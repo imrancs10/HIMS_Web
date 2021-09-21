@@ -28,7 +28,7 @@ namespace HIMS_Web.Controllers
             _response = LoginResponse(message);
             if (message == Enums.LoginMessage.Authenticated)
             {
-                //setUserClaim();
+                setUserClaim();
                 return RedirectToAction("IPDEntry", "Admin");
             }
             else
@@ -63,6 +63,12 @@ namespace HIMS_Web.Controllers
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             Response.Cookies.Add(faCookie);
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

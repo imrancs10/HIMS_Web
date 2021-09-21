@@ -1,4 +1,5 @@
-﻿@using HIMS_Web.Global
+﻿@using HIMS_Web.Global;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,20 +32,26 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" style="text-align:center"><img src="~/Content/files/logo ASMC.png" class="logo_class" style="width:50px; height:50px" alt="Home">&nbsp;&nbsp;Autonomous State Medical College, Firozabad</a> 
+                        <a class="navbar-brand" style="text-align:center"><img src="~/Content/files/logo ASMC.png" class="logo_class" style="width:50px; height:50px" alt="Home">&nbsp;&nbsp;Autonomous State Medical College, Firozabad</a>
                     </div>
                     @if (UserData.UserId!=0 && !string.IsNullOrEmpty(Convert.ToString(UserData.UserId)))
                     {
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                @*<li class="active"><a href="~/Admin/IpdDashboard" class="">Dashboard</a></li>*@
-                                @*<li class=" dropdown">
+                    <div id="navbar" class="navbar-collapse collapse" style=" width: 50%; float: right; margin-top: 1%; margin-right: 7%;">
+                        <ul class="nav navbar-nav">
+                            <li class=" dropdown">
+                                <a href="~/Admin/IPDEntry" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Entry <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/Admin/IPDEntry"><i></i>IPD Entry</a></li>
+                                </ul>
+                            </li>
+                            @*<li class="active"><a href="~/Admin/IpdDashboard" class="">Dashboard</a></li>*@
+                            @*<li class=" dropdown">
                                     <a href="~/Admin/IPDEntry" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Entry <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="~/Admin/IPDEntry"><i></i>IPD Entry</a></li>
                                     </ul>
                                 </li>*@
-                                @*<li class=" dropdown">
+                            @*<li class=" dropdown">
                                     <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Doctor<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/Masters/AddDoctors"><i></i>Add New Doctor</a></li>
@@ -54,7 +61,7 @@
                                         <li><a href="/Masters/AppointmentSetting"><i></i>Appointment Setting</a></li>
                                     </ul>
                                 </li>*@
-                                @*<li class=" dropdown">
+                            @*<li class=" dropdown">
                                     <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Masters <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/Masters/HospitalDetail"><i></i>Hospital Detail</a></li>
@@ -62,7 +69,7 @@
                                         <li><a href="/Masters/AddMasterLookup"><i></i>Master Data</a></li>
                                     </ul>
                                 </li>*@
-                                @*<li class="active"><a href="~/Masters/SendMessageToPatient" class="">Send Message</a></li>
+                            @*<li class="active"><a href="~/Masters/SendMessageToPatient" class="">Send Message</a></li>
                                 <li class="hidden dropdown">
                                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -71,24 +78,18 @@
                                         <li><a href="~/Masters/LabReport"><i></i>Upload Bulk Report</a></li>
                                     </ul>
                                 </li>*@
-                            </ul>
-                            <ul class="nav navbar-nav pull-right">
-                                <li class=" dropdown">
-                                    <a href="~/Admin/IPDEntry" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Entry <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Admin/IPDEntry"><i></i>IPD Entry</a></li>
-                                    </ul>
-                                </li>
-                                <li class=" dropdown">
-                                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as  <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        @*<li><a href="#">Change Password</a></li>*@
-                                        @*<li><a href="#">My Profile</a></li>*@
-                                        <li class=""><a href="~/Masters/Logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right" style=" margin-right: -25%;">
+                            <li class=" dropdown">
+                                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as @UserData.Username<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @*<li><a href="#">Change Password</a></li>*@
+                                    @*<li><a href="#">My Profile</a></li>*@
+                                    <li class=""><a href="/Login/Logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                     }
 
                 </div>
@@ -109,27 +110,27 @@
             </p>
         </div>
         @*<div class="col-md-3">
-            <table width="235" border="0" cellpadding="1" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
-                <tr>
-                    <td width="235" align="center" valign="top">
-                        <script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.drrmlimsonline.in&amp;size=M&amp;use_flash=NO&amp;use_transparent=Yes&amp;lang=en"></script><br /><a href="https://www.websecurity.symantec.com/ssl-certificate" target="_blank" style="color:#000000; text-decoration:none; font:bold 10px verdana,sans-serif; letter-spacing:.5px;text-align:center; margin:0px; padding:0px;"> ABOUT SSL CERTIFICATES</a>
-                    </td>
-                </tr>
-            </table>
-        </div>*@
+                <table width="235" border="0" cellpadding="1" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                    <tr>
+                        <td width="235" align="center" valign="top">
+                            <script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.drrmlimsonline.in&amp;size=M&amp;use_flash=NO&amp;use_transparent=Yes&amp;lang=en"></script><br /><a href="https://www.websecurity.symantec.com/ssl-certificate" target="_blank" style="color:#000000; text-decoration:none; font:bold 10px verdana,sans-serif; letter-spacing:.5px;text-align:center; margin:0px; padding:0px;"> ABOUT SSL CERTIFICATES</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>*@
     </footer>
     @if (TempData["Alert_Title"] != null)
     {
-        <div id="dialog" title="@TempData["Alert_Title"].ToString()">
-            @if (TempData["Alert_Message"] != null)
+    <div id="dialog" title="@TempData["Alert_Title"].ToString()">
+        @if (TempData["Alert_Message"] != null)
             {
-                <p>@TempData["Alert_Message"].ToString()</p>
+        <p>@TempData["Alert_Message"].ToString()</p>
             }
             else
             {
-                <p>Success..!</p>
+        <p>Success..!</p>
             }
-        </div>
+    </div>
     }
 
 

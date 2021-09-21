@@ -23,39 +23,12 @@ namespace HIMS_Web.Controllers
         [HttpPost]
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
-            string Treatment, string Address, string Area, string OtherAreaName, string pincode,
-            string department, string IDorAadharNumber, int Age)
-        //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion,
+            string Treatment, string Address, string Area, string OtherAreaName,
+            string department, string IDorAadharNumber, int Age, string OtherTreatment)
+        //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
-            IpdPatientInfo ipdInfo = new IpdPatientInfo()
-            {
-                Address = Address,
-                AdmittedDateTime = Convert.ToDateTime(AdmittedDateTime),
-                AreaId = Convert.ToInt32(Area),
-                //CityId = Convert.ToInt32(city),
-                CreatedDate = DateTime.Now,
-                DepartmentId = Convert.ToInt32(department),
-                //DOB = Convert.ToDateTime(DOB),
-                //Email = Email,
-                FatherOrHusbandName = FathersHusbandName,
-                Gender = Gender,
-                IDorAadharNumber = IDorAadharNumber,
-                IpdNo = IPDNo,
-                //MaritalStatus = MariatalStatus,
-                MobileNumber = Mobile,
-                //PatientId = PatientId,
-                PatientName = PetientName,
-                PinCode = Convert.ToInt32(pincode),
-                //Religion = religion,
-                //StateId = Convert.ToInt32(state),
-                //Title = Title,
-                TreatmentId = Convert.ToInt32(Treatment),
-                Age = Age
-            };
-
             AdminDetails _details = new AdminDetails();
-            var result = _details.SaveIPDEntry(ipdInfo);
-
+            int areaId = Area == "Other" ? 0 : Convert.ToInt32(Area);
             if (!string.IsNullOrEmpty(OtherAreaName))
             {
                 var areaModel = new Area()
@@ -63,11 +36,54 @@ namespace HIMS_Web.Controllers
                     AreaName = OtherAreaName,
                     CityId = 1318
                 };
-                var resultArea = _details.SaveArea(areaModel);
+                areaId = _details.SaveArea(areaModel);
             }
+            int treatmentId = Treatment == "Other" ? 0 : Convert.ToInt32(Treatment);
+            if (!string.IsNullOrEmpty(OtherTreatment))
+            {
+                var treatmentModel = new Treatment()
+                {
+                    TreatmentName = OtherTreatment,
+                    Description = OtherTreatment
+                };
+                treatmentId = _details.SaveTreatment(treatmentModel);
+            }
+            if (areaId > 0 && treatmentId > 0)
+            {
+                IpdPatientInfo ipdInfo = new IpdPatientInfo()
+                {
+                    Address = Address,
+                    AdmittedDateTime = Convert.ToDateTime(AdmittedDateTime),
+                    AreaId = areaId,
+                    //CityId = Convert.ToInt32(city),
+                    CreatedDate = DateTime.Now,
+                    DepartmentId = Convert.ToInt32(department),
+                    //DOB = Convert.ToDateTime(DOB),
+                    //Email = Email,
+                    FatherOrHusbandName = FathersHusbandName,
+                    Gender = Gender,
+                    IDorAadharNumber = IDorAadharNumber,
+                    IpdNo = IPDNo,
+                    //MaritalStatus = MariatalStatus,
+                    MobileNumber = Mobile,
+                    //PatientId = PatientId,
+                    PatientName = PetientName,
+                    //PinCode = Convert.ToInt32(pincode),
+                    //Religion = religion,
+                    //StateId = Convert.ToInt32(state),
+                    //Title = Title,
+                    TreatmentId = treatmentId,
+                    Age = Age
+                };
 
-            if (result == Enums.CrudStatus.Saved)
-                SetAlertMessage("IPD Patient Info saved", "IPD Patient Info");
+
+                var result = _details.SaveIPDEntry(ipdInfo);
+
+                if (result == Enums.CrudStatus.Saved)
+                    SetAlertMessage("IPD Patient Info saved", "IPD Patient Info");
+                else
+                    SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
+            }
             else
                 SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
             return RedirectToAction("IPDEntry");

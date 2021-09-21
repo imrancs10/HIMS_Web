@@ -106,6 +106,12 @@
                                 <select id="Treatment" class="common-input selectval" name="Treatment"></select>
                             </div>
                         </div>
+                        <div class="form-group" id="OtherTreatmentDiv">
+                            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Enter Treatment<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="text" id="OtherTreatment" class="common-input selectval" name="OtherTreatment" />
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">Address<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -280,6 +286,7 @@
 
     $('#Area').on('change', function (e) {
         var valueSelected = this.value;
+        $('#OtherAreaDiv').val('');
         if (valueSelected == "Other") {
             $('#OtherAreaDiv').removeClass('hidden');
         }
@@ -327,6 +334,7 @@
                 $.each(data, function (key, entry) {
                     dropdown.append($('<option></option>').attr('value', entry.TreatmentId).text(entry.TreatmentName));
                 })
+                dropdown.append('<option value="Other">Other</option>');
             },
             failure: function (response) {
                 alert(response);
@@ -336,6 +344,17 @@
             }
         });
     }
+
+    $('#Treatment').on('change', function (e) {
+        var valueSelected = this.value;
+        $('#OtherTreatment').val('');
+        if (valueSelected == "Other") {
+            $('#OtherTreatmentDiv').removeClass('hidden');
+        }
+        else {
+            $('#OtherTreatmentDiv').addClass('hidden');
+        }
+    });
 </script>
 
 <style type="text/css">

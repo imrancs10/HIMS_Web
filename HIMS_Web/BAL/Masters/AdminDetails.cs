@@ -15,7 +15,7 @@ namespace HIMS_Web.BAL.Masters
         {
             _db = new HIMSDBEntities();
             int _effectRow = 0;
-            var _deptRow = _db.IpdPatientInfoes.Where(x =>x.PatientId.Equals(model.PatientId)).FirstOrDefault();
+            var _deptRow = _db.IpdPatientInfoes.Where(x => x.PatientId.Equals(model.PatientId)).FirstOrDefault();
             if (_deptRow == null)
             {
                 _db.Entry(model).State = EntityState.Added;
@@ -26,7 +26,7 @@ namespace HIMS_Web.BAL.Masters
                 return Enums.CrudStatus.DataAlreadyExist;
         }
 
-        public Enums.CrudStatus SaveArea(Area model)
+        public int SaveArea(Area model)
         {
             _db = new HIMSDBEntities();
             int _effectRow = 0;
@@ -35,10 +35,24 @@ namespace HIMS_Web.BAL.Masters
             {
                 _db.Entry(model).State = EntityState.Added;
                 _effectRow = _db.SaveChanges();
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+                return _effectRow > 0 ? model.AreaId : 0;
             }
             else
-                return Enums.CrudStatus.DataAlreadyExist;
+                return _deptRow.AreaId;
+        }
+        public int SaveTreatment(Treatment model)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.Treatments.Where(x => x.TreatmentName.Equals(model.TreatmentName)).FirstOrDefault();
+            if (_deptRow == null)
+            {
+                _db.Entry(model).State = EntityState.Added;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? model.TreatmentID : 0;
+            }
+            else
+                return _deptRow.TreatmentID;
         }
         //public Enums.CrudStatus EditSchedule(ScheduleModel model)
         //{

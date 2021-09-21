@@ -138,7 +138,7 @@ namespace HIMS_Web.BAL.Masters
         {
             _db = new HIMSDBEntities();
             var _list = (from dept in _db.Areas
-                         where (cityId != null && dept.CityId == cityId) || cityId == null
+                         where (cityId != 0 && dept.CityId == cityId) || cityId == 0
                          select new AreaModel
                          {
                              AreaId = dept.AreaId,

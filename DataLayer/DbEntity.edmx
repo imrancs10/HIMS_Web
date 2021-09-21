@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="AreaId" />
           </Key>
-          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AreaName" Type="varchar" MaxLength="500" />
           <Property Name="CityId" Type="int" />
           <Property Name="WardId" Type="int" />
@@ -118,7 +118,7 @@
           <Key>
             <PropertyRef Name="TreatmentID" />
           </Key>
-          <Property Name="TreatmentID" Type="int" Nullable="false" />
+          <Property Name="TreatmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreatmentName" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
         </EntityType>
@@ -281,7 +281,7 @@
           <Key>
             <PropertyRef Name="AreaId" />
           </Key>
-          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AreaName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CityId" Type="Int32" />
           <Property Name="WardId" Type="Int32" />
@@ -402,7 +402,7 @@
           <Key>
             <PropertyRef Name="TreatmentID" />
           </Key>
-          <Property Name="TreatmentID" Type="Int32" Nullable="false" />
+          <Property Name="TreatmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TreatmentName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
