@@ -24,9 +24,24 @@ namespace HIMS_Web.Controllers
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
             string Treatment, string Address, string Area, string OtherAreaName,
-            string department, string IDorAadharNumber, int Age, string OtherTreatment)
+            string department, string IDorAadharNumber, string Age, string OtherTreatment)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
+            if (string.IsNullOrEmpty(IPDNo)
+                || string.IsNullOrEmpty(AdmittedDateTime)
+                || string.IsNullOrEmpty(PetientName)
+                || string.IsNullOrEmpty(Age)
+                || string.IsNullOrEmpty(Gender)
+                || string.IsNullOrEmpty(FathersHusbandName)
+                || string.IsNullOrEmpty(Treatment)
+                || string.IsNullOrEmpty(Address)
+                || string.IsNullOrEmpty(Area)
+                || string.IsNullOrEmpty(department)
+                || string.IsNullOrEmpty(IDorAadharNumber))
+            {
+                SetAlertMessage("Required parameter is/are missing", "IPD Patient Info");
+                return RedirectToAction("IPDEntry");
+            }
             AdminDetails _details = new AdminDetails();
             int areaId = Area == "Other" ? 0 : Convert.ToInt32(Area);
             if (!string.IsNullOrEmpty(OtherAreaName))
@@ -73,7 +88,7 @@ namespace HIMS_Web.Controllers
                     //StateId = Convert.ToInt32(state),
                     //Title = Title,
                     TreatmentId = treatmentId,
-                    Age = Age
+                    Age = Convert.ToInt32(Age)
                 };
 
 
