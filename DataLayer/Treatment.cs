@@ -12,10 +12,10 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class MasterLookup
+    public partial class Treatment
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public int TreatmentID { get; set; }
+        public string TreatmentName { get; set; }
+        public string Description { get; set; }
     }
 }

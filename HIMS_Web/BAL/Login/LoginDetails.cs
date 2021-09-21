@@ -10,7 +10,7 @@ namespace HIMS_Web.BAL.Login
 {
     public class LoginDetails
     {
-        HIMS_WebEntities _db = null;
+        HIMSDBEntities _db = null;
 
         /// <summary>
         /// Get Authenticate User credentials
@@ -21,13 +21,13 @@ namespace HIMS_Web.BAL.Login
         public Enums.LoginMessage GetLogin(string UserName, string Password)
         {
             string _passwordHash = Utility.GetHashString(Password);
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
 
-            var _userRow = _db.Gbl_Master_User.Where(x => x.Username.Equals(UserName) && x.PasswordHash.Equals(_passwordHash) && x.IsDeleted == false).FirstOrDefault();
+            var _userRow = _db.Ipd_Master_User.Where(x => x.Username.Equals(UserName) && x.PasswordHash.Equals(Password) && x.IsDeleted == false).FirstOrDefault();
 
             if (_userRow != null)
             {
-                var _userLogin = _userRow.Gbl_Master_Login.FirstOrDefault(x => x.IsDeleted == false);
+                var _userLogin = _userRow.Ipd_Master_Login.FirstOrDefault(x => x.IsDeleted == false);
 
                 if (_userLogin != null)
                 {
@@ -44,7 +44,7 @@ namespace HIMS_Web.BAL.Login
                 }
                 else
                 {
-                    Gbl_Master_Login _newLogin = new Gbl_Master_Login();
+                    Ipd_Master_Login _newLogin = new Ipd_Master_Login();
                     _newLogin.CreatedAt = DateTime.Now;
                     _newLogin.IsActive = true;
                     _newLogin.IsBlocked = false;

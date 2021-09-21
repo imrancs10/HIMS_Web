@@ -12,14 +12,9 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class LabReport
+    public partial class Ward
     {
-        public int Id { get; set; }
-        public Nullable<int> PatientId { get; set; }
-        public string ReportName { get; set; }
-        public string FileName { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        public virtual PatientInfo PatientInfo { get; set; }
+        public int WardId { get; set; }
+        public string WardName { get; set; }
     }
 }

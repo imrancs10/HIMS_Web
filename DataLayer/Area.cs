@@ -12,14 +12,13 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class PatientMessage
+    public partial class Area
     {
-        public int Id { get; set; }
-        public Nullable<int> PatientId { get; set; }
-        public string Message { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<bool> HasRead { get; set; }
+        public int AreaId { get; set; }
+        public string AreaName { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public string WardId { get; set; }
     
-        public virtual PatientInfo PatientInfo { get; set; }
+        public virtual City City { get; set; }
     }
 }

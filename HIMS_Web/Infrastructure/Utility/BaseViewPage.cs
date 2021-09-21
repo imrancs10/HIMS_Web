@@ -1,7 +1,7 @@
 ﻿using DataLayer;
-using HIMS_Web.BAL.Appointments;
-using HIMS_Web.BAL.Masters;
-using HIMS_Web.BAL.Patient;
+//using HIMS_Web.BAL.Appointments;
+//using HIMS_Web.BAL.Masters;
+//using HIMS_Web.BAL.Patient;
 using HIMS_Web.Global;
 using HIMS_Web.Infrastructure.Authentication;
 using HIMS_Web.Models;
@@ -39,31 +39,31 @@ namespace HIMS_Web.Infrastructure.Utility
         {
             get { return base.User as CustomPrincipal; }
         }
-        public virtual HospitalDetail GetHospitalDetail()
-        {
-            HospitalDetails _details = new HospitalDetails();
-            return _details.GetHospitalDetail();
-        }
+        //public virtual HospitalDetail GetHospitalDetail()
+        //{
+        //    HospitalDetails _details = new HospitalDetails();
+        //    return _details.GetHospitalDetail();
+        //}
 
-        public virtual AppointmentModel GetAppointmentDetail()
-        {
-            if (User != null)
-            {
-                AppointDetails _details = new AppointDetails();
-                return _details.PatientAppointmentCount(User.Id);
-            }
-            return null;
-        }
+        //public virtual AppointmentModel GetAppointmentDetail()
+        //{
+        //    if (User != null)
+        //    {
+        //        AppointDetails _details = new AppointDetails();
+        //        return _details.PatientAppointmentCount(User.Id);
+        //    }
+        //    return null;
+        //}
 
-        public virtual PatientInfo GetPatientInfo()
-        {
-            if (User != null)
-            {
-                PatientDetails _details = new PatientDetails();
-                return _details.GetPatientDetailById(User.Id);
-            }
-            return null;
-        }
+        //public virtual PatientInfo GetPatientInfo()
+        //{
+        //    if (User != null)
+        //    {
+        //        PatientDetails _details = new PatientDetails();
+        //        return _details.GetPatientDetailById(User.Id);
+        //    }
+        //    return null;
+        //}
 
         public virtual PDModel GetPatientOPDDetail()
         {

@@ -36,31 +36,32 @@ namespace HIMS_Web.Controllers
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
             string filterText = Request["search[value]"];
-            List<DataLayer.PateintLeadger> result = _details.GetBillReportData();
+            //List<DataLayer.PateintLeadger> result = _details.GetBillReportData();
 
-            if (!string.IsNullOrEmpty(filterText))
-            {
-                result = result.Where(x => x.billdate.ToString().Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.billno.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.vtype.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.netamt.ToString().Contains(filterText, StringComparison.InvariantCultureIgnoreCase)).ToList();
-            }
+            //if (!string.IsNullOrEmpty(filterText))
+            //{
+            //    result = result.Where(x => x.billdate.ToString().Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.billno.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.vtype.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.netamt.ToString().Contains(filterText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            //}
 
-            recordsTotal = result.Count();
-            List<DataLayer.PateintLeadger> data = result.Skip(skip).Take(pageSize).ToList();
-            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data }, JsonRequestBehavior.AllowGet);
+            //recordsTotal = result.Count();
+            //List<DataLayer.PateintLeadger> data = result.Skip(skip).Take(pageSize).ToList();
+            //return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data }, JsonRequestBehavior.AllowGet);
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult DuplicateBillingReport()
         {
             ReportDetails _details = new ReportDetails();
-            List<DataLayer.PateintLeadger> result = _details.GetBillReportData();
-            result.ForEach(x =>
-            {
-                x.netamt = Math.Round(x.netamt.Value, 2);
-            });
-            return View(result);
+            //List<DataLayer.PateintLeadger> result = _details.GetBillReportData();
+            //result.ForEach(x =>
+            //{
+            //    x.netamt = Math.Round(x.netamt.Value, 2);
+            //});
+            return View();
         }
         public ActionResult PaymentReciept()
         {
@@ -93,7 +94,7 @@ namespace HIMS_Web.Controllers
             List<PatientTransaction> data = result.Skip(skip).Take(pageSize).ToList();
             return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data }, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult ReportViewing()
         {
             return View();
@@ -109,19 +110,19 @@ namespace HIMS_Web.Controllers
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
             string filterText = Request["search[value]"];
-            List<LabreportPdf> result = _details.GetLabReportData();
+            //List<LabreportPdf> result = _details.GetLabReportData();
 
-            if (!string.IsNullOrEmpty(filterText))
-            {
-                result = result.Where(x => x.Labref.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.LabName.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.BillNo.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
-                                            || x.Location.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)).ToList();
-            }
+            //if (!string.IsNullOrEmpty(filterText))
+            //{
+            //    result = result.Where(x => x.Labref.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.LabName.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.BillNo.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+            //                                || x.Location.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            //}
 
-            recordsTotal = result.Count();
-            List<DataLayer.LabreportPdf> data = result.Skip(skip).Take(pageSize).ToList();
-            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data }, JsonRequestBehavior.AllowGet);
+            //recordsTotal = result.Count();
+            //List<DataLayer.LabreportPdf> data = result.Skip(skip).Take(pageSize).ToList();
+            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult PatientLedger()

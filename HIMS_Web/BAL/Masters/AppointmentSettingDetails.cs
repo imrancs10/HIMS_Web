@@ -11,13 +11,13 @@ namespace HIMS_Web.BAL.Masters
 {
     public class AppointmentSettingDetails
     {
-        HIMS_WebEntities _db;
+        HIMSDBEntities _db;
 
         public Enums.CrudStatus SaveAppSetting(AppSettingModel _model)
         {
             try
             {
-                _db = new HIMS_WebEntities();
+                _db = new HIMSDBEntities();
                 var _appSetting = _db.AppointmentSettings.Where(x => x.IsActive).FirstOrDefault();
                 if (_appSetting != null)
                 {
@@ -47,7 +47,7 @@ namespace HIMS_Web.BAL.Masters
 
         public AppointmentSetting GetAppSetting()
         {
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
             return _db.AppointmentSettings.Where(x => x.IsActive).FirstOrDefault();
         }
     }

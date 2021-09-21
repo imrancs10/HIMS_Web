@@ -4,60 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d25c6a93510442fac667406150cd371" Name="Diagram1" ZoomLevel="108">
-        <EntityTypeShape EntityType="HIMS_WebModel.AppointmentInfo" Width="1.5" PointX="13.5" PointY="12.625" />
-        <EntityTypeShape EntityType="HIMS_WebModel.AppointmentSetting" Width="1.5" PointX="5.75" PointY="1" />
-        <EntityTypeShape EntityType="HIMS_WebModel.City" Width="1.5" PointX="3" PointY="13.375" />
-        <EntityTypeShape EntityType="HIMS_WebModel.DayMaster" Width="1.5" PointX="14.25" PointY="3.375" />
-        <EntityTypeShape EntityType="HIMS_WebModel.Department" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="HIMS_WebModel.Doctor" Width="1.5" PointX="11.25" PointY="8.75" />
-        <EntityTypeShape EntityType="HIMS_WebModel.DoctorLeave" Width="1.5" PointX="13.5" PointY="18" />
-        <EntityTypeShape EntityType="HIMS_WebModel.DoctorSchedule" Width="1.5" PointX="16.5" PointY="8.875" />
-        <EntityTypeShape EntityType="HIMS_WebModel.Gbl_Master_Login" Width="1.5" PointX="3" PointY="1.875" />
-        <EntityTypeShape EntityType="HIMS_WebModel.Gbl_Master_User" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="HIMS_WebModel.HospitalDetail" Width="1.5" PointX="2.75" PointY="6" />
-        <EntityTypeShape EntityType="HIMS_WebModel.LabReport" Width="1.5" PointX="10.5" PointY="22.5" />
-        <EntityTypeShape EntityType="HIMS_WebModel.LabreportPdf" Width="1.5" PointX="13.5" PointY="6.625" />
-        <EntityTypeShape EntityType="HIMS_WebModel.MeridiemMaster" Width="1.5" PointX="14.25" PointY="0.75" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PateintLeadger" Width="1.5" PointX="15.75" PointY="13" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientInfo" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientInfoCRClone" Width="1.5" PointX="5.25" PointY="10.75" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientLoginEntry" Width="1.5" PointX="10.5" PointY="13.125" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientLoginHistory" Width="1.5" PointX="10.5" PointY="16.125" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientTransaction" Width="1.5" PointX="10.5" PointY="18.875" />
-        <EntityTypeShape EntityType="HIMS_WebModel.State" Width="1.5" PointX="0.75" PointY="13.5" />
-        <AssociationConnector Association="HIMS_WebModel.FK_AppointmentInfo_Doctor" />
-        <AssociationConnector Association="HIMS_WebModel.FK_AppointmentInfo_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_City_State" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfo_City" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoCRClone_City" />
-        <AssociationConnector Association="HIMS_WebModel.FK_DoctorScheduleDay_DayMaster1" />
-        <AssociationConnector Association="HIMS_WebModel.FK_Doctor_Doctor" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfo_Department" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoCRClone_Department" />
-        <AssociationConnector Association="HIMS_WebModel.FK_DoctorLeave_Doctor" />
-        <AssociationConnector Association="HIMS_WebModel.FK_DoctorScheduleDay_DoctorSchedule" />
-        <AssociationConnector Association="HIMS_WebModel.FK_LabreportPdf_Doctor" />
-        <AssociationConnector Association="HIMS_WebModel.FK_DoctorScheduleDay_MeridiemMaster" />
-        <AssociationConnector Association="HIMS_WebModel.FK_DoctorScheduleDay_MeridiemMaster1" />
-        <AssociationConnector Association="HIMS_WebModel.FK_Gbl_Master_Login_Gbl_Master_User" />
-        <AssociationConnector Association="HIMS_WebModel.FK_LabReport_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfo_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfo_State" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientLoginEntry_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientLoginHistory_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientTransaction_PatientInfo" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoCRClone_PatientInfoCRClone" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoCRClone_State" />
-        <EntityTypeShape EntityType="HIMS_WebModel.MasterLookup" Width="1.5" PointX="5.375" PointY="4.75" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientMessage" Width="1.5" PointX="10.5" PointY="5.75" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientMessage_PatientInfo" />
-        <EntityTypeShape EntityType="HIMS_WebModel.DoctorType" Width="1.5" PointX="8.375" PointY="0.875" />
-        <AssociationConnector Association="HIMS_WebModel.FK_Doctor_DoctorType" />
-        <EntityTypeShape EntityType="HIMS_WebModel.PatientInfoTemporary" Width="1.5" PointX="17.25" PointY="0.75" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoTemporary_City" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoTemporary_Department" />
-        <AssociationConnector Association="HIMS_WebModel.FK_PatientInfoTemporary_State" />
+      <Diagram DiagramId="e96d0273b49d4c73b3125d2a547d1ca0" Name="Diagram1">
+        <EntityTypeShape EntityType="HIMSDBModel.Area" Width="1.5" PointX="5.25" PointY="12.25" />
+        <EntityTypeShape EntityType="HIMSDBModel.City" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="HIMSDBModel.Department" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="HIMSDBModel.HospitalDetail" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HIMSDBModel.Ipd_Master_Login" Width="1.5" PointX="10" PointY="1.625" />
+        <EntityTypeShape EntityType="HIMSDBModel.Ipd_Master_User" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="HIMSDBModel.IpdPatientInfo" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="HIMSDBModel.State" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="HIMSDBModel.Treatment" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HIMSDBModel.Ward" Width="1.5" PointX="9.75" PointY="5.75" />
+        <AssociationConnector Association="HIMSDBModel.FK_Area_City" />
+        <AssociationConnector Association="HIMSDBModel.FK_City_State" />
+        <AssociationConnector Association="HIMSDBModel.FK_IpdPatientInfo_City" />
+        <AssociationConnector Association="HIMSDBModel.FK_IpdPatientInfo_Department" />
+        <AssociationConnector Association="HIMSDBModel.FK_Ipd_Master_Login_Ipd_Master_User" />
+        <AssociationConnector Association="HIMSDBModel.FK_IpdPatientInfo_State" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

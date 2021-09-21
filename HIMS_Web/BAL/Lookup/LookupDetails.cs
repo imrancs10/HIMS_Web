@@ -13,16 +13,16 @@ namespace HIMS_Web.BAL.Lookup
 {
     public class LookupDetails
     {
-        HIMS_WebEntities _db = null;
+        HIMSDBEntities _db = null;
 
         enum LookupEnum
         {
             HelpLineNo
         }
-        public List<MasterLookup> GetLookupDetail()
-        {
-            _db = new HIMS_WebEntities();
-            return _db.MasterLookups.ToList();
-        }
+        //public List<MasterLookup> GetLookupDetail()
+        //{
+        //    _db = new HIMSDBEntities();
+        //    return _db.MasterLookups.ToList();
+        //}
     }
 }

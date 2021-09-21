@@ -1,4 +1,4 @@
-﻿using HIMS_Web.BAL.Patient;
+﻿//using HIMS_Web.BAL.Patient;
 using HIMS_Web.Global;
 using System;
 using System.IO;
@@ -10,11 +10,11 @@ namespace HIMS_Web.Controllers
     public class PatientController : Controller
     {
         // GET: Patient
-        public ActionResult GetLabReport()
-        {
-            PatientDetails _details = new PatientDetails();
-            return View(_details.GetReportList(Convert.ToInt32(Session["PatientId"])));
-        }
+        //public ActionResult GetLabReport()
+        //{
+        //    PatientDetails _details = new PatientDetails();
+        //    return View(_details.GetReportList(Convert.ToInt32(Session["PatientId"])));
+        //}
 
         public ActionResult GetPDF(string fileName)
         {

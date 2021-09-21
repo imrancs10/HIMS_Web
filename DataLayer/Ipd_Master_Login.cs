@@ -12,17 +12,18 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class AppointmentSetting
+    public partial class Ipd_Master_Login
     {
-        public int Id { get; set; }
-        public int AppointmentSlot { get; set; }
-        public int CalenderPeriod { get; set; }
-        public string AppointmentMessage { get; set; }
-        public int AppointmentLimitPerUser { get; set; }
-        public int AppointmentCancelPeriod { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public int LoginId { get; set; }
+        public int UserId { get; set; }
+        public Nullable<System.DateTime> LastLogin { get; set; }
+        public bool IsBlocked { get; set; }
         public bool IsActive { get; set; }
-        public string AutoCancelMessage { get; set; }
-        public bool IsActiveAppointmentMessage { get; set; }
+        public bool IsSync { get; set; }
+        public bool IsDeleted { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> ModifiedAt { get; set; }
+    
+        public virtual Ipd_Master_User Ipd_Master_User { get; set; }
     }
 }

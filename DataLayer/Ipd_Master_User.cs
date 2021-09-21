@@ -12,12 +12,12 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Gbl_Master_User
+    public partial class Ipd_Master_User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gbl_Master_User()
+        public Ipd_Master_User()
         {
-            this.Gbl_Master_Login = new HashSet<Gbl_Master_Login>();
+            this.Ipd_Master_Login = new HashSet<Ipd_Master_Login>();
         }
     
         public int UserId { get; set; }
@@ -37,6 +37,6 @@ namespace DataLayer
         public Nullable<System.DateTime> ModifiedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gbl_Master_Login> Gbl_Master_Login { get; set; }
+        public virtual ICollection<Ipd_Master_Login> Ipd_Master_Login { get; set; }
     }
 }

@@ -17,21 +17,18 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public City()
         {
-            this.PatientInfoes = new HashSet<PatientInfo>();
-            this.PatientInfoCRClones = new HashSet<PatientInfoCRClone>();
-            this.PatientInfoTemporaries = new HashSet<PatientInfoTemporary>();
+            this.Areas = new HashSet<Area>();
+            this.IpdPatientInfoes = new HashSet<IpdPatientInfo>();
         }
     
         public int CityId { get; set; }
         public string CityName { get; set; }
         public Nullable<int> StateId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Area> Areas { get; set; }
         public virtual State State { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientInfo> PatientInfoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientInfoCRClone> PatientInfoCRClones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientInfoTemporary> PatientInfoTemporaries { get; set; }
+        public virtual ICollection<IpdPatientInfo> IpdPatientInfoes { get; set; }
     }
 }

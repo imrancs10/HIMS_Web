@@ -11,11 +11,11 @@ namespace HIMS_Web.BAL.Masters
 {
     public class HospitalDetails
     {
-        HIMS_WebEntities _db = null;
+        HIMSDBEntities _db = null;
 
         public Enums.CrudStatus SaveHospital(HospitalDetail hospital)
         {
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
             int _effectRow = 0;
             var _hospitalRow = _db.HospitalDetails.Where(x => x.HospitalName.Equals(hospital.HospitalName)).FirstOrDefault();
             if (_hospitalRow == null)
@@ -30,7 +30,7 @@ namespace HIMS_Web.BAL.Masters
 
         public List<HospitalDetail> GetAllHospitalDetail()
         {
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
             var _hospitalRow = _db.HospitalDetails.ToList();
             if (_hospitalRow.Count > 0)
             {
@@ -40,7 +40,7 @@ namespace HIMS_Web.BAL.Masters
         }
         public HospitalDetail GetHospitalDetail()
         {
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
             var _hospitalRow = _db.HospitalDetails.FirstOrDefault();
             if (_hospitalRow != null)
             {
@@ -50,7 +50,7 @@ namespace HIMS_Web.BAL.Masters
         }
         public bool DeleteHospitalDetail(int Id)
         {
-            _db = new HIMS_WebEntities();
+            _db = new HIMSDBEntities();
             var _hospitalRow = _db.HospitalDetails.Where(x => x.Id == Id).FirstOrDefault();
             if (_hospitalRow != null)
             {
