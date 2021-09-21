@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Patient Portal Management system</title>
+    <title>@ViewBag.Title - Hospital Management Information System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -24,14 +24,16 @@
         <div class="container-fluid">
             <nav class="navbar navbar-fixed-top">
                 <div class="container">
+
                     <div class="navbar-header">
+
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Patient Portal</a>
+                        <a class="navbar-brand" style="text-align:center">IPD HIMS Portal</a> 
                     </div>
                     @if (UserData.UserId!=0 && !string.IsNullOrEmpty(Convert.ToString(UserData.UserId)))
                     {
@@ -49,20 +51,20 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="/Masters/AddDoctors"><i></i>Add New Doctor</a></li>
                                         <li><a href="/Admin/DoctorType"><i></i>Set Doctor Type</a></li>
-                                        <li><a href="/Masters/AddSchedule"><i></i>Doctor Schedule</a></li>
+                                        @*<li><a href="/Masters/AddSchedule"><i></i>Doctor Schedule</a></li>
                                         <li><a href="/Masters/AddDoctorLeave"><i></i>Doctor Leave</a></li>
-                                        <li><a href="/Masters/AppointmentSetting"><i></i>Appointment Setting</a></li>
+                                        <li><a href="/Masters/AppointmentSetting"><i></i>Appointment Setting</a></li>*@
                                     </ul>
                                 </li>
                                 <li class=" dropdown">
                                     <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Masters <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/Masters/HospitalDetail"><i></i>Hospital Detail</a></li>
-                                        <li><a href="/Masters/SyncHISFailedTransaction"><i></i>Sync To HIS</a></li>
-                                        <li><a href="/Masters/AddMasterLookup"><i></i>Master Data</a></li>
+                                        @*<li><a href="/Masters/SyncHISFailedTransaction"><i></i>Sync To HIS</a></li>
+                                        <li><a href="/Masters/AddMasterLookup"><i></i>Master Data</a></li>*@
                                     </ul>
                                 </li>
-                                <li class="active"><a href="~/Masters/SendMessageToPatient" class="">Send Message</a></li>
+                                @*<li class="active"><a href="~/Masters/SendMessageToPatient" class="">Send Message</a></li>
                                 <li class="hidden dropdown">
                                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -70,7 +72,7 @@
                                         <li><a href="~/Admin/PatientBillReport">Billing Report</a></li>
                                         <li><a href="~/Masters/LabReport"><i></i>Upload Bulk Report</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                             </ul>
                             <ul class="nav navbar-nav pull-right">
                                 <li class=" dropdown">
@@ -96,13 +98,13 @@
     </div>
     <hr class="text-center navbar-fixed-bottom" />
     <footer class="text-center navbar-fixed-bottom">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <p>
-                Powered by Uptron Powertronics Limited (Undertaking of Government) &copy; @DateTime.Now.Year - Patient Portal || Total Number of visitors: @ApplicationInstance.Application["Totaluser"]
+                Powered by Autonomous State Medical College, Firozabad &copy; @DateTime.Now.Year - HIMS Portal || Total Number of visitors: @ApplicationInstance.Application["Totaluser"]
                 <!--Online Visitors:<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/433806/t/5"></script>-->
             </p>
         </div>
-        <div class="col-md-3">
+        @*<div class="col-md-3">
             <table width="235" border="0" cellpadding="1" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
                 <tr>
                     <td width="235" align="center" valign="top">
@@ -110,7 +112,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div>*@
     </footer>
     @if (TempData["Alert_Title"] != null)
     {

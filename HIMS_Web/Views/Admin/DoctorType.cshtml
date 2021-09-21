@@ -6,28 +6,130 @@
 <div class="row" style="margin-top:50px;">
     <div class="col-sm-12 col-lg-12">
         <div class="panel panel-primary">
-            <div class="panel-heading">
-                Set Doctor Type
+            <div class="panel-heading" style="text-align:center">
+                IPD Patient Details
             </div>
             <div class="panel-body">
                 <div class="table table-responsive">
                     <form id="form" class="form-horizontal" action="SaveDoctorType" method="post" autocomplete="off">
                         <div class="form-group">
-                            <label for="Department" class="control-label col-md-4 col-sm-12 col-xs-12">Select Department<font color="FF0000">*</font></label>
+                            <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Department" class="common-input selectval" name="Department"></select>
+                                <input type="text" id="PatientId" class="common-input selectval" name="PatientId" />
+                            </div>
+                        </div>                        <div class="form-group">
+                            <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">IPD No<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="text" id="IPDNo" class="common-input selectval" name="IPDNo" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="doctor" class="control-label col-md-4 col-sm-12 col-xs-12">Select Doctor<font color="FF0000">*</font></label>
+                            <label for="AdmittedDateTime" class="control-label col-md-4 col-sm-12 col-xs-12">Admitted Date Time<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="doctor" class="common-input selectval" name="doctor"></select>
+                                <input type="datetime" id="AdmittedDateTime" class="common-input selectval" name="AdmittedDateTime" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Title" class="control-label col-md-4 col-sm-12 col-xs-12">Title<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="Title" class="common-input selectval" name="Title"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="doctortype" class="control-label col-md-4 col-sm-12 col-xs-12">Select Doctor Type<font color="FF0000">*</font></label>
+                            <label for="PetientName" class="control-label col-md-4 col-sm-12 col-xs-12">Patient Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="doctortype" class="common-input selectval" name="doctortype"></select>
+                                <input type="text" id="PetientName" class="common-input selectval" name="PetientName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="number" id="Mobile" class="common-input selectval" name="Mobile" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email" class="control-label col-md-4 col-sm-12 col-xs-12">Email Id<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="email" id="Mobile" class="common-input selectval" name="Email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Date of Birth<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="date" id="DOB" class="common-input selectval" name="DOB" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="MariatalStatus" class="control-label col-md-4 col-sm-12 col-xs-12">Marital Status<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="MariatalStatus" class="common-input selectval" name="MariatalStatus"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Gender" class="control-label col-md-4 col-sm-12 col-xs-12">Gender<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="Gender" class="common-input selectval" name="Gender"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="FathersHusbandName" class="control-label col-md-4 col-sm-12 col-xs-12">Father's/Husband Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="text" id="FathersHusbandName" class="common-input selectval" name="FathersHusbandName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Treatment Details<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="Treatment" class="common-input selectval" name="Treatment"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">Address<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <textarea type="text" id="Address" class="common-input selectval" name="Address">  </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Area Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="Area" class="common-input selectval" name="Area"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city" class="control-label col-md-4 col-sm-12 col-xs-12">City Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="city" class="common-input selectval" name="city"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state" class="control-label col-md-4 col-sm-12 col-xs-12">State Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="state" class="common-input selectval" name="state"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode" class="control-label col-md-4 col-sm-12 col-xs-12">Pin Code<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="number" id="pincode" class="common-input selectval" name="pincode" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="religion" class="control-label col-md-4 col-sm-12 col-xs-12">Religion Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="religion" class="common-input selectval" name="religion"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="department" class="control-label col-md-4 col-sm-12 col-xs-12">Department Name<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="department" class="common-input selectval" name="department"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="IDorAadharNumber" class="control-label col-md-4 col-sm-12 col-xs-12">ID/ Aadhaar Number<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="number" id="pincode" class="common-input selectval" name="IDorAadharNumber" />
                             </div>
                         </div>
                         <div class="form-group">
