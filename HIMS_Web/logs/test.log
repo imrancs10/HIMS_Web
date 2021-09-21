@@ -454,3 +454,4 @@ Error Number:-2,State:0,Class:11
    at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.SetConnectionString(DbConnection connection, DbConnectionPropertyInterceptionContext`1 interceptionContext)
    at System.Data.Entity.Core.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
 2021-09-21 17:12:41,415 [7] ERROR HIMS_Web.Infrastructure.Utility.CustomExceptionFilter 
+2021-09-21 23:41:54,691 [18] ERROR HIMS_Web.Infrastructure.Utility.CustomExceptionFilter 
