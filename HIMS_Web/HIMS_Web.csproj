@@ -261,6 +261,7 @@
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\boxstyle.css" />
+    <Content Include="Content\files\logo ASMC.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.slide.css" />
@@ -500,6 +501,7 @@
     <Content Include="Views\Masters\AddDoctorLeave.cshtml" />
     <Content Include="Views\Home\ResetPassword.cshtml" />
     <Content Include="Views\Home\CRIntegrate.cshtml" />
+    <Content Include="Views\Admin\IpdDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

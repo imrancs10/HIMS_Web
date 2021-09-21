@@ -59,7 +59,10 @@ namespace HIMS_Web.Controllers
                 SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
             return RedirectToAction("IPDEntry");
         }
-
+        public ActionResult IpdDashboard()
+        {
+            return View();
+        }
         public ActionResult PatientBillReport()
         {
             return View();
