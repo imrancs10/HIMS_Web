@@ -14,6 +14,34 @@ namespace HIMS_Web.Models.Masters
         public string ImageUrl { get; set; }
         public byte[] Image { get; set; }
     }
+    public class TreatmentModel
+    {
+        public int TreatmentId { get; set; }
+        public string TreatmentName { get; set; }
+        public string TreatmentDescription { get; set; }
+    }
+    public class StateModel
+    {
+        public int StateId { get; set; }
+        public string StateName { get; set; }
+    }
+    public class CityModel
+    {
+        public int CityId { get; set; }
+        public string CityName { get; set; }
+        public int? StateId { get; set; }
+        public string StateName { get; set; }
+    }
+    public class AreaModel
+    {
+        public int AreaId { get; set; }
+        public string AreaName { get; set; }
+        public int? CityId { get; set; }
+        public string CityName { get; set; }
+        public int? WardId { get; set; }
+        public string WardName { get; set; }
+    }
+
 
     public class DoctorModel
     {
@@ -32,7 +60,7 @@ namespace HIMS_Web.Models.Masters
         public int Id { get; set; }
         public string DoctorType { get; set; }
     }
-        public class MasterLookupModel
+    public class MasterLookupModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -12,7 +12,7 @@
           <Property Name="AreaId" Type="int" Nullable="false" />
           <Property Name="AreaName" Type="varchar" MaxLength="500" />
           <Property Name="CityId" Type="int" />
-          <Property Name="WardId" Type="varchar" MaxLength="50" />
+          <Property Name="WardId" Type="int" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -77,11 +77,11 @@
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
-            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RegistrationNumber" Type="varchar" MaxLength="14" />
-          <Property Name="IpdNo" Type="varchar" MaxLength="14" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="varchar" MaxLength="500" />
+          <Property Name="IpdNo" Type="varchar" MaxLength="500" />
           <Property Name="AdmittedDateTime" Type="datetime" />
           <Property Name="TreatmentId" Type="int" />
           <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
@@ -283,7 +283,7 @@
           <Property Name="AreaId" Type="Int32" Nullable="false" />
           <Property Name="AreaName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CityId" Type="Int32" />
-          <Property Name="WardId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WardId" Type="Int32" />
           <NavigationProperty Name="City" Relationship="HIMSDBModel.FK_Area_City" FromRole="Area" ToRole="City" />
         </EntityType>
         <EntityType Name="City">
@@ -355,11 +355,11 @@
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
-            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegistrationNumber" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="IpdNo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IpdNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AdmittedDateTime" Type="DateTime" Precision="3" />
           <Property Name="TreatmentId" Type="Int32" />
           <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -483,7 +483,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -592,8 +592,8 @@
                 <ScalarProperty Name="TreatmentId" ColumnName="TreatmentId" />
                 <ScalarProperty Name="AdmittedDateTime" ColumnName="AdmittedDateTime" />
                 <ScalarProperty Name="IpdNo" ColumnName="IpdNo" />
-                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,6 +1,8 @@
 ﻿//using HIMS_Web.BAL.Commom;
 //using HIMS_Web.BAL.Masters;
 //using HIMS_Web.BAL.Reports;
+using DataLayer;
+using HIMS_Web.BAL.Masters;
 using HIMS_Web.Global;
 using System;
 using System.Collections.Generic;
@@ -14,20 +16,48 @@ namespace HIMS_Web.Controllers
     public class AdminController : CommonController
     {
         // GET: Admin
-        public ActionResult DoctorType()
+        public ActionResult IPDEntry()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult SaveDoctorType(int doctor, int doctortype)
+        public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime, string Title,
+            string PetientName, string Mobile, string Email, string DOB, string MariatalStatus, string Gender, string FathersHusbandName,
+            string Treatment, string Address, string state, string city, string Area, string pincode, string religion,
+            string department, string IDorAadharNumber)
         {
-            //DoctorDetails _details = new DoctorDetails();
-            //var result = _details.UpdateDoctorType(doctor, doctortype);
-            //if (result == Enums.CrudStatus.Updated)
-            //    SetAlertMessage("Doctor Type saved.");
-            //else
-            //    SetAlertMessage("Doctor Type not saved.");
-            return RedirectToAction("DoctorType");
+            IpdPatientInfo ipdInfo = new IpdPatientInfo()
+            {
+                Address = Address,
+                AdmittedDateTime = Convert.ToDateTime(AdmittedDateTime),
+                AreaId = Convert.ToInt32(Area),
+                CityId = Convert.ToInt32(city),
+                CreatedDate = DateTime.Now,
+                DepartmentId = Convert.ToInt32(department),
+                DOB = Convert.ToDateTime(DOB),
+                Email = Email,
+                FatherOrHusbandName = FathersHusbandName,
+                Gender = Gender,
+                IDorAadharNumber = IDorAadharNumber,
+                IpdNo = IPDNo,
+                MaritalStatus = MariatalStatus,
+                MobileNumber = Mobile,
+                PatientId = PatientId,
+                PatientName = PetientName,
+                PinCode = Convert.ToInt32(pincode),
+                Religion = religion,
+                StateId = Convert.ToInt32(state),
+                Title = Title,
+                TreatmentId = Convert.ToInt32(Treatment)
+            };
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveIPDEntry(ipdInfo);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("IPD Patient Info saved", "IPD Patient Info");
+            else
+                SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
+            return RedirectToAction("IPDEntry");
         }
 
         public ActionResult PatientBillReport()

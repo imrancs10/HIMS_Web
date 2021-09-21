@@ -194,6 +194,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BAL\Login\LoginDetails.cs" />
     <Compile Include="BAL\Lookup\LookupDetails.cs" />
+    <Compile Include="BAL\Masters\MasterDetails.cs" />
+    <Compile Include="BAL\Masters\AdminDetails.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -461,7 +463,7 @@
     <Content Include="Views\Masters\SendMessageToPatient.cshtml" />
     <Content Include="Views\Home\MyMessageList.cshtml" />
     <Content Include="Views\Home\TempRegister.cshtml" />
-    <Content Include="Views\Admin\DoctorType.cshtml" />
+    <Content Include="Views\Admin\IPDEntry.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -503,7 +505,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="BAL\Appointments\" />
     <Folder Include="BAL\Commom\" />
-    <Folder Include="BAL\Masters\" />
     <Folder Include="BAL\Patient\" />
     <Folder Include="BAL\Reports\" />
     <Folder Include="Infrastructure\Adapter\WebService\" />

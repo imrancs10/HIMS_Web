@@ -29,7 +29,7 @@ namespace HIMS_Web.Controllers
             if (message == Enums.LoginMessage.Authenticated)
             {
                 //setUserClaim();
-                return RedirectToAction("DoctorType", "Admin");
+                return RedirectToAction("IPDEntry", "Admin");
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HIMS_Web.BAL.Masters;
 using HIMS_Web.Global;
 //using HIMS_Web.BAL.Masters;
 //using HIMS_Web.BAL.Commom;
@@ -61,23 +62,33 @@ namespace HIMS_Web.Controllers
             TempData["Alert_Title"] = title;
         }
 
-        //public virtual JsonResult GetDepartments()
-        //{
-        //    DepartmentDetails _details = new DepartmentDetails();
-        //    return Json(_details.DepartmentList(), JsonRequestBehavior.AllowGet);
-        //}
+        public virtual JsonResult GetDepartments()
+        {
+            MasterDetails _details = new MasterDetails();
+            return Json(_details.DepartmentList(), JsonRequestBehavior.AllowGet);
+        }
 
-        //public virtual JsonResult GetDoctorType()
-        //{
-        //    DoctorDetails _details = new DoctorDetails();
-        //    return Json(_details.GetDoctorTypeList(), JsonRequestBehavior.AllowGet);
-        //}
+        public virtual JsonResult GetTreatment()
+        {
+            MasterDetails _details = new MasterDetails();
+            return Json(_details.GetTreatment(), JsonRequestBehavior.AllowGet);
+        }
+        public virtual JsonResult Getstate()
+        {
+            MasterDetails _details = new MasterDetails();
+            return Json(_details.Getstate(), JsonRequestBehavior.AllowGet);
+        }
 
-        //public JsonResult GetDoctorList(int deptId=0)
-        //{
-        //    DoctorDetails _details = new DoctorDetails();
-        //    return Json(_details.DoctorList(deptId), JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult GetCityByStateId(int stateId = 0)
+        {
+            MasterDetails _details = new MasterDetails();
+            return Json(_details.GetCityByStateId(stateId), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAreaByCityId(int cityId = 0)
+        {
+            MasterDetails _details = new MasterDetails();
+            return Json(_details.GetAreaByCityId(cityId), JsonRequestBehavior.AllowGet);
+        }
 
         //public JsonResult GetDaysList()
         //{

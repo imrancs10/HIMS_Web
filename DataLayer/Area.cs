@@ -17,7 +17,7 @@ namespace DataLayer
         public int AreaId { get; set; }
         public string AreaName { get; set; }
         public Nullable<int> CityId { get; set; }
-        public string WardId { get; set; }
+        public Nullable<int> WardId { get; set; }
     
         public virtual City City { get; set; }
     }

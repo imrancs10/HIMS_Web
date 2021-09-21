@@ -11,7 +11,7 @@
             </div>
             <div class="panel-body">
                 <div class="table table-responsive">
-                    <form id="form" class="form-horizontal" action="SaveDoctorType" method="post" autocomplete="off">
+                    <form id="form" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
                         <div class="form-group">
                             <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -26,14 +26,19 @@
                         <div class="form-group">
                             <label for="AdmittedDateTime" class="control-label col-md-4 col-sm-12 col-xs-12">Admitted Date Time<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="datetime" id="AdmittedDateTime" class="common-input selectval" name="AdmittedDateTime" />
+                                <input type="datetime-local" name="AdmittedDateTime" id="AdmittedDateTime" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="Title" class="control-label col-md-4 col-sm-12 col-xs-12">Title<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Title" class="common-input selectval" name="Title"></select>
+                                <select id="Title" class="common-input selectval" name="Title">
+                                    <option>--Select--</option>
+                                    <option>Mr.</option>
+                                    <option>Mrs.</option>
+                                    <option>Miss.</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,13 +68,23 @@
                         <div class="form-group">
                             <label for="MariatalStatus" class="control-label col-md-4 col-sm-12 col-xs-12">Marital Status<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="MariatalStatus" class="common-input selectval" name="MariatalStatus"></select>
+                                <select id="MariatalStatus" class="common-input selectval" name="MariatalStatus">
+                                    <option>--Select--</option>
+                                    <option>Married</option>
+                                    <option>Unmarried</option>
+                                    <option>Devorcy</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Gender" class="control-label col-md-4 col-sm-12 col-xs-12">Gender<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Gender" class="common-input selectval" name="Gender"></select>
+                                <select id="Gender" class="common-input selectval" name="Gender">
+                                    <option>--Select--</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,9 +106,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Area Name<font color="FF0000">*</font></label>
+                            <label for="state" class="control-label col-md-4 col-sm-12 col-xs-12">State Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Area" class="common-input selectval" name="Area"></select>
+                                <select id="state" class="common-input selectval" name="state"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -103,9 +118,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="state" class="control-label col-md-4 col-sm-12 col-xs-12">State Name<font color="FF0000">*</font></label>
+                            <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Area Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="state" class="common-input selectval" name="state"></select>
+                                <select id="Area" class="common-input selectval" name="Area"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -117,7 +132,11 @@
                         <div class="form-group">
                             <label for="religion" class="control-label col-md-4 col-sm-12 col-xs-12">Religion Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="religion" class="common-input selectval" name="religion"></select>
+                                <select id="religion" class="common-input selectval" name="religion">
+                                    <option>--Select--</option>
+                                    <option>Hindu</option>
+                                    <option>Muslim</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -146,10 +165,99 @@
 <script type="text/javascript">
     $(document).ready(function () {
         fillDepartment();
-        fillDoctorType();
+        fillTreatment();
+        fillstate();
     });
+    function fillstate() {
+        let dropdown = $('#state');
+        dropdown.empty();
+        dropdown.append('<option value="">Select</option>');
+        dropdown.prop('selectedIndex', 0);
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/Common/Getstate',
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $.each(data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.StateId).text(entry.StateName));
+                });
+                dropdown.val('34');
+                dropdown.change();
+            },
+            failure: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    $('#state').on('change', function (e) {
+        var valueSelected = this.value;
+        fillCity(valueSelected)
+    });
+
+    function fillCity(stateId) {
+        let dropdown = $('#city');
+        dropdown.empty();
+        dropdown.append('<option value="">Select</option>');
+        dropdown.prop('selectedIndex', 0);
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/Common/GetCityByStateId',
+            data: '{stateId: "' + stateId + '" }',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $.each(data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.CityId).text(entry.CityName));
+                })
+                dropdown.val('1318');
+                dropdown.change();
+            },
+            failure: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    $('#city').on('change', function (e) {
+        var valueSelected = this.value;
+        fillArea(valueSelected)
+    });
+
+    function fillArea(cityId) {
+        let dropdown = $('#Area');
+        dropdown.empty();
+        dropdown.append('<option value="">Select</option>');
+        dropdown.prop('selectedIndex', 0);
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/Common/GetAreaByCityId',
+            data: '{cityId: "' + cityId + '" }',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $.each(data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.AreaId).text(entry.AreaName));
+                })
+            },
+            failure: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
     function fillDepartment() {
-        let dropdown = $('#Department');
+        let dropdown = $('#department');
         dropdown.empty();
         dropdown.append('<option value="">Select</option>');
         dropdown.prop('selectedIndex', 0);
@@ -172,51 +280,20 @@
             }
         });
     }
-
-    $('#Department').on('change', function (e) {
-        var valueSelected = this.value;
-        fillDoctor(valueSelected)
-    });
-
-    function fillDoctor(departmentId) {
-        let dropdown = $('#doctor');
+    function fillTreatment() {
+        let dropdown = $('#Treatment');
         dropdown.empty();
         dropdown.append('<option value="">Select</option>');
         dropdown.prop('selectedIndex', 0);
         $.ajax({
             dataType: 'json',
             type: 'POST',
-            url: '/Common/GetDoctorList',
-            data: '{deptId: "' + departmentId + '" }',
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.DoctorId).text(entry.DoctorName));
-                })
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-
-    function fillDoctorType() {
-        let dropdown = $('#doctortype');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/GetDoctorType',
+            url: '/Common/GetTreatment',
             async: true,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.Id).text(entry.DoctorType));
+                    dropdown.append($('<option></option>').attr('value', entry.TreatmentId).text(entry.TreatmentName));
                 })
             },
             failure: function (response) {
