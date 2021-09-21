@@ -1,7 +1,7 @@
 ﻿using DataLayer;
 using HIMS_Web.BAL.Reports;
 using HIMS_Web.Global;
-using HIMS_Web.Infrastructure.Adapter.WebService;
+//using HIMS_Web.Infrastructure.Adapter.WebService;
 using HIMS_Web.Models;
 using HIMS_Web.Models.Patient;
 using System;
@@ -388,11 +388,12 @@ namespace HIMS_Web.Controllers
 
         public ActionResult DischargeSummary()
         {
-            var reports = (new WebServiceIntegration()).GetDischargeSummaryDetail(
-                                                    !string.IsNullOrEmpty(WebSession.PatientCRNo) ? WebSession.PatientCRNo : WebSession.PatientRegNo,
-                                                    (Convert.ToInt32(OPDTypeEnum.DischargeSummary)).ToString());
-            TempData["reports"] = reports;
-            return View(reports);
+            //var reports = (new WebServiceIntegration()).GetDischargeSummaryDetail(
+            //                                        !string.IsNullOrEmpty(WebSession.PatientCRNo) ? WebSession.PatientCRNo : WebSession.PatientRegNo,
+            //                                        (Convert.ToInt32(OPDTypeEnum.DischargeSummary)).ToString());
+            //TempData["reports"] = reports;
+            //return View(reports);
+            return View();
         }
         public ActionResult ViewDischargeSummaryReport(string ipNo)
         {

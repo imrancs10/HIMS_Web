@@ -3,7 +3,6 @@ using HIMS_Web.BAL.Masters;
 using HIMS_Web.BAL.Patient;
 using HIMS_Web.Global;
 using HIMS_Web.Infrastructure;
-using HIMS_Web.Infrastructure.Adapter.WebService;
 using HIMS_Web.Models;
 using HIMS_Web.Models.Masters;
 using System;
@@ -350,19 +349,19 @@ namespace HIMS_Web.Controllers
             PatientInfo info = _details.GetPatientDetailById(patientId);
             HISPatientInfoInsertModel insertModel = HomeController.setregistrationModelForHISPortal(info);
             insertModel.Type = transactionType;
-            WebServiceIntegration service = new WebServiceIntegration();
-            string serviceResult = service.GetPatientInfoinsert(insertModel);
+            //WebServiceIntegration service = new WebServiceIntegration();
+            //string serviceResult = service.GetPatientInfoinsert(insertModel);
 
-            //save status to DB
-            PatientInfo user = new PatientInfo()
-            {
-                PatientId = info.PatientId
-            };
-            if (insertModel.Type == Convert.ToInt32(TransactionType.Registration))
-                user.RegistrationStatusHIS = serviceResult;
-            else
-                user.RenewalStatusHIS = serviceResult;
-            _details.UpdatePatientHISSyncStatus(user);
+            ////save status to DB
+            //PatientInfo user = new PatientInfo()
+            //{
+            //    PatientId = info.PatientId
+            //};
+            //if (insertModel.Type == Convert.ToInt32(TransactionType.Registration))
+            //    user.RegistrationStatusHIS = serviceResult;
+            //else
+            //    user.RenewalStatusHIS = serviceResult;
+            //_details.UpdatePatientHISSyncStatus(user);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

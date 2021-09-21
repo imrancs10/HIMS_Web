@@ -3,7 +3,6 @@ using HIMS_Web.BAL.Appointments;
 using HIMS_Web.BAL.Masters;
 using HIMS_Web.BAL.Patient;
 using HIMS_Web.Global;
-using HIMS_Web.Infrastructure.Adapter.WebService;
 using HIMS_Web.Infrastructure.Authentication;
 using HIMS_Web.Models;
 using System;
@@ -68,12 +67,12 @@ namespace HIMS_Web.Infrastructure.Utility
 
         public virtual PDModel GetPatientOPDDetail()
         {
-            if (User != null)
-            {
-                string crNumber = string.IsNullOrEmpty(WebSession.PatientCRNo) ? WebSession.PatientRegNo : WebSession.PatientCRNo;
-                var opdDetail = (new WebServiceIntegration()).GetPatientOPDDetail(crNumber, (Convert.ToInt32(OPDTypeEnum.IPD)).ToString());
-                return opdDetail;
-            }
+            //if (User != null)
+            //{
+            //    string crNumber = string.IsNullOrEmpty(WebSession.PatientCRNo) ? WebSession.PatientRegNo : WebSession.PatientCRNo;
+            //    var opdDetail = (new WebServiceIntegration()).GetPatientOPDDetail(crNumber, (Convert.ToInt32(OPDTypeEnum.IPD)).ToString());
+            //    return opdDetail;
+            //}
             return null;
         }
     }
