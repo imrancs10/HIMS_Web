@@ -4,129 +4,356 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="innercontentDashboard">
+<div class="main-container inner">
+    <!-- start: PAGE -->
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="space30">
+                </div>
+            </div>
+            <!-- end: BREADCRUMB -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-white">
+                        <div class="panel-body">
+                            <div class="col-md-4">
+                                <a href="~/Admin/IPDEntry">
+                                    <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+                                        <h3 style="text-align:center">
+                                            IPD Entry Form
+                                        </h3>
+                                        <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-54px;" alt="" />
+                                        <p>
+                                            @*<a id="" href="/Applicant/ViewAdvertisement" class="btn btn-light-white">View Advetisement</a>
+                                                <a id="" style="color:white">Total Registered Allottee:</a><br />
+                                                <a id="" style="color:white">Total No. of Payment done Allottee:</a><br />
+                                                <a id="" style="color:white">Total No. of Document uploaded Allottee:</a>*@
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/Admin/GrievancesDashboard">
+                                    <div class="panel panel-green" style="padding:15px 20px 15px 20px">
+                                        <h3 style="text-align:center"> Master Form </h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Report </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-red">View Advetisement</a>*@
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-azure" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Doctors </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-blue">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-yellow" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Lab Report </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> RadioDiagnosis </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-green" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Patient Status </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Complaint </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-azure" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> OPD Details </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-yellow" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Department </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Others </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-green" style="padding:15px 20px 15px 20px">
+
+                                    <h3 style="text-align:center"> Maintenance </h3>
+
+                                    <p>
+                                        @*<a id="" class="btn btn-light-yellow">View Advetisement</a>*@
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- end: PAGE -->
+</div>
+<style type="text/css">
+    .panel {
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 1px 2px #c3c3c3;
+        -moz-box-shadow: 0 1px 2px #c3c3c3;
+        box-shadow: 0 1px 2px #c3c3c3;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        color: #8b91a0;
+        border: none;
+        padding: 25px;
+        position: relative;
+    }
+
+    .panel-dark, .partition-dark {
+        background-color: #f0c180;
+        position: relative;
+        background-color: #373b4a 0px;
+        color: white;
+        background-image: linear-gradient(top, #373b4a 0px, #2c2f3b 100%);
+    }
+
+    .panel-white, .partition-white {
+        background-color: white;
+        position: relative;
+        color: #8b91a0;
+    }
+
+    .panel-green, .partition-green {
+        background-color: #1fbba6;
+        position: relative;
+        background-color: #23d1b9 0px;
+        color: white;
+        background-image: linear-gradient(top, #23d1b9 0px, #1fbba6 100%);
+    }
+
+    .panel-orange, .partition-orange {
+        background-color: #f58a5c;
+        position: relative;
+        background-color: #f69b74 0px;
+        color: white;
+        background-image: linear-gradient(top, #f69b74 0px, #f58a5c 100%);
+    }
+
+    .panel-azure, .partition-azure {
+        background-color: #00bdcc;
+        position: relative;
+        background-color: #00d5e6 0px;
+        color: white;
+        background-image: linear-gradient(top, #00d5e6 0px, #00bdcc 100%);
+    }
+
+    .panel-yellow, .partition-yellow {
+        background-color: #ffb848;
+        position: relative;
+        background-color: #ffc261 0px;
+        color: white;
+        background-image: linear-gradient(top, #ffc261 0px, #ffb848 100%);
+    }
+</style>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/Dashboard"]').parent().addClass('active')
+    });
+</script>
+@*<div class="innercontentDashboard">
     <div class="row">
         <div class="col-md-10">
             <div class="clearfix"></div>
             <div class="col-md-12 divmargin">
-                Welcome to HIMS
-                <!--<div class="dataBoxSec">
+                Welcome to HIMS*@
+<!--<div class="dataBoxSec">
 
-                    <div class="col-md-4">
+    <div class="col-md-4">
 
-                        <div class="reqSec dataBox">
+        <div class="reqSec dataBox">
 
-                            <span class="fa fa-calendar-check-o" aria-hidden="true"></span>
+            <span class="fa fa-calendar-check-o" aria-hidden="true"></span>
 
-                            <div class="txtInner">
+            <div class="txtInner">
 
-                                <p><a href="~/Appointment/GetAppointments" class="innercontentDashboard">Appointments </a></p>-->
-                @*<h3 id="cartTotalTickets">4</h3>*@
+                <p><a href="~/Appointment/GetAppointments" class="innercontentDashboard">Appointments </a></p>-->
+@*<h3 id="cartTotalTickets">4</h3>*@
 
-                <!--</div>
+<!--</div>
 
-                    </div>
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="workSec dataBox">
+
+        <span class="fa fa-calendar-check-o" aria-hidden="true"></span>
+
+        <div class="txtInner">
+
+            <p><a href="~/Appointment/PatientProfile" class="innercontentDashboard">Visit Summary</a></p>-->
+@*<h3 id="cartWorkOrders">5</h3>*@
+
+<!--</div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="DocSec dataBox">
+
+        <span class="fa fa-file-text-o" aria-hidden="true"></span>
+
+        <div class="txtInner">
+
+            <p><a href="/Report/DischargeSummary" class="innercontentDashboard">Discharge Documents</a></p>-->
+@*<h3 id="cartHappyCustomers">6</h3>*@
+
+<!--</div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="reqSec dataBox">
+
+        <span class="fa fa-hand-grab-o" aria-hidden="true"></span>
+
+        <div class="txtInner">
+
+            <p><a href="~/Appointment/GetAppointments" class="innercontentDashboard">Clinical </a></p>-->
+@*<h3 id="cartTotalTickets">4</h3>*@
+
+<!--</div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="workSec dataBox">
+
+        <span class="fa fa-flask" aria-hidden="true"></span>
+
+        <div class="txtInner">
+
+            <p><a href="~/Report/ReportViewing" class="innercontentDashboard">Lab Results</a></p>-->
+@*<h3 id="cartWorkOrders">5</h3>*@
+
+<!--</div>
+
+    </div>
+
+</div>
+
+<div class="col-md-4">
+
+    <div class="DocSec dataBox">
+
+        <span class="fa fa-user-o" aria-hidden="true"></span>
+
+        <div class="txtInner" style="padding:0px">
+            <p>
+                <a href="/Home/MyMessageList" class="innercontentDashboard">Messages</a>
+            </p>-->
+@*<h3 id="cartHappyCustomers">6</h3>*@
+
+<!--</div>
+            <span class="badge badge-success" style="font-size:15px;color:red;margin-left: 115px;height:50px;width:50px;padding:18px; background-color:#70ca63;border-radius: 50%;">
+                @ViewData["MessageCount"]
+            </span>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>-->
+@*<div class="col-md-2"></div>
 
                 </div>
-
-                <div class="col-md-4">
-
-                    <div class="workSec dataBox">
-
-                        <span class="fa fa-calendar-check-o" aria-hidden="true"></span>
-
-                        <div class="txtInner">
-
-                            <p><a href="~/Appointment/PatientProfile" class="innercontentDashboard">Visit Summary</a></p>-->
-                @*<h3 id="cartWorkOrders">5</h3>*@
-
-                <!--</div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="DocSec dataBox">
-
-                        <span class="fa fa-file-text-o" aria-hidden="true"></span>
-
-                        <div class="txtInner">
-
-                            <p><a href="/Report/DischargeSummary" class="innercontentDashboard">Discharge Documents</a></p>-->
-                @*<h3 id="cartHappyCustomers">6</h3>*@
-
-                <!--</div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="reqSec dataBox">
-
-                        <span class="fa fa-hand-grab-o" aria-hidden="true"></span>
-
-                        <div class="txtInner">
-
-                            <p><a href="~/Appointment/GetAppointments" class="innercontentDashboard">Clinical </a></p>-->
-                @*<h3 id="cartTotalTickets">4</h3>*@
-
-                <!--</div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="workSec dataBox">
-
-                        <span class="fa fa-flask" aria-hidden="true"></span>
-
-                        <div class="txtInner">
-
-                            <p><a href="~/Report/ReportViewing" class="innercontentDashboard">Lab Results</a></p>-->
-                @*<h3 id="cartWorkOrders">5</h3>*@
-
-                <!--</div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="DocSec dataBox">
-
-                        <span class="fa fa-user-o" aria-hidden="true"></span>
-
-                        <div class="txtInner" style="padding:0px">
-                            <p>
-                                <a href="/Home/MyMessageList" class="innercontentDashboard">Messages</a>
-                            </p>-->
-                @*<h3 id="cartHappyCustomers">6</h3>*@
-
-                <!--</div>
-                            <span class="badge badge-success" style="font-size:15px;color:red;margin-left: 115px;height:50px;width:50px;padding:18px; background-color:#70ca63;border-radius: 50%;">
-                                @ViewData["MessageCount"]
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                </div>-->
-                <div class="col-md-2"></div>
 
             </div>
-
         </div>
-    </div>
-</div>
+    </div>*@
 
 
 

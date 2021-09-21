@@ -298,6 +298,7 @@
     <Content Include="img\b4.jpg" />
     <Content Include="img\banner-bg.jpg" />
     <Content Include="img\banner.jpg" />
+    <Content Include="img\blink.gif" />
     <Content Include="img\click.gif" />
     <Content Include="img\click02.gif" />
     <Content Include="img\cm.png" />

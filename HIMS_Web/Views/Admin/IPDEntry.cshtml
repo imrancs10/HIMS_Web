@@ -49,13 +49,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000">*</font></label>
+                            <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000"></font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="number" id="Mobile" class="form-control" name="Mobile" />
+                                <input type="number" id="Mobile" maxlength="10" pattern="^\d{10}$" class="form-control" name="Mobile" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Age<font color="FF0000">*</font></label>
+                            <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Age (In Years)<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <input type="number" id="Age" class="form-control" name="Age" />
                             </div>
@@ -170,9 +170,14 @@
                                 @*<input type="number" id="pincode" class="form-control" name="IDorAadharNumber" />*@
                                 <select id="IDorAadharNumber" class="form-control" name="IDorAadharNumber">
                                     <option>--Select--</option>
-                                    <option>Aadhar</option>
-                                    <option>Rashan card</option>
+                                    <option>Aadhaar card</option>
+                                    <option>Ration card</option>
                                     <option>Voter card</option>
+                                    <option>Passport</option>
+                                    <option>PAN card</option>
+                                    <option>Driving license</option>
+                                    <option>State-issued Identification Card</option>
+                                    <option>Student Identification Card</option>
                                 </select>
                             </div>
                         </div>
@@ -318,7 +323,7 @@
                 $.each(data, function (key, entry) {
                     dropdown.append($('<option></option>').attr('value', entry.DepartmentId).text(entry.DeparmentName));
                 })
-                //dropdown.val('1318');
+                dropdown.val('1');
             },
             failure: function (response) {
                 alert(response);
