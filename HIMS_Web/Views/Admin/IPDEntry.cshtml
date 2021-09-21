@@ -11,7 +11,7 @@
             </div>
             <div class="panel-body">
                 <div class="table table-responsive">
-                    <form id="form" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                    <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
                         @*<div class="form-group">
                                 <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
                                 <div class="col-md-4 col-sm-6 col-xs-6">
@@ -177,8 +177,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <input type="submit" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit" style="float:right;width:200px;" />
+                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit" 
+                                      onclick="onSaveIPDEntry()" style="float:right;width:135px;" />
                             </div>
                         </div>
                     </form>
@@ -194,6 +195,13 @@
         //fillstate();
         fillArea(null);
     });
+
+    function onSaveIPDEntry() {
+        if (confirm("Are you sure want to save this IPD Entry")) {
+            document.getElementById('formSave').submit();
+        }
+    }
+
     function fillstate() {
         let dropdown = $('#state');
         dropdown.empty();
