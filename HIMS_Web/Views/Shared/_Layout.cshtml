@@ -138,7 +138,13 @@
     <div id="alertModel" style="display:none;" title="">
         <p></p>
     </div>
-
+    <script type="text/javascript">
+        $(document).ajaxError(function (xhr, props) {
+            if (props.status === 401) {
+                window.location.href = '@Url.Action("Index", "Login")';
+            }
+        });
+    </script>
     <script>
         $(function () {
 
