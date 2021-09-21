@@ -77,10 +77,9 @@
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="PatientId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PatientId" Type="varchar" MaxLength="500" />
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IpdNo" Type="varchar" MaxLength="500" />
           <Property Name="AdmittedDateTime" Type="datetime" />
           <Property Name="TreatmentId" Type="int" />
@@ -105,6 +104,8 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="RenewalStatusIPD" Type="varchar" MaxLength="500" />
           <Property Name="RegistrationStatusIPD" Type="varchar" MaxLength="500" />
+          <Property Name="Age" Type="int" />
+          <Property Name="IPDStatus" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -355,10 +356,9 @@
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="PatientId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PatientId" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IpdNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AdmittedDateTime" Type="DateTime" Precision="3" />
           <Property Name="TreatmentId" Type="Int32" />
@@ -383,6 +383,8 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="RenewalStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="RegistrationStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="IPDStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="HIMSDBModel.FK_IpdPatientInfo_City" FromRole="IpdPatientInfo" ToRole="City" />
           <NavigationProperty Name="Department" Relationship="HIMSDBModel.FK_IpdPatientInfo_Department" FromRole="IpdPatientInfo" ToRole="Department" />
           <NavigationProperty Name="State" Relationship="HIMSDBModel.FK_IpdPatientInfo_State" FromRole="IpdPatientInfo" ToRole="State" />
@@ -568,6 +570,8 @@
           <EntitySetMapping Name="IpdPatientInfoes">
             <EntityTypeMapping TypeName="HIMSDBModel.IpdPatientInfo">
               <MappingFragment StoreEntitySet="IpdPatientInfo">
+                <ScalarProperty Name="IPDStatus" ColumnName="IPDStatus" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="RegistrationStatusIPD" ColumnName="RegistrationStatusIPD" />
                 <ScalarProperty Name="RenewalStatusIPD" ColumnName="RenewalStatusIPD" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -593,7 +597,6 @@
                 <ScalarProperty Name="AdmittedDateTime" ColumnName="AdmittedDateTime" />
                 <ScalarProperty Name="IpdNo" ColumnName="IpdNo" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

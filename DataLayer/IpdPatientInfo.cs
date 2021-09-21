@@ -14,8 +14,7 @@ namespace DataLayer
     
     public partial class IpdPatientInfo
     {
-        public int Id { get; set; }
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         public string IpdNo { get; set; }
         public Nullable<System.DateTime> AdmittedDateTime { get; set; }
         public Nullable<int> TreatmentId { get; set; }
@@ -40,6 +39,8 @@ namespace DataLayer
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string RenewalStatusIPD { get; set; }
         public string RegistrationStatusIPD { get; set; }
+        public Nullable<int> Age { get; set; }
+        public string IPDStatus { get; set; }
     
         public virtual City City { get; set; }
         public virtual Department Department { get; set; }

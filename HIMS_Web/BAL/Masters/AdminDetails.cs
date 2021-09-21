@@ -25,6 +25,21 @@ namespace HIMS_Web.BAL.Masters
             else
                 return Enums.CrudStatus.DataAlreadyExist;
         }
+
+        public Enums.CrudStatus SaveArea(Area model)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.Areas.Where(x => x.AreaName.Equals(model.AreaName)).FirstOrDefault();
+            if (_deptRow == null)
+            {
+                _db.Entry(model).State = EntityState.Added;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            else
+                return Enums.CrudStatus.DataAlreadyExist;
+        }
         //public Enums.CrudStatus EditSchedule(ScheduleModel model)
         //{
         //    _db = new HIMSDBEntities();
@@ -64,7 +79,7 @@ namespace HIMS_Web.BAL.Masters
         //{
         //    _db = new HIMSDBEntities();
         //    var _list = (from docSchedule in _db.DoctorSchedules
-                         
+
         //                 orderby docSchedule.Doctor.DoctorName
         //                 select new 
         //                 {

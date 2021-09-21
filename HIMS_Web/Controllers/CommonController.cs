@@ -84,7 +84,7 @@ namespace HIMS_Web.Controllers
             MasterDetails _details = new MasterDetails();
             return Json(_details.GetCityByStateId(stateId), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetAreaByCityId(int cityId = 0)
+        public JsonResult GetAreaByCityId(int? cityId = 0)
         {
             MasterDetails _details = new MasterDetails();
             return Json(_details.GetAreaByCityId(cityId), JsonRequestBehavior.AllowGet);

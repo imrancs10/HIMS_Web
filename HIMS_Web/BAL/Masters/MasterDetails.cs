@@ -134,11 +134,11 @@ namespace HIMS_Web.BAL.Masters
                          }).ToList();
             return _list != null ? _list : new List<CityModel>();
         }
-        public List<AreaModel> GetAreaByCityId(int cityId)
+        public List<AreaModel> GetAreaByCityId(int? cityId)
         {
             _db = new HIMSDBEntities();
             var _list = (from dept in _db.Areas
-                         where dept.CityId == cityId
+                         where (cityId != null && dept.CityId == cityId) || cityId == null
                          select new AreaModel
                          {
                              AreaId = dept.AreaId,
