@@ -1,0 +1,51 @@
+﻿body {
+    font-size: 12px!important;
+}
+
+h3 {
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+
+.table {
+    margin-bottom: inherit;
+}
+
+    .table > tbody > tr > td,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > td,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > thead > tr > th {
+        padding: 2px;
+    }
+
+.table-responsive {
+    margin-top: inherit;
+}
+
+.form-control {
+    font-size: 12px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+.body-text,
+.h5,
+h5 {
+    font-size: 12px;
+}
+.centre {
+    text-align: center;
+}
+
+.mainwrap > media > p {
+    white-space: nowrap;
+}

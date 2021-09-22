@@ -344,6 +344,7 @@
     <Content Include="Scripts\App\Masters\MasterLookup.js" />
     <Content Include="Scripts\App\Masters\Department.js" />
     <Content Include="Scripts\App\Masters\DoctorLeave.js" />
+    <Content Include="Scripts\App\Masters\navigation.js" />
     <Content Include="Scripts\App\Masters\SyncHISData.js" />
     <Content Include="Scripts\App\Masters\LabReport.js" />
     <Content Include="Scripts\App\Masters\Doctors.js" />
@@ -420,6 +421,17 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="styles\bootstrap.css" />
+    <Content Include="styles\components.css" />
+    <Content Include="styles\dashbaord.css" />
+    <Content Include="styles\deamon.css" />
+    <Content Include="styles\demo.css" />
+    <Content Include="styles\dependencies.css" />
+    <Content Include="styles\jquery-ui.css" />
+    <Content Include="styles\pages.css" />
+    <Content Include="styles\style.css" />
+    <Content Include="styles\table_form.css" />
+    <Content Include="styles\wrapkit.css" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Masters\AppointmentSetting.cshtml" />
     <Content Include="Views\Masters\LabReport.cshtml" />
@@ -505,6 +517,7 @@
     <Content Include="Views\Admin\IpdDashboard.cshtml" />
     <Content Include="Views\Admin\AddArea.cshtml" />
     <Content Include="Views\Admin\IPDList.cshtml" />
+    <Content Include="Views\Admin\IPDPatientStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

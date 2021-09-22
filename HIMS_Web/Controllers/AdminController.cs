@@ -130,6 +130,10 @@ namespace HIMS_Web.Controllers
             return RedirectToAction("AddArea");
 
         }
+        public ActionResult IPDPatientStatus()
+        {
+            return View();
+        }
         public ActionResult PatientBillReport()
         {
             return View();

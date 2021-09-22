@@ -22,35 +22,35 @@
                 </div>
             </div>
             <div class="col-sm-12 col-xs-12" style="padding: 0px;">
-                <div class="table-responsive" style=" padding: 10px 0 50px 0; overflow-x: scroll; width: 1135px; height: 400px;">
+                <div class="table-responsive" style=" padding: 10px 0 10px 0; overflow-x: scroll; width: 1200px; height: 440px;">
                     <table class="table table_css_main_cl table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th class="text-center">Patient Id</th>
                                 <th class="text-center">Ipd No</th>
-                                <th class="text-center">PatientName</th>
-                                <th class="text-center">FatherOrHusbandName</th>
-                                <th class="text-center">MobileNumber</th>
+                                <th class="text-center">Patient Name</th>
+                                <th class="text-center">Father / HusbandName</th>
+                                <th class="text-center">Mobile Number</th>
                                 <th class="text-center">Age</th>
                                 <th class="text-center">Gender</th>
-                                <th class="text-center">IDorAadharNumber</th>
-                                <th class="text-center">IDNumber</th>
-                                <th class="text-center">AdmittedDateTime</th>
+                                <th class="text-center">ID Proof Type</th>
+                                <th class="text-center">ID Proof Number</th>
+                                <th class="text-center">Admitted Date & Time</th>
                                 <th class="text-center">Address</th>
-                                <th class="text-center">IPDStatus</th>
+                                <th class="text-center">IPD Status</th>
                                 <th class="text-center">Area</th>
                                 <th class="text-center">Department</th>
                                 <th class="text-center">Treatment</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tbody style="height:400px;overflow-y:auto">
+                        <tbody style="height:440px;overflow-y:auto">
                             @foreach (var data in AreaData)
                             {
                                 <tr>
                                     <td class="text-left">@index</td>
-                                    <td class="text-left">RCH/@data.PatientId</td>
+                                    <td class="text-left">RCH-@data.PatientId</td>
                                     <td class="text-center">@data.IpdNo</td>
                                     <td class="text-left">@data.PatientName</td>
                                     <td class="text-center">@data.FatherOrHusbandName</td>
