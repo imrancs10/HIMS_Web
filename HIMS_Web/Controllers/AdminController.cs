@@ -107,6 +107,29 @@ namespace HIMS_Web.Controllers
         {
             return View();
         }
+        public ActionResult AddArea()
+        {
+            return View();
+        }
+        public ActionResult SaveAreaMaster(string AreaId, string areaname)
+        {
+            Area pages = new Area();
+            pages.AreaId = !string.IsNullOrEmpty(AreaId) ? Convert.ToInt32(AreaId) : 0;
+            pages.AreaName = areaname;
+            //pages.CityId = UserData.UserId;
+           // pages.CreatedDate = DateTime.Now;
+           // pages.IsActive = active == "on" ? true : false;
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveArea(pages);
+            //if (result == Enums.CrudStatus.Saved)
+            //{
+            //    SetAlertMessage("Area created", "Save Area master");
+            //}
+            //else
+            //    SetAlertMessage("Area creation failed", "Save Area master");
+            return RedirectToAction("AddArea");
+
+        }
         public ActionResult PatientBillReport()
         {
             return View();
