@@ -5,6 +5,7 @@ using DataLayer;
 using HIMS_Web.Global;
 using System.Data.Entity;
 using HIMS_Web.Models.Masters;
+using System.Data.Entity.Validation;
 
 namespace HIMS_Web.BAL.Masters
 {
@@ -39,6 +40,43 @@ namespace HIMS_Web.BAL.Masters
             }
             else
                 return _deptRow.AreaId;
+        }
+        public Enums.CrudStatus AddUpdateArea(Area model)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (model.AreaId > 0)
+                {
+                    var pages = _db.Areas.Where(x => x.AreaId == model.AreaId).FirstOrDefault();
+                    if (pages != null)
+                    {
+                        pages.AreaName = model.AreaName;
+                        pages.CityId = model.CityId;
+                        _db.Entry(pages).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(model).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
         }
         public int SaveTreatment(Treatment model)
         {

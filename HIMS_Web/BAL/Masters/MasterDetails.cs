@@ -148,6 +148,20 @@ namespace HIMS_Web.BAL.Masters
                          }).ToList();
             return _list != null ? _list : new List<AreaModel>();
         }
+        public AreaModel GetAreaByAreaId(int areaId)
+        {
+            _db = new HIMSDBEntities();
+            var _list = (from dept in _db.Areas
+                         where dept.AreaId == areaId
+                         select new AreaModel
+                         {
+                             AreaId = dept.AreaId,
+                             AreaName = dept.AreaName,
+                             CityId = dept.CityId,
+                             WardId = dept.WardId
+                         }).FirstOrDefault();
+            return _list;
+        }
         //public List<MasterLookupModel> GetMastersData()
         //{
         //    _db = new HIMSDBEntities();

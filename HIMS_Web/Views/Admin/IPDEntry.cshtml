@@ -217,6 +217,14 @@
             utility.alert.setAlert("IPD Patient Info", "Required parameter is/are missing");
             return false;
         }
+        else if ($('#Treatment').val() == "Other" && $("#OtherTreatment").val() == "") {
+            utility.alert.setAlert("IPD Patient Info", "Treatment name is mandatory in case of Other");
+            return false;
+        }
+        else if ($('#Area').val() == "Other" && $("#OtherArea").val() == "") {
+            utility.alert.setAlert("IPD Patient Info", "Area name is mandatory in case of Other");
+            return false;
+        }
         else if ($('#Mobile').val().length != 10) {
             utility.alert.setAlert("IPD Patient Info", "Mobile Number is not correct");
             return false;

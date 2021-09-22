@@ -1,8 +1,9 @@
-﻿@{
+﻿@using HIMS_Web.Models.Masters;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Add Area";
-    //var UserData = ViewData["PageData"] as List<PageMasterModel>;
-    //int index = 1;
+    var AreaData = ViewData["PageData"] as List<AreaModel>;
+    int index = 1;
 }
 
 <link rel="stylesheet" href="~/styles/table_form.css">
@@ -16,8 +17,8 @@
                     <div class="col-sm-6 col-xs-12">
                         <h3 style="font-size:20px; padding-top: 10px;">Area Detail</h3>
                     </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddPage">Add New Area</button>
+                    <div class="col-sm-6 col-xs-12" style=" margin-top: 2%;">
+                        <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddArea">Add New Area</button>
                     </div>
                 </div>
             </div>
@@ -29,33 +30,32 @@
                                 <th>#</th>
                                 <th class="text-center">Area Id</th>
                                 <th class="text-center">Area Name</th>
-                                <th class="text-center">Active</th>
+                                @*<th class="text-center">Active</th>*@
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        @*<tbody>
-                            @foreach (var data in UserData)
+                        <tbody style="height:400px;overflow-y:auto">
+                            @foreach (var data in AreaData)
                             {
                                 <tr>
                                     <td scope="text-left">@index</td>
-                                    <td class="text-left">@data.Id</td>
-                                    <td class="text-center">@data.PageName</td>
-                                    @if (data.IsActive == true)
-                                    {
-                                        <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
-                                    }
-                                    else
-                                    {
-                                        <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
-                                    }
-
+                                    <td class="text-left">@data.AreaId</td>
+                                    <td class="text-center">@data.AreaName</td>
+                                    @*@if (data.IsActive == true)
+                                        {
+                                            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+                                        }*@
                                     <td class="text-center">
-                                        <a href="#" onclick="editPageMaster(@data.Id); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                        <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 index++;
                             }
-                        </tbody>*@
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<form action="/Admin/SavePageMaster" method="post">
+<form action="/Admin/SaveAreaMaster" method="post">
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -74,13 +74,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-sm-12 col-xs-12">
-                            <input type="hidden" name="PageId" value="" />
+                            <input type="hidden" name="AreaId" value="" />
                             <label for="user" class="">Area Name</label>
-                            <input type="text" name="pagename" class="form-control" placeholder="user name">
+                            <input type="text" name="areaname" class="form-control" placeholder="user name">
                         </div>
-                        <div class="form-group col-sm-6 col-xs-12">
-                            Active<input type="checkbox" name="active" />
-                        </div>
+                        @*<div class="form-group col-sm-6 col-xs-12">
+                                Active<input type="checkbox" name="active" />
+                            </div>*@
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -92,3 +92,57 @@
         </div>
     </div>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnAddArea').click(function () {
+            $('[name*=AreaId]').val("");
+            $('[name*=areaname]').val("");
+            //$('[name*=active]').prop('checked', true);
+            $('#lblModalTitle').text('Add New Area');
+
+            $('#myModal').css('display', 'block');
+            $('#myModal').addClass('in');
+            $('body').addClass('modal-open')
+            $('body').append('<div class="modal-backdrop fade in"></div>');
+        });
+
+        $('#btnCloseModal').click(function () {
+            $('#myModal').css('display', 'none');
+            $('#myModal').removeClass('in');
+            $('body').removeClass('modal-open')
+            $('.modal-backdrop').remove();
+        });
+
+    });
+    function editArea(id) {
+        debugger
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{AreaId: ' + id + ' }',
+            url: '/Admin/GetAreaDetail',
+            success: function (data) {
+                debugger
+                if (data != null) {
+                    $('[name*=AreaId]').val(data.AreaId);
+                    $('[name*=areaname]').val(data.AreaName);
+                    //$('[name*=active]').prop('checked', data.IsActive);
+                    $('#lblModalTitle').text('Update Page');
+                }
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+        $('#myModal').css('display', 'block');
+        $('#myModal').addClass('in');
+        $('body').addClass('modal-open')
+        $('body').append('<div class="modal-backdrop fade in"></div>');
+    }
+
+</script>

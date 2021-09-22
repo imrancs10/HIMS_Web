@@ -94,24 +94,32 @@ namespace HIMS_Web.Controllers
         }
         public ActionResult AddArea()
         {
+            var _details = new MasterDetails();
+            ViewData["PageData"] = _details.GetAreaByCityId(0);
             return View();
+        }
+        public JsonResult GetAreaDetail(int AreaId)
+        {
+            var _details = new MasterDetails();
+            return Json(_details.GetAreaByAreaId(AreaId), JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveAreaMaster(string AreaId, string areaname)
         {
             Area pages = new Area();
             pages.AreaId = !string.IsNullOrEmpty(AreaId) ? Convert.ToInt32(AreaId) : 0;
             pages.AreaName = areaname;
+            pages.CityId = 1318;
             //pages.CityId = UserData.UserId;
-           // pages.CreatedDate = DateTime.Now;
-           // pages.IsActive = active == "on" ? true : false;
+            // pages.CreatedDate = DateTime.Now;
+            // pages.IsActive = active == "on" ? true : false;
             AdminDetails _details = new AdminDetails();
-            var result = _details.SaveArea(pages);
-            //if (result == Enums.CrudStatus.Saved)
-            //{
-            //    SetAlertMessage("Area created", "Save Area master");
-            //}
-            //else
-            //    SetAlertMessage("Area creation failed", "Save Area master");
+            var result = _details.AddUpdateArea(pages);
+            if (result == Enums.CrudStatus.Saved)
+            {
+                SetAlertMessage("Area created", "Save Area master");
+            }
+            else
+                SetAlertMessage("Area creation failed", "Save Area master");
             return RedirectToAction("AddArea");
 
         }
