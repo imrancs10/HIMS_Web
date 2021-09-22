@@ -27,21 +27,6 @@ namespace HIMS_Web.Controllers
             string department, string IDorAadharNumber, string Age, string OtherTreatment)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
-            if (string.IsNullOrEmpty(IPDNo)
-                || string.IsNullOrEmpty(AdmittedDateTime)
-                || string.IsNullOrEmpty(PetientName)
-                || string.IsNullOrEmpty(Age)
-                || string.IsNullOrEmpty(Gender)
-                || string.IsNullOrEmpty(FathersHusbandName)
-                || string.IsNullOrEmpty(Treatment)
-                || string.IsNullOrEmpty(Address)
-                || string.IsNullOrEmpty(Area)
-                || string.IsNullOrEmpty(department)
-                || string.IsNullOrEmpty(IDorAadharNumber))
-            {
-                SetAlertMessage("Required parameter is/are missing", "IPD Patient Info");
-                return RedirectToAction("IPDEntry");
-            }
             AdminDetails _details = new AdminDetails();
             int areaId = Area == "Other" ? 0 : Convert.ToInt32(Area);
             if (!string.IsNullOrEmpty(OtherAreaName))
