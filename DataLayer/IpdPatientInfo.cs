@@ -36,6 +36,7 @@ namespace DataLayer
         public string FatherOrHusbandName { get; set; }
         public Nullable<System.DateTime> ValidUpto { get; set; }
         public string IDorAadharNumber { get; set; }
+        public string IDNumber { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string RenewalStatusIPD { get; set; }
         public string RegistrationStatusIPD { get; set; }

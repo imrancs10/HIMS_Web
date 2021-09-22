@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="CityId" />
           </Key>
-          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CityName" Type="varchar" MaxLength="500" />
           <Property Name="StateId" Type="int" />
         </EntityType>
@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="DepartmentID" />
           </Key>
-          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartmentName" Type="varchar" MaxLength="200" />
           <Property Name="DepartmentUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="varchar(max)" />
@@ -101,6 +101,7 @@
           <Property Name="FatherOrHusbandName" Type="varchar" MaxLength="100" />
           <Property Name="ValidUpto" Type="datetime" />
           <Property Name="IDorAadharNumber" Type="varchar" MaxLength="50" />
+          <Property Name="IDNumber" Type="varchar" MaxLength="500" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="RenewalStatusIPD" Type="varchar" MaxLength="500" />
           <Property Name="RegistrationStatusIPD" Type="varchar" MaxLength="500" />
@@ -291,7 +292,7 @@
           <Key>
             <PropertyRef Name="CityId" />
           </Key>
-          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CityName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="StateId" Type="Int32" />
           <NavigationProperty Name="Areas" Relationship="HIMSDBModel.FK_Area_City" FromRole="City" ToRole="Area" />
@@ -302,7 +303,7 @@
           <Key>
             <PropertyRef Name="DepartmentID" />
           </Key>
-          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -380,6 +381,7 @@
           <Property Name="FatherOrHusbandName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ValidUpto" Type="DateTime" Precision="3" />
           <Property Name="IDorAadharNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="RenewalStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="RegistrationStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -575,6 +577,7 @@
                 <ScalarProperty Name="RegistrationStatusIPD" ColumnName="RegistrationStatusIPD" />
                 <ScalarProperty Name="RenewalStatusIPD" ColumnName="RenewalStatusIPD" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="IDorAadharNumber" ColumnName="IDorAadharNumber" />
                 <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
                 <ScalarProperty Name="FatherOrHusbandName" ColumnName="FatherOrHusbandName" />

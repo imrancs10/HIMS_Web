@@ -24,7 +24,7 @@ namespace HIMS_Web.Controllers
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
             string Treatment, string Address, string Area, string OtherAreaName,
-            string department, string IDorAadharNumber, string Age, string OtherTreatment)
+            string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
             AdminDetails _details = new AdminDetails();
@@ -73,9 +73,9 @@ namespace HIMS_Web.Controllers
                     //StateId = Convert.ToInt32(state),
                     //Title = Title,
                     TreatmentId = treatmentId,
-                    Age = Convert.ToInt32(Age)
+                    Age = Convert.ToInt32(Age),
+                    IDNumber = IDNumber
                 };
-
 
                 var result = _details.SaveIPDEntry(ipdInfo);
 
