@@ -26,7 +26,36 @@ namespace HIMS_Web.BAL.Masters
             else
                 return Enums.CrudStatus.DataAlreadyExist;
         }
-
+        public List<IpdPatientInfoModel> GetIPDList()
+        {
+            _db = new HIMSDBEntities();
+            var _list = (from dept in _db.IpdPatientInfoes
+                         join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
+                         join area in _db.Areas on dept.AreaId equals area.AreaId
+                         join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
+                         select new IpdPatientInfoModel
+                         {
+                             Address = dept.Address,
+                             AdmittedDateTime = dept.AdmittedDateTime,
+                             Age = dept.Age,
+                             FatherOrHusbandName = dept.FatherOrHusbandName,
+                             Gender = dept.Gender,
+                             IDNumber = dept.IDNumber,
+                             IDorAadharNumber = dept.IDorAadharNumber,
+                             IpdNo = dept.IpdNo,
+                             IPDStatus = dept.IPDStatus,
+                             MobileNumber = dept.MobileNumber,
+                             PatientId = dept.PatientId,
+                             PatientName = dept.PatientName,
+                             AreaId = dept.AreaId,
+                             DepartmentId = dept.DepartmentId,
+                             TreatmentId = dept.TreatmentId,
+                             AreaName = area != null ? area.AreaName : "",
+                             DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
+                             TreatmentName = treat != null ? treat.TreatmentName : "",
+                         }).ToList();
+            return _list != null ? _list : new List<IpdPatientInfoModel>();
+        }
         public int SaveArea(Area model)
         {
             _db = new HIMSDBEntities();

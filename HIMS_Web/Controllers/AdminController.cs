@@ -74,7 +74,8 @@ namespace HIMS_Web.Controllers
                     //Title = Title,
                     TreatmentId = treatmentId,
                     Age = Convert.ToInt32(Age),
-                    IDNumber = IDNumber
+                    IPDStatus = "Admitted",
+                    IDNumber = IDNumber,
                 };
 
                 var result = _details.SaveIPDEntry(ipdInfo);
@@ -87,6 +88,12 @@ namespace HIMS_Web.Controllers
             else
                 SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
             return RedirectToAction("IPDEntry");
+        }
+        public ActionResult IPDList()
+        {
+            var _details = new AdminDetails();
+            ViewData["PageData"] = _details.GetIPDList();
+            return View();
         }
         public ActionResult IpdDashboard()
         {

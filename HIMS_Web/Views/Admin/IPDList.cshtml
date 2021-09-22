@@ -1,0 +1,135 @@
+﻿@using HIMS_Web.Models.Masters;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Area";
+    var AreaData = ViewData["PageData"] as List<IpdPatientInfoModel>;
+    int index = 1;
+}
+
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <div class="col-sm-12 col-xs-12" style="padding:20px 0;">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <h3 style="font-size:20px; padding-top: 10px;">IPD Patient Detail</h3>
+                    </div>
+                    <div class="col-sm-6 col-xs-12" style=" margin-top: 2%;">
+                        <a href="~/Admin/IPDEntry" class="btn btn-primary pull-right">Add New IPD Patient</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12" style="padding: 0px;">
+                <div class="table-responsive" style=" padding: 10px 0 50px 0; overflow-x: scroll; width: 1135px; height: 400px;">
+                    <table class="table table_css_main_cl table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Patient Id</th>
+                                <th class="text-center">Ipd No</th>
+                                <th class="text-center">PatientName</th>
+                                <th class="text-center">FatherOrHusbandName</th>
+                                <th class="text-center">MobileNumber</th>
+                                <th class="text-center">Age</th>
+                                <th class="text-center">Gender</th>
+                                <th class="text-center">IDorAadharNumber</th>
+                                <th class="text-center">IDNumber</th>
+                                <th class="text-center">AdmittedDateTime</th>
+                                <th class="text-center">Address</th>
+                                <th class="text-center">IPDStatus</th>
+                                <th class="text-center">Area</th>
+                                <th class="text-center">Department</th>
+                                <th class="text-center">Treatment</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody style="height:400px;overflow-y:auto">
+                            @foreach (var data in AreaData)
+                            {
+                                <tr>
+                                    <td class="text-left">@index</td>
+                                    <td class="text-left">RCH/@data.PatientId</td>
+                                    <td class="text-center">@data.IpdNo</td>
+                                    <td class="text-left">@data.PatientName</td>
+                                    <td class="text-center">@data.FatherOrHusbandName</td>
+                                    <td class="text-left">@data.MobileNumber</td>
+                                    <td class="text-center">@data.Age</td>
+                                    <td class="text-left">@data.Gender</td>
+                                    <td class="text-center">@data.IDorAadharNumber</td>
+                                    <td class="text-left">@data.IDNumber</td>
+                                    <td class="text-center">@data.AdmittedDateTime</td>
+                                    <td class="text-left">@data.Address</td>
+                                    <td class="text-left">@data.IPDStatus</td>
+                                    <td class="text-center">@data.AreaName</td>
+                                    <td class="text-center">@data.DepartmentName</td>
+                                    <td class="text-center">@data.TreatmentName</td>
+                                    <td class="text-center">
+                                        <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                        <br />
+                                        <a href="#" onclick="deleteArea(@data.AreaId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                index++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    $('#btnAddArea').click(function () {
+    //        $('[name*=AreaId]').val("");
+    //        $('[name*=areaname]').val("");
+    //        //$('[name*=active]').prop('checked', true);
+    //        $('#lblModalTitle').text('Add New Area');
+
+    //        $('#myModal').css('display', 'block');
+    //        $('#myModal').addClass('in');
+    //        $('body').addClass('modal-open')
+    //        $('body').append('<div class="modal-backdrop fade in"></div>');
+    //    });
+
+    //    $('#btnCloseModal').click(function () {
+    //        $('#myModal').css('display', 'none');
+    //        $('#myModal').removeClass('in');
+    //        $('body').removeClass('modal-open')
+    //        $('.modal-backdrop').remove();
+    //    });
+
+    //});
+    //function editArea(id) {
+    //    $.ajax({
+    //        contentType: 'application/json; charset=utf-8',
+    //        dataType: 'json',
+    //        type: 'POST',
+    //        data: '{AreaId: ' + id + ' }',
+    //        url: '/Admin/GetAreaDetail',
+    //        success: function (data) {
+    //            if (data != null) {
+    //                $('[name*=AreaId]').val(data.AreaId);
+    //                $('[name*=areaname]').val(data.AreaName);
+    //                //$('[name*=active]').prop('checked', data.IsActive);
+    //                $('#lblModalTitle').text('Update Page');
+    //            }
+    //        },
+    //        failure: function (response) {
+    //            console.log(response);
+    //        },
+    //        error: function (response) {
+    //            console.log(response.responseText);
+    //        }
+    //    });
+    //    $('#myModal').css('display', 'block');
+    //    $('#myModal').addClass('in');
+    //    $('body').addClass('modal-open')
+    //    $('body').append('<div class="modal-backdrop fade in"></div>');
+    //}
+
+</script>

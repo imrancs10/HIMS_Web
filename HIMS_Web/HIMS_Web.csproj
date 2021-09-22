@@ -504,6 +504,7 @@
     <Content Include="Views\Home\CRIntegrate.cshtml" />
     <Content Include="Views\Admin\IpdDashboard.cshtml" />
     <Content Include="Views\Admin\AddArea.cshtml" />
+    <Content Include="Views\Admin\IPDList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

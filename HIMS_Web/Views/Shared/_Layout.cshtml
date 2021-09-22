@@ -39,13 +39,20 @@
                         <div id="navbar" class="navbar-collapse collapse" style=" width: 50%; float: right; margin-top: 1%; margin-right: 7%;">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="~/Admin/IpdDashboard" class="">Dashboard</a></li>
-                                <li class="active"><a href="~/Admin/IPDEntry" class="">IPD Entry</a></li>
-                                @*<li class=" dropdown">
-            <a href="~/Admin/IPDEntry" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Entry <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="~/Admin/IPDEntry"><i></i>IPD Entry</a></li>
-            </ul>
-        </li>*@
+                                @*<li class="active"><a href="~/Admin/IPDEntry" class="">IPD Entry</a></li>*@
+                                <li class=" dropdown">
+                                    <a class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Admin/AddArea"><i></i>Area</a></li>
+                                    </ul>
+                                </li>
+                                <li class=" dropdown">
+                                    <a class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Patient<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Admin/IPDEntry"><i></i>IPD Entry</a></li>
+                                        <li><a href="~/Admin/IPDList"><i></i>IPD List</a></li>
+                                    </ul>
+                                </li>
 
                                 @*<li class=" dropdown">
             <a href="~/Admin/IPDEntry" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IPD Entry <span class="caret"></span></a>

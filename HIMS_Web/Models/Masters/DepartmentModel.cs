@@ -41,7 +41,40 @@ namespace HIMS_Web.Models.Masters
         public int? WardId { get; set; }
         public string WardName { get; set; }
     }
-
+    public class IpdPatientInfoModel
+    {
+        public int PatientId { get; set; }
+        public string IpdNo { get; set; }
+        public Nullable<System.DateTime> AdmittedDateTime { get; set; }
+        public Nullable<int> TreatmentId { get; set; }
+        public string MobileNumber { get; set; }
+        public string Email { get; set; }
+        public string Title { get; set; }
+        public string PatientName { get; set; }
+        public string MaritalStatus { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string Gender { get; set; }
+        public string Address { get; set; }
+        public Nullable<int> AreaId { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public Nullable<int> PinCode { get; set; }
+        public string Religion { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
+        public Nullable<int> StateId { get; set; }
+        public byte[] Photo { get; set; }
+        public string FatherOrHusbandName { get; set; }
+        public Nullable<System.DateTime> ValidUpto { get; set; }
+        public string IDorAadharNumber { get; set; }
+        public string IDNumber { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string RenewalStatusIPD { get; set; }
+        public string RegistrationStatusIPD { get; set; }
+        public Nullable<int> Age { get; set; }
+        public string IPDStatus { get; set; }
+        public string AreaName { get; set; }
+        public string TreatmentName { get; set; }
+        public string DepartmentName { get; set; }
+    }
 
     public class DoctorModel
     {

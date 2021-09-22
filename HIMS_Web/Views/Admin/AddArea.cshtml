@@ -7,7 +7,6 @@
 }
 
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <div class="container">
     <div class="row">
@@ -116,7 +115,6 @@
 
     });
     function editArea(id) {
-        debugger
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -124,7 +122,6 @@
             data: '{AreaId: ' + id + ' }',
             url: '/Admin/GetAreaDetail',
             success: function (data) {
-                debugger
                 if (data != null) {
                     $('[name*=AreaId]').val(data.AreaId);
                     $('[name*=areaname]').val(data.AreaName);
