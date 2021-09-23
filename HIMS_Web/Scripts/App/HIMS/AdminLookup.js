@@ -83,6 +83,91 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "Save") {
                     utility.alert.setAlert("IPD Lab Report", "IPD Lab Report Saved");
+                    $('#Hb').val("");
+                    $('#Platelet').val("");
+                    $('#Malaria').val("");
+                    $('#malariadate').val("");
+                    $('#RapidKitNS1Status').val("");
+                    $('#RapidKitNS1Date').val("");
+                    $('#RapidKitIGMStatus').val("");
+                    $('#RapidKitIGMDate').val("");
+                    $('#ELISANS1Status').val("");
+                    $('#ELISANS1Date').val("");
+                    $('#ELISAIGMStatus').val("");
+                    $('#ELISAIGMDate').val("");
+                    $('#ELISAScrubTyphusStatus').val("");
+                    $('#ELISAScrubTyphusDate').val("");
+                    $('#ELISALeptospiraStatus').val("");
+                    $('#ELISALeptospiraDate').val("");
+                    $('#LFT').val("");
+                    $('#kft').val("");
+                    $('#BTRandomDonerPlatelet').val("");
+                    $('#BTRandomDonerPlateletDate').val("");
+                    $('#BTSingleDonerPlatelet').val("");
+                    $('#BTSingleDonerPlateletDate').val("");
+                    $('#WholeBloodCell').val("");
+                    $('#WholeBloodCellDate').val("");
+                    $('#PackedRBC').val("");
+                    $('#PackedRBCDate').val("");
+                }
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+
+    $('#saveDiagnosisReport').click(function () {
+        var model = {
+            PatientId: $('#patientId').val(),
+            Xray_Details: $('#xray').val(),
+            USG_Details: $('#USG').val(),
+        }
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(model),
+            url: '/Admin/SaveDiagnosisReport',
+            success: function (data) {
+                if (data == "Save") {
+                    utility.alert.setAlert("Diagnosis Report", "Diagnosis Report Saved");
+                    $('#xray').val("");
+                    $('#USG').val("");
+                }
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+    $('#saveIPDStatus').click(function () {
+        var model = {
+            PatientId: $('#patientId').val(),
+            IPDStatus: $('#IPDStatus').val(),
+            AdmittedDateTime: $('#AdmittedDateTime').val(),
+            Reason: $('#Reason').val(),
+            casesummary: $('#casesummary').val()
+        }
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: JSON.stringify(model),
+            url: '/Admin/SaveIPDStatus',
+            success: function (data) {
+                if (data == "Save") {
+                    utility.alert.setAlert("IPD Status", "IPD Status Updated");
+                    $('#IPDStatus').val("");
+                    $('#AdmittedDateTime').val("");
+                    $('#Reason').val("");
+                    $('#casesummary').val("");
                 }
             },
             failure: function (response) {
@@ -94,6 +179,8 @@ $(document).ready(function () {
         });
     });
 })
+
+
 
 $(document).on('click', '#selectPatient', function () {
     var patientId = $(this).attr('data-Id');

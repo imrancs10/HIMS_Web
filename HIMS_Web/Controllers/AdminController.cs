@@ -148,7 +148,7 @@ namespace HIMS_Web.Controllers
             AdminDetails _details = new AdminDetails();
             IpdPatientLabReport report = new IpdPatientLabReport()
             {
-                PatientId=model.PatientId,
+                PatientId = model.PatientId,
                 CreatedBy = UserData.UserId,
                 CreatedDate = DateTime.Now,
                 ELISAIGM_Status = model.ELISAIGMStatus,
@@ -181,7 +181,7 @@ namespace HIMS_Web.Controllers
             if (!string.IsNullOrEmpty(model.ELISAIGMDate))
                 report.ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate);
             if (!string.IsNullOrEmpty(model.ELISANS1Date))
-               report.ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date);
+                report.ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date);
             if (!string.IsNullOrEmpty(model.ELISALeptospiraDate))
                 report.ELISALaptospira_TestDate = Convert.ToDateTime(model.ELISALeptospiraDate);
             if (!string.IsNullOrEmpty(model.ELISAScrubTyphusDate))
@@ -201,6 +201,85 @@ namespace HIMS_Web.Controllers
             if (!string.IsNullOrEmpty(model.malariadate))
                 report.MalariaParasite_TestDate = Convert.ToDateTime(model.malariadate);
             var result = _details.SaveIPDLabReport(report);
+            return Json("Save", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveDiagnosisReport(DiagnosisReportModel model)
+        {
+            AdminDetails _details = new AdminDetails();
+            IpdRadioDiagnosisReport report = new IpdRadioDiagnosisReport()
+            {
+                PatientId = model.PatientId,
+                CreatedBy = UserData.UserId,
+                CreatedDate = DateTime.Now,
+                USG_Details = model.USG_Details,
+                Xray_Details = model.Xray_Details
+            };
+            var result = _details.SaveDiagnosisReport(report);
+            return Json("Save", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult SaveIPDStatus(IPDStatusModel model)
+        {
+            AdminDetails _details = new AdminDetails();
+            IpdPatientStatu report = new IpdPatientStatu()
+            {
+                PatientId = model.PatientId,
+            };
+            if (model.IPDStatus == "Admit")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.AdmittedDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+            }
+            else if (model.IPDStatus == "Discharge")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.DischargeDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+            }
+            else if (model.IPDStatus == "Refer")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.ReferDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.ReferReasons = model.Reason;
+                report.ReferCaseSummary = model.casesummary;
+            }
+            else if (model.IPDStatus == "LAMA")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.LAMADateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.LAMAReasons = model.Reason;
+                report.LAMACaseSummary = model.casesummary;
+            }
+            else if (model.IPDStatus == "DOPR")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.DOPRDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.DOPRReasons = model.Reason;
+                report.DOPRCaseSummary = model.casesummary;
+            }
+            else if (model.IPDStatus == "Death")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.DeathDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.DeathReasons = model.Reason;
+                report.DeathCaseSummary = model.casesummary;
+            }
+            else if (model.IPDStatus == "Abscond")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.AbscondDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.AbscondReasons = model.Reason;
+                report.AbscondCaseSummary = model.casesummary;
+            }
+            else if (model.IPDStatus == "Other")
+            {
+                if (!string.IsNullOrWhiteSpace(model.AdmittedDateTime))
+                    report.OtherDateTime = Convert.ToDateTime(model.AdmittedDateTime);
+                report.OtherReasons = model.Reason;
+            }
+
+            var result = _details.SaveIPDStatus(report);
             return Json("Save", JsonRequestBehavior.AllowGet);
         }
         public ActionResult PatientBillReport()

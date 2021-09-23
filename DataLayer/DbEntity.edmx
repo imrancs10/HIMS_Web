@@ -143,6 +143,35 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
         </EntityType>
+        <EntityType Name="IpdPatientStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="IPDStatus" Type="varchar" MaxLength="500" />
+          <Property Name="AdmittedDateTime" Type="datetime" />
+          <Property Name="DischargeDateTime" Type="datetime" />
+          <Property Name="ReferDateTime" Type="datetime" />
+          <Property Name="ReferReasons" Type="varchar(max)" />
+          <Property Name="ReferCaseSummary" Type="varchar(max)" />
+          <Property Name="LAMADateTime" Type="datetime" />
+          <Property Name="LAMAReasons" Type="varchar(max)" />
+          <Property Name="LAMACaseSummary" Type="varchar(max)" />
+          <Property Name="DOPRDateTime" Type="datetime" />
+          <Property Name="DOPRReasons" Type="varchar(max)" />
+          <Property Name="DOPRCaseSummary" Type="varchar(max)" />
+          <Property Name="DeathDateTime" Type="datetime" />
+          <Property Name="DeathReasons" Type="varchar(max)" />
+          <Property Name="DeathCaseSummary" Type="varchar(max)" />
+          <Property Name="AbscondDateTime" Type="datetime" />
+          <Property Name="AbscondReasons" Type="varchar(max)" />
+          <Property Name="AbscondCaseSummary" Type="varchar(max)" />
+          <Property Name="OtherDateTime" Type="datetime" />
+          <Property Name="OtherReasons" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="IpdRadioDiagnosisReport">
           <Key>
             <PropertyRef Name="Id" />
@@ -260,6 +289,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IpdPatientStatus_IpdPatientStatus">
+          <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="0..1" />
+          <End Role="IpdPatientStatus" Type="Self.IpdPatientStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdPatientStatus">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo">
           <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="0..1" />
           <End Role="IpdRadioDiagnosisReport" Type="Self.IpdRadioDiagnosisReport" Multiplicity="*" />
@@ -281,6 +322,7 @@
           <EntitySet Name="Ipd_Master_User" EntityType="Self.Ipd_Master_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientInfo" EntityType="Self.IpdPatientInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientLabReport" EntityType="Self.IpdPatientLabReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IpdPatientStatus" EntityType="Self.IpdPatientStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdRadioDiagnosisReport" EntityType="Self.IpdRadioDiagnosisReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
@@ -313,6 +355,10 @@
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
             <End Role="IpdPatientLabReport" EntitySet="IpdPatientLabReport" />
           </AssociationSet>
+          <AssociationSet Name="FK_IpdPatientStatus_IpdPatientStatus" Association="Self.FK_IpdPatientStatus_IpdPatientStatus">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
+            <End Role="IpdPatientStatus" EntitySet="IpdPatientStatus" />
+          </AssociationSet>
           <AssociationSet Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo" Association="Self.FK_IpdRadioDiagnosisReport_IpdPatientInfo">
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
             <End Role="IpdRadioDiagnosisReport" EntitySet="IpdRadioDiagnosisReport" />
@@ -331,6 +377,7 @@
           <EntitySet Name="Ipd_Master_User" EntityType="HIMSDBModel.Ipd_Master_User" />
           <EntitySet Name="IpdPatientInfoes" EntityType="HIMSDBModel.IpdPatientInfo" />
           <EntitySet Name="IpdPatientLabReports" EntityType="HIMSDBModel.IpdPatientLabReport" />
+          <EntitySet Name="IpdPatientStatus" EntityType="HIMSDBModel.IpdPatientStatu" />
           <EntitySet Name="IpdRadioDiagnosisReports" EntityType="HIMSDBModel.IpdRadioDiagnosisReport" />
           <EntitySet Name="States" EntityType="HIMSDBModel.State" />
           <EntitySet Name="Treatments" EntityType="HIMSDBModel.Treatment" />
@@ -362,6 +409,10 @@
           <AssociationSet Name="FK_IpdPatientLabReport_IpdPatientLabReport" Association="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport">
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
             <End Role="IpdPatientLabReport" EntitySet="IpdPatientLabReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IpdPatientStatus_IpdPatientStatus" Association="HIMSDBModel.FK_IpdPatientStatus_IpdPatientStatus">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
+            <End Role="IpdPatientStatu" EntitySet="IpdPatientStatus" />
           </AssociationSet>
           <AssociationSet Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo" Association="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo">
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
@@ -481,6 +532,7 @@
           <NavigationProperty Name="Department" Relationship="HIMSDBModel.FK_IpdPatientInfo_Department" FromRole="IpdPatientInfo" ToRole="Department" />
           <NavigationProperty Name="State" Relationship="HIMSDBModel.FK_IpdPatientInfo_State" FromRole="IpdPatientInfo" ToRole="State" />
           <NavigationProperty Name="IpdPatientLabReports" Relationship="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport" FromRole="IpdPatientInfo" ToRole="IpdPatientLabReport" />
+          <NavigationProperty Name="IpdPatientStatus" Relationship="HIMSDBModel.FK_IpdPatientStatus_IpdPatientStatus" FromRole="IpdPatientInfo" ToRole="IpdPatientStatu" />
           <NavigationProperty Name="IpdRadioDiagnosisReports" Relationship="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo" FromRole="IpdPatientInfo" ToRole="IpdRadioDiagnosisReport" />
         </EntityType>
         <EntityType Name="IpdPatientLabReport">
@@ -518,6 +570,36 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport" FromRole="IpdPatientLabReport" ToRole="IpdPatientInfo" />
+        </EntityType>
+        <EntityType Name="IpdPatientStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="IPDStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AdmittedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DischargeDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ReferDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ReferReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReferCaseSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LAMADateTime" Type="DateTime" Precision="3" />
+          <Property Name="LAMAReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LAMACaseSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DOPRDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DOPRReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DOPRCaseSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeathDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeathReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeathCaseSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AbscondDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AbscondReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AbscondCaseSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtherDateTime" Type="DateTime" Precision="3" />
+          <Property Name="OtherReasons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_IpdPatientStatus_IpdPatientStatus" FromRole="IpdPatientStatu" ToRole="IpdPatientInfo" />
         </EntityType>
         <EntityType Name="IpdRadioDiagnosisReport">
           <Key>
@@ -635,6 +717,18 @@
               <PropertyRef Name="PatientId" />
             </Principal>
             <Dependent Role="IpdPatientLabReport">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IpdPatientStatus_IpdPatientStatus">
+          <End Type="HIMSDBModel.IpdPatientInfo" Role="IpdPatientInfo" Multiplicity="0..1" />
+          <End Type="HIMSDBModel.IpdPatientStatu" Role="IpdPatientStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdPatientStatu">
               <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
@@ -798,6 +892,36 @@
                 <ScalarProperty Name="MalariaParasite_Status" ColumnName="MalariaParasite_Status" />
                 <ScalarProperty Name="PlateletCount" ColumnName="PlateletCount" />
                 <ScalarProperty Name="HbCount" ColumnName="HbCount" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IpdPatientStatus">
+            <EntityTypeMapping TypeName="HIMSDBModel.IpdPatientStatu">
+              <MappingFragment StoreEntitySet="IpdPatientStatus">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OtherReasons" ColumnName="OtherReasons" />
+                <ScalarProperty Name="OtherDateTime" ColumnName="OtherDateTime" />
+                <ScalarProperty Name="AbscondCaseSummary" ColumnName="AbscondCaseSummary" />
+                <ScalarProperty Name="AbscondReasons" ColumnName="AbscondReasons" />
+                <ScalarProperty Name="AbscondDateTime" ColumnName="AbscondDateTime" />
+                <ScalarProperty Name="DeathCaseSummary" ColumnName="DeathCaseSummary" />
+                <ScalarProperty Name="DeathReasons" ColumnName="DeathReasons" />
+                <ScalarProperty Name="DeathDateTime" ColumnName="DeathDateTime" />
+                <ScalarProperty Name="DOPRCaseSummary" ColumnName="DOPRCaseSummary" />
+                <ScalarProperty Name="DOPRReasons" ColumnName="DOPRReasons" />
+                <ScalarProperty Name="DOPRDateTime" ColumnName="DOPRDateTime" />
+                <ScalarProperty Name="LAMACaseSummary" ColumnName="LAMACaseSummary" />
+                <ScalarProperty Name="LAMAReasons" ColumnName="LAMAReasons" />
+                <ScalarProperty Name="LAMADateTime" ColumnName="LAMADateTime" />
+                <ScalarProperty Name="ReferCaseSummary" ColumnName="ReferCaseSummary" />
+                <ScalarProperty Name="ReferReasons" ColumnName="ReferReasons" />
+                <ScalarProperty Name="ReferDateTime" ColumnName="ReferDateTime" />
+                <ScalarProperty Name="DischargeDateTime" ColumnName="DischargeDateTime" />
+                <ScalarProperty Name="AdmittedDateTime" ColumnName="AdmittedDateTime" />
+                <ScalarProperty Name="IPDStatus" ColumnName="IPDStatus" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

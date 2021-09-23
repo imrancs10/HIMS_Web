@@ -83,6 +83,9 @@
     <Compile Include="IpdPatientLabReport.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="IpdPatientStatu.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="IpdRadioDiagnosisReport.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

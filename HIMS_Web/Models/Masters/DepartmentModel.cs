@@ -108,6 +108,22 @@ namespace HIMS_Web.Models.Masters
 
     }
 
+    public class DiagnosisReportModel
+    {
+        public int PatientId { get; set; }
+        public string Xray_Details { get; set; }
+        public string USG_Details { get; set; }
+    }
+    public class IPDStatusModel
+    {
+        public int PatientId { get; set; }
+        public string IPDStatus { get; set; }
+        public string AdmittedDateTime { get; set; }
+        public string Reason { get; set; }
+        public string casesummary { get; set; }
+
+    }
+
     public class DoctorModel
     {
         public int DoctorId { get; set; }

@@ -232,6 +232,95 @@ namespace HIMS_Web.BAL.Masters
             }
         }
 
+        public Enums.CrudStatus SaveDiagnosisReport(IpdRadioDiagnosisReport report)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (report.Id > 0)
+                {
+                    var pages = _db.IpdRadioDiagnosisReports.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                    if (pages != null)
+                    {
+                        //pages.AreaName = model.AreaName;
+                        //pages.CityId = model.CityId;
+                        //_db.Entry(pages).State = EntityState.Modified;
+                        //_effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(report).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+        public Enums.CrudStatus SaveIPDStatus(IpdPatientStatu report)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                var pages = _db.IpdPatientStatus.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                if (pages != null)
+                {
+                    pages.AbscondCaseSummary = !string.IsNullOrEmpty(report.AbscondCaseSummary) ? report.AbscondCaseSummary : pages.AbscondCaseSummary;
+                    pages.AbscondDateTime = report.AbscondDateTime != null ? report.AbscondDateTime : pages.AbscondDateTime;
+                    pages.AbscondReasons = !string.IsNullOrEmpty(report.AbscondReasons) ? report.AbscondReasons : pages.AbscondReasons;
+                    pages.AdmittedDateTime = report.AdmittedDateTime != null ? report.AdmittedDateTime : pages.AdmittedDateTime;
+                    pages.DeathCaseSummary = !string.IsNullOrEmpty(report.DeathCaseSummary) ? report.DeathCaseSummary : pages.DeathCaseSummary;
+                    pages.DeathDateTime = report.DeathDateTime != null ? report.DeathDateTime : pages.DeathDateTime;
+                    pages.DeathReasons = !string.IsNullOrEmpty(report.DeathReasons) ? report.DeathReasons : pages.DeathReasons;
+                    pages.DischargeDateTime = report.DischargeDateTime != null ? report.DischargeDateTime : pages.DischargeDateTime;
+                    pages.DOPRCaseSummary = !string.IsNullOrEmpty(report.DOPRCaseSummary) ? report.DOPRCaseSummary : pages.DOPRCaseSummary;
+                    pages.DOPRDateTime = report.DOPRDateTime != null ? report.DOPRDateTime : pages.DOPRDateTime;
+                    pages.DOPRReasons = !string.IsNullOrEmpty(report.DOPRReasons) ? report.DOPRReasons : pages.DOPRReasons;
+                    pages.IPDStatus = !string.IsNullOrEmpty(report.IPDStatus) ? report.IPDStatus : pages.IPDStatus;
+                    pages.LAMACaseSummary = !string.IsNullOrEmpty(report.LAMACaseSummary) ? report.LAMACaseSummary : pages.LAMACaseSummary;
+                    pages.LAMADateTime = report.LAMADateTime != null ? report.LAMADateTime : pages.LAMADateTime;
+                    pages.LAMAReasons = !string.IsNullOrEmpty(report.LAMAReasons) ? report.LAMAReasons : pages.LAMAReasons;
+                    pages.OtherDateTime = report.OtherDateTime != null ? report.OtherDateTime : pages.OtherDateTime;
+                    pages.OtherReasons = !string.IsNullOrEmpty(report.OtherReasons) ? report.OtherReasons : pages.OtherReasons;
+                    pages.ReferCaseSummary = !string.IsNullOrEmpty(report.ReferCaseSummary) ? report.ReferCaseSummary : pages.ReferCaseSummary;
+                    pages.ReferDateTime = report.ReferDateTime != null ? report.ReferDateTime : pages.ReferDateTime;
+                    pages.ReferReasons = !string.IsNullOrEmpty(report.ReferReasons) ? report.ReferReasons : pages.ReferReasons;
+                    _db.Entry(pages).State = EntityState.Modified;
+                    _effectRow = _db.SaveChanges();
+                }
+                else
+                {
+                    _db.Entry(report).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
         //public Enums.CrudStatus EditSchedule(ScheduleModel model)
         //{
         //    _db = new HIMSDBEntities();
