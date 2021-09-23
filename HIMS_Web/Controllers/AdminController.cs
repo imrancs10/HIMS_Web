@@ -151,7 +151,32 @@ namespace HIMS_Web.Controllers
                 CreatedBy = UserData.UserId,
                 CreatedDate = DateTime.Now,
                 ELISAIGM_Status = model.ELISAIGMStatus,
-                ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate)
+                ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate),
+                ELISANS1_Status = model.ELISANS1Status,
+                ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date),
+                ELISALaptospira_Status = model.ELISALeptospiraStatus,
+                ELISALaptospira_TestDate = Convert.ToDateTime(model.ELISALeptospiraDate),
+                ELISAScrubTyphus_Status = model.ELISAScrubTyphusStatus,
+                ELISAScrubTyphus_TestDate = Convert.ToDateTime(model.ELISAScrubTyphusDate),
+                RapidKitNS1_Status = model.RapidKitNS1Status,
+                RapidKitNS1_TestDate = Convert.ToDateTime(model.RapidKitNS1Date),
+                RapidKitIGM_Status = model.RapidKitIGMStatus,
+                RapidKitIGM_TestDate = Convert.ToDateTime(model.RapidKitIGMDate),
+                LFT_Details = model.LFT,
+                KFT_Details = model.kft,
+                RandomDonerPlatelet_Count = model.BTRandomDonerPlatelet,
+                RandomDonerPlatelet_TestDate = Convert.ToDateTime(model.BTRandomDonerPlateletDate),
+                SingleDonorPlatelet_Count = model.BTSingleDonerPlatelet,
+                SingleDonorPlatelet_TestDate = Convert.ToDateTime(model.BTSingleDonerPlateletDate),
+                WholeBloodCell_Count = model.WholeBloodCell,
+                WholeBloodCell_TestDate = Convert.ToDateTime(model.WholeBloodCellDate),
+                PackedRBC_Count = model.PackedRBC,
+                PackedRBC_TestDate = Convert.ToDateTime(model.PackedRBCDate),
+                MalariaParasite_Status = model.MalariaStatus,
+                MalariaParasite_TestDate = Convert.ToDateTime(model.malariadate),
+                PlateletCount = model.Platelet,
+                HbCount = model.Hb
+
             };
             var result = _details.SaveIPDLabReport(report);
             return Json("Save", JsonRequestBehavior.AllowGet);

@@ -84,6 +84,7 @@ namespace HIMS_Web.Models.Masters
         public string MalariaStatus { get; set; }
         public string malariadate { get; set; }
         public string RapidKitNS1Status { get; set; }
+        public string RapidKitNS1Date { get; set; }
         public string RapidKitIGMStatus { get; set; }
         public string RapidKitIGMDate { get; set; }
         public string ELISANS1Status { get; set; }
