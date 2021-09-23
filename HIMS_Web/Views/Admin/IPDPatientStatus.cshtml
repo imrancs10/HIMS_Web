@@ -80,94 +80,163 @@
                     <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
                         <table class="table table_css_main_cl table-bordered">
                             <tr>
-                                <th class="text-center">Test Items</th>
-                                <th class="text-center">Fields</th>
+                                <th class="text-center" colspan="2">Test Items</th>
+                                <th class="text-center" colspan="2">Fields</th>
 
                             </tr>
                             <tr>
-                                <td class="text-left">Hb</td>
-                                <td class="text-left"><textarea type="text" id="Hb" class="form-control" name="Hb"></textarea></td>
+                                <td class="text-left" colspan="2">Hb</td>
+                                <td class="text-left" colspan="2">
+                                    <textarea type="text" id="Hb" class="form-control" name="Hb"></textarea>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="text-left">Platelet count</td>
-                                <td class="text-left"><textarea type="text" id="Platelet" class="form-control" name="Platelet"></textarea></td>
+                                <td class="text-left" colspan="2">Platelet count</td>
+                                <td class="text-left" colspan="2">
+                                    <textarea type="text" id="Platelet" class="form-control" name="Platelet"></textarea>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="text-left"> Malaria parasite</td>
+                                <td class="text-left" colspan="2"> Malaria parasite</td>
                                 <td class="text-left">
                                     <select id="Malaria" class="form-control" name="Malaria">
                                         <option value="">--Select--</option>
                                         <option>Positive</option>
                                         <option>Negative</option>
                                     </select>
-                                    <input type="date" id="" class="form-control" name="malariadate" />
                                 </td>
+                                <td><input type="date" id="" class="form-control" name="malariadate" /></td>
                             </tr>
                             <tr>
-                                <td class="text-left">Rapid Kit</td>
+                                <td class="text-left" rowspan="2">Rapid Kit</td>
                                 <td class="text-left">
-                                    <select id="ns1" class="form-control" name="ns1">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                    <input type="date" id="" class="form-control" name="ns1date" />
+                                    NS1
+                                </td>
+                                <td>
                                     <select id="igM" class="form-control" name="igM">
                                         <option value="">--Select--</option>
                                         <option>Positive</option>
                                         <option>Negative</option>
                                     </select>
-                                    <input type="date" id="" class="form-control" name="igMdate" />
+                                </td>
+                                <td>
+                                    <input type="date" id="" class="form-control" name="NS1date" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left">ELISA</td>
+                                @*<td class="text-left">Rapid Kit</td>*@
                                 <td class="text-left">
-                                    <select id="ns1" class="form-control" name="ns1">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                    <input type="date" id="" class="form-control" name="ns1date" />
+                                    IGM
+                                </td>
+                                <td>
                                     <select id="igM" class="form-control" name="igM">
                                         <option value="">--Select--</option>
                                         <option>Positive</option>
                                         <option>Negative</option>
                                     </select>
+                                </td>
+                                <td>
                                     <input type="date" id="" class="form-control" name="igMdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" rowspan="4">ELISA</td>
+                                <td class="text-left">
+                                    NS1
+                                </td>
+                                <td>
+                                    <select id="igM" class="form-control" name="NS1">
+                                        <option value="">--Select--</option>
+                                        <option>Positive</option>
+                                        <option>Negative</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="date" id="" class="form-control" name="NS1date" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    IGM
+                                </td>
+                                <td>
+                                    <select id="igM" class="form-control" name="igM">
+                                        <option value="">--Select--</option>
+                                        <option>Positive</option>
+                                        <option>Negative</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="date" id="" class="form-control" name="igMdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    Scrub typhus
+                                </td>
+                                <td>
                                     <select id="Scrubtyphus" class="form-control" name="Scrubtyphus">
                                         <option value="">--Select--</option>
                                         <option>Positive</option>
                                         <option>Negative</option>
                                     </select>
+                                </td>
+                                <td>
                                     <input type="date" id="" class="form-control" name="Scrubtyphusdate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    Leptospira
+                                </td>
+                                <td>
                                     <select id="Leptospira" class="form-control" name="Leptospira">
                                         <option value="">--Select--</option>
                                         <option>Positive</option>
                                         <option>Negative</option>
                                     </select>
+                                </td>
+                                <td>
                                     <input type="date" id="" class="form-control" name="LeptospiraMdate" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left">LFT</td>
-                                <td class="text-left"><textarea type="text" id="lft" class="form-control" name="lft"></textarea></td>
+                                <td class="text-left" colspan="2">LFT</td>
+                                <td class="text-left" colspan="2"><textarea type="text" id="lft" class="form-control" name="lft"></textarea></td>
                             </tr>
                             <tr>
-                                <td class="text-left">KFT</td>
-                                <td class="text-left"><textarea type="text" id="kft" class="form-control" name="kft"></textarea></td>
+                                <td class="text-left" colspan="2">KFT</td>
+                                <td class="text-left" colspan="2"><textarea type="text" id="kft" class="form-control" name="kft"></textarea></td>
                             </tr>
                             <tr>
-                                <td class="text-left">Blood Transfusion</td>
-                                <td class="text-left">
+                                <td class="text-left" rowspan="4">Blood Transfusion</td>
+                                <td rowspan="2">Platelet</td>
+                                <td>Random Doner Platelet</td>
+                                <td>
                                     <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="platelet" />
+                                    <input type="date" id="" class="form-control" name="plateletDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Single Doner Platelet</td>
+                                <td>
                                     <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="platelet" />
+                                    <input type="date" id="" class="form-control" name="plateletDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Blood</td>
+                                <td>Whole Blood Cell</td>
+                                <td>
                                     <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="platelet" />
+                                    <input type="date" id="" class="form-control" name="plateletDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Packed RBC</td>
+                                <td>
                                     <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="platelet" />
+                                    <input type="date" id="" class="form-control" name="plateletDate" />
                                 </td>
                             </tr>
                         </table>
