@@ -147,6 +147,7 @@ $(document).ready(function () {
             }
         });
     });
+
     $('#saveIPDStatus').click(function () {
         var model = {
             PatientId: $('#patientId').val(),
@@ -177,6 +178,49 @@ $(document).ready(function () {
                 console.log(response.responseText);
             }
         });
+    });
+
+    $("#IPDStatus").change(function () {
+        if ($(this).val() == "Admit") {
+            $("#Reason").parent().parent().hide();
+            $("#casesummary").parent().parent().hide();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "Discharge") {
+            $("#Reason").parent().parent().hide();
+            $("#casesummary").parent().parent().hide();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "Refer") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().show();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "LAMA") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().show();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "DOPR") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().show();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "Death") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().show();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "Abscond") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().show();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
+        else if ($(this).val() == "Other") {
+            $("#Reason").parent().parent().show();
+            $("#casesummary").parent().parent().hide();
+            $("#AdmittedDateTime").parent().parent().show();
+        }
     });
 })
 

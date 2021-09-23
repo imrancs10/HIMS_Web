@@ -284,69 +284,59 @@
             <div id="tabs-4" class="panel-body">
                 <div class="table-responsive" style="padding:10px 0 10px 0;">
                     @*<form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">*@
-                    <table class="table table_css_main_cl table-bordered">
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-sm-12 col-lg-12">
-                                <div class="panel panel-primary">
-                                    <div class="panel-body">
-                                        <div class="table table-responsive">
-                                            @*<form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">*@
-                                            <div class="form-group">
-                                                <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">Select Patient Status<font color="FF0000">*</font></label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <select id="IPDStatus" class="form-control" name="IPDStatus">
-                                                        <option value="">--Select--</option>
-                                                        <option>Admit</option>
-                                                        <option>Discharge</option>
-                                                        <option>Refer</option>
-                                                        <option>LAMA</option>
-                                                        <option>DOPR</option>
-                                                        <option>Death</option>
-                                                        <option>Abscond</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="form-group">
-                                                <label for="AdmittedDateTime" class="control-label col-md-4 col-sm-12 col-xs-12">Admitted Date Time</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <input type="datetime-local" name="AdmittedDateTime" id="AdmittedDateTime" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">Reason</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <textarea type="text" id="Reason" class="form-control" name="Reason"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="casesummary" class="control-label col-md-4 col-sm-12 col-xs-12">Case Summary</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <textarea type="text" id="casesummary" class="form-control" name="casesummary"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
-                                                    <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
-                                                           id="saveIPDStatus" style="float:right;width:135px;" />
-                                                </div>
-                                            </div>
-                                            @*</form>*@
-                                        </div>
-                                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-12 col-lg-12">
+                            <label for="IPDNo" class="control-label">Select Patient Status<font color="FF0000">*</font></label>
+                            <div class="">
+                                <select id="IPDStatus" class="form-control" name="IPDStatus">
+                                    <option value="">--Select--</option>
+                                    <option>Admit</option>
+                                    <option>Discharge</option>
+                                    <option>Refer</option>
+                                    <option>LAMA</option>
+                                    <option>DOPR</option>
+                                    <option>Death</option>
+                                    <option>Abscond</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12 col-lg-12">
+                            <label for="AdmittedDateTime" class="control-label">Admitted Date Time</label>
+                            <div class="">
+                                <input type="datetime-local" name="AdmittedDateTime" id="AdmittedDateTime" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="col-sm-6 col-lg-6">
+                                <label for="Address" class="control-label">Reason</label>
+                                <div class="">
+                                    <textarea type="text" id="Reason" class="form-control" name="Reason"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <label for="casesummary" class="control-label">Case Summary</label>
+                                <div class="">
+                                    <textarea type="text" id="casesummary" class="form-control" name="casesummary"></textarea>
                                 </div>
                             </div>
                         </div>
-                    </table>
-                    @*<div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;margin-top:10px;">
                                 <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
-                                       onclick=" " style="float:right;width:135px;" />
+                                       id="saveIPDStatus" style="float:right;width:135px;" />
                             </div>
-                        </div>*@
-                    @*</form>*@
+                        </div>
+                    </div>
                 </div>
+                @*<div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                            <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                   onclick=" " style="float:right;width:135px;" />
+                        </div>
+                    </div>*@
+                @*</form>*@
             </div>
         </div>
     </div>
