@@ -108,6 +108,52 @@
           <Property Name="Age" Type="int" />
           <Property Name="IPDStatus" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="IpdPatientLabReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="HbCount" Type="varchar" MaxLength="500" />
+          <Property Name="PlateletCount" Type="varchar" MaxLength="500" />
+          <Property Name="MalariaParasite_Status" Type="varchar" MaxLength="50" />
+          <Property Name="MalariaParasite_TestDate" Type="datetime" />
+          <Property Name="RapidKitNS1_Status" Type="varchar" MaxLength="50" />
+          <Property Name="RapidKitNS1_TestDate" Type="datetime" />
+          <Property Name="RapidKitIGM_Status" Type="varchar" MaxLength="50" />
+          <Property Name="RapidKitIGM_TestDate" Type="datetime" />
+          <Property Name="ELISANS1_Status" Type="varchar" MaxLength="50" />
+          <Property Name="ELISANS1_TestDate" Type="datetime" />
+          <Property Name="ELISAIGM_Status" Type="varchar" MaxLength="50" />
+          <Property Name="ELISAIGM_TestDate" Type="datetime" />
+          <Property Name="ELISAScrubTyphus_Status" Type="varchar" MaxLength="50" />
+          <Property Name="ELISAScrubTyphus_TestDate" Type="datetime" />
+          <Property Name="ELISALaptospira_Status" Type="varchar" MaxLength="50" />
+          <Property Name="ELISALaptospira_TestDate" Type="datetime" />
+          <Property Name="LFT_Details" Type="varchar" MaxLength="500" />
+          <Property Name="KFT_Details" Type="varchar" MaxLength="500" />
+          <Property Name="RandomDonerPlatelet_Count" Type="varchar" MaxLength="500" />
+          <Property Name="RandomDonerPlatelet_TestDate" Type="datetime" />
+          <Property Name="SingleDonorPlatelet_Count" Type="varchar" MaxLength="500" />
+          <Property Name="SingleDonorPlatelet_TestDate" Type="datetime" />
+          <Property Name="WholeBloodCell_Count" Type="varchar" MaxLength="500" />
+          <Property Name="WholeBloodCell_TestDate" Type="datetime" />
+          <Property Name="PackedRBC_Count" Type="varchar" MaxLength="500" />
+          <Property Name="PackedRBC_TestDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="IpdRadioDiagnosisReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="Xray_Details" Type="varchar(max)" />
+          <Property Name="USG_Details" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateId" />
@@ -202,6 +248,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IpdPatientLabReport_IpdPatientLabReport">
+          <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="0..1" />
+          <End Role="IpdPatientLabReport" Type="Self.IpdPatientLabReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdPatientLabReport">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo">
+          <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="0..1" />
+          <End Role="IpdRadioDiagnosisReport" Type="Self.IpdRadioDiagnosisReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdRadioDiagnosisReport">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HIMSDBModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -210,6 +280,8 @@
           <EntitySet Name="Ipd_Master_Login" EntityType="Self.Ipd_Master_Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ipd_Master_User" EntityType="Self.Ipd_Master_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientInfo" EntityType="Self.IpdPatientInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IpdPatientLabReport" EntityType="Self.IpdPatientLabReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IpdRadioDiagnosisReport" EntityType="Self.IpdRadioDiagnosisReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
@@ -237,6 +309,14 @@
             <End Role="State" EntitySet="State" />
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_IpdPatientLabReport_IpdPatientLabReport" Association="Self.FK_IpdPatientLabReport_IpdPatientLabReport">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
+            <End Role="IpdPatientLabReport" EntitySet="IpdPatientLabReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo" Association="Self.FK_IpdRadioDiagnosisReport_IpdPatientInfo">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
+            <End Role="IpdRadioDiagnosisReport" EntitySet="IpdRadioDiagnosisReport" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -250,6 +330,8 @@
           <EntitySet Name="Ipd_Master_Login" EntityType="HIMSDBModel.Ipd_Master_Login" />
           <EntitySet Name="Ipd_Master_User" EntityType="HIMSDBModel.Ipd_Master_User" />
           <EntitySet Name="IpdPatientInfoes" EntityType="HIMSDBModel.IpdPatientInfo" />
+          <EntitySet Name="IpdPatientLabReports" EntityType="HIMSDBModel.IpdPatientLabReport" />
+          <EntitySet Name="IpdRadioDiagnosisReports" EntityType="HIMSDBModel.IpdRadioDiagnosisReport" />
           <EntitySet Name="States" EntityType="HIMSDBModel.State" />
           <EntitySet Name="Treatments" EntityType="HIMSDBModel.Treatment" />
           <EntitySet Name="Wards" EntityType="HIMSDBModel.Ward" />
@@ -276,6 +358,14 @@
           <AssociationSet Name="FK_IpdPatientInfo_State" Association="HIMSDBModel.FK_IpdPatientInfo_State">
             <End Role="State" EntitySet="States" />
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IpdPatientLabReport_IpdPatientLabReport" Association="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
+            <End Role="IpdPatientLabReport" EntitySet="IpdPatientLabReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo" Association="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
+            <End Role="IpdRadioDiagnosisReport" EntitySet="IpdRadioDiagnosisReports" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Area">
@@ -390,6 +480,56 @@
           <NavigationProperty Name="City" Relationship="HIMSDBModel.FK_IpdPatientInfo_City" FromRole="IpdPatientInfo" ToRole="City" />
           <NavigationProperty Name="Department" Relationship="HIMSDBModel.FK_IpdPatientInfo_Department" FromRole="IpdPatientInfo" ToRole="Department" />
           <NavigationProperty Name="State" Relationship="HIMSDBModel.FK_IpdPatientInfo_State" FromRole="IpdPatientInfo" ToRole="State" />
+          <NavigationProperty Name="IpdPatientLabReports" Relationship="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport" FromRole="IpdPatientInfo" ToRole="IpdPatientLabReport" />
+          <NavigationProperty Name="IpdRadioDiagnosisReports" Relationship="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo" FromRole="IpdPatientInfo" ToRole="IpdRadioDiagnosisReport" />
+        </EntityType>
+        <EntityType Name="IpdPatientLabReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="HbCount" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PlateletCount" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MalariaParasite_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MalariaParasite_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="RapidKitNS1_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RapidKitNS1_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="RapidKitIGM_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RapidKitIGM_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="ELISANS1_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ELISANS1_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="ELISAIGM_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ELISAIGM_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="ELISAScrubTyphus_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ELISAScrubTyphus_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="ELISALaptospira_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ELISALaptospira_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="LFT_Details" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="KFT_Details" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RandomDonerPlatelet_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RandomDonerPlatelet_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="SingleDonorPlatelet_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SingleDonorPlatelet_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="WholeBloodCell_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WholeBloodCell_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="PackedRBC_Count" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PackedRBC_TestDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport" FromRole="IpdPatientLabReport" ToRole="IpdPatientInfo" />
+        </EntityType>
+        <EntityType Name="IpdRadioDiagnosisReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="Xray_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="USG_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo" FromRole="IpdRadioDiagnosisReport" ToRole="IpdPatientInfo" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -484,6 +624,30 @@
             </Principal>
             <Dependent Role="IpdPatientInfo">
               <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IpdPatientLabReport_IpdPatientLabReport">
+          <End Type="HIMSDBModel.IpdPatientInfo" Role="IpdPatientInfo" Multiplicity="0..1" />
+          <End Type="HIMSDBModel.IpdPatientLabReport" Role="IpdPatientLabReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdPatientLabReport">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo">
+          <End Type="HIMSDBModel.IpdPatientInfo" Role="IpdPatientInfo" Multiplicity="0..1" />
+          <End Type="HIMSDBModel.IpdRadioDiagnosisReport" Role="IpdRadioDiagnosisReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="IpdRadioDiagnosisReport">
+              <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -600,6 +764,54 @@
                 <ScalarProperty Name="AdmittedDateTime" ColumnName="AdmittedDateTime" />
                 <ScalarProperty Name="IpdNo" ColumnName="IpdNo" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IpdPatientLabReports">
+            <EntityTypeMapping TypeName="HIMSDBModel.IpdPatientLabReport">
+              <MappingFragment StoreEntitySet="IpdPatientLabReport">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PackedRBC_TestDate" ColumnName="PackedRBC_TestDate" />
+                <ScalarProperty Name="PackedRBC_Count" ColumnName="PackedRBC_Count" />
+                <ScalarProperty Name="WholeBloodCell_TestDate" ColumnName="WholeBloodCell_TestDate" />
+                <ScalarProperty Name="WholeBloodCell_Count" ColumnName="WholeBloodCell_Count" />
+                <ScalarProperty Name="SingleDonorPlatelet_TestDate" ColumnName="SingleDonorPlatelet_TestDate" />
+                <ScalarProperty Name="SingleDonorPlatelet_Count" ColumnName="SingleDonorPlatelet_Count" />
+                <ScalarProperty Name="RandomDonerPlatelet_TestDate" ColumnName="RandomDonerPlatelet_TestDate" />
+                <ScalarProperty Name="RandomDonerPlatelet_Count" ColumnName="RandomDonerPlatelet_Count" />
+                <ScalarProperty Name="KFT_Details" ColumnName="KFT_Details" />
+                <ScalarProperty Name="LFT_Details" ColumnName="LFT_Details" />
+                <ScalarProperty Name="ELISALaptospira_TestDate" ColumnName="ELISALaptospira_TestDate" />
+                <ScalarProperty Name="ELISALaptospira_Status" ColumnName="ELISALaptospira_Status" />
+                <ScalarProperty Name="ELISAScrubTyphus_TestDate" ColumnName="ELISAScrubTyphus_TestDate" />
+                <ScalarProperty Name="ELISAScrubTyphus_Status" ColumnName="ELISAScrubTyphus_Status" />
+                <ScalarProperty Name="ELISAIGM_TestDate" ColumnName="ELISAIGM_TestDate" />
+                <ScalarProperty Name="ELISAIGM_Status" ColumnName="ELISAIGM_Status" />
+                <ScalarProperty Name="ELISANS1_TestDate" ColumnName="ELISANS1_TestDate" />
+                <ScalarProperty Name="ELISANS1_Status" ColumnName="ELISANS1_Status" />
+                <ScalarProperty Name="RapidKitIGM_TestDate" ColumnName="RapidKitIGM_TestDate" />
+                <ScalarProperty Name="RapidKitIGM_Status" ColumnName="RapidKitIGM_Status" />
+                <ScalarProperty Name="RapidKitNS1_TestDate" ColumnName="RapidKitNS1_TestDate" />
+                <ScalarProperty Name="RapidKitNS1_Status" ColumnName="RapidKitNS1_Status" />
+                <ScalarProperty Name="MalariaParasite_TestDate" ColumnName="MalariaParasite_TestDate" />
+                <ScalarProperty Name="MalariaParasite_Status" ColumnName="MalariaParasite_Status" />
+                <ScalarProperty Name="PlateletCount" ColumnName="PlateletCount" />
+                <ScalarProperty Name="HbCount" ColumnName="HbCount" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IpdRadioDiagnosisReports">
+            <EntityTypeMapping TypeName="HIMSDBModel.IpdRadioDiagnosisReport">
+              <MappingFragment StoreEntitySet="IpdRadioDiagnosisReport">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="USG_Details" ColumnName="USG_Details" />
+                <ScalarProperty Name="Xray_Details" ColumnName="Xray_Details" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

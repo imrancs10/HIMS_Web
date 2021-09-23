@@ -80,6 +80,12 @@
     <Compile Include="IpdPatientInfo.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="IpdPatientLabReport.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IpdRadioDiagnosisReport.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ipd_Master_Login.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

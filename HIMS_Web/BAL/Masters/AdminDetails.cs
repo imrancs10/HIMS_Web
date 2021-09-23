@@ -33,7 +33,7 @@ namespace HIMS_Web.BAL.Masters
                          join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
-                         select new IpdPatientInfoModel
+                         select new
                          {
                              Address = dept.Address,
                              AdmittedDateTime = dept.AdmittedDateTime,
@@ -53,6 +53,78 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
+                         }).ToList().Select(x => new IpdPatientInfoModel
+                         {
+                             Address = x.Address,
+                             AdmittedDateTime = x.AdmittedDateTime != null ? x.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                             Age = x.Age,
+                             FatherOrHusbandName = x.FatherOrHusbandName,
+                             Gender = x.Gender,
+                             IDNumber = x.IDNumber,
+                             IDorAadharNumber = x.IDorAadharNumber,
+                             IpdNo = x.IpdNo,
+                             IPDStatus = x.IPDStatus,
+                             MobileNumber = x.MobileNumber,
+                             PatientId = x.PatientId,
+                             PatientName = x.PatientName,
+                             AreaId = x.AreaId,
+                             DepartmentId = x.DepartmentId,
+                             TreatmentId = x.TreatmentId,
+                             AreaName = x.AreaName,
+                             DepartmentName = x.DepartmentName,
+                             TreatmentName = x.TreatmentName,
+                         }).ToList();
+            return _list != null ? _list : new List<IpdPatientInfoModel>();
+        }
+
+        public List<IpdPatientInfoModel> GetIPDDetail(string searchText)
+        {
+            _db = new HIMSDBEntities();
+            var _list = (from dept in _db.IpdPatientInfoes
+                         join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
+                         join area in _db.Areas on dept.AreaId equals area.AreaId
+                         join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
+                         where dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText)
+                         select new
+                         {
+                             Address = dept.Address,
+                             AdmittedDateTime = dept.AdmittedDateTime,
+                             Age = dept.Age,
+                             FatherOrHusbandName = dept.FatherOrHusbandName,
+                             Gender = dept.Gender,
+                             IDNumber = dept.IDNumber,
+                             IDorAadharNumber = dept.IDorAadharNumber,
+                             IpdNo = dept.IpdNo,
+                             IPDStatus = dept.IPDStatus,
+                             MobileNumber = dept.MobileNumber,
+                             PatientId = dept.PatientId,
+                             PatientName = dept.PatientName,
+                             AreaId = dept.AreaId,
+                             DepartmentId = dept.DepartmentId,
+                             TreatmentId = dept.TreatmentId,
+                             AreaName = area != null ? area.AreaName : "",
+                             DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
+                             TreatmentName = treat != null ? treat.TreatmentName : "",
+                         }).ToList().Select(x => new IpdPatientInfoModel
+                         {
+                             Address = x.Address,
+                             AdmittedDateTime = x.AdmittedDateTime != null ? x.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                             Age = x.Age,
+                             FatherOrHusbandName = x.FatherOrHusbandName,
+                             Gender = x.Gender,
+                             IDNumber = x.IDNumber,
+                             IDorAadharNumber = x.IDorAadharNumber,
+                             IpdNo = x.IpdNo,
+                             IPDStatus = x.IPDStatus,
+                             MobileNumber = x.MobileNumber,
+                             PatientId = x.PatientId,
+                             PatientName = x.PatientName,
+                             AreaId = x.AreaId,
+                             DepartmentId = x.DepartmentId,
+                             TreatmentId = x.TreatmentId,
+                             AreaName = x.AreaName,
+                             DepartmentName = x.DepartmentName,
+                             TreatmentName = x.TreatmentName,
                          }).ToList();
             return _list != null ? _list : new List<IpdPatientInfoModel>();
         }
@@ -121,6 +193,45 @@ namespace HIMS_Web.BAL.Masters
             else
                 return _deptRow.TreatmentID;
         }
+
+        public Enums.CrudStatus SaveIPDLabReport(IpdPatientLabReport report)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (report.Id > 0)
+                {
+                    var pages = _db.IpdPatientLabReports.Where(x => x.Id == report.Id).FirstOrDefault();
+                    if (pages != null)
+                    {
+                        //pages.AreaName = model.AreaName;
+                        //pages.CityId = model.CityId;
+                        //_db.Entry(pages).State = EntityState.Modified;
+                        //_effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(report).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
         //public Enums.CrudStatus EditSchedule(ScheduleModel model)
         //{
         //    _db = new HIMSDBEntities();

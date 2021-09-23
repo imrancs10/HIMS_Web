@@ -14,6 +14,13 @@ namespace DataLayer
     
     public partial class IpdPatientInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IpdPatientInfo()
+        {
+            this.IpdPatientLabReports = new HashSet<IpdPatientLabReport>();
+            this.IpdRadioDiagnosisReports = new HashSet<IpdRadioDiagnosisReport>();
+        }
+    
         public int PatientId { get; set; }
         public string IpdNo { get; set; }
         public Nullable<System.DateTime> AdmittedDateTime { get; set; }
@@ -46,5 +53,9 @@ namespace DataLayer
         public virtual City City { get; set; }
         public virtual Department Department { get; set; }
         public virtual State State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IpdPatientLabReport> IpdPatientLabReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IpdRadioDiagnosisReport> IpdRadioDiagnosisReports { get; set; }
     }
 }

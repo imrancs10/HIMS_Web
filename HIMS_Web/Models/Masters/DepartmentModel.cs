@@ -45,7 +45,7 @@ namespace HIMS_Web.Models.Masters
     {
         public int PatientId { get; set; }
         public string IpdNo { get; set; }
-        public Nullable<System.DateTime> AdmittedDateTime { get; set; }
+        public string AdmittedDateTime { get; set; }
         public Nullable<int> TreatmentId { get; set; }
         public string MobileNumber { get; set; }
         public string Email { get; set; }
@@ -74,6 +74,37 @@ namespace HIMS_Web.Models.Masters
         public string AreaName { get; set; }
         public string TreatmentName { get; set; }
         public string DepartmentName { get; set; }
+    }
+
+    public class IpdLabReportModel
+    {
+        public int PatientId { get; set; }
+        public string Hb { get; set; }
+        public string Platelet { get; set; }
+        public string MalariaStatus { get; set; }
+        public string malariadate { get; set; }
+        public string RapidKitNS1Status { get; set; }
+        public string RapidKitIGMStatus { get; set; }
+        public string RapidKitIGMDate { get; set; }
+        public string ELISANS1Status { get; set; }
+        public string ELISANS1Date { get; set; }
+        public string ELISAIGMStatus { get; set; }
+        public string ELISAIGMDate { get; set; }
+        public string ELISAScrubTyphusStatus { get; set; }
+        public string ELISAScrubTyphusDate { get; set; }
+        public string ELISALeptospiraStatus { get; set; }
+        public string ELISALeptospiraDate { get; set; }
+        public string LFT { get; set; }
+        public string kft { get; set; }
+        public string BTRandomDonerPlatelet { get; set; }
+        public string BTRandomDonerPlateletDate { get; set; }
+        public string BTSingleDonerPlatelet { get; set; }
+        public string BTSingleDonerPlateletDate { get; set; }
+        public string WholeBloodCell { get; set; }
+        public string WholeBloodCellDate { get; set; }
+        public string PackedRBC { get; set; }
+        public string PackedRBCDate { get; set; }
+
     }
 
     public class DoctorModel

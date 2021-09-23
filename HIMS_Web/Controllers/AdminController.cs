@@ -4,6 +4,7 @@
 using DataLayer;
 using HIMS_Web.BAL.Masters;
 using HIMS_Web.Global;
+using HIMS_Web.Models.Masters;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -133,6 +134,26 @@ namespace HIMS_Web.Controllers
         public ActionResult IPDPatientStatus()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetPatientDetail(string searchText)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetIPDDetail(searchText);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult SaveIPDLabReport(IpdLabReportModel model)
+        {
+            AdminDetails _details = new AdminDetails();
+            IpdPatientLabReport report = new IpdPatientLabReport()
+            {
+                CreatedBy = UserData.UserId,
+                CreatedDate = DateTime.Now,
+                ELISAIGM_Status = model.ELISAIGMStatus
+            };
+            var result = _details.SaveIPDLabReport(report);
+            return Json("Save", JsonRequestBehavior.AllowGet);
         }
         public ActionResult PatientBillReport()
         {

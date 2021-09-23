@@ -2,9 +2,9 @@
     ViewBag.Title = "IPD Status & Reports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/navigation.js"></script>
+<script src="~/Scripts/App/HIMS/AdminLookup.js"></script>
 <script>
     $(function () {
         $("#tabs-1").tabs();
@@ -32,10 +32,10 @@
     <div class="col-sm-12 col-xs-12">
         <div class="form-group col-sm-4 col-xs-12">
             <label>IPD No / Patient Name</label>
-            <input type="text" class="form-control" value="">
+            <input type="text" class="form-control" value="" id="searchText">
         </div>
         <div class="form-group col-sm-1 col-xs-12">
-            <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;">Search</button>
+            <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;" id="searchPatient">Search</button>
         </div>
     </div>
     <div class="col-sm-12 col-xs-12" style="margin-top: 6%;">
@@ -51,24 +51,15 @@
                     <th class="text-center">Admitted Date & Time</th>
                     <th class="text-center">Treatment</th>
                     <th class="text-center">Department</th>
+                    <th class="text-center">Area</th>
                     <th class="text-center">Status</th>
                 </tr>
-                <tr>
-                    <td class="text-center"><input type="radio" id="" name="" /></td>
-                    <td class="text-center">123</td>
-                    <td class="text-center">Rahul</td>
-                    <td class="text-center">Rajesh</td>
-                    <td class="text-center">54656454</td>
-                    <td class="text-center">23</td>
-                    <td class="text-center">12/09/2021 09:45</td>
-                    <td class="text-center">Fever</td>
-                    <td class="text-center">Pediatric</td>
-                    <td class="text-center">Admitted</td>
-                </tr>
+                <tbody id="tbodyData">
+                </tbody>
             </table>
         </div>
     </div>
-    <div class="col-sm-12 col-xs-12">
+    <div class="col-sm-12 col-xs-12 hidden" id="divReport">
         <div id="tabs-1">
             <ul>
                 <li><a href="#tabs-2">Lab Report</a></li>
@@ -77,187 +68,183 @@
             </ul>
             <div id="tabs-2" class="panel-body">
                 <div class="table-responsive" style="padding:10px 0 10px 0;">
-                    <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
-                        <table class="table table_css_main_cl table-bordered">
-                            <tr>
-                                <th class="text-center" colspan="2">Test Items</th>
-                                <th class="text-center" colspan="2">Fields</th>
+                    @*<form id="formSave" class="form-horizontal" action="SaveIPDLabReport" method="post" autocomplete="off">*@
+                    <input type="hidden" name="patientId" id="patientId" />
+                    <table class="table table_css_main_cl table-bordered">
+                        <tr>
+                            <th class="text-center" colspan="2">Test Items</th>
+                            <th class="text-center" colspan="2">Fields</th>
 
-                            </tr>
-                            <tr>
-                                <td class="text-left" colspan="2">Hb</td>
-                                <td class="text-left" colspan="2">
-                                    <textarea type="text" id="Hb" class="form-control" name="Hb"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" colspan="2">Platelet count</td>
-                                <td class="text-left" colspan="2">
-                                    <textarea type="text" id="Platelet" class="form-control" name="Platelet"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" colspan="2"> Malaria parasite</td>
-                                <td class="text-left">
-                                    <select id="Malaria" class="form-control" name="Malaria">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td><input type="date" id="" class="form-control" name="malariadate" /></td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" rowspan="2">Rapid Kit</td>
-                                <td class="text-left">
-                                    NS1
-                                </td>
-                                <td>
-                                    <select id="igM" class="form-control" name="igM">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="NS1date" />
-                                </td>
-                            </tr>
-                            <tr>
-                                @*<td class="text-left">Rapid Kit</td>*@
-                                <td class="text-left">
-                                    IGM
-                                </td>
-                                <td>
-                                    <select id="igM" class="form-control" name="igM">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="igMdate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" rowspan="4">ELISA</td>
-                                <td class="text-left">
-                                    NS1
-                                </td>
-                                <td>
-                                    <select id="igM" class="form-control" name="NS1">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="NS1date" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">
-                                    IGM
-                                </td>
-                                <td>
-                                    <select id="igM" class="form-control" name="igM">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="igMdate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">
-                                    Scrub typhus
-                                </td>
-                                <td>
-                                    <select id="Scrubtyphus" class="form-control" name="Scrubtyphus">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="Scrubtyphusdate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">
-                                    Leptospira
-                                </td>
-                                <td>
-                                    <select id="Leptospira" class="form-control" name="Leptospira">
-                                        <option value="">--Select--</option>
-                                        <option>Positive</option>
-                                        <option>Negative</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="date" id="" class="form-control" name="LeptospiraMdate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" colspan="2">LFT</td>
-                                <td class="text-left" colspan="2"><textarea type="text" id="lft" class="form-control" name="lft"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" colspan="2">KFT</td>
-                                <td class="text-left" colspan="2"><textarea type="text" id="kft" class="form-control" name="kft"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" rowspan="4">Blood Transfusion</td>
-                                <td rowspan="2">Platelet</td>
-                                <td>Random Doner Platelet</td>
-                                <td>
-                                    <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="plateletDate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Single Doner Platelet</td>
-                                <td>
-                                    <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="plateletDate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">Blood</td>
-                                <td>Whole Blood Cell</td>
-                                <td>
-                                    <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="plateletDate" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Packed RBC</td>
-                                <td>
-                                    <input type="text" id="" class="form-control" name="platelet" />
-                                    <input type="date" id="" class="form-control" name="plateletDate" />
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
-                                <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
-                                       onclick=" " style="float:right;width:135px;" />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                @*<div class="form-group">
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">Hb</td>
+                            <td class="text-left" colspan="2">
+                                <textarea type="text" id="Hb" class="form-control" name="Hb"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">Platelet count</td>
+                            <td class="text-left" colspan="2">
+                                <textarea type="text" id="Platelet" class="form-control" name="Platelet"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2"> Malaria parasite</td>
+                            <td class="text-left">
+                                <select id="Malaria" class="form-control" name="Malaria">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td><input type="date" id="malariadate" class="form-control" name="malariadate" /></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" rowspan="2">Rapid Kit</td>
+                            <td class="text-left">
+                                NS1
+                            </td>
+                            <td>
+                                <select id="RapidKitNS1Status" class="form-control" name="NS1">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="RapidKitNS1Date" class="form-control" name="NS1date" />
+                            </td>
+                        </tr>
+                        <tr>
+                            @*<td class="text-left">Rapid Kit</td>*@
+                            <td class="text-left">
+                                IGM
+                            </td>
+                            <td>
+                                <select id="RapidKitIGMStatus" class="form-control" name="igM">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="RapidKitIGMDate" class="form-control" name="igMdate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" rowspan="4">ELISA</td>
+                            <td class="text-left">
+                                NS1
+                            </td>
+                            <td>
+                                <select id="ELISANS1Status" class="form-control" name="NS1">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="ELISANS1Date" class="form-control" name="NS1date" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                IGM
+                            </td>
+                            <td>
+                                <select id="ELISAIGMStatus" class="form-control" name="igM">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="ELISAIGMDate" class="form-control" name="igMdate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                Scrub Typhus
+                            </td>
+                            <td>
+                                <select id="ELISAScrubTyphusStatus" class="form-control" name="Scrubtyphus">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="ELISAScrubTyphusDate" class="form-control" name="Scrubtyphusdate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                Leptospira
+                            </td>
+                            <td>
+                                <select id="ELISALeptospiraStatus" class="form-control" name="Leptospira">
+                                    <option value="">--Select--</option>
+                                    <option>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" id="ELISALeptospiraDate" class="form-control" name="LeptospiraMdate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">LFT</td>
+                            <td class="text-left" colspan="2"><textarea type="text" id="LFT" class="form-control" name="lft"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="2">KFT</td>
+                            <td class="text-left" colspan="2"><textarea type="text" id="kft" class="form-control" name="kft"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" rowspan="4">Blood Transfusion</td>
+                            <td rowspan="2">Platelet</td>
+                            <td>Random Doner Platelet</td>
+                            <td>
+                                <input type="text" id="BTRandomDonerPlatelet" class="form-control" name="platelet" />
+                                <input type="date" id="BTRandomDonerPlateletDate" class="form-control" name="plateletDate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Single Doner Platelet</td>
+                            <td>
+                                <input type="text" id="BTSingleDonerPlatelet" class="form-control" name="platelet" />
+                                <input type="date" id="BTSingleDonerPlateletDate" class="form-control" name="plateletDate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Blood</td>
+                            <td>Whole Blood Cell</td>
+                            <td>
+                                <input type="text" id="WholeBloodCell" class="form-control" name="platelet" />
+                                <input type="date" id="WholeBloodCellDate" class="form-control" name="plateletDate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Packed RBC</td>
+                            <td>
+                                <input type="text" id="PackedRBC" class="form-control" name="platelet" />
+                                <input type="date" id="PackedRBCDate" class="form-control" name="plateletDate" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
                             <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
-                                   onclick="" style="float:right;width:135px;" />
+                                   style="float:right;width:135px;" id="saveLabReport" />
                         </div>
-                    </div>*@
+                    </div>
+                    @*</form>*@
+                </div>
             </div>
             <div id="tabs-3" class="panel-body">
                 <div class="table-responsive" style="padding:10px 0 10px 0;">
                     <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                        <input type="hidden" name="patientId" id="patientId" />
                         <table class="table table_css_main_cl table-bordered">
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-sm-12 col-lg-12">
@@ -298,6 +285,7 @@
             <div id="tabs-4" class="panel-body">
                 <div class="table-responsive" style="padding:10px 0 10px 0;">
                     <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                        <input type="hidden" name="patientId" id="patientId" />
                         <table class="table table_css_main_cl table-bordered">
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-sm-12 col-lg-12">
