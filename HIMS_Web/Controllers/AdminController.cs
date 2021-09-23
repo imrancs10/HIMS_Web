@@ -150,7 +150,8 @@ namespace HIMS_Web.Controllers
             {
                 CreatedBy = UserData.UserId,
                 CreatedDate = DateTime.Now,
-                ELISAIGM_Status = model.ELISAIGMStatus
+                ELISAIGM_Status = model.ELISAIGMStatus,
+                ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate)
             };
             var result = _details.SaveIPDLabReport(report);
             return Json("Save", JsonRequestBehavior.AllowGet);
