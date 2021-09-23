@@ -1,5 +1,301 @@
 ﻿@{
+    ViewBag.Title = "IPD Status & Reports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<script>
+    $(function () {
+        $("#tabs-1").tabs();
+    });
+</script>
+<style>
+    #tabs-1 {
+        font-size: 14px;
+    }
 
+    .ui-widget-header {
+        background: lightpink;
+        border: 1px solid #b9cd6d;
+        color: lightyellow;
+        font-weight: bold;
+    }
+</style>
+<div class="container" style="padding:20px">
+    @*<input type="hidden" value="@UserData.ApplicationId" id="hdnApplicationId" />
+        <input type="hidden" value="@UserData.SchemeNameId" id="hdnSchemeNameId" />*@
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 15px;">
+            <h3 style="font-size:18px;">IPD Status & Reports</h3>
+            <hr />
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label>IPD No / Patient Name</label>
+            <input type="text" class="form-control" value=" ">
+        </div>
+        <div class="form-group col-sm-1 col-xs-12">
+            <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;">Search</button>
+        </div>
+        <div class="col-sm-12 col-xs-12">
+
+            <div class="table-responsive" style="padding:10px 0 10px 0;">
+                <table class="table table_css_main_cl table-bordered">
+                    <tr>
+                        <th class="text-center">Action</th>
+                        <th class="text-center">IPD Number</th>
+                        <th class="text-center">Patient Name</th>
+                        <th class="text-center">Fathers/ Husband Name</th>
+                        <th class="text-center">Mobile Number</th>
+                        <th class="text-center">Age</th>
+                        <th class="text-center">Admitted Date & Time</th>
+                        <th class="text-center">Treatment</th>
+                        <th class="text-center">Department</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><input type="radio" id="" name=" " /></td>
+                        <td class="text-center">123</td>
+                        <td class="text-center">Rahul</td>
+                        <td class="text-center">Rajesh</td>
+                        <td class="text-center">54656454</td>
+                        <td class="text-center">23</td>
+                        <td class="text-center">12/09/2021 09:45</td>
+                        <td class="text-center">Fever</td>
+                        <td class="text-center">Pediatric</td>
+                        <td class="text-center">Admitted</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div id="tabs-1">
+                <ul>
+                    <li><a href="#tabs-2">Lab Report</a></li>
+                    <li><a href="#tabs-3">Radio Diagnosis</a></li>
+                    <li><a href="#tabs-4">Status</a></li>
+                </ul>
+                <div id="tabs-2" class="panel-body">
+                    <div class="table-responsive" style="padding:10px 0 10px 0;">
+                        <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                            <table class="table table_css_main_cl table-bordered">
+                                <tr>
+                                    <th class="text-center">Test Items</th>
+                                    <th class="text-center">Fields</th>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Hb</td>
+                                    <td class="text-left"><textarea type="text" id="Hb" class="form-control" name="Hb"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Platelet count</td>
+                                    <td class="text-left"><textarea type="text" id="Platelet" class="form-control" name="Platelet"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"> Malaria parasite</td>
+                                    <td class="text-left">
+                                        <select id="Malaria" class="form-control" name="Malaria">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="malariadate" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Rapid Kit</td>
+                                    <td class="text-left">
+                                        <select id="ns1" class="form-control" name="ns1">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="ns1date" />
+                                        <select id="igM" class="form-control" name="igM">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="igMdate" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">ELISA</td>
+                                    <td class="text-left">
+                                        <select id="ns1" class="form-control" name="ns1">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="ns1date" />
+                                        <select id="igM" class="form-control" name="igM">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="igMdate" />
+                                        <select id="Scrubtyphus" class="form-control" name="Scrubtyphus">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="Scrubtyphusdate" />
+                                        <select id="Leptospira" class="form-control" name="Leptospira">
+                                            <option value="">--Select--</option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                        </select>
+                                        <input type="date" id="" class="form-control" name="LeptospiraMdate" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">LFT</td>
+                                    <td class="text-left"><textarea type="text" id="lft" class="form-control" name="lft"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">KFT</td>
+                                    <td class="text-left"><textarea type="text" id="kft" class="form-control" name="kft"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Blood Transfusion</td>
+                                    <td class="text-left">
+                                        <input type="text" id="" class="form-control" name="platelet" />
+                                        <input type="date" id="" class="form-control" name="platelet" />
+                                        <input type="text" id="" class="form-control" name="platelet" />
+                                        <input type="date" id="" class="form-control" name="platelet" />
+                                        <input type="text" id="" class="form-control" name="platelet" />
+                                        <input type="date" id="" class="form-control" name="platelet" />
+                                        <input type="text" id="" class="form-control" name="platelet" />
+                                        <input type="date" id="" class="form-control" name="platelet" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                    <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                           onclick=" " style="float:right;width:135px;" />
+                                </div>
+                            </div>
+                         </form>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                            <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                   onclick="" style="float:right;width:135px;" />
+                        </div>
+                    </div>*@
+                </div>
+                <div id="tabs-3" class="panel-body">
+                    <div class="table-responsive" style="padding:10px 0 10px 0;">
+                        <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                            <table class="table table_css_main_cl table-bordered">
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-sm-12 col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="table table-responsive">
+                                                    <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                                                        <p style="text-align:center"><strong>Radio Diagnosis Report</strong></p>
+                                                        <hr />
+                                                        <div class="form-group">
+                                                            <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">X-ray</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <textarea type="text" id="Address" class="form-control" name="Address"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">USG</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <textarea type="text" id="Address" class="form-control" name="Address"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                                                <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                                                       onclick="onSaveIPDEntry()" style="float:right;width:135px;" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </table>
+                     </form>
+                    </div>
+                </div>
+                <div id="tabs-4" class="panel-body">
+                    <div class="table-responsive" style="padding:10px 0 10px 0;">
+                        <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                            <table class="table table_css_main_cl table-bordered">
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-sm-12 col-lg-12">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="table table-responsive">
+                                                    <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
+                                                        <div class="form-group">
+                                                            <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">Select Patient Status<font color="FF0000">*</font></label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <select id="Leptospira" class="form-control" name="Leptospira">
+                                                                    <option value="">--Select--</option>
+                                                                    <option>Admit</option>
+                                                                    <option>Discharge</option>
+                                                                    <option>Refer</option>
+                                                                    <option>LAMA</option>
+                                                                    <option>DOPR</option>
+                                                                    <option>Death</option>
+                                                                    <option>Abscond</option>
+                                                                    <option>Other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="form-group">
+                                                            <label for="AdmittedDateTime" class="control-label col-md-4 col-sm-12 col-xs-12">Admitted Date Time</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <input type="datetime-local" name="AdmittedDateTime" id="AdmittedDateTime" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">Reason</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <textarea type="text" id="Reason" class="form-control" name="Reason"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="casesummary" class="control-label col-md-4 col-sm-12 col-xs-12">Case Summary</label>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                                <textarea type="text" id="casesummary" class="form-control" name="casesummary"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                                                <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                                                       onclick="onSaveIPDEntry()" style="float:right;width:135px;" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </table>
+                            @*<div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                    <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
+                                           onclick=" " style="float:right;width:135px;" />
+                                </div>
+                            </div>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
