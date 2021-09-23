@@ -72,8 +72,8 @@
                     @*<form id="formSave" class="form-horizontal" action="SaveIPDLabReport" method="post" autocomplete="off">*@
                     <table class="table table_css_main_cl table-bordered">
                         <tr>
-                            <th class="text-center" colspan="2">Test Items</th>
-                            <th class="text-center" colspan="2">Fields</th>
+                            <th class="text-center" colspan="2">Test Report</th>
+                            <th class="text-center" colspan="2">Result</th>
 
                         </tr>
                         <tr>
@@ -92,12 +92,12 @@
                             <td class="text-left" colspan="2"> Malaria parasite</td>
                             <td class="text-left">
                                 <select id="Malaria" class="form-control" name="Malaria">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
-                            <td><input type="date" id="malariadate" class="form-control" name="malariadate" /></td>
+                            <td><input type="datetime-local" id="malariadate" class="form-control" name="malariadate" /></td>
                         </tr>
                         <tr>
                             <td class="text-left" rowspan="2">Rapid Kit</td>
@@ -106,13 +106,13 @@
                             </td>
                             <td>
                                 <select id="RapidKitNS1Status" class="form-control" name="NS1">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="RapidKitNS1Date" class="form-control" name="NS1date" />
+                                <input type="datetime-local" id="RapidKitNS1Date" class="form-control" name="NS1date" />
                             </td>
                         </tr>
                         <tr>
@@ -122,13 +122,13 @@
                             </td>
                             <td>
                                 <select id="RapidKitIGMStatus" class="form-control" name="igM">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="RapidKitIGMDate" class="form-control" name="igMdate" />
+                                <input type="datetime-local" id="RapidKitIGMDate" class="form-control" name="igMdate" />
                             </td>
                         </tr>
                         <tr>
@@ -138,13 +138,13 @@
                             </td>
                             <td>
                                 <select id="ELISANS1Status" class="form-control" name="NS1">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="ELISANS1Date" class="form-control" name="NS1date" />
+                                <input type="datetime-local" id="ELISANS1Date" class="form-control" name="NS1date" />
                             </td>
                         </tr>
                         <tr>
@@ -153,13 +153,13 @@
                             </td>
                             <td>
                                 <select id="ELISAIGMStatus" class="form-control" name="igM">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="ELISAIGMDate" class="form-control" name="igMdate" />
+                                <input type="datetime-local" id="ELISAIGMDate" class="form-control" name="igMdate" />
                             </td>
                         </tr>
                         <tr>
@@ -174,7 +174,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="ELISAScrubTyphusDate" class="form-control" name="Scrubtyphusdate" />
+                                <input type="datetime-local" id="ELISAScrubTyphusDate" class="form-control" name="Scrubtyphusdate" />
                             </td>
                         </tr>
                         <tr>
@@ -183,13 +183,13 @@
                             </td>
                             <td>
                                 <select id="ELISALeptospiraStatus" class="form-control" name="Leptospira">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Positive</option>
                                     <option>Negative</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="date" id="ELISALeptospiraDate" class="form-control" name="LeptospiraMdate" />
+                                <input type="datetime-local" id="ELISALeptospiraDate" class="form-control" name="LeptospiraMdate" />
                             </td>
                         </tr>
                         <tr>
@@ -206,14 +206,14 @@
                             <td>Random Doner Platelet</td>
                             <td>
                                 <input type="text" id="BTRandomDonerPlatelet" class="form-control" name="platelet" />
-                                <input type="date" id="BTRandomDonerPlateletDate" class="form-control" name="plateletDate" />
+                                <input type="datetime-local" id="BTRandomDonerPlateletDate" class="form-control" name="plateletDate" />
                             </td>
                         </tr>
                         <tr>
                             <td>Single Doner Platelet</td>
                             <td>
                                 <input type="text" id="BTSingleDonerPlatelet" class="form-control" name="platelet" />
-                                <input type="date" id="BTSingleDonerPlateletDate" class="form-control" name="plateletDate" />
+                                <input type="datetime-local" id="BTSingleDonerPlateletDate" class="form-control" name="plateletDate" />
                             </td>
                         </tr>
                         <tr>
@@ -221,14 +221,14 @@
                             <td>Whole Blood Cell</td>
                             <td>
                                 <input type="text" id="WholeBloodCell" class="form-control" name="platelet" />
-                                <input type="date" id="WholeBloodCellDate" class="form-control" name="plateletDate" />
+                                <input type="datetime-local" id="WholeBloodCellDate" class="form-control" name="plateletDate" />
                             </td>
                         </tr>
                         <tr>
                             <td>Packed RBC</td>
                             <td>
                                 <input type="text" id="PackedRBC" class="form-control" name="platelet" />
-                                <input type="date" id="PackedRBCDate" class="form-control" name="plateletDate" />
+                                <input type="datetime-local" id="PackedRBCDate" class="form-control" name="plateletDate" />
                             </td>
                         </tr>
                     </table>
@@ -253,20 +253,22 @@
                                             @*<form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">*@
                                             <p style="text-align:center"><strong>Radio Diagnosis Report</strong></p>
                                             <hr />
-                                            <div class="form-group">
-                                                <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">X-ray</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <textarea type="text" id="xray" class="form-control" name="xray"></textarea>
+                                            <div class="col-sm-12 col-lg-12">
+                                                <div class="col-sm-6 col-lg-6">
+                                                    <label for="X-ray" class="control-label">X-ray</label>
+                                                    <div class="">
+                                                        <textarea type="text" id="xray" class="form-control" name="xray"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-lg-6">
+                                                    <label for="USG" class="control-label">USG</label>
+                                                    <div class="">
+                                                        <textarea type="text" id="USG" class="form-control" name="USG"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">USG</label>
-                                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                                    <textarea type="text" id="USG" class="form-control" name="USG"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;">
+                                                <div class="col-md-6 col-sm-6 col-xs-6" style="margin-left: 10%;margin-top:10px;">
                                                     <input type="button" name="Submit" class="btn btn-primary btn-blue btn-block btn-lg" value="Submit"
                                                            style="float:right;width:135px;" id="saveDiagnosisReport" />
                                                 </div>
@@ -289,7 +291,7 @@
                             <label for="IPDNo" class="control-label">Select Patient Status<font color="FF0000">*</font></label>
                             <div class="">
                                 <select id="IPDStatus" class="form-control" name="IPDStatus">
-                                    <option value="">--Select--</option>
+                                    <option value="">--Select Status--</option>
                                     <option>Admit</option>
                                     <option>Discharge</option>
                                     <option>Refer</option>
