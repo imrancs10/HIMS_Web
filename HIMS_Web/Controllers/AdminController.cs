@@ -148,36 +148,58 @@ namespace HIMS_Web.Controllers
             AdminDetails _details = new AdminDetails();
             IpdPatientLabReport report = new IpdPatientLabReport()
             {
+                PatientId=model.PatientId,
                 CreatedBy = UserData.UserId,
                 CreatedDate = DateTime.Now,
                 ELISAIGM_Status = model.ELISAIGMStatus,
-                ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate),
+                //ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate),
                 ELISANS1_Status = model.ELISANS1Status,
-                ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date),
+                //ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date),
                 ELISALaptospira_Status = model.ELISALeptospiraStatus,
-                ELISALaptospira_TestDate = Convert.ToDateTime(model.ELISALeptospiraDate),
+                //ELISALaptospira_TestDate = Convert.ToDateTime(model.ELISALeptospiraDate),
                 ELISAScrubTyphus_Status = model.ELISAScrubTyphusStatus,
-                ELISAScrubTyphus_TestDate = Convert.ToDateTime(model.ELISAScrubTyphusDate),
+                //ELISAScrubTyphus_TestDate = Convert.ToDateTime(model.ELISAScrubTyphusDate),
                 RapidKitNS1_Status = model.RapidKitNS1Status,
-                RapidKitNS1_TestDate = Convert.ToDateTime(model.RapidKitNS1Date),
+                //RapidKitNS1_TestDate = Convert.ToDateTime(model.RapidKitNS1Date),
                 RapidKitIGM_Status = model.RapidKitIGMStatus,
-                RapidKitIGM_TestDate = Convert.ToDateTime(model.RapidKitIGMDate),
+                //RapidKitIGM_TestDate = Convert.ToDateTime(model.RapidKitIGMDate),
                 LFT_Details = model.LFT,
                 KFT_Details = model.kft,
                 RandomDonerPlatelet_Count = model.BTRandomDonerPlatelet,
-                RandomDonerPlatelet_TestDate = Convert.ToDateTime(model.BTRandomDonerPlateletDate),
+                //RandomDonerPlatelet_TestDate = Convert.ToDateTime(model.BTRandomDonerPlateletDate),
                 SingleDonorPlatelet_Count = model.BTSingleDonerPlatelet,
-                SingleDonorPlatelet_TestDate = Convert.ToDateTime(model.BTSingleDonerPlateletDate),
+                //SingleDonorPlatelet_TestDate = Convert.ToDateTime(model.BTSingleDonerPlateletDate),
                 WholeBloodCell_Count = model.WholeBloodCell,
-                WholeBloodCell_TestDate = Convert.ToDateTime(model.WholeBloodCellDate),
+                //WholeBloodCell_TestDate = Convert.ToDateTime(model.WholeBloodCellDate),
                 PackedRBC_Count = model.PackedRBC,
-                PackedRBC_TestDate = Convert.ToDateTime(model.PackedRBCDate),
+                //PackedRBC_TestDate = Convert.ToDateTime(model.PackedRBCDate),
                 MalariaParasite_Status = model.MalariaStatus,
-                MalariaParasite_TestDate = Convert.ToDateTime(model.malariadate),
+                //MalariaParasite_TestDate = Convert.ToDateTime(model.malariadate),
                 PlateletCount = model.Platelet,
                 HbCount = model.Hb
-
             };
+            if (!string.IsNullOrEmpty(model.ELISAIGMDate))
+                report.ELISAIGM_TestDate = Convert.ToDateTime(model.ELISAIGMDate);
+            if (!string.IsNullOrEmpty(model.ELISANS1Date))
+               report.ELISANS1_TestDate = Convert.ToDateTime(model.ELISANS1Date);
+            if (!string.IsNullOrEmpty(model.ELISALeptospiraDate))
+                report.ELISALaptospira_TestDate = Convert.ToDateTime(model.ELISALeptospiraDate);
+            if (!string.IsNullOrEmpty(model.ELISAScrubTyphusDate))
+                report.ELISAScrubTyphus_TestDate = Convert.ToDateTime(model.ELISAScrubTyphusDate);
+            if (!string.IsNullOrEmpty(model.RapidKitNS1Date))
+                report.RapidKitNS1_TestDate = Convert.ToDateTime(model.RapidKitNS1Date);
+            if (!string.IsNullOrEmpty(model.RapidKitIGMDate))
+                report.RapidKitIGM_TestDate = Convert.ToDateTime(model.RapidKitIGMDate);
+            if (!string.IsNullOrEmpty(model.BTRandomDonerPlateletDate))
+                report.RandomDonerPlatelet_TestDate = Convert.ToDateTime(model.BTRandomDonerPlateletDate);
+            if (!string.IsNullOrEmpty(model.BTSingleDonerPlateletDate))
+                report.SingleDonorPlatelet_TestDate = Convert.ToDateTime(model.BTSingleDonerPlateletDate);
+            if (!string.IsNullOrEmpty(model.WholeBloodCellDate))
+                report.WholeBloodCell_TestDate = Convert.ToDateTime(model.WholeBloodCellDate);
+            if (!string.IsNullOrEmpty(model.PackedRBCDate))
+                report.PackedRBC_TestDate = Convert.ToDateTime(model.PackedRBCDate);
+            if (!string.IsNullOrEmpty(model.malariadate))
+                report.MalariaParasite_TestDate = Convert.ToDateTime(model.malariadate);
             var result = _details.SaveIPDLabReport(report);
             return Json("Save", JsonRequestBehavior.AllowGet);
         }

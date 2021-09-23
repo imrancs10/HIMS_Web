@@ -81,7 +81,9 @@ $(document).ready(function () {
             data: JSON.stringify(model),
             url: '/Admin/SaveIPDLabReport',
             success: function (data) {
-               
+                if (data == "Save") {
+                    utility.alert.setAlert("IPD Lab Report", "IPD Lab Report Saved");
+                }
             },
             failure: function (response) {
                 console.log(response);
@@ -94,7 +96,6 @@ $(document).ready(function () {
 })
 
 $(document).on('click', '#selectPatient', function () {
-    debugger
     var patientId = $(this).attr('data-Id');
     if (patientId > 0) {
         $('#divReport').removeClass('hidden');
