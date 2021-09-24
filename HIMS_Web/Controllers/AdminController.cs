@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -358,7 +359,12 @@ namespace HIMS_Web.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult ExportIPDList(string GridHtml)
+        {
+            return File(Encoding.ASCII.GetBytes(GridHtml), "application/vnd.ms-excel", "IPDList.xls");
+        }
         [HttpPost]
         //HttpPostedFileBase reportfile,
         public ActionResult SetBillingReport(int PatientId, string BillNo, string BillType, DateTime BillDate, string ReportUrl, decimal BillAmount, string BillID)
