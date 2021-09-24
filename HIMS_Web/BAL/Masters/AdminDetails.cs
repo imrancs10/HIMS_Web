@@ -257,8 +257,7 @@ namespace HIMS_Web.BAL.Masters
                     if (pages != null)
                     {
                         pages.TreatmentName = model.TreatmentName;
-                        //pages.DepartmentUrl = model.DepartmentUrl;
-                        //pages.Image = model.Image;
+                        pages.Description = model.Description;
                         _db.Entry(pages).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                     }

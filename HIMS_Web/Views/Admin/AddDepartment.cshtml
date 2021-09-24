@@ -1,7 +1,7 @@
 ﻿@using HIMS_Web.Models.Masters;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Add Area";
+    ViewBag.Title = "Department";
     var DepartmentData = ViewData["PageData"] as List<DepartmentModel>;
     int index = 1;
 }
@@ -36,7 +36,7 @@
                             @foreach (var data in DepartmentData)
                             {
                                 <tr>
-                                    <td scope="text-left">@index</td>
+                                    <td class="text-left">@index</td>
                                     <td class="text-left">@data.DepartmentId</td>
                                     <td class="text-center">@data.DeparmentName</td>
                                     @*@if (data.IsActive == true)
@@ -48,7 +48,7 @@
                                             <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
                                         }*@
                                     <td class="text-center">
-                                        <a href="#" onclick="editArea(@data.DepartmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                        <a href="#" onclick="editDepartment(@data.DepartmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 index++;
@@ -99,7 +99,7 @@
     $(document).ready(function () {
         $('#btnAddDepartment').click(function () {
             $('[name*=DepartmentId]').val("");
-            $('[name*=Departmentname]').val("");
+            $('[name*=departmentname]').val("");
             //$('[name*=active]').prop('checked', true);
             $('#lblModalTitle').text('Add New Department');
 
@@ -127,9 +127,9 @@
             success: function (data) {
                 if (data != null) {
                     $('[name*=DepartmentId]').val(data.DepartmentId);
-                    $('[name*=Departmentname]').val(data.DepartmentName);
+                    $('[name*=departmentname]').val(data.DeparmentName);
                     //$('[name*=active]').prop('checked', data.IsActive);
-                    $('#lblModalTitle').text('Update Page');
+                    $('#lblModalTitle').text('Update Department');
                 }
             },
             failure: function (response) {

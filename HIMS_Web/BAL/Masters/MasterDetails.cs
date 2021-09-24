@@ -13,76 +13,6 @@ namespace HIMS_Web.BAL.Masters
     {
         HIMSDBEntities _db = null;
 
-        //public Enums.CrudStatus SaveDept(string deptName, string deptDesc, string deptUrl)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _deptRow = _db.Departments.Where(x => x.DepartmentName.Equals(deptName)).FirstOrDefault();
-        //    var maxDepartmentId = _db.Departments.Max(x => x.DepartmentID);
-        //    if (_deptRow == null)
-        //    {
-        //        Department _newDept = new Department();
-        //        _newDept.DepartmentName = deptName;
-        //        _newDept.DepartmentUrl = deptUrl;
-        //        _newDept.Description = deptDesc;
-        //        _newDept.DepartmentID = maxDepartmentId + 1;
-        //        _db.Entry(_newDept).State = EntityState.Added;
-        //        _effectRow = _db.SaveChanges();
-        //        WebSession.DepartmentId = _newDept.DepartmentID;
-        //        return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
-
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataAlreadyExist;
-        //}
-        //public Enums.CrudStatus EditDept(string deptName, int deptId, string deptUrl,string  deptDesc)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
-        //    if (_deptRow != null)
-        //    {
-        //        _deptRow.DepartmentName = deptName;
-        //        _deptRow.DepartmentUrl = deptUrl;
-        //        _deptRow.Description = deptDesc;
-        //        _db.Entry(_deptRow).State = EntityState.Modified;
-        //        _effectRow = _db.SaveChanges();
-        //        return _effectRow > 0 ? Enums.CrudStatus.Updated : Enums.CrudStatus.NotUpdated;
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataNotFound;
-        //}
-        //public Enums.CrudStatus UpdateDeptImage(byte[] image, int deptId)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
-        //    if (_deptRow != null)
-        //    {
-        //        _deptRow.Image = image;
-        //        _db.Entry(_deptRow).State = EntityState.Modified;
-        //        _effectRow = _db.SaveChanges();
-        //        return _effectRow > 0 ? Enums.CrudStatus.Updated : Enums.CrudStatus.NotUpdated;
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataNotFound;
-        //}
-        //public Enums.CrudStatus DeleteDept(int deptId)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
-        //    if (_deptRow != null)
-        //    {
-        //        _db.Departments.Remove(_deptRow);
-        //        //_db.Entry(_deptRow).State = EntityState.Deleted;
-        //        _effectRow = _db.SaveChanges();
-        //        return _effectRow > 0 ? Enums.CrudStatus.Deleted : Enums.CrudStatus.NotDeleted;
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataNotFound;
-        //}
-
         public List<DepartmentModel> DepartmentList()
         {
             _db = new HIMSDBEntities();
@@ -101,7 +31,6 @@ namespace HIMS_Web.BAL.Masters
         public DepartmentModel GetDeparmentById(int deptId)
         {
             _db = new HIMSDBEntities();
-            int _effectRow = 0;
             var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
             if (_deptRow != null)
             {

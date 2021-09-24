@@ -103,7 +103,7 @@ namespace HIMS_Web.Controllers
         public ActionResult AddTreatment()
         {
             var _details = new MasterDetails();
-            ViewData["PageData"] = _details.GetTreatmentById(0);
+            ViewData["PageData"] = _details.GetTreatment();
             return View();
         }
         public JsonResult GetTreatmentDetail(int TreatmentId)
@@ -111,30 +111,30 @@ namespace HIMS_Web.Controllers
             var _details = new MasterDetails();
             return Json(_details.GetTreatmentById(TreatmentId), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SaveTreatmentMaster(string TreatmentId, string Treatmentname)
+        public ActionResult SaveTreatmentMaster(string TreatmentId, string treatmentname, string treatmentdescription)
         {
             Treatment pages = new Treatment();
             pages.TreatmentID = !string.IsNullOrEmpty(TreatmentId) ? Convert.ToInt32(TreatmentId) : 0;
-            pages.TreatmentName = Treatmentname;
-            //pages.CityId = 1318;
-            //pages.CityId = UserData.UserId;
-            // pages.CreatedDate = DateTime.Now;
-            // pages.IsActive = active == "on" ? true : false;
+            pages.TreatmentName = treatmentname;
+            pages.Description = treatmentdescription;
             AdminDetails _details = new AdminDetails();
             var result = _details.AddUpdateTreatment(pages);
             if (result == Enums.CrudStatus.Saved)
             {
-                SetAlertMessage("Treatment created", "Save Treatment master");
+                if (string.IsNullOrEmpty(TreatmentId))
+                    SetAlertMessage("Treatment created", "Save Treatment");
+                else
+                    SetAlertMessage("Treatment updated", "Save Treatment");
             }
             else
-                SetAlertMessage("Treatment creation failed", "Save Treatment master");
+                SetAlertMessage("Treatment creation failed", "Save Treatment");
             return RedirectToAction("AddTreatment");
 
         }
         public ActionResult AddDepartment()
         {
             var _details = new MasterDetails();
-            ViewData["PageData"] = _details.GetDeparmentById(0);
+            ViewData["PageData"] = _details.DepartmentList();
             return View();
         }
         public JsonResult GetDepartmentDetail(int DepartmentId)
@@ -142,23 +142,22 @@ namespace HIMS_Web.Controllers
             var _details = new MasterDetails();
             return Json(_details.GetDeparmentById(DepartmentId), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SaveDepartmentMaster(string DepartmentId, string Departmentname)
+        public ActionResult SaveDepartmentMaster(string DepartmentId, string departmentname)
         {
             Department pages = new Department();
             pages.DepartmentID = !string.IsNullOrEmpty(DepartmentId) ? Convert.ToInt32(DepartmentId) : 0;
-            pages.DepartmentName = Departmentname;
-            //pages.CityId = 1318;
-            //pages.CityId = UserData.UserId;
-            // pages.CreatedDate = DateTime.Now;
-            // pages.IsActive = active == "on" ? true : false;
+            pages.DepartmentName = departmentname;
             AdminDetails _details = new AdminDetails();
             var result = _details.AddUpdateDepartment(pages);
             if (result == Enums.CrudStatus.Saved)
             {
-                SetAlertMessage("Department created", "Save Department master");
+                if (string.IsNullOrEmpty(DepartmentId))
+                    SetAlertMessage("Department created", "Save Department");
+                else
+                    SetAlertMessage("Department updated", "Save Department");
             }
             else
-                SetAlertMessage("Department creation failed", "Save Department master");
+                SetAlertMessage("Department creation failed", "Save Department");
             return RedirectToAction("AddDepartment");
 
         }
@@ -186,10 +185,13 @@ namespace HIMS_Web.Controllers
             var result = _details.AddUpdateArea(pages);
             if (result == Enums.CrudStatus.Saved)
             {
-                SetAlertMessage("Area created", "Save Area master");
+                if (string.IsNullOrEmpty(AreaId))
+                    SetAlertMessage("Area created", "Save Area");
+                else
+                    SetAlertMessage("Area updated", "Save Area");
             }
             else
-                SetAlertMessage("Area creation failed", "Save Area master");
+                SetAlertMessage("Area creation failed", "Save Area");
             return RedirectToAction("AddArea");
 
         }

@@ -1,7 +1,7 @@
 ﻿@using HIMS_Web.Models.Masters;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Add Treatment";
+    ViewBag.Title = "Treatment";
     var TreatmentData = ViewData["PageData"] as List<TreatmentModel>;
     int index = 1;
 }
@@ -29,6 +29,7 @@
                                 <th>#</th>
                                 <th class="text-center">Treatment Id</th>
                                 <th class="text-center">Treatment Name</th>
+                                <th class="text-center">Treatment Description</th>
                                 @*<th class="text-center">Active</th>*@
                                 <th class="text-center">Action</th>
                             </tr>
@@ -36,23 +37,23 @@
                         <tbody style="height:400px;overflow-y:auto">
                             @foreach (var data in TreatmentData)
                             {
-                            <tr>
-                                <td scope="text-left">@index</td>
-                                <td class="text-left">@data.TreatmentId</td>
-                                <td class="text-center">@data.TreatmentName</td>
-                                <td class="text-center">@data.TreatmentDescription</td>
-                                @*@if (data.IsActive == true)
-        {
-            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
-        }
-        else
-        {
-            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
-        }*@
-                                <td class="text-center">
-                                    <a href="#" onclick="editArea(@data.TreatmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-left">@index</td>
+                                    <td class="text-left">@data.TreatmentId</td>
+                                    <td class="text-center">@data.TreatmentName</td>
+                                    <td class="text-center">@data.TreatmentDescription</td>
+                                    @*@if (data.IsActive == true)
+                                        {
+                                            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+                                        }*@
+                                    <td class="text-center">
+                                        <a href="#" onclick="editTreatment(@data.TreatmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
                                 index++;
                             }
                         </tbody>
@@ -82,6 +83,14 @@
                                 <input type="text" name="treatmentname" class="form-control" placeholder="treatment name">
                             </div>
                         </div>
+                        <div class="form-group col-sm-12 col-xs-12">
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="area" class="">Treatment Description</label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <textarea type="text" name="treatmentdescription" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
                         @*<div class="form-group col-sm-6 col-xs-12">
                                 Active<input type="checkbox" name="active" />
                             </div>*@
@@ -102,7 +111,7 @@
         $('#btnAddTreatment').click(function () {
             $('[name*=TreatmentId]').val("");
             $('[name*=treatmentname]').val("");
-            //$('[name*=active]').prop('checked', true);
+            $('[name*=treatmentdescription]').val("");
             $('#lblModalTitle').text('Add New Treatment');
 
             $('#myModal').css('display', 'block');
@@ -132,7 +141,7 @@
                     $('[name*=treatmentname]').val(data.TreatmentName);
                     $('[name*=treatmentdescription]').val(data.TreatmentDescription);
                     //$('[name*=active]').prop('checked', data.IsActive);
-                    $('#lblModalTitle').text('Update Page');
+                    $('#lblModalTitle').text('Update Treatment');
                 }
             },
             failure: function (response) {
