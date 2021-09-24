@@ -4,6 +4,7 @@
 using DataLayer;
 using HIMS_Web.BAL.Masters;
 using HIMS_Web.Global;
+using HIMS_Web.Infrastructure.Utility;
 using HIMS_Web.Models.Masters;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace HIMS_Web.Controllers
 {
+    [AdminSessionTimeout]
     public class AdminController : CommonController
     {
         // GET: Admin

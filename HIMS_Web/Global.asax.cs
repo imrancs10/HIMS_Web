@@ -27,7 +27,7 @@ namespace HIMS_Web
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            GlobalFilters.Filters.Add(new CustomExceptionFilter());
+            //GlobalFilters.Filters.Add(new CustomExceptionFilter());
             log4net.Config.XmlConfigurator.Configure();
             Application["Totaluser"] = 0;
         }

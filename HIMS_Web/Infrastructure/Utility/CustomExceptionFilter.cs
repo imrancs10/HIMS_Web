@@ -7,23 +7,43 @@ using System.Web.Mvc;
 
 namespace HIMS_Web.Infrastructure.Utility
 {
-    public class CustomExceptionFilter : ActionFilterAttribute, IExceptionFilter
+    public class SessionTimeoutAttribute : ActionFilterAttribute
     {
-        ILog logger = LogManager.GetLogger(typeof(CustomExceptionFilter));
-        public void OnException(ExceptionContext filterContext)
+        List<string> ByPassActions = new List<string>()
         {
-            Exception e = filterContext.Exception;
-            //filterContext.ExceptionHandled = true;
-            //filterContext.Result = new ViewResult()
-            //{
-            //    ViewName = "ExceptionPage"
-            //};
-            logger.Error(e.InnerException);
+            "PaymentResponse",
+            "PayAllotementMoney",
+            "PaymentResponseAllotment",
+            "AllotementPaymentResponseSuccess",
+            "AllotementPaymentReciept"
+        };
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            HttpContext ctx = HttpContext.Current;
+            if (!ByPassActions.Contains(filterContext.ActionDescriptor.ActionName))
+            {
+                if (HttpContext.Current.Session["userid"] == null)
+                {
+                    filterContext.Result = new RedirectResult("~/Login/ApplicantLogin");
+                    return;
+                }
+            }
+
+            base.OnActionExecuting(filterContext);
         }
     }
 
-    //public interface IExceptionFilter
-    //{
-    //    void OnException(ExceptionContext filterContext);
-    //}
+    public class AdminSessionTimeoutAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            HttpContext ctx = HttpContext.Current;
+            if (HttpContext.Current.Session["userid"] == null)
+            {
+                filterContext.Result = new RedirectResult("~/Login/Index");
+                return;
+            }
+            base.OnActionExecuting(filterContext);
+        }
+    }
 }
