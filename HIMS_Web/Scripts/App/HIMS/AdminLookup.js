@@ -109,6 +109,7 @@ $(document).ready(function () {
                     $('#WholeBloodCellDate').val("");
                     $('#PackedRBC').val("");
                     $('#PackedRBCDate').val("");
+                    $('#searchPatient').click();
                 }
             },
             failure: function (response) {
@@ -137,6 +138,7 @@ $(document).ready(function () {
                     utility.alert.setAlert("Diagnosis Report", "Diagnosis Report Saved");
                     $('#xray').val("");
                     $('#USG').val("");
+                    $('#searchPatient').click();
                 }
             },
             failure: function (response) {
@@ -169,6 +171,7 @@ $(document).ready(function () {
                     $('#AdmittedDateTime').val("");
                     $('#Reason').val("");
                     $('#casesummary').val("");
+                    $('#searchPatient').click();
                 }
             },
             failure: function (response) {

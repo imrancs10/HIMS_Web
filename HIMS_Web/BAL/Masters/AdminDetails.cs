@@ -84,7 +84,7 @@ namespace HIMS_Web.BAL.Masters
                          join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
-                         where dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText)
+                         where (!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/")
                          select new
                          {
                              Address = dept.Address,
@@ -125,7 +125,7 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = x.AreaName,
                              DepartmentName = x.DepartmentName,
                              TreatmentName = x.TreatmentName,
-                         }).ToList();
+                         }).Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
             return _list != null ? _list : new List<IpdPatientInfoModel>();
         }
         public int SaveDepartment(Department model)
@@ -366,6 +366,8 @@ namespace HIMS_Web.BAL.Masters
                 var pages = _db.IpdPatientStatus.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
                 if (pages != null)
                 {
+                    pages.IPDStatus = !string.IsNullOrEmpty(report.IPDStatus) ? report.IPDStatus : pages.IPDStatus;
+
                     pages.AbscondCaseSummary = !string.IsNullOrEmpty(report.AbscondCaseSummary) ? report.AbscondCaseSummary : pages.AbscondCaseSummary;
                     pages.AbscondDateTime = report.AbscondDateTime != null ? report.AbscondDateTime : pages.AbscondDateTime;
                     pages.AbscondReasons = !string.IsNullOrEmpty(report.AbscondReasons) ? report.AbscondReasons : pages.AbscondReasons;
@@ -377,7 +379,6 @@ namespace HIMS_Web.BAL.Masters
                     pages.DOPRCaseSummary = !string.IsNullOrEmpty(report.DOPRCaseSummary) ? report.DOPRCaseSummary : pages.DOPRCaseSummary;
                     pages.DOPRDateTime = report.DOPRDateTime != null ? report.DOPRDateTime : pages.DOPRDateTime;
                     pages.DOPRReasons = !string.IsNullOrEmpty(report.DOPRReasons) ? report.DOPRReasons : pages.DOPRReasons;
-                    pages.IPDStatus = !string.IsNullOrEmpty(report.IPDStatus) ? report.IPDStatus : pages.IPDStatus;
                     pages.LAMACaseSummary = !string.IsNullOrEmpty(report.LAMACaseSummary) ? report.LAMACaseSummary : pages.LAMACaseSummary;
                     pages.LAMADateTime = report.LAMADateTime != null ? report.LAMADateTime : pages.LAMADateTime;
                     pages.LAMAReasons = !string.IsNullOrEmpty(report.LAMAReasons) ? report.LAMAReasons : pages.LAMAReasons;
@@ -387,10 +388,25 @@ namespace HIMS_Web.BAL.Masters
                     pages.ReferDateTime = report.ReferDateTime != null ? report.ReferDateTime : pages.ReferDateTime;
                     pages.ReferReasons = !string.IsNullOrEmpty(report.ReferReasons) ? report.ReferReasons : pages.ReferReasons;
                     _db.Entry(pages).State = EntityState.Modified;
+
+                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                    if (ipdPatientInfo != null)
+                    {
+                        ipdPatientInfo.IPDStatus = pages.IPDStatus;
+                        _db.Entry(ipdPatientInfo).State = EntityState.Modified;
+                    }
+
                     _effectRow = _db.SaveChanges();
                 }
                 else
                 {
+                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                    if (ipdPatientInfo != null)
+                    {
+                        ipdPatientInfo.IPDStatus = report.IPDStatus;
+                        _db.Entry(ipdPatientInfo).State = EntityState.Modified;
+                    }
+
                     _db.Entry(report).State = EntityState.Added;
                     _effectRow = _db.SaveChanges();
                 }

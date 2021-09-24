@@ -77,7 +77,7 @@ namespace HIMS_Web.Controllers
                     //Title = Title,
                     TreatmentId = treatmentId,
                     Age = Convert.ToInt32(Age),
-                    IPDStatus = "Admitted",
+                    IPDStatus = "Admit",
                     IDNumber = IDNumber,
                 };
 
@@ -292,6 +292,7 @@ namespace HIMS_Web.Controllers
             IpdPatientStatu report = new IpdPatientStatu()
             {
                 PatientId = model.PatientId,
+                IPDStatus = model.IPDStatus
             };
             if (model.IPDStatus == "Admit")
             {
