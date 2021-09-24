@@ -98,6 +98,25 @@ namespace HIMS_Web.BAL.Masters
                          }).ToList();
             return _list != null ? _list : new List<DepartmentModel>();
         }
+        public DepartmentModel GetDeparmentById(int deptId)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
+            if (_deptRow != null)
+            {
+                var dep = new DepartmentModel()
+                {
+                    DeparmentName = _deptRow.DepartmentName,
+                    DepartmentId = _deptRow.DepartmentID,
+                    DepartmentUrl = _deptRow.DepartmentUrl,
+                    Description = _deptRow.Description,
+                    Image = _deptRow.Image
+                };
+                return dep;
+            }
+            return null;
+        }
         public List<TreatmentModel> GetTreatment()
         {
             _db = new HIMSDBEntities();
@@ -109,6 +128,23 @@ namespace HIMS_Web.BAL.Masters
                              TreatmentDescription = dept.Description
                          }).ToList();
             return _list != null ? _list : new List<TreatmentModel>();
+        }
+        public DepartmentModel GetTreatmentById(int TreatId)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.Treatments.Where(x => x.TreatmentID.Equals(TreatId)).FirstOrDefault();
+            if (_deptRow != null)
+            {
+                var dep = new TreatmentModel()
+                {
+                    TreatmentId = _deptRow.TreatmentID,
+                    TreatmentName = _deptRow.TreatmentName,
+                    TreatmentDescription = _deptRow.Description
+                };
+                return _deptRow;
+            }
+            return null;
         }
         public List<StateModel> Getstate()
         {
@@ -175,25 +211,7 @@ namespace HIMS_Web.BAL.Masters
         //    return _list != null ? _list : new List<MasterLookupModel>();
         //}
 
-        //public DepartmentModel GetDeparmentById(int deptId)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _deptRow = _db.Departments.Where(x => x.DepartmentID.Equals(deptId)).FirstOrDefault();
-        //    if (_deptRow != null)
-        //    {
-        //        var dep = new DepartmentModel()
-        //        {
-        //            DeparmentName = _deptRow.DepartmentName,
-        //            DepartmentId = _deptRow.DepartmentID,
-        //            DepartmentUrl = _deptRow.DepartmentUrl,
-        //            Description = _deptRow.Description,
-        //            Image = _deptRow.Image
-        //        };
-        //        return dep;
-        //    }
-        //    return null;
-        //}
+       
 
         //public Enums.CrudStatus SaveMasterLookup(string name, string value)
         //{

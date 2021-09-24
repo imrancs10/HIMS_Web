@@ -1,0 +1,151 @@
+﻿@using HIMS_Web.Models.Masters;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Treatment";
+    var TreatmentData = ViewData["PageData"] as List<TreatmentModel>;
+    int index = 1;
+}
+
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <div class="col-sm-12 col-xs-12" style="padding:20px 0;">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <h3 style="font-size:20px; padding-top: 10px;">Treatment Detail</h3>
+                    </div>
+                    <div class="col-sm-6 col-xs-12" style=" margin-top: 2%;">
+                        <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddTreatment">Add New Treatment</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12" style="padding: 0px;">
+                <div class="table-responsive" style="padding:10px 0 50px 0;">
+                    <table class="table table_css_main_cl table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Treatment Id</th>
+                                <th class="text-center">Treatment Name</th>
+                                @*<th class="text-center">Active</th>*@
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody style="height:400px;overflow-y:auto">
+                            @foreach (var data in TreatmentData)
+                            {
+                            <tr>
+                                <td scope="text-left">@index</td>
+                                <td class="text-left">@data.TreatmentId</td>
+                                <td class="text-center">@data.TreatmentName</td>
+                                <td class="text-center">@data.TreatmentDescription</td>
+                                @*@if (data.IsActive == true)
+        {
+            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+        }
+        else
+        {
+            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+        }*@
+                                <td class="text-center">
+                                    <a href="#" onclick="editArea(@data.TreatmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                                index++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/Admin/SaveTreatmentMaster" method="post">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span id="lblModalTitle">Add New Treatment</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-xs-12">
+                            <input type="hidden" name="TreatmentId" value="" />
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="area" class="">Treatment Name</label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="text" name="treatmentname" class="form-control" placeholder="treatment name">
+                            </div>
+                        </div>
+                        @*<div class="form-group col-sm-6 col-xs-12">
+                                Active<input type="checkbox" name="active" />
+                            </div>*@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" style="background:rgb(15, 56, 145); color:#fff;">Submit</button>
+                    <button type="button" class="btn btn-warning" id="btnCloseModal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnAddTreatment').click(function () {
+            $('[name*=TreatmentId]').val("");
+            $('[name*=treatmentname]').val("");
+            //$('[name*=active]').prop('checked', true);
+            $('#lblModalTitle').text('Add New Treatment');
+
+            $('#myModal').css('display', 'block');
+            $('#myModal').addClass('in');
+            $('body').addClass('modal-open')
+            $('body').append('<div class="modal-backdrop fade in"></div>');
+        });
+
+        $('#btnCloseModal').click(function () {
+            $('#myModal').css('display', 'none');
+            $('#myModal').removeClass('in');
+            $('body').removeClass('modal-open')
+            $('.modal-backdrop').remove();
+        });
+
+    });
+    function editTreatment(id) {
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{TreatmentId: ' + id + ' }',
+            url: '/Admin/GetTreatmentDetail',
+            success: function (data) {
+                if (data != null) {
+                    $('[name*=TreatmentId]').val(data.TreatmentId);
+                    $('[name*=treatmentname]').val(data.TreatmentName);
+                    $('[name*=treatmentdescription]').val(data.TreatmentDescription);
+                    //$('[name*=active]').prop('checked', data.IsActive);
+                    $('#lblModalTitle').text('Update Page');
+                }
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+        $('#myModal').css('display', 'block');
+        $('#myModal').addClass('in');
+        $('body').addClass('modal-open')
+        $('body').append('<div class="modal-backdrop fade in"></div>');
+    }
+
+</script>

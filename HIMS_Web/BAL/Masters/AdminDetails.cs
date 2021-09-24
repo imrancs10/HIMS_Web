@@ -128,6 +128,58 @@ namespace HIMS_Web.BAL.Masters
                          }).ToList();
             return _list != null ? _list : new List<IpdPatientInfoModel>();
         }
+        public int SaveDepartment(Department model)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.Departments.Where(x => x.DepartmentName.Equals(model.DepartmentName)).FirstOrDefault();
+            if (_deptRow == null)
+            {
+                _db.Entry(model).State = EntityState.Added;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? model.DepartmentID : 0;
+            }
+            else
+                return _deptRow.DepartmentID;
+        }
+        public Enums.CrudStatus AddUpdateDepartment(Department model)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (model.DepartmentID > 0)
+                {
+                    var pages = _db.Departments.Where(x => x.DepartmentID == model.DepartmentID).FirstOrDefault();
+                    if (pages != null)
+                    {
+                        pages.DepartmentName = model.DepartmentName;
+                        pages.DepartmentUrl = model.DepartmentUrl;
+                        pages.Image = model.Image;
+                        _db.Entry(pages).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(model).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
         public int SaveArea(Area model)
         {
             _db = new HIMSDBEntities();
