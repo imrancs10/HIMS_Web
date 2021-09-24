@@ -129,11 +129,11 @@ namespace HIMS_Web.BAL.Masters
                          }).ToList();
             return _list != null ? _list : new List<TreatmentModel>();
         }
-        public DepartmentModel GetTreatmentById(int TreatId)
+        public TreatmentModel GetTreatmentById(int TreatmentId)
         {
             _db = new HIMSDBEntities();
             int _effectRow = 0;
-            var _deptRow = _db.Treatments.Where(x => x.TreatmentID.Equals(TreatId)).FirstOrDefault();
+            var _deptRow = _db.Treatments.Where(x => x.TreatmentID.Equals(TreatmentId)).FirstOrDefault();
             if (_deptRow != null)
             {
                 var dep = new TreatmentModel()
@@ -142,7 +142,7 @@ namespace HIMS_Web.BAL.Masters
                     TreatmentName = _deptRow.TreatmentName,
                     TreatmentDescription = _deptRow.Description
                 };
-                return _deptRow;
+                return dep;
             }
             return null;
         }

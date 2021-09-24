@@ -245,7 +245,44 @@ namespace HIMS_Web.BAL.Masters
             else
                 return _deptRow.TreatmentID;
         }
+        public Enums.CrudStatus AddUpdateTreatment(Treatment model)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (model.TreatmentID > 0)
+                {
+                    var pages = _db.Treatments.Where(x => x.TreatmentID == model.TreatmentID).FirstOrDefault();
+                    if (pages != null)
+                    {
+                        pages.TreatmentName = model.TreatmentName;
+                        //pages.DepartmentUrl = model.DepartmentUrl;
+                        //pages.Image = model.Image;
+                        _db.Entry(pages).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(model).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
 
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
         public Enums.CrudStatus SaveIPDLabReport(IpdPatientLabReport report)
         {
             try
