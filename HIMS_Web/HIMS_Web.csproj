@@ -261,6 +261,8 @@
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\boxstyle.css" />
+    <Content Include="Content\files\autocomplete.css" />
+    <Content Include="Content\files\DashStyle.css" />
     <Content Include="Content\files\logo ASMC.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\index.css" />
@@ -354,6 +356,7 @@
     <Content Include="Scripts\App\Patient\Profile.js" />
     <Content Include="Scripts\App\Report\BillingReport.js" />
     <Content Include="Scripts\App\Report\LabReport.js" />
+    <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -521,6 +524,8 @@
     <Content Include="Views\Admin\IPDPatientStatus.cshtml" />
     <Content Include="Views\Admin\AddDepartment.cshtml" />
     <Content Include="Views\Admin\AddTreatment.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
+    <Content Include="Views\Admin\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

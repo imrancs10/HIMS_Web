@@ -103,6 +103,14 @@ namespace HIMS_Web.Controllers
         {
             return View();
         }
+        public ActionResult AdminDashboard()
+        {
+            return View();
+        }
+        public ActionResult Test()
+        {
+            return View();
+        }
         public ActionResult AddTreatment()
         {
             var _details = new MasterDetails();

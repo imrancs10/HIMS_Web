@@ -25,6 +25,13 @@ $(document).ready(function () {
                         '<td class="text-center">' + entry.DepartmentName + '</td>' +
                         '<td class="text-center">' + entry.AreaName + '</td>' +
                         '<td class="text-center">' + entry.IPDStatus + '</td>' +
+                        '<td class="text-center">' + entry.MalariaStatus + '</td>' +
+                        '<td class="text-center">' + entry.RapidKitNS1Status + '</td>' +
+                        '<td class="text-center">' + entry.RapidKitIGMStatus + '</td>' +
+                        '<td class="text-center">' + entry.ELISANS1Status + '</td>' +
+                        '<td class="text-center">' + entry.ELISAIGMStatus + '</td>' +
+                        '<td class="text-center">' + entry.ELISAScrubTyphusStatus + '</td>' +
+                        '<td class="text-center">' + entry.ELISALeptospiraStatus + '</td>' +
                         '</tr>';
                 });
                 if (data.length == 0) {
