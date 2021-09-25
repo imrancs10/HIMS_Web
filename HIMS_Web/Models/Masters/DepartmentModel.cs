@@ -74,6 +74,13 @@ namespace HIMS_Web.Models.Masters
         public string AreaName { get; set; }
         public string TreatmentName { get; set; }
         public string DepartmentName { get; set; }
+        public string MalariaStatus { get; set; }
+        public string RapidKitNS1Status { get; set; }
+        public string RapidKitIGMStatus { get; set; }
+        public string ELISANS1Status { get; set; }
+        public string ELISAIGMStatus { get; set; }
+        public string ELISAScrubTyphusStatus { get; set; }
+        public string ELISALeptospiraStatus { get; set; }
     }
 
     public class IpdLabReportModel

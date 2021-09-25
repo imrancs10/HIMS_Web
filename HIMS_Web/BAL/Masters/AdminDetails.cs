@@ -84,6 +84,8 @@ namespace HIMS_Web.BAL.Masters
                          join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
+                         join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
+                         from labReport in labReport2.DefaultIfEmpty()
                          where (!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/")
                          select new
                          {
@@ -105,6 +107,13 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
+                             MalariaStatus = labReport != null ? labReport.MalariaParasite_Status : "",
+                             RapidKitNS1Status = labReport != null ? labReport.RapidKitNS1_Status : "",
+                             RapidKitIGMStatus = labReport != null ? labReport.RapidKitIGM_Status : "",
+                             ELISANS1Status = labReport != null ? labReport.ELISANS1_Status : "",
+                             ELISAIGMStatus = labReport != null ? labReport.ELISAIGM_Status : "",
+                             ELISAScrubTyphusStatus = labReport != null ? labReport.ELISAScrubTyphus_Status : "",
+                             ELISALeptospiraStatus = labReport != null ? labReport.ELISALaptospira_Status : "",
                          }).ToList().Select(x => new IpdPatientInfoModel
                          {
                              Address = x.Address,
@@ -125,6 +134,13 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = x.AreaName,
                              DepartmentName = x.DepartmentName,
                              TreatmentName = x.TreatmentName,
+                             MalariaStatus = x.MalariaStatus,
+                             RapidKitNS1Status = x.RapidKitNS1Status,
+                             RapidKitIGMStatus = x.RapidKitIGMStatus,
+                             ELISANS1Status = x.ELISANS1Status,
+                             ELISAIGMStatus = x.ELISAIGMStatus,
+                             ELISAScrubTyphusStatus = x.ELISAScrubTyphusStatus,
+                             ELISALeptospiraStatus = x.ELISALeptospiraStatus,
                          }).Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
             return _list != null ? _list : new List<IpdPatientInfoModel>();
         }
