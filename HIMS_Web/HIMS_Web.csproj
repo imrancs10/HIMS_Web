@@ -526,6 +526,9 @@
     <Content Include="Views\Admin\AddTreatment.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Admin\Test.cshtml" />
+    <Content Include="Views\Admin\AddUser.cshtml" />
+    <Content Include="Views\Shared\_LayoutIpd.cshtml" />
+    <Content Include="Views\Shared\_LayoutIpdLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

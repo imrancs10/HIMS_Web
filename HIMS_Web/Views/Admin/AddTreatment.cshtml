@@ -1,6 +1,6 @@
 ﻿@using HIMS_Web.Models.Masters;
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutIpd.cshtml";
     ViewBag.Title = "Treatment";
     var TreatmentData = ViewData["PageData"] as List<TreatmentModel>;
     int index = 1;
@@ -11,15 +11,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
-            <div class="col-sm-12 col-xs-12" style="padding:20px 0;">
+            <div class="col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        <h3 style="font-size:20px; padding-top: 10px;">Treatment Detail</h3>
+                        <h3 style="font-size:20px;"><strong>Treatment Detail</strong></h3>
                     </div>
-                    <div class="col-sm-6 col-xs-12" style=" margin-top: 2%;">
+                    <div class="col-sm-6 col-xs-12">
                         <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddTreatment">Add New Treatment</button>
                     </div>
-                </div>
+                </div><hr />
             </div>
             <div class="col-sm-12 col-xs-12" style="padding: 0px;">
                 <div class="table-responsive" style="padding:10px 0 50px 0;">
