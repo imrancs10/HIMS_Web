@@ -32,6 +32,14 @@ namespace HIMS_Web.Controllers
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
             AdminDetails _details = new AdminDetails();
+
+            bool isDuplicateIPDNumber = _details.duplicateIPDNumber(IPDNo);
+            if (isDuplicateIPDNumber)
+            {
+                SetAlertMessage("IPD Number is already exist", "IPD Patient");
+                return RedirectToAction("IPDEntry");
+            }
+
             int areaId = Area == "Other" ? 0 : Convert.ToInt32(Area);
             if (!string.IsNullOrEmpty(OtherAreaName))
             {
@@ -83,9 +91,11 @@ namespace HIMS_Web.Controllers
                 };
 
                 var result = _details.SaveIPDEntry(ipdInfo);
-                _details.SaveIPDTreatment(Treatment, result);
                 if (result > 0)
+                {
+                    _details.SaveIPDTreatment(Treatment, result);
                     SetAlertMessage("IPD Patient Info saved", "IPD Patient Info");
+                }
                 else
                     SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
             }

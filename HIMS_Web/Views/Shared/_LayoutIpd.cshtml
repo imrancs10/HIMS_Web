@@ -16,11 +16,13 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <link href="~/Content/App/Common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Content/jquery-ui.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-ui.js"></script>
     <link href="~/Content/Menu.css" rel="stylesheet" />
     <script src="~/Scripts/App/Global/App.js"></script>
-    
+    <script src="~/Scripts/App/Global/Utility.js"></script>
+
     <link rel="shortcut icon" href="files/favicon.ico" type="image/vnd.microsoft.icon" />
     <!--New Bootstrep-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,75 +61,75 @@
         </div>
     </div>
     <div id="navbar">
-            <nav class="navbar nav_class navbar-default navbar-static-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        <nav class="navbar nav_class navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <div class="col-sm-12 col-xs-12" style="padding: 0 30px;">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/Admin/IpdDashboard" title="Home">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="kopie"><a href="/Admin/AddArea">Create Area</a></li>
+                                <li class="kopie"><a href="/Admin/AddDepartment">Create Department</a></li>
+                                <li class="kopie"><a href="/Admin/AddTreatment">Create Treatment</a></li>
+                                <li class="kopie"><a href="/Admin/AddUser">Create User</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Details<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Admin/IPDEntry">IPD Entry Form 1</a></li>
+                                <li><a href="/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
+                                <li><a href="/Admin/IPDList">IPD List</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Reports<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0);">IPD Lab Report</a></li>
+                                <li><a href="javascript:void(0);">IPD Radio Diagnosis Report</a></li>
+                                <li><a href="javascript:void(0);">IPD Status Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="apply_btn_cl" style="background-color: transparent;">
+                            <a>
+                                <i class="fa fa-user" aria-hidden="true" style="padding-right: 6px;"></i>Welcome @UserData.Username
+                            </a>
+                        </li>
+                        <li class="apply_btn_cl" style="background: #ec5029;"><a href="/Admin/IpdDashboard" title="Home"><i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back</a></li>
+                        <li class="apply_btn_cl" style="background: #1b5d95;"><a href="/Login/Logout" title="Logout"><i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; Logout</a></li>
+                    </ul>
                 </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <div class="col-sm-12 col-xs-12" style="padding: 0 30px;">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="/Admin/IpdDashboard" title="Home">Home</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li class="kopie"><a href="/Admin/AddArea">Create Area</a></li>
-                                    <li class="kopie"><a href="/Admin/AddDepartment">Create Department</a></li>
-                                    <li class="kopie"><a href="/Admin/AddTreatment">Create Treatment</a></li>
-                                    <li class="kopie"><a href="/Admin/AddUser">Create User</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Details<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Admin/IPDEntry">IPD Entry Form 1</a></li>
-                                    <li><a href="/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
-                                    <li><a href="/Admin/IPDList">IPD List</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Reports<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0);">IPD Lab Report</a></li>
-                                    <li><a href="javascript:void(0);">IPD Radio Diagnosis Report</a></li>
-                                    <li><a href="javascript:void(0);">IPD Status Report</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav pull-right">
-                            <li class="apply_btn_cl" style="background-color: transparent;">
-                                <a>
-                                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 6px;"></i>Welcome @UserData.Username
-                                </a>
-                            </li>
-                            <li class="apply_btn_cl" style="background: #ec5029;"><a href="/Admin/IpdDashboard" title="Home"><i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back</a></li>
-                            <li class="apply_btn_cl" style="background: #1b5d95;"><a href="/Login/Logout" title="Logout"><i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
-        </div>
-        <div style="min-height:400px">
-            @RenderBody()
-        </div>
-        <div class="container-fluid" style=" background: #082b49 !important; padding-top:20px; text-align:center;">
-            <div class="row">
-                <div class="container">
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+    <div style="min-height:400px">
+        @RenderBody()
+    </div>
+    <div class="container-fluid" style=" background: #082b49 !important; padding-top:20px; text-align:center;">
+        <div class="row">
+            <div class="container">
 
-                    <div class="col-xs-12 text-center">
-                        <address style="font-size:1em; line-height:20px; color:#fff;">
-                            @*Copyright © Gorakhpur Industrial Development Authority,(GIDA) || All rights reserved.<br />*@
-                            Powered by Autonomous State Medical College, Firozabad &copy; @DateTime.Now.Year - HIMS Portal || Total Number of visitors: @ApplicationInstance.Application["Totaluser"]
-                        </address>
-                    </div>
+                <div class="col-xs-12 text-center">
+                    <address style="font-size:1em; line-height:20px; color:#fff;">
+                        @*Copyright © Gorakhpur Industrial Development Authority,(GIDA) || All rights reserved.<br />*@
+                        Powered by Autonomous State Medical College, Firozabad &copy; @DateTime.Now.Year - HIMS Portal || Total Number of visitors: @ApplicationInstance.Application["Totaluser"]
+                    </address>
                 </div>
             </div>
         </div>
+    </div>
 
     }
 
@@ -208,6 +210,22 @@
             if (props.status === 401) {
                 window.location.href = '@Url.Action("Login", "AdminLogin")';
             }
+        });
+    </script>
+    <script>
+        $(function () {
+
+            $("#dialog").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
         });
     </script>
 </body>

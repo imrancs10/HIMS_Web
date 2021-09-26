@@ -26,6 +26,12 @@ namespace HIMS_Web.BAL.Masters
             else
                 return 0;
         }
+        public bool duplicateIPDNumber(string ipdNumber)
+        {
+            _db = new HIMSDBEntities();
+            var _deptRow = _db.IpdPatientInfoes.Where(x => x.IpdNo.Equals(ipdNumber)).FirstOrDefault();
+            return _deptRow != null;
+        }
         public Enums.CrudStatus SaveIPDTreatment(List<int> treatmentList, int patientID)
         {
             _db = new HIMSDBEntities();
@@ -138,7 +144,7 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
-                             MalariaStatus = labReport != null && labReport.MalariaParasite_Status!=null ? labReport.MalariaParasite_Status : "",
+                             MalariaStatus = labReport != null && labReport.MalariaParasite_Status != null ? labReport.MalariaParasite_Status : "",
                              RapidKitNS1Status = labReport != null && labReport.RapidKitNS1_Status != null ? labReport.RapidKitNS1_Status : "",
                              RapidKitIGMStatus = labReport != null && labReport.RapidKitIGM_Status != null ? labReport.RapidKitIGM_Status : "",
                              ELISANS1Status = labReport != null && labReport.ELISANS1_Status != null ? labReport.ELISANS1_Status : "",
