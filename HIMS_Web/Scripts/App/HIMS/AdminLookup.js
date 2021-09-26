@@ -117,6 +117,10 @@ $(document).ready(function () {
                     $('#PackedRBC').val("");
                     $('#PackedRBCDate').val("");
                     $('#searchPatient').click();
+                    $('#LabReportTab').removeClass('ui-tabs-active ui-state-active');
+                    $('#RadioDiagnosisTab').addClass('ui-tabs-active ui-state-active');
+                    $('#tabs-2').css('display', 'none');
+                    $('#tabs-3').css('display', 'block');
                 }
             },
             failure: function (response) {
@@ -146,6 +150,10 @@ $(document).ready(function () {
                     $('#xray').val("");
                     $('#USG').val("");
                     $('#searchPatient').click();
+                    $('#RadioDiagnosisTab').removeClass('ui-tabs-active ui-state-active');
+                    $('#StatusTab').addClass('ui-tabs-active ui-state-active');
+                    $('#tabs-3').css('display', 'none');
+                    $('#tabs-4').css('display', 'block');
                 }
             },
             failure: function (response) {
