@@ -66,36 +66,36 @@
                         <tbody style="height:440px;overflow-y:auto">
                             @foreach (var data in AreaData)
                             {
-                            <tr>
-                                <td class="text-left">@index</td>
-                                <td class="text-left">RCH-@data.PatientId</td>
-                                <td class="text-center">@data.IpdNo</td>
-                                <td class="text-left">@data.PatientName</td>
-                                <td class="text-center">@data.FatherOrHusbandName</td>
-                                <td class="text-left">@data.MobileNumber</td>
-                                <td class="text-center">@data.Age</td>
-                                <td class="text-left">@data.Gender</td>
-                                <td class="text-center">@data.IDorAadharNumber</td>
-                                <td class="text-left">@data.IDNumber</td>
-                                <td class="text-center">@data.AdmittedDateTime</td>
-                                <td class="text-left">@data.Address</td>
-                                <td class="text-left">@data.IPDStatus</td>
-                                <td class="text-center">@data.AreaName</td>
-                                <td class="text-center">@data.DepartmentName</td>
-                                <td class="text-center">@data.TreatmentName</td>
-                                <td class="text-center">@data.MalariaStatus</td>
-                                <td class="text-center">@data.RapidKitNS1Status</td>
-                                <td class="text-center">@data.RapidKitIGMStatus</td>
-                                <td class="text-center">@data.ELISANS1Status</td>
-                                <td class="text-center">@data.ELISAIGMStatus</td>
-                                <td class="text-center">@data.ELISAScrubTyphusStatus</td>
-                                <td class="text-center">@data.ELISALeptospiraStatus</td>
-                                <td class="text-center">
-                                    <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                    <br />
-                                    <a href="#" onclick="deleteArea(@data.AreaId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-left">@index</td>
+                                    <td class="text-left">RCH-@data.PatientId</td>
+                                    <td class="text-center">@data.IpdNo</td>
+                                    <td class="text-left">@data.PatientName</td>
+                                    <td class="text-center">@data.FatherOrHusbandName</td>
+                                    <td class="text-left">@data.MobileNumber</td>
+                                    <td class="text-center">@data.Age</td>
+                                    <td class="text-left">@data.Gender</td>
+                                    <td class="text-center">@data.IDorAadharNumber</td>
+                                    <td class="text-left">@data.IDNumber</td>
+                                    <td class="text-center">@data.AdmittedDateTime</td>
+                                    <td class="text-left">@data.Address</td>
+                                    <td class="text-left">@data.IPDStatus</td>
+                                    <td class="text-center">@data.AreaName</td>
+                                    <td class="text-center">@data.DepartmentName</td>
+                                    <td class="text-center">@data.TreatmentName</td>
+                                    <td class="text-center">@data.MalariaStatus</td>
+                                    <td class="text-center">@data.RapidKitNS1Status</td>
+                                    <td class="text-center">@data.RapidKitIGMStatus</td>
+                                    <td class="text-center">@data.ELISANS1Status</td>
+                                    <td class="text-center">@data.ELISAIGMStatus</td>
+                                    <td class="text-center">@data.ELISAScrubTyphusStatus</td>
+                                    <td class="text-center">@data.ELISALeptospiraStatus</td>
+                                    <td class="text-center">
+                                        <a href="/Admin/IPDEntry?patientId=@data.PatientId"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                        <br />
+                                        <a href="#" onclick="deletePatient(@data.PatientId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
                                 index++;
                             }
                         </tbody>
@@ -108,12 +108,12 @@
 
 
 <script type="text/javascript">
-    
-        $(function () {
-            $("#btnSubmit").click(function () {
-                $("input[name='GridHtml']").val($("#divExport").html());
-            });
+
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divExport").html());
         });
+    });
 
     //$(document).ready(function () {
     //    $('#btnAddArea').click(function () {
@@ -163,5 +163,32 @@
     //    $('body').addClass('modal-open')
     //    $('body').append('<div class="modal-backdrop fade in"></div>');
     //}
+
+    function deletePatient(patientId) {
+        if (confirm("Are you sure want to Delete this Patient?")) {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{patientId: ' + patientId + ' }',
+                url: '/Admin/DeletePatient',
+                success: function (data) {
+                    if (data == true) {
+                        utility.alert.setAlert("Delete Patient", "Patient has been deleted");
+                        location.reload();
+                    }
+
+                    else
+                        utility.alert.setAlert("Delete Patient", "Patient has not been deleted");
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+    }
 
 </script>

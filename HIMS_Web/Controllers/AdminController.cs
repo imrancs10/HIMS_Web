@@ -88,6 +88,7 @@ namespace HIMS_Web.Controllers
                     Age = Convert.ToInt32(Age),
                     IPDStatus = "Admit",
                     IDNumber = IDNumber,
+                    IsActive = true
                 };
 
                 var result = _details.SaveIPDEntry(ipdInfo);
@@ -424,6 +425,11 @@ namespace HIMS_Web.Controllers
             //_details.SetLabReportData(PatientId, BillNo, RefNo, ReportPath, LabName, ReportDate, doctorId);
             return View("PatientLabReport");
         }
-
+        [HttpPost]
+        public JsonResult DeletePatient(int patientId)
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.DeletePatient(patientId), JsonRequestBehavior.AllowGet);
+        }
     }
 }

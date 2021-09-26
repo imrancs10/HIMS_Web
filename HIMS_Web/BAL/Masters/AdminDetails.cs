@@ -29,7 +29,7 @@ namespace HIMS_Web.BAL.Masters
         public bool duplicateIPDNumber(string ipdNumber)
         {
             _db = new HIMSDBEntities();
-            var _deptRow = _db.IpdPatientInfoes.Where(x => x.IpdNo.Equals(ipdNumber)).FirstOrDefault();
+            var _deptRow = _db.IpdPatientInfoes.Where(x => x.IpdNo.Equals(ipdNumber) && x.IsActive == true).FirstOrDefault();
             return _deptRow != null;
         }
         public Enums.CrudStatus SaveIPDTreatment(List<int> treatmentList, int patientID)
@@ -61,6 +61,7 @@ namespace HIMS_Web.BAL.Masters
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
                          join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
                          from labReport in labReport2.DefaultIfEmpty()
+                         where dept.IsActive == true
                          select new
                          {
                              Address = dept.Address,
@@ -140,6 +141,7 @@ namespace HIMS_Web.BAL.Masters
                          join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
                          from labReport in labReport2.DefaultIfEmpty()
                          where (!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/")
+                         && dept.IsActive == true
                          select new
                          {
                              Address = dept.Address,
@@ -468,7 +470,7 @@ namespace HIMS_Web.BAL.Masters
                     pages.ReferReasons = !string.IsNullOrEmpty(report.ReferReasons) ? report.ReferReasons : pages.ReferReasons;
                     _db.Entry(pages).State = EntityState.Modified;
 
-                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId && x.IsActive == true).FirstOrDefault();
                     if (ipdPatientInfo != null)
                     {
                         ipdPatientInfo.IPDStatus = pages.IPDStatus;
@@ -479,7 +481,7 @@ namespace HIMS_Web.BAL.Masters
                 }
                 else
                 {
-                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
+                    var ipdPatientInfo = _db.IpdPatientInfoes.Where(x => x.PatientId == report.PatientId && x.IsActive == true).FirstOrDefault();
                     if (ipdPatientInfo != null)
                     {
                         ipdPatientInfo.IPDStatus = report.IPDStatus;
@@ -504,61 +506,20 @@ namespace HIMS_Web.BAL.Masters
             }
         }
 
-        //public Enums.CrudStatus EditSchedule(ScheduleModel model)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _docRow = _db.DoctorSchedules.Where(x => x.DoctorScheduleID.Equals(model.ScheduleId)).FirstOrDefault();
-        //    if (_docRow != null)
-        //    {
-        //        _docRow.DayID = model.DayId;
-        //        _docRow.DoctorID = model.DoctorId;
-        //        _docRow.TimeFrom = model.TimeFrom;
-        //        _docRow.TimeFromMeridiemID = model.TimeFromMeridiumId;
-        //        _docRow.TimeTo = model.TimeTo;
-        //        _docRow.TimeToMeridiemID = model.TimeToMeridiumId;
-        //        _db.Entry(_docRow).State = EntityState.Modified;
-        //        _effectRow = _db.SaveChanges();
-        //        return _effectRow > 0 ? Enums.CrudStatus.Updated : Enums.CrudStatus.NotUpdated;
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataNotFound;
-        //}
-        //public Enums.CrudStatus DeleteSchedule(int docId)
-        //{
-        //    _db = new HIMSDBEntities();
-        //    int _effectRow = 0;
-        //    var _docRow = _db.DoctorSchedules.Where(x => x.DoctorScheduleID.Equals(docId)).FirstOrDefault();
-        //    if (_docRow != null)
-        //    {
-        //        _db.DoctorSchedules.Remove(_docRow);
-        //        //_db.Entry(_deptRow).State = EntityState.Deleted;
-        //        _effectRow = _db.SaveChanges();
-        //        return _effectRow > 0 ? Enums.CrudStatus.Deleted : Enums.CrudStatus.NotDeleted;
-        //    }
-        //    else
-        //        return Enums.CrudStatus.DataNotFound;
-        //}
-        //public IEnumerable<object> ScheduleList()
-        //{
-        //    _db = new HIMSDBEntities();
-        //    var _list = (from docSchedule in _db.DoctorSchedules
-
-        //                 orderby docSchedule.Doctor.DoctorName
-        //                 select new 
-        //                 {
-        //                     DayId=docSchedule.DayID,
-        //                     docSchedule.DayMaster.DayName,
-        //                     docSchedule.DoctorID,
-        //                     docSchedule.Doctor.DoctorName,
-        //                     docSchedule.Doctor.Department.DepartmentName,
-        //                     docSchedule.DoctorScheduleID,
-        //                     TimeFrom=docSchedule.TimeFrom + (docSchedule.TimeFromMeridiemID==1?" AM":" PM"),
-        //                     TimeTo=docSchedule.TimeTo + (docSchedule.TimeToMeridiemID == 1 ? " AM" : " PM"),
-        //                     docSchedule.TimeFromMeridiemID,
-        //                     docSchedule.TimeToMeridiemID 
-        //                 }).ToList();
-        //    return _list;
-        //}
+        public bool DeletePatient(int patientId)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.IpdPatientInfoes.Where(x => x.PatientId == patientId).FirstOrDefault();
+            if (_deptRow != null)
+            {
+                _deptRow.IsActive = false;
+                _db.Entry(_deptRow).State = EntityState.Modified;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? true : false;
+            }
+            else
+                return false;
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace DataLayer
         public byte[] Photo { get; set; }
         public string FatherOrHusbandName { get; set; }
         public Nullable<System.DateTime> ValidUpto { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public string IDorAadharNumber { get; set; }
         public string IDNumber { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

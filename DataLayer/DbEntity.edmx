@@ -100,6 +100,7 @@
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="FatherOrHusbandName" Type="varchar" MaxLength="100" />
           <Property Name="ValidUpto" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
           <Property Name="IDorAadharNumber" Type="varchar" MaxLength="50" />
           <Property Name="IDNumber" Type="varchar" MaxLength="500" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -555,6 +556,7 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FatherOrHusbandName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ValidUpto" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
           <Property Name="IDorAadharNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IDNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -897,6 +899,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="IDorAadharNumber" ColumnName="IDorAadharNumber" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
                 <ScalarProperty Name="FatherOrHusbandName" ColumnName="FatherOrHusbandName" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
