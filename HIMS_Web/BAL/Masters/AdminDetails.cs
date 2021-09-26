@@ -59,6 +59,8 @@ namespace HIMS_Web.BAL.Masters
                          join treat in _db.Treatments on patTreat.PatientTreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
+                         join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
+                         from labReport in labReport2.DefaultIfEmpty()
                          select new
                          {
                              Address = dept.Address,
@@ -79,6 +81,13 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
+                             MalariaStatus = labReport != null && labReport.MalariaParasite_Status != null ? labReport.MalariaParasite_Status : "",
+                             RapidKitNS1Status = labReport != null && labReport.RapidKitNS1_Status != null ? labReport.RapidKitNS1_Status : "",
+                             RapidKitIGMStatus = labReport != null && labReport.RapidKitIGM_Status != null ? labReport.RapidKitIGM_Status : "",
+                             ELISANS1Status = labReport != null && labReport.ELISANS1_Status != null ? labReport.ELISANS1_Status : "",
+                             ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
+                             ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
+                             ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
                          }).ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
@@ -107,6 +116,13 @@ namespace HIMS_Web.BAL.Masters
                     AreaName = patientInfo.AreaName,
                     DepartmentName = patientInfo.DepartmentName,
                     TreatmentName = treatmentName,
+                    MalariaStatus = patientInfo.MalariaStatus,
+                    RapidKitNS1Status = patientInfo.RapidKitNS1Status,
+                    RapidKitIGMStatus = patientInfo.RapidKitIGMStatus,
+                    ELISANS1Status = patientInfo.ELISANS1Status,
+                    ELISAIGMStatus = patientInfo.ELISAIGMStatus,
+                    ELISAScrubTyphusStatus = patientInfo.ELISAScrubTyphusStatus,
+                    ELISALeptospiraStatus = patientInfo.ELISALeptospiraStatus,
                 });
 
             }

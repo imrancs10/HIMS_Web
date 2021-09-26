@@ -53,35 +53,49 @@
                                 <th class="text-center">Area</th>
                                 <th class="text-center">Department</th>
                                 <th class="text-center">Treatment</th>
+                                <th class="text-center">Malaria Parasite</th>
+                                <th class="text-center">Rapid Kit NS1</th>
+                                <th class="text-center">Rapid Kit IgM</th>
+                                <th class="text-center">ELISA NS1</th>
+                                <th class="text-center">ELISA IgM</th>
+                                <th class="text-center">ELISA Scrub Typhus</th>
+                                <th class="text-center">ELISA Leptospira</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody style="height:440px;overflow-y:auto">
                             @foreach (var data in AreaData)
                             {
-                                <tr>
-                                    <td class="text-left">@index</td>
-                                    <td class="text-left">RCH-@data.PatientId</td>
-                                    <td class="text-center">@data.IpdNo</td>
-                                    <td class="text-left">@data.PatientName</td>
-                                    <td class="text-center">@data.FatherOrHusbandName</td>
-                                    <td class="text-left">@data.MobileNumber</td>
-                                    <td class="text-center">@data.Age</td>
-                                    <td class="text-left">@data.Gender</td>
-                                    <td class="text-center">@data.IDorAadharNumber</td>
-                                    <td class="text-left">@data.IDNumber</td>
-                                    <td class="text-center">@data.AdmittedDateTime</td>
-                                    <td class="text-left">@data.Address</td>
-                                    <td class="text-left">@data.IPDStatus</td>
-                                    <td class="text-center">@data.AreaName</td>
-                                    <td class="text-center">@data.DepartmentName</td>
-                                    <td class="text-center">@data.TreatmentName</td>
-                                    <td class="text-center">
-                                        <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                        <br />
-                                        <a href="#" onclick="deleteArea(@data.AreaId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="text-left">@index</td>
+                                <td class="text-left">RCH-@data.PatientId</td>
+                                <td class="text-center">@data.IpdNo</td>
+                                <td class="text-left">@data.PatientName</td>
+                                <td class="text-center">@data.FatherOrHusbandName</td>
+                                <td class="text-left">@data.MobileNumber</td>
+                                <td class="text-center">@data.Age</td>
+                                <td class="text-left">@data.Gender</td>
+                                <td class="text-center">@data.IDorAadharNumber</td>
+                                <td class="text-left">@data.IDNumber</td>
+                                <td class="text-center">@data.AdmittedDateTime</td>
+                                <td class="text-left">@data.Address</td>
+                                <td class="text-left">@data.IPDStatus</td>
+                                <td class="text-center">@data.AreaName</td>
+                                <td class="text-center">@data.DepartmentName</td>
+                                <td class="text-center">@data.TreatmentName</td>
+                                <td class="text-center">@data.MalariaStatus</td>
+                                <td class="text-center">@data.RapidKitNS1Status</td>
+                                <td class="text-center">@data.RapidKitIGMStatus</td>
+                                <td class="text-center">@data.ELISANS1Status</td>
+                                <td class="text-center">@data.ELISAIGMStatus</td>
+                                <td class="text-center">@data.ELISAScrubTyphusStatus</td>
+                                <td class="text-center">@data.ELISALeptospiraStatus</td>
+                                <td class="text-center">
+                                    <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    <br />
+                                    <a href="#" onclick="deleteArea(@data.AreaId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
                                 index++;
                             }
                         </tbody>
