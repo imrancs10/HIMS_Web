@@ -56,7 +56,7 @@ namespace HIMS_Web.Controllers
                 return Resource.Common_NoResponseFromServer;
         }
 
-        public void SetAlertMessage(string message,string title="Alert")
+        public void SetAlertMessage(string message, string title = "Alert")
         {
             TempData["Alert_Message"] = message;
             TempData["Alert_Title"] = title;
@@ -88,6 +88,22 @@ namespace HIMS_Web.Controllers
         {
             MasterDetails _details = new MasterDetails();
             return Json(_details.GetAreaByCityId(cityId), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetAreaAutoComplete(string prefix)
+        {
+            MasterDetails _details = new MasterDetails();
+            var data = _details.GetAreaByCityId(0);
+            var areas = (from area in data
+                         where area.AreaName.ToLower().StartsWith(prefix.ToLower())
+                             select new
+                             {
+                                 label = area.AreaName,
+                                 val = area.AreaId
+                             }).ToList();
+
+            return Json(areas);
         }
 
         //public JsonResult GetDaysList()

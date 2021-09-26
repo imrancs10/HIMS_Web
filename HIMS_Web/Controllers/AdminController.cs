@@ -27,7 +27,7 @@ namespace HIMS_Web.Controllers
         [HttpPost]
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
-            List<int> Treatment, string Address, string Area, string OtherAreaName,
+            List<int> Treatment, string Address, string AreaId, string OtherAreaName,
             string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
@@ -40,7 +40,7 @@ namespace HIMS_Web.Controllers
                 return RedirectToAction("IPDEntry");
             }
 
-            int areaId = Area == "Other" ? 0 : Convert.ToInt32(Area);
+            int areaId = AreaId == "Other" ? 0 : Convert.ToInt32(AreaId);
             if (!string.IsNullOrEmpty(OtherAreaName))
             {
                 var areaModel = new Area()
