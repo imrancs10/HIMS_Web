@@ -14,11 +14,11 @@
                 <div class="table table-responsive">
                     <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
                         @*<div class="form-group">
-                                <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <input type="text" id="PatientId" class="form-control" name="PatientId" />
-                                </div>
-                            </div>*@
+            <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <input type="text" id="PatientId" class="form-control" name="PatientId" />
+            </div>
+        </div>*@
                         <div class="form-group">
                             <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">IPD No<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -31,18 +31,6 @@
                                 <input type="datetime-local" name="AdmittedDateTime" id="AdmittedDateTime" class="form-control">
                             </div>
                         </div>
-
-                        @*<div class="form-group">
-                                <label for="Title" class="control-label col-md-4 col-sm-12 col-xs-12">Title<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <select id="Title" class="form-control" name="Title">
-                                        <option>--Select--</option>
-                                        <option>Mr.</option>
-                                        <option>Mrs.</option>
-                                        <option>Miss.</option>
-                                    </select>
-                                </div>
-                            </div>*@
                         <div class="form-group">
                             <label for="PetientName" class="control-label col-md-4 col-sm-12 col-xs-12">Patient Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -50,9 +38,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000"></font></label>
+                            <label for="FathersHusbandName" class="control-label col-md-4 col-sm-12 col-xs-12">Father's/Husband Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile" />
+                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -61,29 +49,6 @@
                                 <input type="text" id="Age" class="form-control" name="Age" />
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <label for="Email" class="control-label col-md-4 col-sm-12 col-xs-12">Email Id<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <input type="email" id="Mobile" class="form-control" name="Email" />
-                                </div>
-                            </div>*@
-                        @*<div class="form-group">
-                                <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Date of Birth<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <input type="date" id="DOB" class="form-control" name="DOB" />
-                                </div>
-                            </div>*@
-                        @*<div class="form-group">
-                                <label for="MariatalStatus" class="control-label col-md-4 col-sm-12 col-xs-12">Marital Status<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <select id="MariatalStatus" class="form-control" name="MariatalStatus">
-                                        <option>--Select--</option>
-                                        <option>Married</option>
-                                        <option>Unmarried</option>
-                                        <option>Devorcy</option>
-                                    </select>
-                                </div>
-                            </div>*@
                         <div class="form-group">
                             <label for="Gender" class="control-label col-md-4 col-sm-12 col-xs-12">Gender<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -96,41 +61,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="FathersHusbandName" class="control-label col-md-4 col-sm-12 col-xs-12">Father's/Husband Name<font color="FF0000">*</font></label>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Treatment Details<font color="FF0000">*</font></label>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Treatment" class="form-control" name="Treatment" multiple></select>
-                            </div>
-                        </div>
-                        @*<div class="form-group hidden" id="OtherTreatmentDiv">
-                                <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Enter Treatment<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <input type="text" id="OtherTreatment" class="form-control" name="OtherTreatment" />
-                                </div>
-                            </div>*@
-                        <div class="form-group">
                             <label for="Address" class="control-label col-md-4 col-sm-12 col-xs-12">Address<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <textarea type="text" id="Address" class="form-control" name="Address"></textarea>
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <label for="state" class="control-label col-md-4 col-sm-12 col-xs-12">State Name<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <select id="state" class="form-control" name="state"></select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="city" class="control-label col-md-4 col-sm-12 col-xs-12">City Name<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <select id="city" class="form-control" name="city"></select>
-                                </div>
-                            </div>*@
                         <div class="form-group">
                             <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Area Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -143,22 +78,24 @@
                                 <input type="text" id="OtherAreaName" class="form-control" name="OtherAreaName" />
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <label for="pincode" class="control-label col-md-4 col-sm-12 col-xs-12">Pin Code<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <input type="number" id="pincode" class="form-control" name="pincode" />
-                                </div>
+                        <div class="form-group">
+                            <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000"></font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile" />
                             </div>
-                            <div class="form-group">
-                                <label for="religion" class="control-label col-md-4 col-sm-12 col-xs-12">Religion Name<font color="FF0000">*</font></label>
-                                <div class="col-md-4 col-sm-6 col-xs-6">
-                                    <select id="religion" class="form-control" name="religion">
-                                        <option>--Select--</option>
-                                        <option>Hindu</option>
-                                        <option>Muslim</option>
-                                    </select>
-                                </div>
-                            </div>*@
+                        </div>
+                        <div class="form-group">
+                            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Treatment Details<font color="FF0000">*</font></label>
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <select id="Treatment" class="form-control" name="Treatment" multiple></select>
+                            </div>
+                        </div>
+                        @*<div class="form-group hidden" id="OtherTreatmentDiv">
+            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Enter Treatment<font color="FF0000">*</font></label>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <input type="text" id="OtherTreatment" class="form-control" name="OtherTreatment" />
+            </div>
+        </div>*@
                         <div class="form-group">
                             <label for="department" class="control-label col-md-4 col-sm-12 col-xs-12">Department Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
