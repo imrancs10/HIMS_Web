@@ -138,13 +138,13 @@ namespace HIMS_Web.BAL.Masters
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
-                             MalariaStatus = labReport != null ? labReport.MalariaParasite_Status : "",
-                             RapidKitNS1Status = labReport != null ? labReport.RapidKitNS1_Status : "",
-                             RapidKitIGMStatus = labReport != null ? labReport.RapidKitIGM_Status : "",
-                             ELISANS1Status = labReport != null ? labReport.ELISANS1_Status : "",
-                             ELISAIGMStatus = labReport != null ? labReport.ELISAIGM_Status : "",
-                             ELISAScrubTyphusStatus = labReport != null ? labReport.ELISAScrubTyphus_Status : "",
-                             ELISALeptospiraStatus = labReport != null ? labReport.ELISALaptospira_Status : "",
+                             MalariaStatus = labReport != null && labReport.MalariaParasite_Status!=null ? labReport.MalariaParasite_Status : "",
+                             RapidKitNS1Status = labReport != null && labReport.RapidKitNS1_Status != null ? labReport.RapidKitNS1_Status : "",
+                             RapidKitIGMStatus = labReport != null && labReport.RapidKitIGM_Status != null ? labReport.RapidKitIGM_Status : "",
+                             ELISANS1Status = labReport != null && labReport.ELISANS1_Status != null ? labReport.ELISANS1_Status : "",
+                             ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
+                             ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
+                             ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
                          }).ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
