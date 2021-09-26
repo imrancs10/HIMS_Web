@@ -20,11 +20,11 @@
                 <div class="table table-responsive">
                     <form id="formSave" class="form-horizontal" action="SaveIPDEntry" method="post" autocomplete="off">
                         @*<div class="form-group">
-                            <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="PatientId" class="form-control" name="PatientId" />
-                            </div>
-                        </div>*@
+                                <label for="PatientId" class="control-label col-md-4 col-sm-12 col-xs-12">Patient ID<font color="FF0000">*</font></label>
+                                <div class="col-md-4 col-sm-6 col-xs-6">
+                                    <input type="text" id="PatientId" class="form-control" name="PatientId" />
+                                </div>
+                            </div>*@
                         <div class="form-group">
                             <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">IPD No<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -75,7 +75,9 @@
                         <div class="form-group">
                             <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Area Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="Area" class="form-control" name="Area"></select>
+                                <input type="hidden" id="hfAreaId" name="AreaId" />
+                                <input type="text" id="Area" name="Area" class="form-control" />
+                                @*<select id="Area" class="form-control" name="Area"></select>*@
                             </div>
                         </div>
                         <div class="form-group hidden" id="OtherAreaDiv">
@@ -97,11 +99,11 @@
                             </div>
                         </div>
                         @*<div class="form-group hidden" id="OtherTreatmentDiv">
-                            <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Enter Treatment<font color="FF0000">*</font></label>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="OtherTreatment" class="form-control" name="OtherTreatment" />
-                            </div>
-                        </div>*@
+                                <label for="Treatment" class="control-label col-md-4 col-sm-12 col-xs-12">Enter Treatment<font color="FF0000">*</font></label>
+                                <div class="col-md-4 col-sm-6 col-xs-6">
+                                    <input type="text" id="OtherTreatment" class="form-control" name="OtherTreatment" />
+                                </div>
+                            </div>*@
                         <div class="form-group">
                             <label for="department" class="control-label col-md-4 col-sm-12 col-xs-12">Department Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -148,7 +150,7 @@
         fillDepartment();
         fillTreatment();
         //fillstate();
-        fillArea(null);
+        //fillArea(null);
     });
 
     function onSaveIPDEntry() {
@@ -366,10 +368,43 @@
             return false;
         }
     });
+    $("#Area").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Common/GetAreaAutoComplete/',
+                data: "{ 'prefix': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfAreaId").val(i.item.val);
+        },
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });
 </script>
 
 <style type="text/css">
     select {
         width: 280px;
+    }
+
+    .ui-autocomplete {
+        overflow: auto;
+        max-height: 100px;
     }
 </style>
