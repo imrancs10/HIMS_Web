@@ -35,6 +35,7 @@ namespace DataLayer
         public virtual DbSet<IpdPatientLabReport> IpdPatientLabReports { get; set; }
         public virtual DbSet<IpdPatientStatu> IpdPatientStatus { get; set; }
         public virtual DbSet<IpdRadioDiagnosisReport> IpdRadioDiagnosisReports { get; set; }
+        public virtual DbSet<PatientTreatment> PatientTreatments { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<Treatment> Treatments { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }

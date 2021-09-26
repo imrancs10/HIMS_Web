@@ -183,6 +183,18 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
         </EntityType>
+        <EntityType Name="PatientTreatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientTreatmentId" Type="int" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateId" />
@@ -313,6 +325,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientTreatment_IpdPatientInfo">
+          <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="0..1" />
+          <End Role="PatientTreatment" Type="Self.PatientTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PatientTreatment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HIMSDBModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -324,6 +348,7 @@
           <EntitySet Name="IpdPatientLabReport" EntityType="Self.IpdPatientLabReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientStatus" EntityType="Self.IpdPatientStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdRadioDiagnosisReport" EntityType="Self.IpdRadioDiagnosisReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientTreatment" EntityType="Self.PatientTreatment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
@@ -363,6 +388,10 @@
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
             <End Role="IpdRadioDiagnosisReport" EntitySet="IpdRadioDiagnosisReport" />
           </AssociationSet>
+          <AssociationSet Name="FK_PatientTreatment_IpdPatientInfo" Association="Self.FK_PatientTreatment_IpdPatientInfo">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfo" />
+            <End Role="PatientTreatment" EntitySet="PatientTreatment" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -379,6 +408,7 @@
           <EntitySet Name="IpdPatientLabReports" EntityType="HIMSDBModel.IpdPatientLabReport" />
           <EntitySet Name="IpdPatientStatus" EntityType="HIMSDBModel.IpdPatientStatu" />
           <EntitySet Name="IpdRadioDiagnosisReports" EntityType="HIMSDBModel.IpdRadioDiagnosisReport" />
+          <EntitySet Name="PatientTreatments" EntityType="HIMSDBModel.PatientTreatment" />
           <EntitySet Name="States" EntityType="HIMSDBModel.State" />
           <EntitySet Name="Treatments" EntityType="HIMSDBModel.Treatment" />
           <EntitySet Name="Wards" EntityType="HIMSDBModel.Ward" />
@@ -417,6 +447,10 @@
           <AssociationSet Name="FK_IpdRadioDiagnosisReport_IpdPatientInfo" Association="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo">
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
             <End Role="IpdRadioDiagnosisReport" EntitySet="IpdRadioDiagnosisReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientTreatment_IpdPatientInfo" Association="HIMSDBModel.FK_PatientTreatment_IpdPatientInfo">
+            <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
+            <End Role="PatientTreatment" EntitySet="PatientTreatments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Area">
@@ -534,6 +568,7 @@
           <NavigationProperty Name="IpdPatientLabReports" Relationship="HIMSDBModel.FK_IpdPatientLabReport_IpdPatientLabReport" FromRole="IpdPatientInfo" ToRole="IpdPatientLabReport" />
           <NavigationProperty Name="IpdPatientStatus" Relationship="HIMSDBModel.FK_IpdPatientStatus_IpdPatientStatus" FromRole="IpdPatientInfo" ToRole="IpdPatientStatu" />
           <NavigationProperty Name="IpdRadioDiagnosisReports" Relationship="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo" FromRole="IpdPatientInfo" ToRole="IpdRadioDiagnosisReport" />
+          <NavigationProperty Name="PatientTreatments" Relationship="HIMSDBModel.FK_PatientTreatment_IpdPatientInfo" FromRole="IpdPatientInfo" ToRole="PatientTreatment" />
         </EntityType>
         <EntityType Name="IpdPatientLabReport">
           <Key>
@@ -612,6 +647,19 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_IpdRadioDiagnosisReport_IpdPatientInfo" FromRole="IpdRadioDiagnosisReport" ToRole="IpdPatientInfo" />
+        </EntityType>
+        <EntityType Name="PatientTreatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientTreatmentId" Type="Int32" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IpdPatientInfo" Relationship="HIMSDBModel.FK_PatientTreatment_IpdPatientInfo" FromRole="PatientTreatment" ToRole="IpdPatientInfo" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -741,6 +789,18 @@
               <PropertyRef Name="PatientId" />
             </Principal>
             <Dependent Role="IpdRadioDiagnosisReport">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientTreatment_IpdPatientInfo">
+          <End Type="HIMSDBModel.IpdPatientInfo" Role="IpdPatientInfo" Multiplicity="0..1" />
+          <End Type="HIMSDBModel.PatientTreatment" Role="PatientTreatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IpdPatientInfo">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PatientTreatment">
               <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
@@ -935,6 +995,19 @@
                 <ScalarProperty Name="USG_Details" ColumnName="USG_Details" />
                 <ScalarProperty Name="Xray_Details" ColumnName="Xray_Details" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientTreatments">
+            <EntityTypeMapping TypeName="HIMSDBModel.PatientTreatment">
+              <MappingFragment StoreEntitySet="PatientTreatment">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientTreatmentId" ColumnName="PatientTreatmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

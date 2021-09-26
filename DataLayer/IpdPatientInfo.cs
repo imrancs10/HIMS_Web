@@ -20,6 +20,7 @@ namespace DataLayer
             this.IpdPatientLabReports = new HashSet<IpdPatientLabReport>();
             this.IpdPatientStatus = new HashSet<IpdPatientStatu>();
             this.IpdRadioDiagnosisReports = new HashSet<IpdRadioDiagnosisReport>();
+            this.PatientTreatments = new HashSet<PatientTreatment>();
         }
     
         public int PatientId { get; set; }
@@ -60,5 +61,7 @@ namespace DataLayer
         public virtual ICollection<IpdPatientStatu> IpdPatientStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IpdRadioDiagnosisReport> IpdRadioDiagnosisReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatientTreatment> PatientTreatments { get; set; }
     }
 }

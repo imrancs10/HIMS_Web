@@ -12,7 +12,7 @@ namespace HIMS_Web.BAL.Masters
     public class AdminDetails
     {
         HIMSDBEntities _db = null;
-        public Enums.CrudStatus SaveIPDEntry(IpdPatientInfo model)
+        public int SaveIPDEntry(IpdPatientInfo model)
         {
             _db = new HIMSDBEntities();
             int _effectRow = 0;
@@ -21,16 +21,36 @@ namespace HIMS_Web.BAL.Masters
             {
                 _db.Entry(model).State = EntityState.Added;
                 _effectRow = _db.SaveChanges();
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+                return _effectRow > 0 ? model.PatientId : 0;
             }
             else
-                return Enums.CrudStatus.DataAlreadyExist;
+                return 0;
+        }
+        public Enums.CrudStatus SaveIPDTreatment(List<int> treatmentList, int patientID)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            treatmentList.ForEach(x =>
+            {
+                PatientTreatment pt = new PatientTreatment()
+                {
+                    CreatedBy = UserData.UserId,
+                    CreatedDate = DateTime.Now,
+                    PatientId = patientID,
+                    PatientTreatmentId = x
+                };
+                _db.Entry(pt).State = EntityState.Added;
+            });
+            _db.SaveChanges();
+
+            return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
         }
         public List<IpdPatientInfoModel> GetIPDList()
         {
             _db = new HIMSDBEntities();
             var _list = (from dept in _db.IpdPatientInfoes
-                         join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
+                         join patTreat in _db.PatientTreatments on dept.PatientId equals patTreat.PatientId
+                         join treat in _db.Treatments on patTreat.PatientTreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
                          select new
@@ -49,39 +69,50 @@ namespace HIMS_Web.BAL.Masters
                              PatientName = dept.PatientName,
                              AreaId = dept.AreaId,
                              DepartmentId = dept.DepartmentId,
-                             TreatmentId = dept.TreatmentId,
+                             TreatmentId = treat.TreatmentID,
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
-                         }).ToList().Select(x => new IpdPatientInfoModel
-                         {
-                             Address = x.Address,
-                             AdmittedDateTime = x.AdmittedDateTime != null ? x.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
-                             Age = x.Age,
-                             FatherOrHusbandName = x.FatherOrHusbandName,
-                             Gender = x.Gender,
-                             IDNumber = x.IDNumber,
-                             IDorAadharNumber = x.IDorAadharNumber,
-                             IpdNo = x.IpdNo,
-                             IPDStatus = x.IPDStatus,
-                             MobileNumber = x.MobileNumber,
-                             PatientId = x.PatientId,
-                             PatientName = x.PatientName,
-                             AreaId = x.AreaId,
-                             DepartmentId = x.DepartmentId,
-                             TreatmentId = x.TreatmentId,
-                             AreaName = x.AreaName,
-                             DepartmentName = x.DepartmentName,
-                             TreatmentName = x.TreatmentName,
                          }).ToList();
-            return _list != null ? _list : new List<IpdPatientInfoModel>();
+
+            var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
+            var output = new List<IpdPatientInfoModel>();
+            foreach (var item in listGrouped)
+            {
+                var treartments = _list.Where(x => x.PatientId == item.patientId).Select(x => x.TreatmentName).ToList();
+                var treatmentName = string.Join(",", treartments);
+                var patientInfo = _list.Where(x => x.PatientId == item.patientId).FirstOrDefault();
+                output.Add(new IpdPatientInfoModel()
+                {
+                    Address = patientInfo.Address,
+                    AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    Age = patientInfo.Age,
+                    FatherOrHusbandName = patientInfo.FatherOrHusbandName,
+                    Gender = patientInfo.Gender,
+                    IDNumber = patientInfo.IDNumber,
+                    IDorAadharNumber = patientInfo.IDorAadharNumber,
+                    IpdNo = patientInfo.IpdNo,
+                    IPDStatus = patientInfo.IPDStatus,
+                    MobileNumber = patientInfo.MobileNumber,
+                    PatientId = patientInfo.PatientId,
+                    PatientName = patientInfo.PatientName,
+                    AreaId = patientInfo.AreaId,
+                    DepartmentId = patientInfo.DepartmentId,
+                    AreaName = patientInfo.AreaName,
+                    DepartmentName = patientInfo.DepartmentName,
+                    TreatmentName = treatmentName,
+                });
+
+            }
+            return output != null ? output : new List<IpdPatientInfoModel>();
         }
 
         public List<IpdPatientInfoModel> GetIPDDetail(string searchText)
         {
             _db = new HIMSDBEntities();
             var _list = (from dept in _db.IpdPatientInfoes
-                         join treat in _db.Treatments on dept.TreatmentId equals treat.TreatmentID
+                         join patTreat in _db.PatientTreatments on dept.PatientId equals patTreat.PatientId
+                         join treat in _db.Treatments on patTreat.PatientTreatmentId equals treat.TreatmentID
                          join area in _db.Areas on dept.AreaId equals area.AreaId
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
                          join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
@@ -103,7 +134,7 @@ namespace HIMS_Web.BAL.Masters
                              PatientName = dept.PatientName,
                              AreaId = dept.AreaId,
                              DepartmentId = dept.DepartmentId,
-                             TreatmentId = dept.TreatmentId,
+                             TreatmentId = treat.TreatmentID,
                              AreaName = area != null ? area.AreaName : "",
                              DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
                              TreatmentName = treat != null ? treat.TreatmentName : "",
@@ -114,35 +145,45 @@ namespace HIMS_Web.BAL.Masters
                              ELISAIGMStatus = labReport != null ? labReport.ELISAIGM_Status : "",
                              ELISAScrubTyphusStatus = labReport != null ? labReport.ELISAScrubTyphus_Status : "",
                              ELISALeptospiraStatus = labReport != null ? labReport.ELISALaptospira_Status : "",
-                         }).ToList().Select(x => new IpdPatientInfoModel
-                         {
-                             Address = x.Address,
-                             AdmittedDateTime = x.AdmittedDateTime != null ? x.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
-                             Age = x.Age,
-                             FatherOrHusbandName = x.FatherOrHusbandName,
-                             Gender = x.Gender,
-                             IDNumber = x.IDNumber,
-                             IDorAadharNumber = x.IDorAadharNumber,
-                             IpdNo = x.IpdNo,
-                             IPDStatus = x.IPDStatus,
-                             MobileNumber = x.MobileNumber,
-                             PatientId = x.PatientId,
-                             PatientName = x.PatientName,
-                             AreaId = x.AreaId,
-                             DepartmentId = x.DepartmentId,
-                             TreatmentId = x.TreatmentId,
-                             AreaName = x.AreaName,
-                             DepartmentName = x.DepartmentName,
-                             TreatmentName = x.TreatmentName,
-                             MalariaStatus = x.MalariaStatus,
-                             RapidKitNS1Status = x.RapidKitNS1Status,
-                             RapidKitIGMStatus = x.RapidKitIGMStatus,
-                             ELISANS1Status = x.ELISANS1Status,
-                             ELISAIGMStatus = x.ELISAIGMStatus,
-                             ELISAScrubTyphusStatus = x.ELISAScrubTyphusStatus,
-                             ELISALeptospiraStatus = x.ELISALeptospiraStatus,
-                         }).Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
-            return _list != null ? _list : new List<IpdPatientInfoModel>();
+                         }).ToList();
+
+            var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
+            var output = new List<IpdPatientInfoModel>();
+            foreach (var item in listGrouped)
+            {
+                var treartments = _list.Where(x => x.PatientId == item.patientId).Select(x => x.TreatmentName).ToList();
+                var treatmentName = string.Join(",", treartments);
+                var patientInfo = _list.Where(x => x.PatientId == item.patientId).FirstOrDefault();
+                output.Add(new IpdPatientInfoModel()
+                {
+                    Address = patientInfo.Address,
+                    AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    Age = patientInfo.Age,
+                    FatherOrHusbandName = patientInfo.FatherOrHusbandName,
+                    Gender = patientInfo.Gender,
+                    IDNumber = patientInfo.IDNumber,
+                    IDorAadharNumber = patientInfo.IDorAadharNumber,
+                    IpdNo = patientInfo.IpdNo,
+                    IPDStatus = patientInfo.IPDStatus,
+                    MobileNumber = patientInfo.MobileNumber,
+                    PatientId = patientInfo.PatientId,
+                    PatientName = patientInfo.PatientName,
+                    AreaId = patientInfo.AreaId,
+                    DepartmentId = patientInfo.DepartmentId,
+                    AreaName = patientInfo.AreaName,
+                    DepartmentName = patientInfo.DepartmentName,
+                    MalariaStatus = patientInfo.MalariaStatus,
+                    RapidKitNS1Status = patientInfo.RapidKitNS1Status,
+                    RapidKitIGMStatus = patientInfo.RapidKitIGMStatus,
+                    ELISANS1Status = patientInfo.ELISANS1Status,
+                    ELISAIGMStatus = patientInfo.ELISAIGMStatus,
+                    ELISAScrubTyphusStatus = patientInfo.ELISAScrubTyphusStatus,
+                    ELISALeptospiraStatus = patientInfo.ELISALeptospiraStatus,
+                    TreatmentName = treatmentName,
+                });
+            }
+            //output = output.Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
+            return output != null ? output : new List<IpdPatientInfoModel>();
         }
         public int SaveDepartment(Department model)
         {

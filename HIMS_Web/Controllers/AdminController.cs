@@ -27,7 +27,7 @@ namespace HIMS_Web.Controllers
         [HttpPost]
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
-            string Treatment, string Address, string Area, string OtherAreaName,
+            List<int> Treatment, string Address, string Area, string OtherAreaName,
             string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
@@ -42,17 +42,17 @@ namespace HIMS_Web.Controllers
                 };
                 areaId = _details.SaveArea(areaModel);
             }
-            int treatmentId = Treatment == "Other" ? 0 : Convert.ToInt32(Treatment);
-            if (!string.IsNullOrEmpty(OtherTreatment))
-            {
-                var treatmentModel = new Treatment()
-                {
-                    TreatmentName = OtherTreatment,
-                    Description = OtherTreatment
-                };
-                treatmentId = _details.SaveTreatment(treatmentModel);
-            }
-            if (areaId > 0 && treatmentId > 0)
+            //int treatmentId = Treatment == "Other" ? 0 : Convert.ToInt32(Treatment);
+            //if (!string.IsNullOrEmpty(OtherTreatment))
+            //{
+            //    var treatmentModel = new Treatment()
+            //    {
+            //        TreatmentName = OtherTreatment,
+            //        Description = OtherTreatment
+            //    };
+            //    treatmentId = _details.SaveTreatment(treatmentModel);
+            //}
+            if (areaId > 0)
             {
                 IpdPatientInfo ipdInfo = new IpdPatientInfo()
                 {
@@ -76,15 +76,15 @@ namespace HIMS_Web.Controllers
                     //Religion = religion,
                     //StateId = Convert.ToInt32(state),
                     //Title = Title,
-                    TreatmentId = treatmentId,
+                    //TreatmentId = treatmentId,
                     Age = Convert.ToInt32(Age),
                     IPDStatus = "Admit",
                     IDNumber = IDNumber,
                 };
 
                 var result = _details.SaveIPDEntry(ipdInfo);
-
-                if (result == Enums.CrudStatus.Saved)
+                _details.SaveIPDTreatment(Treatment, result);
+                if (result > 0)
                     SetAlertMessage("IPD Patient Info saved", "IPD Patient Info");
                 else
                     SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
