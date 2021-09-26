@@ -5,7 +5,6 @@
     var AreaData = ViewData["PageData"] as List<IpdPatientInfoModel>;
     int index = 1;
 }
-
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <div class="container">
@@ -23,13 +22,13 @@
                         <h3 style="font-size:20px;"><strong>IPD Patient Detail</strong></h3>
                     </div>
                     <div class="col-sm-6 col-xs-12">
-                        @using (Html.BeginForm("ExportIPDList", "Admin", FormMethod.Post))
-                        {
-                            <input type="hidden" name="GridHtml" />
-                            <input type="submit" id="btnSubmit" class="btn btn-primary" value="Export to Excel" style=" float: right; position: relative; padding-left:2em" />
-                        }
                         <a href="~/Admin/IPDEntry" class="btn btn-primary pull-right">Add New IPD Patient</a>
                     </div>
+                    @using (Html.BeginForm("ExportIPDList", "Admin", FormMethod.Post))
+                    {
+                        <input type="hidden" name="GridHtml" />
+                        <input type="submit" id="btnSubmit" class="btn btn-default" value="Export to Excel" />
+                    }
                 </div><hr />
             </div>
             <div class="col-sm-12 col-xs-12" style="padding: 0px;">
@@ -114,7 +113,14 @@
             $("input[name='GridHtml']").val($("#divExport").html());
         });
     });
-
+    //$(document).ready(function () {
+    //    $('#divExport').DataTable({
+    //        dom: 'Bfrtip',
+    //        buttons: [
+    //            'copy', 'csv', 'excel', 'pdf', 'print'
+    //        ]
+    //    });
+    //});
     //$(document).ready(function () {
     //    $('#btnAddArea').click(function () {
     //        $('[name*=AreaId]').val("");
