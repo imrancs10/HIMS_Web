@@ -30,7 +30,23 @@ namespace HIMS_Web.BAL.Masters
                 return _effectRow > 0 ? model.PatientId : 0;
             }
             else
-                return 0;
+            {
+                _deptRow.Address = !string.IsNullOrEmpty(model.Address) ? model.Address : _deptRow.Address;
+                _deptRow.AdmittedDateTime = model.AdmittedDateTime != null ? model.AdmittedDateTime : _deptRow.AdmittedDateTime;
+                _deptRow.Age = model.Age != null ? model.Age : _deptRow.Age;
+                _deptRow.AreaId = model.AreaId != null ? model.AreaId : _deptRow.AreaId;
+                _deptRow.CityId = model.CityId != null ? model.CityId : _deptRow.CityId;
+                _deptRow.DepartmentId = model.DepartmentId != null ? model.DepartmentId : _deptRow.DepartmentId;
+                _deptRow.FatherOrHusbandName = !string.IsNullOrEmpty(model.FatherOrHusbandName) ? model.FatherOrHusbandName : _deptRow.FatherOrHusbandName;
+                _deptRow.Gender = !string.IsNullOrEmpty(model.Gender) ? model.Gender : _deptRow.Gender;
+                _deptRow.IDNumber = !string.IsNullOrEmpty(model.IDNumber) ? model.IDNumber : _deptRow.IDNumber;
+                _deptRow.IDorAadharNumber = !string.IsNullOrEmpty(model.IDorAadharNumber) ? model.IDorAadharNumber : _deptRow.IDorAadharNumber;
+                _deptRow.MobileNumber = !string.IsNullOrEmpty(model.MobileNumber) ? model.MobileNumber : _deptRow.MobileNumber;
+                _deptRow.PatientName = !string.IsNullOrEmpty(model.PatientName) ? model.PatientName : _deptRow.PatientName;
+                _db.Entry(_deptRow).State = EntityState.Modified;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? _deptRow.PatientId : 0;
+            }
         }
         public bool duplicateIPDNumber(string ipdNumber)
         {
@@ -42,6 +58,11 @@ namespace HIMS_Web.BAL.Masters
         {
             _db = new HIMSDBEntities();
             int _effectRow = 0;
+            var treatments = _db.PatientTreatments.Where(x => x.PatientId == patientID).ToList();
+            treatments.ForEach(x =>
+            {
+                _db.Entry(x).State = EntityState.Deleted;
+            });
             treatmentList.ForEach(x =>
             {
                 PatientTreatment pt = new PatientTreatment()

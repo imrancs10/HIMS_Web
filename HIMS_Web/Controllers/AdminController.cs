@@ -40,21 +40,22 @@ namespace HIMS_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
+        public ActionResult SaveIPDEntry(int PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
             List<int> Treatment, string Address, string AreaId, string OtherAreaName,
             string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
             AdminDetails _details = new AdminDetails();
-
-            bool isDuplicateIPDNumber = _details.duplicateIPDNumber(IPDNo);
-            if (isDuplicateIPDNumber)
+            if (PatientId == null)
             {
-                SetAlertMessage("IPD Number is already exist", "IPD Patient");
-                return RedirectToAction("IPDEntry");
+                bool isDuplicateIPDNumber = _details.duplicateIPDNumber(IPDNo);
+                if (isDuplicateIPDNumber)
+                {
+                    SetAlertMessage("IPD Number is already exist", "IPD Patient");
+                    return RedirectToAction("IPDEntry");
+                }
             }
-
             int areaId = AreaId == "Other" ? 0 : Convert.ToInt32(AreaId);
             if (!string.IsNullOrEmpty(OtherAreaName))
             {
@@ -103,7 +104,8 @@ namespace HIMS_Web.Controllers
                     Age = Convert.ToInt32(Age),
                     IPDStatus = "Admit",
                     IDNumber = IDNumber,
-                    IsActive = true
+                    IsActive = true,
+                    PatientId = Convert.ToInt32(PatientId)
                 };
 
                 var result = _details.SaveIPDEntry(ipdInfo);
@@ -117,7 +119,10 @@ namespace HIMS_Web.Controllers
             }
             else
                 SetAlertMessage("IPD Patient Info saved failed", "IPD Patient Info");
-            return RedirectToAction("IPDEntry");
+            if (PatientId == null)
+                return RedirectToAction("IPDEntry");
+            else
+                return RedirectToAction("IPDList");
         }
         public ActionResult IPDList()
         {

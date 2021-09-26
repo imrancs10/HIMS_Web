@@ -37,7 +37,6 @@
             <div class="col-sm-12 col-xs-12 text-center" style="padding-bottom: 5px;">
                 @if (mode == "Edit")
                 {
-                    <input type="hidden" id="PatientId" name="PatientId" />
                     <h3 style="font-size:20px;"><strong>Edit Patient Detail</strong></h3>
                 }
                 else
@@ -56,6 +55,7 @@
                                     <input type="text" id="PatientId" class="form-control" name="PatientId" />
                                 </div>
                             </div>*@
+                        <input type="hidden" id="PatientId" name="PatientId" />
                         <div class="form-group">
                             <label for="IPDNo" class="control-label col-md-4 col-sm-12 col-xs-12">IPD No<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -71,19 +71,19 @@
                         <div class="form-group">
                             <label for="PetientName" class="control-label col-md-4 col-sm-12 col-xs-12">Patient Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="PetientName" class="form-control" name="PetientName"/>
+                                <input type="text" id="PetientName" class="form-control" name="PetientName" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="FathersHusbandName" class="control-label col-md-4 col-sm-12 col-xs-12">Father's/Husband Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName"/>
+                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Age (In Years)<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="Age" class="form-control" name="Age"/>
+                                <input type="text" id="Age" class="form-control" name="Age" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -120,7 +120,7 @@
                         <div class="form-group">
                             <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000"></font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile"/>
+                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -138,7 +138,7 @@
                         <div class="form-group">
                             <label for="department" class="control-label col-md-4 col-sm-12 col-xs-12">Department Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="department" class="form-control" name="department" ></select>
+                                <select id="department" class="form-control" name="department"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -161,7 +161,7 @@
                         <div class="form-group" id="OtherAreaDiv">
                             <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Enter ID Proof Number<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="IDNumber" class="form-control" name="IDNumber"/>
+                                <input type="text" id="IDNumber" class="form-control" name="IDNumber" />
                             </div>
                         </div>
                         <div class="form-group">

@@ -121,8 +121,8 @@ $(document).ready(function () {
                     $('#RadioDiagnosisTab').addClass('ui-tabs-active ui-state-active');
                     $('#tabs-2').css('display', 'none');
                     $('#tabs-3').css('display', 'block');
-                    $('#divDischarge').addClass('hidden');
-                    $('#divReport').addClass('hidden');
+                    //$('#divDischarge').addClass('hidden');
+                    //$('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -156,8 +156,8 @@ $(document).ready(function () {
                     $('#StatusTab').addClass('ui-tabs-active ui-state-active');
                     $('#tabs-3').css('display', 'none');
                     $('#tabs-4').css('display', 'block');
-                    $('#divDischarge').addClass('hidden');
-                    $('#divReport').addClass('hidden');
+                    //$('#divDischarge').addClass('hidden');
+                    //$('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -191,8 +191,8 @@ $(document).ready(function () {
                     $('#Reason').val("");
                     $('#casesummary').val("");
                     $('#searchPatient').click();
-                    $('#divDischarge').addClass('hidden');
-                    $('#divReport').addClass('hidden');
+                    //$('#divDischarge').addClass('hidden');
+                    //$('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -253,7 +253,7 @@ $(document).ready(function () {
 $(document).on('click', '#selectPatient', function () {
     var patientId = $(this).attr('data-Id');
     var status = $(this).attr('data-status');
-    if (status == 'Discharge') {
+    if (status == 'Discharge' || status == 'Death' || status == 'Refer' || status == 'Abscond') {
         $('#divDischarge').removeClass('hidden');
         $('#divReport').addClass('hidden');
     }
