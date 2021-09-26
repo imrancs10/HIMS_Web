@@ -20,10 +20,25 @@ namespace HIMS_Web.Controllers
     public class AdminController : CommonController
     {
         // GET: Admin
-        public ActionResult IPDEntry()
+        public ActionResult IPDEntry(int? patientId)
         {
+            if (patientId != null && patientId > 0)
+            {
+                ViewData["Mode"] = "Edit";
+            }
+            else
+            {
+                ViewData["Mode"] = "Add";
+            }
             return View();
         }
+        public JsonResult GetPatientDetailById(int patientId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var patientInfo = _details.GetIPDPatientById(patientId);
+            return Json(patientInfo, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult SaveIPDEntry(string PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,

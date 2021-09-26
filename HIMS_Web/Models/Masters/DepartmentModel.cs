@@ -45,8 +45,9 @@ namespace HIMS_Web.Models.Masters
     {
         public int PatientId { get; set; }
         public string IpdNo { get; set; }
+        public DateTime? AdmittedDate { get; set; }
         public string AdmittedDateTime { get; set; }
-        public Nullable<int> TreatmentId { get; set; }
+        public string TreatmentIds { get; set; }
         public string MobileNumber { get; set; }
         public string Email { get; set; }
         public string Title { get; set; }

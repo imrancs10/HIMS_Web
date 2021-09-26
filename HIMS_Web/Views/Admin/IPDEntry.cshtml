@@ -1,8 +1,30 @@
-﻿
+﻿@using System;
+@using DataLayer;
 @{
     ViewBag.Title = "IPDEntry";
     Layout = "~/Views/Shared/_LayoutIpd.cshtml";
+    var mode = ViewData["Mode"].ToString();
+    //var patientInfo = ViewData["Patient"] as IpdPatientInfo;
+    //string ipdNo = "", AdmittedDateTime = "", PetientName = "", FathersHusbandName = "", Age = "", Gender = "", Address = "", Area = "", AreaId = "", Mobile = "", Treatment = "", department = "", IDorAadharNumber = "", IDNumber = "";
+    //if (patientInfo != null)
+    //{
+    //    ipdNo = patientInfo.IpdNo;
+    //    AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("yyyy-MM-dd") : "";
+    //    PetientName = patientInfo.PatientName;
+    //    FathersHusbandName = patientInfo.FatherOrHusbandName;
+    //    Age = patientInfo.Age.ToString();
+    //    Gender = patientInfo.Gender;
+    //    Address = patientInfo.Address;
+    //    Area = patientInfo.AreaId.ToString();
+    //    AreaId = patientInfo.AreaId.ToString();
+    //    Mobile = patientInfo.MobileNumber;
+    //    Treatment = patientInfo.TreatmentId.ToString();
+    //    department = patientInfo.DepartmentId.ToString();
+    //    IDorAadharNumber = patientInfo.IDorAadharNumber;
+    //    IDNumber = patientInfo.IDNumber;
+    //}
 }
+<script src="~/Scripts/App/HIMS/PatientEntry.js"></script>
 <div class="row">
     <div class="col-sm-12 col-lg-12">
         <ul class="breadcrumb">
@@ -13,7 +35,16 @@
         </ul>
         <div class="panel">
             <div class="col-sm-12 col-xs-12 text-center" style="padding-bottom: 5px;">
-                <h3 style="font-size:20px;"><strong>IPD Status & Reports</strong></h3>
+                @if (mode == "Edit")
+                {
+                    <input type="hidden" id="PatientId" name="PatientId" />
+                    <h3 style="font-size:20px;"><strong>Edit Patient Detail</strong></h3>
+                }
+                else
+                {
+                    <h3 style="font-size:20px;"><strong>IPD Status & Reports</strong></h3>
+                }
+
                 <hr />
             </div>
             <div class="panel-body">
@@ -40,19 +71,19 @@
                         <div class="form-group">
                             <label for="PetientName" class="control-label col-md-4 col-sm-12 col-xs-12">Patient Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="PetientName" class="form-control" name="PetientName" />
+                                <input type="text" id="PetientName" class="form-control" name="PetientName"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="FathersHusbandName" class="control-label col-md-4 col-sm-12 col-xs-12">Father's/Husband Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName" />
+                                <input type="text" id="FathersHusbandName" class="form-control" name="FathersHusbandName"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="DOB" class="control-label col-md-4 col-sm-12 col-xs-12">Age (In Years)<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="Age" class="form-control" name="Age" />
+                                <input type="text" id="Age" class="form-control" name="Age"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -89,7 +120,7 @@
                         <div class="form-group">
                             <label for="Mobile" class="control-label col-md-4 col-sm-12 col-xs-12">Mobile Number<font color="FF0000"></font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile" />
+                                <input type="text" id="Mobile" maxlength="10" class="form-control" name="Mobile"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -107,7 +138,7 @@
                         <div class="form-group">
                             <label for="department" class="control-label col-md-4 col-sm-12 col-xs-12">Department Name<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <select id="department" class="form-control" name="department"></select>
+                                <select id="department" class="form-control" name="department" ></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -130,7 +161,7 @@
                         <div class="form-group" id="OtherAreaDiv">
                             <label for="Area" class="control-label col-md-4 col-sm-12 col-xs-12">Enter ID Proof Number<font color="FF0000">*</font></label>
                             <div class="col-md-4 col-sm-6 col-xs-6">
-                                <input type="text" id="IDNumber" class="form-control" name="IDNumber" />
+                                <input type="text" id="IDNumber" class="form-control" name="IDNumber"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,258 +176,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        fillDepartment();
-        fillTreatment();
-        //fillstate();
-        //fillArea(null);
-    });
 
-    function onSaveIPDEntry() {
-        if ($('[name*=IPDNo]').val() == ""
-            || $('[name*=AdmittedDateTime]').val() == ""
-            || $('[name*=PetientName]').val() == ""
-            || $('[name*=Age]').val() == ""
-            || $('[name*=Gender]').val() == ""
-            || $('[name*=FathersHusbandName]').val() == ""
-            || $('[name*=Treatment]').val() == ""
-            || $('[name*=Address]').val() == ""
-            || $('[name*=Area]').val() == ""
-            || $('[name*=department]').val() == ""
-            || $('[name*=IDorAadharNumber]').val() == ""
-            || $('[name*=IDNumber]').val() == ""
-        ) {
-            utility.alert.setAlert("IPD Patient Info", "Required parameter is/are missing");
-            return false;
-        }
-        //else if ($('#Treatment').val() == "Other" && $("#OtherTreatment").val() == "") {
-        //    utility.alert.setAlert("IPD Patient Info", "Treatment name is mandatory in case of Other");
-        //    return false;
-        //}
-        else if ($('#Area').val() == "Other" && $("#OtherArea").val() == "") {
-            utility.alert.setAlert("IPD Patient Info", "Area name is mandatory in case of Other");
-            return false;
-        }
-        else if ($('#Mobile').val().trim() != "" && $('#Mobile').val().length != 10) {
-            utility.alert.setAlert("IPD Patient Info", "Mobile Number is not correct");
-            return false;
-        }
-        else {
-            if (confirm("Are you sure want to save this IPD Entry?")) {
-                document.getElementById('formSave').submit();
-            }
-        }
-    }
-
-    function fillstate() {
-        let dropdown = $('#state');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/Getstate',
-            async: true,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.StateId).text(entry.StateName));
-                });
-                dropdown.val('34');
-                dropdown.change();
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-
-    $('#state').on('change', function (e) {
-        var valueSelected = this.value;
-        fillCity(valueSelected)
-    });
-
-    function fillCity(stateId) {
-        let dropdown = $('#city');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/GetCityByStateId',
-            data: '{stateId: "' + stateId + '" }',
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.CityId).text(entry.CityName));
-                })
-                dropdown.val('1318');
-                dropdown.change();
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-
-    $('#city').on('change', function (e) {
-        var valueSelected = this.value;
-        fillArea(valueSelected)
-    });
-
-    function fillArea(cityId = null) {
-        let dropdown = $('#Area');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/GetAreaByCityId',
-            data: '{cityId: "' + cityId + '" }',
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.AreaId).text(entry.AreaName));
-                });
-                dropdown.append('<option value="Other">Other</option>');
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-
-    $('#Area').on('change', function (e) {
-        var valueSelected = this.value;
-        $('#OtherAreaDiv').val('');
-        if (valueSelected == "Other") {
-            $('#OtherAreaDiv').removeClass('hidden');
-        }
-        else {
-            $('#OtherAreaDiv').addClass('hidden');
-        }
-    });
-
-    function fillDepartment() {
-        let dropdown = $('#department');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/GetDepartments',
-            async: true,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.DepartmentId).text(entry.DeparmentName));
-                })
-                dropdown.val('7');
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-    function fillTreatment() {
-        let dropdown = $('#Treatment');
-        dropdown.empty();
-        dropdown.append('<option value="">Select</option>');
-        dropdown.prop('selectedIndex', 0);
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/Common/GetTreatment',
-            async: true,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (key, entry) {
-                    dropdown.append($('<option></option>').attr('value', entry.TreatmentId).text(entry.TreatmentName));
-                })
-                //dropdown.append('<option value="Other">Other</option>');
-            },
-            failure: function (response) {
-                alert(response);
-            },
-            error: function (response) {
-                alert(response.responseText);
-            }
-        });
-    }
-
-    //$('#Treatment').on('change', function (e) {
-    //    var valueSelected = this.value;
-    //    $('#OtherTreatment').val('');
-    //    if (valueSelected == "Other") {
-    //        $('#OtherTreatmentDiv').removeClass('hidden');
-    //    }
-    //    else {
-    //        $('#OtherTreatmentDiv').addClass('hidden');
-    //    }
-    //});
-
-    $('#Age').on('keypress', function (event) {
-        var regex = new RegExp("^[0-9]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-    $('#Mobile').on('keypress', function (event) {
-        var regex = new RegExp("^[0-9]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-    $("#Area").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: '/Common/GetAreaAutoComplete/',
-                data: "{ 'prefix': '" + request.term + "'}",
-                dataType: "json",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return item;
-                    }))
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                },
-                failure: function (response) {
-                    alert(response.responseText);
-                }
-            });
-        },
-        select: function (e, i) {
-            $("#hfAreaId").val(i.item.val);
-        },
-        minLength: 0
-    }).focus(function () {
-        $(this).autocomplete("search");
-    });
-</script>
 
 <style type="text/css">
     select {

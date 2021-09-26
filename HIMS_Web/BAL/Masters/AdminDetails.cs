@@ -12,6 +12,12 @@ namespace HIMS_Web.BAL.Masters
     public class AdminDetails
     {
         HIMSDBEntities _db = null;
+
+        public IpdPatientInfoModel GetIPDPatientById(int? patientId)
+        {
+            _db = new HIMSDBEntities();
+            return GetIPDList().Where(x => x.PatientId.Equals(patientId)).FirstOrDefault();
+        }
         public int SaveIPDEntry(IpdPatientInfo model)
         {
             _db = new HIMSDBEntities();
@@ -95,12 +101,14 @@ namespace HIMS_Web.BAL.Masters
             var output = new List<IpdPatientInfoModel>();
             foreach (var item in listGrouped)
             {
-                var treartments = _list.Where(x => x.PatientId == item.patientId).Select(x => x.TreatmentName).ToList();
-                var treatmentName = string.Join(",", treartments);
+                var treartments = _list.Where(x => x.PatientId == item.patientId).ToList();
+                var treatmentName = string.Join(",", treartments.Select(x => x.TreatmentName).ToList());
+                var treatmentIds = string.Join(",", treartments.Select(x => x.TreatmentId).ToList());
                 var patientInfo = _list.Where(x => x.PatientId == item.patientId).FirstOrDefault();
                 output.Add(new IpdPatientInfoModel()
                 {
                     Address = patientInfo.Address,
+                    AdmittedDate = patientInfo.AdmittedDateTime,
                     AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
                     Age = patientInfo.Age,
                     FatherOrHusbandName = patientInfo.FatherOrHusbandName,
@@ -116,6 +124,7 @@ namespace HIMS_Web.BAL.Masters
                     DepartmentId = patientInfo.DepartmentId,
                     AreaName = patientInfo.AreaName,
                     DepartmentName = patientInfo.DepartmentName,
+                    TreatmentIds = treatmentIds,
                     TreatmentName = treatmentName,
                     MalariaStatus = patientInfo.MalariaStatus,
                     RapidKitNS1Status = patientInfo.RapidKitNS1Status,
