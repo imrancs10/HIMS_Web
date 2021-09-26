@@ -107,6 +107,10 @@ namespace HIMS_Web.Controllers
         {
             return View();
         }
+        public ActionResult AddUser()
+        {
+            return View();
+        }
         public ActionResult Test()
         {
             return View();
