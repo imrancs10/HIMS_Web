@@ -11,6 +11,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <ul class="breadcrumb">
+                <li style="font-size:14px;"><a href="~/Admin/IpdDashboard">Home</a></li>
+                <li style="font-size:16px;"><a href="~/Admin/AddArea">Create Area</a></li>
+                @*<li style="font-size:16px;color:black"><a href="~/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>*@
+                @*<li><a href="~/Admin/IPDList">IPD List</a></li>*@
+            </ul>
             <div class="col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
@@ -41,13 +47,13 @@
                                     <td class="text-left">@data.AreaId</td>
                                     <td class="text-center">@data.AreaName</td>
                                     @*@if (data.IsActive == true)
-                                        {
-                                            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
-                                        }*@
+                                {
+                                    <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+                                }
+                                else
+                                {
+                                    <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+                                }*@
                                     <td class="text-center">
                                         <a href="#" onclick="editArea(@data.AreaId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                     </td>

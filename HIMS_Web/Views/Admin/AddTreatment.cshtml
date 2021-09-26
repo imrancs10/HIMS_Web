@@ -11,6 +11,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+            <ul class="breadcrumb">
+                <li style="font-size:14px;"><a href="~/Admin/IpdDashboard">Home</a></li>
+                <li style="font-size:16px;"><a href="~/Admin/AddArea">Create Area</a></li>
+                <li style="font-size:16px;"><a href="~/Admin/AddDepartment">Create Department</a></li>
+                <li style="font-size:16px;"><a href="~/Admin/AddTreatment">Create Treatment</a></li>
+            </ul>
             <div class="col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
@@ -43,13 +49,13 @@
                                     <td class="text-center">@data.TreatmentName</td>
                                     <td class="text-center">@data.TreatmentDescription</td>
                                     @*@if (data.IsActive == true)
-                                        {
-                                            <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
-                                        }*@
+                                {
+                                    <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+                                }
+                                else
+                                {
+                                    <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+                                }*@
                                     <td class="text-center">
                                         <a href="#" onclick="editTreatment(@data.TreatmentId); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                     </td>
