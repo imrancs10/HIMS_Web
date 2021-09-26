@@ -5,6 +5,35 @@ $(document).ready(function () {
     fillTreatment();
     //fillstate();
     //fillArea(null);
+    $("#Area").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Common/GetAreaAutoComplete/',
+                data: "{ 'prefix': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfAreaId").val(i.item.val);
+        },
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });
+
 });
 
 function onSaveIPDEntry() {
@@ -289,32 +318,4 @@ $('#Mobile').on('keypress', function (event) {
         event.preventDefault();
         return false;
     }
-});
-$("#Area").autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            url: '/Common/GetAreaAutoComplete/',
-            data: "{ 'prefix': '" + request.term + "'}",
-            dataType: "json",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                response($.map(data, function (item) {
-                    return item;
-                }))
-            },
-            error: function (response) {
-                alert(response.responseText);
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            }
-        });
-    },
-    select: function (e, i) {
-        $("#hfAreaId").val(i.item.val);
-    },
-    minLength: 0
-}).focus(function () {
-    $(this).autocomplete("search");
 });

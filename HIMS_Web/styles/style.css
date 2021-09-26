@@ -3212,3 +3212,7 @@ ul.breadcrumb li {
         }
     }
 
+.modal-dialog {
+    left: -3px !important;
+    top: 60px !important;
+}

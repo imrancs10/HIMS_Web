@@ -170,7 +170,7 @@ namespace HIMS_Web.BAL.Masters
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
                          join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
                          from labReport in labReport2.DefaultIfEmpty()
-                         where (!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/")
+                         where ((!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/"))
                          && dept.IsActive == true
                          select new
                          {
