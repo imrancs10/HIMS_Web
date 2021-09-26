@@ -14,7 +14,7 @@ $(document).ready(function () {
                 $('#tbodyData tr').remove();
                 $.each(data, function (key, entry) {
                     rowHtml += '<tr>' +
-                        '<td class="text-center"><input type="radio" id="selectPatient" name="selectPatient" data-Id="' + entry.PatientId + '" name="" /></td>' +
+                        '<td class="text-center"><input type="radio" id="selectPatient" name="selectPatient" data-status="' + entry.IPDStatus + '" data-Id="' + entry.PatientId + '" name="" /></td>' +
                         '<td class="text-center">' + entry.IpdNo + '</td>' +
                         '<td class="text-center">' + entry.PatientName + '</td>' +
                         '<td class="text-center">' + entry.FatherOrHusbandName + '</td>' +
@@ -121,6 +121,8 @@ $(document).ready(function () {
                     $('#RadioDiagnosisTab').addClass('ui-tabs-active ui-state-active');
                     $('#tabs-2').css('display', 'none');
                     $('#tabs-3').css('display', 'block');
+                    $('#divDischarge').addClass('hidden');
+                    $('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -154,6 +156,8 @@ $(document).ready(function () {
                     $('#StatusTab').addClass('ui-tabs-active ui-state-active');
                     $('#tabs-3').css('display', 'none');
                     $('#tabs-4').css('display', 'block');
+                    $('#divDischarge').addClass('hidden');
+                    $('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -187,6 +191,8 @@ $(document).ready(function () {
                     $('#Reason').val("");
                     $('#casesummary').val("");
                     $('#searchPatient').click();
+                    $('#divDischarge').addClass('hidden');
+                    $('#divReport').addClass('hidden');
                 }
             },
             failure: function (response) {
@@ -246,7 +252,13 @@ $(document).ready(function () {
 
 $(document).on('click', '#selectPatient', function () {
     var patientId = $(this).attr('data-Id');
-    if (patientId > 0) {
+    var status = $(this).attr('data-status');
+    if (status == 'Discharge') {
+        $('#divDischarge').removeClass('hidden');
+        $('#divReport').addClass('hidden');
+    }
+    else if (patientId > 0) {
+        $('#divDischarge').addClass('hidden');
         $('#divReport').removeClass('hidden');
         $('[name*=patientId]').val(patientId);
     }
