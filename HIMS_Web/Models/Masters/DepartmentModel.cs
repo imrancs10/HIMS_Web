@@ -41,6 +41,18 @@ namespace HIMS_Web.Models.Masters
         public int? WardId { get; set; }
         public string WardName { get; set; }
     }
+    public class DashboardDataModel
+    {
+        public int PatientTreated { get; set; }
+        public int AdmitPatient { get; set; }
+        public int DischargePatient { get; set; }
+        public int Refer { get; set; }
+        public int Abscond { get; set; }
+        public int LAMA { get; set; }
+        public int DOPR { get; set; }
+        public int Death { get; set; }
+        public int Other { get; set; }
+    }
     public class IpdPatientInfoModel
     {
         public int PatientId { get; set; }

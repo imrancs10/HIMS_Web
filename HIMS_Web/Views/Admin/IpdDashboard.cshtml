@@ -1,8 +1,9 @@
-﻿@{
-
+﻿@using HIMS_Web.Models.Masters;
+@{
     ViewBag.Title = "IpdDashboard";
 
     Layout = "~/Views/Shared/_LayoutIpd.cshtml";
+    var dashboardData = ViewData["PageData"] as DashboardDataModel;
 }
 <link href="~/css/style.css" rel="stylesheet" /><div class="main-container inner">
     <!-- start: PAGE -->
@@ -12,11 +13,11 @@
                 <div class="space30" style="text-align:center; padding-top:10px;padding-bottom:10px">
                     <h3 style="font-size:26px;"><strong>IPD Summary</strong></h3>
                     @*<ul class="breadcrumb">
-            <li><a href="~/Admin/IpdDashboard">Home</a></li>
-            <li><a href="~/Admin/IPDEntry">IPD Entry Form 1</a></li>
-            <li><a href="~/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
-            <li><a href="~/Admin/IPDList">IPD List</a></li>
-        </ul>*@
+                            <li><a href="~/Admin/IpdDashboard">Home</a></li>
+                            <li><a href="~/Admin/IPDEntry">IPD Entry Form 1</a></li>
+                            <li><a href="~/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
+                            <li><a href="~/Admin/IPDList">IPD List</a></li>
+                        </ul>*@
                 </div>
             </div>
             <!-- end: BREADCRUMB -->
@@ -27,26 +28,8 @@
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-user-md icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>452</strong></h5>
+                                    <h5><strong>@dashboardData.PatientTreated</strong></h5>
                                     <span>Patient Treated</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 widget widget1">
-                            <div class="r3_counter_box">
-                                <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
-                                <div class="stats">
-                                    <h5><strong>1019</strong></h5>
-                                    <span>Non Active Patient</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 widget widget1">
-                            <div class="r3_counter_box">
-                                <i class="pull-left fa fa-heartbeat user2 icon-rounded"></i>
-                                <div class="stats">
-                                    <h5><strong>1012</strong></h5>
-                                    <span>Active Patient</span>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +37,7 @@
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-stethoscope dollar1 icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>450</strong></h5>
+                                    <h5><strong>@dashboardData.AdmitPatient</strong></h5>
                                     <span>Admit Patient</span>
                                 </div>
                             </div>
@@ -63,8 +46,26 @@
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-ambulance dollar2 icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>1450</strong></h5>
+                                    <h5><strong>@dashboardData.DischargePatient</strong></h5>
                                     <span>Discharge Patient</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 widget widget1">
+                            <div class="r3_counter_box">
+                                <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>@dashboardData.Refer</strong></h5>
+                                    <span>Refer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 widget widget1">
+                            <div class="r3_counter_box">
+                                <i class="pull-left fa fa-heartbeat user2 icon-rounded"></i>
+                                <div class="stats">
+                                    <h5><strong>@dashboardData.Abscond</strong></h5>
+                                    <span>Abscond</span>
                                 </div>
                             </div>
                         </div>
@@ -85,30 +86,54 @@
                         </div>
                         <div class="col-md-3 stat">
                             <div class="content-top-1">
-                                <div class="col-md-6 top-content">
-                                    <h5>Sales</h5>
-                                    <label>1283+</label>
-                                </div>
-                                <div class="r3_counter_box">
-                                    <i class="pull-left fa fa-user-circle-o icon-rounded"></i>
-                                    @*<div class="col-md-6 top-content1">
-        <div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>*@
-                                </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            <div class="content-top-1">
-                                <div class="col-md-6 top-content">
-                                    <h5>Reviews</h5>
-                                    <label>2262+</label>
-                                </div>
-                                <div class="r3_counter_box">
-                                    <i class="pull-left fa fa-user-plus icon-rounded"></i>
-                                    @*<div class="col-md-6 top-content1">
-            <div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>*@
+                                <div class="col-md-3 widget widget1">
+                                    <div class="r3_counter_box" style="width:150px;">
+                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
+                                        <div class="stats">
+                                            <h5><strong>@dashboardData.LAMA</strong></h5>
+                                            <span>LAMA</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
-                                @*<div class="content-top-1">
+                            <div class="content-top-1">
+                                <div class="col-md-3 widget widget1">
+                                    <div class="r3_counter_box" style="width:150px;">
+                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
+                                        <div class="stats">
+                                            <h5><strong>@dashboardData.DOPR</strong></h5>
+                                            <span>DOPR</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="content-top-1">
+                                <div class="col-md-3 widget widget1">
+                                    <div class="r3_counter_box" style="width:150px;">
+                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
+                                        <div class="stats">
+                                            <h5><strong>@dashboardData.Death</strong></h5>
+                                            <span>Death</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="content-top-1">
+                                <div class="col-md-3 widget widget1">
+                                    <div class="r3_counter_box" style="width:150px;">
+                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
+                                        <div class="stats">
+                                            <h5><strong>@dashboardData.Other</strong></h5>
+                                            <span>Other</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            @*<div class="content-top-1">
             <div class="col-md-6 top-content">
                 <h5>Visitors</h5>
                 <label>12589+</label>
@@ -118,39 +143,39 @@
             </div>
             <div class="clearfix"> </div>
         </div>*@
-                            </div>
+                        </div>
                         <!--	<div class="col-md-2 stat">
-                        <div class="content-top">
-                            <div class="top-content facebook">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            <div class="content-top">
+                                <div class="top-content facebook">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </div>
+                                <ul class="info">
+                                    <li class="col-md-6"><b>1,296</b><p>Friends</p></li>
+                                    <li class="col-md-6"><b>647</b><p>Likes</p></li>
+                                    <div class="clearfix"></div>
+                                </ul>
                             </div>
-                            <ul class="info">
-                                <li class="col-md-6"><b>1,296</b><p>Friends</p></li>
-                                <li class="col-md-6"><b>647</b><p>Likes</p></li>
-                                <div class="clearfix"></div>
-                            </ul>
-                        </div>
-                        <div class="content-top">
-                            <div class="top-content twitter">
-                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            <div class="content-top">
+                                <div class="top-content twitter">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </div>
+                                <ul class="info">
+                                    <li class="col-md-6"><b>1,997</b><p>Followers</p></li>
+                                    <li class="col-md-6"><b>389</b><p>Tweets</p></li>
+                                    <div class="clearfix"></div>
+                                </ul>
                             </div>
-                            <ul class="info">
-                                <li class="col-md-6"><b>1,997</b><p>Followers</p></li>
-                                <li class="col-md-6"><b>389</b><p>Tweets</p></li>
-                                <div class="clearfix"></div>
-                            </ul>
-                        </div>
-                        <div class="content-top">
-                            <div class="top-content google-plus">
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <div class="content-top">
+                                <div class="top-content google-plus">
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </div>
+                                <ul class="info">
+                                    <li class="col-md-6"><b>1,216</b><p>Followers</p></li>
+                                    <li class="col-md-6"><b>321</b><p>shares</p></li>
+                                    <div class="clearfix"></div>
+                                </ul>
                             </div>
-                            <ul class="info">
-                                <li class="col-md-6"><b>1,216</b><p>Followers</p></li>
-                                <li class="col-md-6"><b>321</b><p>shares</p></li>
-                                <div class="clearfix"></div>
-                            </ul>
-                        </div>
-                    </div> -->
+                        </div> -->
                         <div class="clearfix"> </div>
                     </div>
                     <div class="table-responsive bs-example widget-shadow cust-table">
@@ -235,103 +260,103 @@
             </div>
 
             @*<div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-white">
-                    <div class="panel-body">
-                        <div class="col-md-4">
-                            <a href="~/Admin/IPDEntry">
-                                <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
-                                    <h3 style="text-align:center">
-                                        IPD Entry Form
-                                    </h3>
-                                    <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                    <div class="col-md-12">
+                        <div class="panel panel-white">
+                            <div class="panel-body">
+                                <div class="col-md-4">
+                                    <a href="~/Admin/IPDEntry">
+                                        <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+                                            <h3 style="text-align:center">
+                                                IPD Entry Form
+                                            </h3>
+                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="~/Admin/AddArea">
-                                <div class="panel panel-green" style="padding:15px 20px 15px 20px">
-                                    <h3 style="text-align:center">Area Master Form </h3>
-                                    <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                <div class="col-md-4">
+                                    <a href="~/Admin/AddArea">
+                                        <div class="panel panel-green" style="padding:15px 20px 15px 20px">
+                                            <h3 style="text-align:center">Area Master Form </h3>
+                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="~/Admin/IPDList">
-                                <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
-                                    <h3 style="text-align:center"> IPD Patient List </h3>
-                                    <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                <div class="col-md-4">
+                                    <a href="~/Admin/IPDList">
+                                        <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
+                                            <h3 style="text-align:center"> IPD Patient List </h3>
+                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="~/Admin/IpdPatientStatus">
-                                <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
-                                    <h3 style="text-align:center"> IPD Status & Lab Report </h3>
-                                    <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                <div class="col-md-4">
+                                    <a href="~/Admin/IpdPatientStatus">
+                                        <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
+                                            <h3 style="text-align:center"> IPD Status & Lab Report </h3>
+                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-yellow" style="padding:15px 20px 15px 20px">
+                                <div class="col-md-4">
+                                    <div class="panel panel-yellow" style="padding:15px 20px 15px 20px">
 
-                                <h3 style="text-align:center"> Doctor </h3>
+                                        <h3 style="text-align:center"> Doctor </h3>
 
-                                <p>
+                                        <p>
 
 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
 
-                                <h3 style="text-align:center"> RadioDiagnosis </h3>
+                                        <h3 style="text-align:center"> RadioDiagnosis </h3>
 
-                                <p>
-
-
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-green" style="padding:15px 20px 15px 20px">
-
-                                <h3 style="text-align:center"> Patient Status </h3>
-
-                                <p>
+                                        <p>
 
 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-green" style="padding:15px 20px 15px 20px">
 
-                                <h3 style="text-align:center"> Complaint </h3>
+                                        <h3 style="text-align:center"> Patient Status </h3>
 
-                                <p>
+                                        <p>
 
 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-azure" style="padding:15px 20px 15px 20px">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
 
-                                <h3 style="text-align:center"> OPD Details </h3>
+                                        <h3 style="text-align:center"> Complaint </h3>
 
-                                <p>
-                                    <a id="" class="btn btn-light-yellow">View Advetisement</a>
+                                        <p>
 
-                                </p>
+
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-azure" style="padding:15px 20px 15px 20px">
+
+                                        <h3 style="text-align:center"> OPD Details </h3>
+
+                                        <p>
+                                            <a id="" class="btn btn-light-yellow">View Advetisement</a>
+
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-        </div>*@
+                </div>*@
 
 
         </div>

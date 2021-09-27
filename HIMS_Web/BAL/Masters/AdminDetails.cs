@@ -551,5 +551,57 @@ namespace HIMS_Web.BAL.Masters
             else
                 return false;
         }
+
+        public DashboardDataModel GetDashboardData()
+        {
+            _db = new HIMSDBEntities();
+            var _list = (from dept in _db.IpdPatientInfoes
+                         join PatientStatus1 in _db.IpdPatientStatus on dept.PatientId equals PatientStatus1.PatientId into PatientStatus2
+                         from PatientStatus in PatientStatus2.DefaultIfEmpty()
+                         where dept.IsActive == true
+                         select new
+                         {
+                             Address = dept.Address,
+                             AdmittedDateTime = dept.AdmittedDateTime,
+                             Age = dept.Age,
+                             FatherOrHusbandName = dept.FatherOrHusbandName,
+                             Gender = dept.Gender,
+                             IDNumber = dept.IDNumber,
+                             IDorAadharNumber = dept.IDorAadharNumber,
+                             IpdNo = dept.IpdNo,
+                             IPDStatus = dept.IPDStatus,
+                             MobileNumber = dept.MobileNumber,
+                             PatientId = dept.PatientId,
+                             PatientName = dept.PatientName,
+                             AreaId = dept.AreaId,
+                             DepartmentId = dept.DepartmentId,
+                             PatientStatus = dept.IPDStatus
+                         }).ToList();
+
+            var listGrouped = _list.GroupBy(x => x.PatientStatus).Select(x => new { PatientStatus = x.Key, Count = x.Count() });
+            var output = new DashboardDataModel();
+            int AdmitPatient = 0, DischargePatient = 0, Refer = 0, Abscond = 0, LAMA = 0, DOPR = 0, Death = 0, Other = 0;
+            output.PatientTreated = _list.Count();
+            foreach (var item in listGrouped)
+            {
+                if (item.PatientStatus == "Admit")
+                    output.AdmitPatient = item.Count;
+                else if (item.PatientStatus == "Discharge")
+                    output.DischargePatient = item.Count;
+                else if (item.PatientStatus == "Refer")
+                    output.Refer = item.Count;
+                else if (item.PatientStatus == "Abscond")
+                    output.Abscond = item.Count;
+                else if (item.PatientStatus == "LAMA")
+                    output.LAMA = item.Count;
+                else if (item.PatientStatus == "DOPR")
+                    output.DOPR = item.Count;
+                else if (item.PatientStatus == "Death")
+                    output.Death = item.Count;
+                else if (item.PatientStatus == "Other")
+                    output.Other = item.Count;
+            }
+            return output != null ? output : new DashboardDataModel();
+        }
     }
 }

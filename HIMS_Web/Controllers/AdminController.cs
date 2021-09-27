@@ -132,6 +132,8 @@ namespace HIMS_Web.Controllers
         }
         public ActionResult IpdDashboard()
         {
+            var _details = new AdminDetails();
+            ViewData["PageData"] = _details.GetDashboardData();
             return View();
         }
         public ActionResult AdminDashboard()
