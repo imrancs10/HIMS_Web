@@ -40,7 +40,7 @@ namespace HIMS_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveIPDEntry(int PatientId, string IPDNo, string AdmittedDateTime,
+        public ActionResult SaveIPDEntry(int? PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
             List<int> Treatment, string Address, string AreaId, string OtherAreaName,
             string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
