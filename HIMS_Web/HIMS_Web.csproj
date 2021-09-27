@@ -264,6 +264,7 @@
     <Content Include="Content\files\autocomplete.css" />
     <Content Include="Content\files\DashStyle.css" />
     <Content Include="Content\files\logo ASMC.png" />
+    <Content Include="Content\files\Uttar_Pradesh.svg.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.slide.css" />
@@ -282,6 +283,19 @@
     <Content Include="Content\hoe-theme-color.css" />
     <Content Include="Content\hoe.css" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\custom.css" />
+    <Content Include="css\export.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\graph.css" />
+    <Content Include="css\jqcandlestick.css" />
+    <Content Include="css\login.css" />
+    <Content Include="css\monthly.css" />
+    <Content Include="css\owl.carousel.css" />
+    <Content Include="css\SidebarNav.min.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style_old.css" />
     <Content Include="ExternalAssembly\com.awl.MerchantToolKit.dll" />
     <Content Include="ExternalAssembly\RequestAndResponse.dll" />
     <Content Include="favicon.ico" />
