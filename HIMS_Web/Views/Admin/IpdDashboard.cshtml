@@ -4,6 +4,7 @@
 
     Layout = "~/Views/Shared/_LayoutIpd.cshtml";
     var dashboardData = ViewData["PageData"] as DashboardDataModel;
+    var AreaData = ViewData["IPDData"] as List<IpdPatientInfoModel>;
 }
 <link href="~/css/style.css" rel="stylesheet" /><div class="main-container inner">
     <!-- start: PAGE -->
@@ -109,40 +110,6 @@
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
-                            <div class="content-top-1">
-                                <div class="col-md-3 widget widget1">
-                                    <div class="r3_counter_box" style="width:150px;">
-                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
-                                        <div class="stats">
-                                            <h5><strong>@dashboardData.Death</strong></h5>
-                                            <span>Death</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                            <div class="content-top-1">
-                                <div class="col-md-3 widget widget1">
-                                    <div class="r3_counter_box" style="width:150px;">
-                                        <i class="pull-left fa fa-ambulance user1 icon-rounded"></i>
-                                        <div class="stats">
-                                            <h5><strong>@dashboardData.Other</strong></h5>
-                                            <span>Other</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                            @*<div class="content-top-1">
-            <div class="col-md-6 top-content">
-                <h5>Visitors</h5>
-                <label>12589+</label>
-            </div>
-            <div class="col-md-6 top-content1">
-                <div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>*@
                         </div>
                         <!--	<div class="col-md-2 stat">
                             <div class="content-top">
@@ -182,77 +149,44 @@
                         <table id="example" class="table table-bordered">
                             <thead>
                                 <tr class="cust-filter">
-                                    <th> <input type="checkbox" name="check"></th>
-                                    <th>Assest Code <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Serial No. <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Assest Name <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Category <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Assest Location <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Status <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Transferred to <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Allotted Upto <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Department <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Condition <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
-                                    <th>Brand <i class="fa fa-sort-amount-desc" aria-hidden="true"></i></th>
+                                    <th class="text-center">Patient Id</th>
+                                    <th class="text-center">Ipd No</th>
+                                    <th class="text-center">Patient Name</th>
+                                    <th class="text-center">Father / HusbandName</th>
+                                    <th class="text-center">Mobile Number</th>
+                                    <th class="text-center">Age</th>
+                                    <th class="text-center">Gender</th>
+                                    <th class="text-center">ID Proof Type</th>
+                                    <th class="text-center">ID Proof Number</th>
+                                    <th class="text-center">Admitted Date & Time</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">IPD Status</th>
+                                    <th class="text-center">Area</th>
+                                    <th class="text-center">Department</th>
+                                    <th class="text-center">Treatment</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row"><input type="checkbox" name="check"></th>
-                                    <td>AST202014663</td>
-                                    <td>AST202014664</td>
-                                    <td>AST202014665</td>
-                                    <td>AST202014662</td>
-                                    <td>AST202014666</td>
-                                    <td>AST202014667</td>
-                                    <td>AST202014668</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014661</td>
-                                    <td>AST202014663</td>
-                                    <td>AST202014669</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><input type="checkbox" name="check"></th>
-                                    <td>AST202014662</td>
-                                    <td>AST202014663</td>
-                                    <td>AST202014669</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014665</td>
-                                    <td>AST202014666</td>
-                                    <td>AST202014668</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014661</td>
-                                    <td>AST202014663</td>
-                                    <td>AST202014669</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><input type="checkbox" name="check"></th>
-                                    <td>AST202014661</td>
-                                    <td>AST202014662</td>
-                                    <td>AST202014663</td>
-                                    <td>AST202014664</td>
-                                    <td>AST202014668</td>
-                                    <td>AST202014669</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014661</td>
-                                    <td>AST202014661</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014668</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><input type="checkbox" name="check"></th>
-                                    <td>AST202014666</td>
-                                    <td>AST202014667</td>
-                                    <td>AST202014668</td>
-                                    <td>AST202014669</td>
-                                    <td>AST202014664</td>
-                                    <td>AST202014663</td>
-                                    <td>AST202014662</td>
-                                    <td>AST202014661</td>
-                                    <td>AST202014669</td>
-                                    <td>AST202014660</td>
-                                    <td>AST202014661</td>
-                                </tr>
+                                @foreach (var data in AreaData)
+                                {
+                                    <tr>
+                                        <td class="text-left">RCH-@data.PatientId</td>
+                                        <td class="text-center">@data.IpdNo</td>
+                                        <td class="text-left">@data.PatientName</td>
+                                        <td class="text-center">@data.FatherOrHusbandName</td>
+                                        <td class="text-left">@data.MobileNumber</td>
+                                        <td class="text-center">@data.Age</td>
+                                        <td class="text-left">@data.Gender</td>
+                                        <td class="text-center">@data.IDorAadharNumber</td>
+                                        <td class="text-left">@data.IDNumber</td>
+                                        <td class="text-center">@data.AdmittedDateTime</td>
+                                        <td class="text-left">@data.Address</td>
+                                        <td class="text-left">@data.IPDStatus</td>
+                                        <td class="text-center">@data.AreaName</td>
+                                        <td class="text-center">@data.DepartmentName</td>
+                                        <td class="text-center">@data.TreatmentName</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

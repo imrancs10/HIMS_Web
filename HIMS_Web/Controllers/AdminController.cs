@@ -134,6 +134,7 @@ namespace HIMS_Web.Controllers
         {
             var _details = new AdminDetails();
             ViewData["PageData"] = _details.GetDashboardData();
+            ViewData["IPDData"] = _details.GetIPDList().Where(x => x.AdmittedDate.Value.Date == DateTime.Now.Date).ToList();
             return View();
         }
         public ActionResult AdminDashboard()

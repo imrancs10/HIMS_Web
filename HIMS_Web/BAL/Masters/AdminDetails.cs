@@ -116,7 +116,7 @@ namespace HIMS_Web.BAL.Masters
                              ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
                              ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
                              ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
-                         }).ToList();
+                         }).Distinct().ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
             var output = new List<IpdPatientInfoModel>();
@@ -199,7 +199,7 @@ namespace HIMS_Web.BAL.Masters
                              ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
                              ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
                              ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
-                         }).ToList();
+                         }).Distinct().ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
             var output = new List<IpdPatientInfoModel>();
