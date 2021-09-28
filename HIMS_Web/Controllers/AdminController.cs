@@ -135,17 +135,59 @@ namespace HIMS_Web.Controllers
         }
         public ActionResult IPDListExportToExcel()
         {
-            //var products = new System.Data.DataTable("teste");
-            //products.Columns.Add("col1", typeof(int));
-            //products.Columns.Add("col2", typeof(string));
+            var _details = new AdminDetails();
+            var ipdList = _details.GetIPDList();
+            var data = (from ipd in ipdList
+                        select new
+                        {
+                            PatientId = "RCH-" + ipd.PatientId,
+                            IpdNo = ipd.IpdNo,
+                            PatientName = ipd.PatientName,
+                            IPDStatus = ipd.IPDStatus,
+                            FatherOrHusbandName = ipd.FatherOrHusbandName,
+                            Gender = ipd.Gender,
+                            MobileNumber = ipd.MobileNumber,
+                            Address = ipd.Address,
+                            AdmittedDateTime = ipd.AdmittedDateTime,
+                            Age = ipd.Age,
+                            AreaName = ipd.AreaName,
+                            DepartmentName = ipd.DepartmentName,
+                            TreatmentName = ipd.TreatmentName,
+                            IDorAadharNumber = ipd.IDorAadharNumber,
+                            IDNumber = ipd.IDNumber,
+                            MalariaStatus = ipd.MalariaStatus,
+                            RapidKitNS1Status = ipd.RapidKitNS1Status,
+                            RapidKitIGMStatus = ipd.RapidKitIGMStatus,
+                            ELISANS1Status = ipd.ELISANS1Status,
+                            ELISAIGMStatus = ipd.ELISAIGMStatus,
+                            ELISAScrubTyphusStatus = ipd.ELISAScrubTyphusStatus,
+                            ELISALeptospiraStatus = ipd.ELISALeptospiraStatus,
+                        }).ToList();
+            var products = new System.Data.DataTable();
+            products = ListtoDataTable.ToDataTable(data);
+            var grid = new GridView();
+            grid.DataSource = products;
+            grid.DataBind();
 
-            //products.Rows.Add(1, "product 1");
-            //products.Rows.Add(2, "product 2");
-            //products.Rows.Add(3, "product 3");
-            //products.Rows.Add(4, "product 4");
-            //products.Rows.Add(5, "product 5");
-            //products.Rows.Add(6, "product 6");
-            //products.Rows.Add(7, "product 7");
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("IPDList");
+        }
+        public ActionResult IPDListExportToPDF()
+        {
             var _details = new AdminDetails();
             var ipdList = _details.GetIPDList();
             var products = new System.Data.DataTable();
@@ -156,8 +198,35 @@ namespace HIMS_Web.Controllers
 
             Response.ClearContent();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
-            Response.ContentType = "application/ms-excel";
+            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".pdf");
+            Response.ContentType = "application/pdf";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("IPDList");
+        }
+        public ActionResult IPDListExportToCSV()
+        {
+            var _details = new AdminDetails();
+            var ipdList = _details.GetIPDList();
+            var products = new System.Data.DataTable();
+            products = ListtoDataTable.ToDataTable(ipdList);
+            var grid = new GridView();
+            grid.DataSource = products;
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".csv");
+            Response.ContentType = "text/csv";
 
             Response.Charset = "";
             StringWriter sw = new StringWriter();
