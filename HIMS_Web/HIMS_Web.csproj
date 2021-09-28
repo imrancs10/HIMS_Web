@@ -61,6 +61,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -266,6 +269,7 @@
     <Content Include="Content\files\logo ASMC.png" />
     <Content Include="Content\files\Uttar_Pradesh.svg.png" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.slide.css" />
     <Content Include="Content\Menu.css" />
@@ -386,6 +390,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="logs\test.log" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -406,6 +411,9 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dist\jquery.slide.js" />
     <Content Include="Scripts\dist\jquery.slide.min.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-minicolors.js" />
     <Content Include="Scripts\jquery-ui.js" />
@@ -544,6 +552,8 @@
     <Content Include="Views\Admin\AddUser.cshtml" />
     <Content Include="Views\Shared\_LayoutIpd.cshtml" />
     <Content Include="Views\Shared\_LayoutIpdLogin.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

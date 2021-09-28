@@ -1,12 +1,16 @@
 ﻿@using HIMS_Web.Models.Masters;
+@using GridMvc.Html
+@model IEnumerable<IpdPatientInfoModel>
 @{
     Layout = "~/Views/Shared/_LayoutIpd.cshtml";
     ViewBag.Title = "IPD List";
-    var AreaData = ViewData["PageData"] as List<IpdPatientInfoModel>;
-    int index = 1;
+    //var AreaData = ViewData["PageData"] as List<IpdPatientInfoModel>;
+    //int index = 1;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/navigation.js"></script>
+<link href="~/Content/Gridmvc.css" rel="stylesheet" />
+<script src="~/Scripts/gridmvc.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
@@ -31,75 +35,104 @@
                     }
                 </div><hr />
             </div>
-            <div class="col-sm-12 col-xs-12" style="padding: 0px;">
-                <div class="table-responsive" id="divExport" style=" padding: 10px 0 10px 0; overflow-x: scroll; width: 1200px; height: 440px;">
-                    <table class="table table_css_main_cl table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th class="text-center">Patient Id</th>
-                                <th class="text-center">Ipd No</th>
-                                <th class="text-center">Patient Name</th>
-                                <th class="text-center">Father / HusbandName</th>
-                                <th class="text-center">Mobile Number</th>
-                                <th class="text-center">Age</th>
-                                <th class="text-center">Gender</th>
-                                <th class="text-center">ID Proof Type</th>
-                                <th class="text-center">ID Proof Number</th>
-                                <th class="text-center">Admitted Date & Time</th>
-                                <th class="text-center">Address</th>
-                                <th class="text-center">IPD Status</th>
-                                <th class="text-center">Area</th>
-                                <th class="text-center">Department</th>
-                                <th class="text-center">Treatment</th>
-                                <th class="text-center">Malaria Parasite</th>
-                                <th class="text-center">Rapid Kit NS1</th>
-                                <th class="text-center">Rapid Kit IgM</th>
-                                <th class="text-center">ELISA NS1</th>
-                                <th class="text-center">ELISA IgM</th>
-                                <th class="text-center">ELISA Scrub Typhus</th>
-                                <th class="text-center">ELISA Leptospira</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody style="height:440px;overflow-y:auto">
-                            @foreach (var data in AreaData)
-                            {
-                                <tr>
-                                    <td class="text-left">@index</td>
-                                    <td class="text-left">RCH-@data.PatientId</td>
-                                    <td class="text-center">@data.IpdNo</td>
-                                    <td class="text-left">@data.PatientName</td>
-                                    <td class="text-center">@data.FatherOrHusbandName</td>
-                                    <td class="text-left">@data.MobileNumber</td>
-                                    <td class="text-center">@data.Age</td>
-                                    <td class="text-left">@data.Gender</td>
-                                    <td class="text-center">@data.IDorAadharNumber</td>
-                                    <td class="text-left">@data.IDNumber</td>
-                                    <td class="text-center">@data.AdmittedDateTime</td>
-                                    <td class="text-left">@data.Address</td>
-                                    <td class="text-left">@data.IPDStatus</td>
-                                    <td class="text-center">@data.AreaName</td>
-                                    <td class="text-center">@data.DepartmentName</td>
-                                    <td class="text-center">@data.TreatmentName</td>
-                                    <td class="text-center">@data.MalariaStatus</td>
-                                    <td class="text-center">@data.RapidKitNS1Status</td>
-                                    <td class="text-center">@data.RapidKitIGMStatus</td>
-                                    <td class="text-center">@data.ELISANS1Status</td>
-                                    <td class="text-center">@data.ELISAIGMStatus</td>
-                                    <td class="text-center">@data.ELISAScrubTyphusStatus</td>
-                                    <td class="text-center">@data.ELISALeptospiraStatus</td>
-                                    <td class="text-center">
-                                        <a href="/Admin/IPDEntry?patientId=@data.PatientId"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                        <br />
-                                        <a href="#" onclick="deletePatient(@data.PatientId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
-                                    </td>
-                                </tr>
-                                index++;
-                            }
-                        </tbody>
-                    </table>
+            <div class="col-sm-12 col-xs-12" style="padding: 0px;width:1100px;overflow-x:auto;" id="divExport" >
+                <div class="code-cut">
+                    @Html.Grid(Model).Columns(columns =>
+               {
+                   columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Edit", "IPDEntry", new { patientId = o.PatientId }));
+                   columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Delete", null, null, new { @onclick = "return deletePatient(" + o.PatientId + ");" }));
+                   columns.Add(c => c.PatientId).Titled("Patient Id").Filterable(true);
+                   columns.Add(c => c.IpdNo).Titled("Ipd No").Filterable(true);
+                   columns.Add(c => c.PatientName).Titled("Patient Name").Filterable(true);
+                   columns.Add(c => c.FatherOrHusbandName).Titled("Father/Husband Name").Filterable(true);
+                   columns.Add(c => c.MobileNumber).Titled("Mobile Number").Filterable(true);
+                   columns.Add(c => c.Age).Titled("Age").Filterable(true);
+                   columns.Add(c => c.Gender).Titled("Gender").Filterable(true);
+                   columns.Add(c => c.IDorAadharNumber).Titled("ID Proof Type").Filterable(true);
+                   columns.Add(c => c.IDNumber).Titled("ID Proof Number").Filterable(true);
+                   columns.Add(c => c.AdmittedDateTime).Titled("Admitted Date & Time").Filterable(true);
+                   columns.Add(c => c.Address).Titled("Address").Filterable(true);
+                   columns.Add(c => c.IPDStatus).Titled("IPD Status").Filterable(true);
+                   columns.Add(c => c.AreaName).Titled("Area").Filterable(true);
+                   columns.Add(c => c.DepartmentName).Titled("Department").Filterable(true);
+                   columns.Add(c => c.TreatmentName).Titled("Treatment").Filterable(true);
+                   columns.Add(c => c.MalariaStatus).Titled("Malaria Parasite").Filterable(true);
+                   columns.Add(c => c.RapidKitNS1Status).Titled("Rapid Kit NS1").Filterable(true);
+                   columns.Add(c => c.RapidKitIGMStatus).Titled("Rapid Kit IgM").Filterable(true);
+                   columns.Add(c => c.ELISANS1Status).Titled("ELISA NS1").Filterable(true);
+                   columns.Add(c => c.ELISAIGMStatus).Titled("ELISA IgM").Filterable(true);
+                   columns.Add(c => c.ELISAScrubTyphusStatus).Titled("ELISA Scrub Typhus").Filterable(true);
+                   columns.Add(c => c.ELISALeptospiraStatus).Titled("ELISA Leptospira").Filterable(true);
+               }).WithPaging(10).Sortable(true)
                 </div>
+                @*<div class="table-responsive" id="divExport" style=" padding: 10px 0 10px 0; overflow-x: scroll; width: 1200px; height: 440px;">
+                        <table class="table table_css_main_cl table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="text-center">Patient Id</th>
+                                    <th class="text-center">Ipd No</th>
+                                    <th class="text-center">Patient Name</th>
+                                    <th class="text-center">Father/Husband Name</th>
+                                    <th class="text-center">Mobile Number</th>
+                                    <th class="text-center">Age</th>
+                                    <th class="text-center">Gender</th>
+                                    <th class="text-center">ID Proof Type</th>
+                                    <th class="text-center">ID Proof Number</th>
+                                    <th class="text-center">Admitted Date & Time</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">IPD Status</th>
+                                    <th class="text-center">Area</th>
+                                    <th class="text-center">Department</th>
+                                    <th class="text-center">Treatment</th>
+                                    <th class="text-center">Malaria Parasite</th>
+                                    <th class="text-center">Rapid Kit NS1</th>
+                                    <th class="text-center">Rapid Kit IgM</th>
+                                    <th class="text-center">ELISA NS1</th>
+                                    <th class="text-center">ELISA IgM</th>
+                                    <th class="text-center">ELISA Scrub Typhus</th>
+                                    <th class="text-center">ELISA Leptospira</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody style="height:440px;overflow-y:auto">
+                                @foreach (var data in AreaData)
+                                {
+                                    <tr>
+                                        <td class="text-left">@index</td>
+                                        <td class="text-left">RCH-@data.PatientId</td>
+                                        <td class="text-center">@data.IpdNo</td>
+                                        <td class="text-left">@data.PatientName</td>
+                                        <td class="text-center">@data.FatherOrHusbandName</td>
+                                        <td class="text-left">@data.MobileNumber</td>
+                                        <td class="text-center">@data.Age</td>
+                                        <td class="text-left">@data.Gender</td>
+                                        <td class="text-center">@data.IDorAadharNumber</td>
+                                        <td class="text-left">@data.IDNumber</td>
+                                        <td class="text-center">@data.AdmittedDateTime</td>
+                                        <td class="text-left">@data.Address</td>
+                                        <td class="text-left">@data.IPDStatus</td>
+                                        <td class="text-center">@data.AreaName</td>
+                                        <td class="text-center">@data.DepartmentName</td>
+                                        <td class="text-center">@data.TreatmentName</td>
+                                        <td class="text-center">@data.MalariaStatus</td>
+                                        <td class="text-center">@data.RapidKitNS1Status</td>
+                                        <td class="text-center">@data.RapidKitIGMStatus</td>
+                                        <td class="text-center">@data.ELISANS1Status</td>
+                                        <td class="text-center">@data.ELISAIGMStatus</td>
+                                        <td class="text-center">@data.ELISAScrubTyphusStatus</td>
+                                        <td class="text-center">@data.ELISALeptospiraStatus</td>
+                                        <td class="text-center">
+                                            <a href="/Admin/IPDEntry?patientId=@data.PatientId"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                            <br />
+                                            <a href="#" onclick="deletePatient(@data.PatientId); return false;"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    index++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>*@
             </div>
         </div>
     </div>

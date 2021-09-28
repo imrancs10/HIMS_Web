@@ -127,8 +127,8 @@ namespace HIMS_Web.Controllers
         public ActionResult IPDList()
         {
             var _details = new AdminDetails();
-            ViewData["PageData"] = _details.GetIPDList();
-            return View();
+            var ipdList = _details.GetIPDList();
+            return View(ipdList);
         }
         public ActionResult IpdDashboard()
         {
