@@ -170,6 +170,8 @@ namespace HIMS_Web.BAL.Masters
                          join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
                          join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
                          from labReport in labReport2.DefaultIfEmpty()
+                         join patStatus1 in _db.IpdPatientStatus on dept.PatientId equals patStatus1.PatientId into patStatus2
+                         from patStatus in patStatus2.DefaultIfEmpty()
                          where ((!searchText.Contains("/") && (dept.IpdNo.Contains(searchText) || dept.PatientName.Contains(searchText))) || searchText.Contains("/"))
                          && dept.IsActive == true
                          select new
@@ -199,6 +201,14 @@ namespace HIMS_Web.BAL.Masters
                              ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
                              ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
                              ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
+                             PatientStatusUpdated = patStatus != null ? patStatus.IPDStatus : "",
+                             DischargeDateTime = patStatus != null ? patStatus.DischargeDateTime : null,
+                             ReferDateTime = patStatus != null ? patStatus.ReferDateTime : null,
+                             LAMADateTime = patStatus != null ? patStatus.LAMADateTime : null,
+                             DOPRDateTime = patStatus != null ? patStatus.DOPRDateTime : null,
+                             DeathDateTime = patStatus != null ? patStatus.DeathDateTime : null,
+                             AbscondDateTime = patStatus != null ? patStatus.AbscondDateTime : null,
+                             OtherDateTime = patStatus != null ? patStatus.OtherDateTime : null
                          }).Distinct().ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
@@ -234,8 +244,34 @@ namespace HIMS_Web.BAL.Masters
                     ELISAScrubTyphusStatus = patientInfo.ELISAScrubTyphusStatus,
                     ELISALeptospiraStatus = patientInfo.ELISALeptospiraStatus,
                     TreatmentName = treatmentName,
+                    DischargeDateTime = patientInfo.DischargeDateTime != null ? patientInfo.DischargeDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ReferDateTime = patientInfo.ReferDateTime != null ? patientInfo.ReferDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    LAMADateTime = patientInfo.LAMADateTime != null ? patientInfo.LAMADateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    DOPRDateTime = patientInfo.DOPRDateTime != null ? patientInfo.DOPRDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    DeathDateTime = patientInfo.DeathDateTime != null ? patientInfo.DeathDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    AbscondDateTime = patientInfo.AbscondDateTime != null ? patientInfo.AbscondDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    OtherDateTime = patientInfo.OtherDateTime != null ? patientInfo.OtherDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
                 });
             }
+            output.ForEach(x =>
+            {
+                if (x.IPDStatus == "Admit")
+                    x.IPDStatusDate = x.AdmittedDateTime;
+                else if (x.IPDStatus == "Discharge")
+                    x.IPDStatusDate = x.DischargeDateTime;
+                else if (x.IPDStatus == "Refer")
+                    x.IPDStatusDate = x.ReferDateTime;
+                else if (x.IPDStatus == "LAMA")
+                    x.IPDStatusDate = x.LAMADateTime;
+                else if (x.IPDStatus == "DOPR")
+                    x.IPDStatusDate = x.DOPRDateTime;
+                else if (x.IPDStatus == "Death")
+                    x.IPDStatusDate = x.DeathDateTime;
+                else if (x.IPDStatus == "Abscond")
+                    x.IPDStatusDate = x.AbscondDateTime;
+                else if (x.IPDStatus == "Other")
+                    x.IPDStatusDate = x.OtherDateTime;
+            });
             //output = output.Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
             return output != null ? output : new List<IpdPatientInfoModel>();
         }

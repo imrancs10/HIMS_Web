@@ -94,6 +94,14 @@ namespace HIMS_Web.Models.Masters
         public string ELISAIGMStatus { get; set; }
         public string ELISAScrubTyphusStatus { get; set; }
         public string ELISALeptospiraStatus { get; set; }
+        public string DischargeDateTime { get; set; }
+        public string ReferDateTime { get; set; }
+        public string LAMADateTime { get; set; }
+        public string DOPRDateTime { get; set; }
+        public string DeathDateTime { get; set; }
+        public string AbscondDateTime { get; set; }
+        public string OtherDateTime { get; set; }
+        public string IPDStatusDate { get; set; }
     }
 
     public class IpdLabReportModel

@@ -19,12 +19,13 @@ $(document).ready(function () {
                         '<td class="text-center">' + entry.PatientName + '</td>' +
                         '<td class="text-center">' + entry.FatherOrHusbandName + '</td>' +
                         '<td class="text-center">' + entry.MobileNumber + '</td>' +
-                        '<td class="text-center">' + entry.Age + '</td>' +
                         '<td class="text-center">' + entry.AdmittedDateTime + '</td>' +
+                        '<td class="text-center">' + entry.Age + '</td>' +
                         '<td class="text-center">' + entry.TreatmentName + '</td>' +
                         '<td class="text-center">' + entry.DepartmentName + '</td>' +
                         '<td class="text-center">' + entry.AreaName + '</td>' +
                         '<td class="text-center">' + entry.IPDStatus + '</td>' +
+                        '<td class="text-center">' + entry.IPDStatusDate + '</td>' +
                         '<td class="text-center">' + entry.MalariaStatus + '</td>' +
                         '<td class="text-center">' + entry.RapidKitNS1Status + '</td>' +
                         '<td class="text-center">' + entry.RapidKitIGMStatus + '</td>' +
