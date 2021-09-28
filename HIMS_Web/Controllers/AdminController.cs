@@ -9,10 +9,13 @@ using HIMS_Web.Models.Masters;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace HIMS_Web.Controllers
 {
@@ -129,6 +132,44 @@ namespace HIMS_Web.Controllers
             var _details = new AdminDetails();
             var ipdList = _details.GetIPDList();
             return View(ipdList);
+        }
+        public ActionResult IPDListExportToExcel()
+        {
+            //var products = new System.Data.DataTable("teste");
+            //products.Columns.Add("col1", typeof(int));
+            //products.Columns.Add("col2", typeof(string));
+
+            //products.Rows.Add(1, "product 1");
+            //products.Rows.Add(2, "product 2");
+            //products.Rows.Add(3, "product 3");
+            //products.Rows.Add(4, "product 4");
+            //products.Rows.Add(5, "product 5");
+            //products.Rows.Add(6, "product 6");
+            //products.Rows.Add(7, "product 7");
+            var _details = new AdminDetails();
+            var ipdList = _details.GetIPDList();
+            var products = new System.Data.DataTable();
+            products = ListtoDataTable.ToDataTable(ipdList);
+            var grid = new GridView();
+            grid.DataSource = products;
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("IPDList");
         }
         public ActionResult IpdDashboard()
         {
@@ -405,12 +446,12 @@ namespace HIMS_Web.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ValidateInput(false)]
-        public FileResult ExportIPDList(string GridHtml)
-        {
-            return File(Encoding.ASCII.GetBytes(GridHtml), "application/vnd.ms-excel", "IPDList.xls");
-        }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public FileResult ExportIPDList(string GridHtml)
+        //{
+        //    return File(Encoding.ASCII.GetBytes(GridHtml), "application/vnd.ms-excel", "IPDList.xls");
+        //}
         [HttpPost]
         //HttpPostedFileBase reportfile,
         public ActionResult SetBillingReport(int PatientId, string BillNo, string BillType, DateTime BillDate, string ReportUrl, decimal BillAmount, string BillID)

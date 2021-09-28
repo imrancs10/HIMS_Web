@@ -230,6 +230,7 @@
     <Compile Include="Infrastructure\Utility\CustomExceptionFilter.cs" />
     <Compile Include="Infrastructure\Utility\EmailHelper.cs" />
     <Compile Include="Infrastructure\Utility\KnownFolders.cs" />
+    <Compile Include="Infrastructure\Utility\ListtoDataTable.cs" />
     <Compile Include="Infrastructure\Utility\Serializer.cs" />
     <Compile Include="Infrastructure\Utility\VerificationCodeGeneration.cs" />
     <Compile Include="Models\Common\CommonModel.cs" />
