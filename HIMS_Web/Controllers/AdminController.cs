@@ -144,6 +144,7 @@ namespace HIMS_Web.Controllers
                             IpdNo = ipd.IpdNo,
                             PatientName = ipd.PatientName,
                             IPDStatus = ipd.IPDStatus,
+                            IPDStatusDate = ipd.IPDStatusDate,
                             FatherOrHusbandName = ipd.FatherOrHusbandName,
                             Gender = ipd.Gender,
                             MobileNumber = ipd.MobileNumber,
