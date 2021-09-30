@@ -565,5 +565,12 @@ namespace HIMS_Web.Controllers
             AdminDetails _details = new AdminDetails();
             return Json(_details.DeletePatient(patientId), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetPatientDetailByPatientId(int patientId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var patientInfo = _details.GetPatientDetailByPatientId(patientId);
+            return Json(patientInfo, JsonRequestBehavior.AllowGet);
+        }
     }
 }

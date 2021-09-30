@@ -474,13 +474,50 @@ namespace HIMS_Web.BAL.Masters
                 int _effectRow = 0;
                 if (report.Id > 0)
                 {
-                    var pages = _db.IpdPatientLabReports.Where(x => x.Id == report.Id).FirstOrDefault();
+                    var pages = _db.IpdPatientLabReports.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
                     if (pages != null)
                     {
-                        //pages.AreaName = model.AreaName;
-                        //pages.CityId = model.CityId;
-                        //_db.Entry(pages).State = EntityState.Modified;
-                        //_effectRow = _db.SaveChanges();
+                        pages.ELISAIGM_Status = report.ELISAIGM_Status;
+                        pages.ELISANS1_Status = report.ELISANS1_Status;
+                        pages.ELISALaptospira_Status = report.ELISALaptospira_Status;
+                        pages.ELISAScrubTyphus_Status = report.ELISAScrubTyphus_Status;
+                        pages.RapidKitNS1_Status = report.RapidKitNS1_Status;
+                        pages.RapidKitIGM_Status = report.RapidKitIGM_Status;
+                        pages.LFT_Details = report.LFT_Details;
+                        pages.KFT_Details = report.KFT_Details;
+                        pages.RandomDonerPlatelet_Count = report.RandomDonerPlatelet_Count;
+                        pages.SingleDonorPlatelet_Count = report.SingleDonorPlatelet_Count;
+                        pages.WholeBloodCell_Count = report.WholeBloodCell_Count;
+                        pages.PackedRBC_Count = report.PackedRBC_Count;
+                        pages.MalariaParasite_Status = report.MalariaParasite_Status;
+                        pages.PlateletCount = report.PlateletCount;
+                        pages.HbCount = report.HbCount;
+
+                        if (report.ELISAIGM_TestDate != null)
+                            pages.ELISAIGM_TestDate = Convert.ToDateTime(report.ELISAIGM_TestDate);
+                        if (report.ELISANS1_TestDate != null)
+                            pages.ELISANS1_TestDate = Convert.ToDateTime(report.ELISANS1_TestDate);
+                        if (report.ELISALaptospira_TestDate != null)
+                            pages.ELISALaptospira_TestDate = Convert.ToDateTime(report.ELISALaptospira_TestDate);
+                        if (report.ELISAScrubTyphus_TestDate != null)
+                            pages.ELISAScrubTyphus_TestDate = Convert.ToDateTime(report.ELISAScrubTyphus_TestDate);
+                        if (report.RapidKitNS1_TestDate != null)
+                            pages.RapidKitNS1_TestDate = Convert.ToDateTime(report.RapidKitNS1_TestDate);
+                        if (report.RapidKitIGM_TestDate != null)
+                            pages.RapidKitIGM_TestDate = Convert.ToDateTime(report.RapidKitIGM_TestDate);
+                        if (report.RandomDonerPlatelet_TestDate != null)
+                            pages.RandomDonerPlatelet_TestDate = Convert.ToDateTime(report.RandomDonerPlatelet_TestDate);
+                        if (report.SingleDonorPlatelet_TestDate != null)
+                            pages.SingleDonorPlatelet_TestDate = Convert.ToDateTime(report.SingleDonorPlatelet_TestDate);
+                        if (report.WholeBloodCell_TestDate != null)
+                            pages.WholeBloodCell_TestDate = Convert.ToDateTime(report.WholeBloodCell_TestDate);
+                        if (report.PackedRBC_TestDate != null)
+                            pages.PackedRBC_TestDate = Convert.ToDateTime(report.PackedRBC_TestDate);
+                        if (report.MalariaParasite_TestDate != null)
+                            pages.MalariaParasite_TestDate = Convert.ToDateTime(report.MalariaParasite_TestDate);
+
+                        _db.Entry(pages).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
                     }
                 }
                 else
@@ -510,15 +547,15 @@ namespace HIMS_Web.BAL.Masters
             {
                 _db = new HIMSDBEntities();
                 int _effectRow = 0;
-                if (report.Id > 0)
+                if (report.PatientId > 0)
                 {
                     var pages = _db.IpdRadioDiagnosisReports.Where(x => x.PatientId == report.PatientId).FirstOrDefault();
                     if (pages != null)
                     {
-                        //pages.AreaName = model.AreaName;
-                        //pages.CityId = model.CityId;
-                        //_db.Entry(pages).State = EntityState.Modified;
-                        //_effectRow = _db.SaveChanges();
+                        pages.USG_Details = report.USG_Details;
+                        pages.Xray_Details = report.Xray_Details;
+                        _db.Entry(pages).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
                     }
                 }
                 else
@@ -577,6 +614,8 @@ namespace HIMS_Web.BAL.Masters
                     if (ipdPatientInfo != null)
                     {
                         ipdPatientInfo.IPDStatus = pages.IPDStatus;
+                        if (pages.IPDStatus == "Admit")
+                            ipdPatientInfo.AdmittedDateTime = pages.AdmittedDateTime;
                         _db.Entry(ipdPatientInfo).State = EntityState.Modified;
                     }
 
@@ -675,6 +714,91 @@ namespace HIMS_Web.BAL.Masters
                     output.Other = item.Count;
             }
             return output != null ? output : new DashboardDataModel();
+        }
+
+        public IPDPatientDetailModel GetPatientDetailByPatientId(int? patientId)
+        {
+            _db = new HIMSDBEntities();
+            var labData = (from lab in _db.IpdPatientLabReports
+                           where lab.PatientId == patientId
+                           select new IpdPatientLabReportModel
+                           {
+                               CreatedBy = lab.CreatedBy,
+                               CreatedDate = lab.CreatedDate,
+                               ELISAIGM_Status = lab.ELISAIGM_Status,
+                               ELISAIGM_TestDate = lab.ELISAIGM_TestDate,
+                               ELISALaptospira_Status = lab.ELISALaptospira_Status,
+                               ELISALaptospira_TestDate = lab.ELISALaptospira_TestDate,
+                               ELISANS1_Status = lab.ELISANS1_Status,
+                               ELISANS1_TestDate = lab.ELISANS1_TestDate,
+                               ELISAScrubTyphus_Status = lab.ELISAScrubTyphus_Status,
+                               ELISAScrubTyphus_TestDate = lab.ELISAScrubTyphus_TestDate,
+                               HbCount = lab.HbCount,
+                               Id = lab.Id,
+                               KFT_Details = lab.KFT_Details,
+                               LFT_Details = lab.LFT_Details,
+                               MalariaParasite_Status = lab.MalariaParasite_Status,
+                               MalariaParasite_TestDate = lab.MalariaParasite_TestDate,
+                               PackedRBC_Count = lab.PackedRBC_Count,
+                               PackedRBC_TestDate = lab.PackedRBC_TestDate,
+                               PatientId = lab.PatientId,
+                               PlateletCount = lab.PlateletCount,
+                               RandomDonerPlatelet_Count = lab.RandomDonerPlatelet_Count,
+                               RandomDonerPlatelet_TestDate = lab.RandomDonerPlatelet_TestDate,
+                               RapidKitIGM_Status = lab.RapidKitIGM_Status,
+                               RapidKitIGM_TestDate = lab.RapidKitIGM_TestDate,
+                               RapidKitNS1_Status = lab.RapidKitNS1_Status,
+                               RapidKitNS1_TestDate = lab.RapidKitNS1_TestDate,
+                               SingleDonorPlatelet_Count = lab.SingleDonorPlatelet_Count,
+                               SingleDonorPlatelet_TestDate = lab.SingleDonorPlatelet_TestDate,
+                               WholeBloodCell_Count = lab.WholeBloodCell_Count,
+                               WholeBloodCell_TestDate = lab.WholeBloodCell_TestDate
+                           }).FirstOrDefault();
+            var diagnosisData = (from lab in _db.IpdRadioDiagnosisReports
+                                 where lab.PatientId == patientId
+                                 select new IpdRadioDiagnosisReportModel
+                                 {
+                                     CreatedBy = lab.CreatedBy,
+                                     CreatedDate = lab.CreatedDate,
+                                     Id = lab.Id,
+                                     PatientId = lab.PatientId,
+                                     USG_Details = lab.USG_Details,
+                                     Xray_Details = lab.Xray_Details
+                                 }).FirstOrDefault();
+            var statusData = (from lab in _db.IpdPatientStatus
+                              where lab.PatientId == patientId
+                              select new IpdPatientStatusModel
+                              {
+                                  AbscondCaseSummary = lab.AbscondCaseSummary,
+                                  PatientId = lab.PatientId,
+                                  Id = lab.Id,
+                                  CreatedDate = lab.CreatedDate,
+                                  CreatedBy = lab.CreatedBy,
+                                  AbscondDateTime = lab.AbscondDateTime,
+                                  AbscondReasons = lab.AbscondReasons,
+                                  AdmittedDateTime = lab.AdmittedDateTime,
+                                  DeathCaseSummary = lab.DeathCaseSummary,
+                                  DeathDateTime = lab.DeathDateTime,
+                                  DeathReasons = lab.DeathReasons,
+                                  DischargeDateTime = lab.DischargeDateTime,
+                                  DOPRCaseSummary = lab.DOPRCaseSummary,
+                                  DOPRDateTime = lab.DOPRDateTime,
+                                  DOPRReasons = lab.DOPRReasons,
+                                  IPDStatus = lab.IPDStatus,
+                                  LAMACaseSummary = lab.LAMACaseSummary,
+                                  LAMADateTime = lab.LAMADateTime,
+                                  LAMAReasons = lab.LAMAReasons,
+                                  OtherDateTime = lab.OtherDateTime,
+                                  OtherReasons = lab.OtherReasons,
+                                  ReferCaseSummary = lab.ReferCaseSummary,
+                                  ReferDateTime = lab.ReferDateTime,
+                                  ReferReasons = lab.ReferReasons
+                              }).FirstOrDefault();
+            var data = new IPDPatientDetailModel();
+            data.LabReport = labData;
+            data.DiagnosisReport = diagnosisData;
+            data.PatientStatus = statusData;
+            return data;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -52,6 +53,82 @@ namespace HIMS_Web.Models.Masters
         public int DOPR { get; set; }
         public int Death { get; set; }
         public int Other { get; set; }
+    }
+    public class IpdPatientLabReportModel
+    {
+        public int Id { get; set; }
+        public Nullable<int> PatientId { get; set; }
+        public string HbCount { get; set; }
+        public string PlateletCount { get; set; }
+        public string MalariaParasite_Status { get; set; }
+        public Nullable<System.DateTime> MalariaParasite_TestDate { get; set; }
+        public string RapidKitNS1_Status { get; set; }
+        public Nullable<System.DateTime> RapidKitNS1_TestDate { get; set; }
+        public string RapidKitIGM_Status { get; set; }
+        public Nullable<System.DateTime> RapidKitIGM_TestDate { get; set; }
+        public string ELISANS1_Status { get; set; }
+        public Nullable<System.DateTime> ELISANS1_TestDate { get; set; }
+        public string ELISAIGM_Status { get; set; }
+        public Nullable<System.DateTime> ELISAIGM_TestDate { get; set; }
+        public string ELISAScrubTyphus_Status { get; set; }
+        public Nullable<System.DateTime> ELISAScrubTyphus_TestDate { get; set; }
+        public string ELISALaptospira_Status { get; set; }
+        public Nullable<System.DateTime> ELISALaptospira_TestDate { get; set; }
+        public string LFT_Details { get; set; }
+        public string KFT_Details { get; set; }
+        public string RandomDonerPlatelet_Count { get; set; }
+        public Nullable<System.DateTime> RandomDonerPlatelet_TestDate { get; set; }
+        public string SingleDonorPlatelet_Count { get; set; }
+        public Nullable<System.DateTime> SingleDonorPlatelet_TestDate { get; set; }
+        public string WholeBloodCell_Count { get; set; }
+        public Nullable<System.DateTime> WholeBloodCell_TestDate { get; set; }
+        public string PackedRBC_Count { get; set; }
+        public Nullable<System.DateTime> PackedRBC_TestDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+    }
+    public class IpdRadioDiagnosisReportModel
+    {
+        public int Id { get; set; }
+        public Nullable<int> PatientId { get; set; }
+        public string Xray_Details { get; set; }
+        public string USG_Details { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+    }
+    public class IpdPatientStatusModel
+    {
+        public int Id { get; set; }
+        public Nullable<int> PatientId { get; set; }
+        public string IPDStatus { get; set; }
+        public Nullable<System.DateTime> AdmittedDateTime { get; set; }
+        public Nullable<System.DateTime> DischargeDateTime { get; set; }
+        public Nullable<System.DateTime> ReferDateTime { get; set; }
+        public string ReferReasons { get; set; }
+        public string ReferCaseSummary { get; set; }
+        public Nullable<System.DateTime> LAMADateTime { get; set; }
+        public string LAMAReasons { get; set; }
+        public string LAMACaseSummary { get; set; }
+        public Nullable<System.DateTime> DOPRDateTime { get; set; }
+        public string DOPRReasons { get; set; }
+        public string DOPRCaseSummary { get; set; }
+        public Nullable<System.DateTime> DeathDateTime { get; set; }
+        public string DeathReasons { get; set; }
+        public string DeathCaseSummary { get; set; }
+        public Nullable<System.DateTime> AbscondDateTime { get; set; }
+        public string AbscondReasons { get; set; }
+        public string AbscondCaseSummary { get; set; }
+        public Nullable<System.DateTime> OtherDateTime { get; set; }
+        public string OtherReasons { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+
+    }
+    public class IPDPatientDetailModel
+    {
+        public IpdPatientLabReportModel LabReport { get; set; }
+        public IpdRadioDiagnosisReportModel DiagnosisReport { get; set; }
+        public IpdPatientStatusModel PatientStatus { get; set; }
     }
     public class IpdPatientInfoModel
     {
