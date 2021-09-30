@@ -296,6 +296,7 @@
     <Content Include="css\graph.css" />
     <Content Include="css\jqcandlestick.css" />
     <Content Include="css\login.css" />
+    <Content Include="css\menu.css" />
     <Content Include="css\monthly.css" />
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\SidebarNav.min.css" />
@@ -475,6 +476,7 @@
     <Content Include="Scripts\lib\vendor.js" />
     <Content Include="Scripts\lib\wrapkit-setup.js" />
     <Content Include="Scripts\lib\wrapkit.js" />
+    <Content Include="Scripts\Menu.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
