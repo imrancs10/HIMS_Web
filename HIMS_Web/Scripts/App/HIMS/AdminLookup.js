@@ -117,37 +117,12 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "Save") {
                     utility.alert.setAlert("IPD Lab Report", "IPD Lab Report Saved");
-                    //$('#Hb').val("");
-                    //$('#Platelet').val("");
-                    //$('#Malaria').val("");
-                    //$('#malariadate').val("");
-                    //$('#RapidKitNS1Status').val("");
-                    //$('#RapidKitNS1Date').val("");
-                    //$('#RapidKitIGMStatus').val("");
-                    //$('#RapidKitIGMDate').val("");
-                    //$('#ELISANS1Status').val("");
-                    //$('#ELISANS1Date').val("");
-                    //$('#ELISAIGMStatus').val("");
-                    //$('#ELISAIGMDate').val("");
-                    //$('#ELISAScrubTyphusStatus').val("");
-                    //$('#ELISAScrubTyphusDate').val("");
-                    //$('#ELISALeptospiraStatus').val("");
-                    //$('#ELISALeptospiraDate').val("");
-                    //$('#LFT').val("");
-                    //$('#kft').val("");
-                    //$('#BTRandomDonerPlatelet').val("");
-                    //$('#BTRandomDonerPlateletDate').val("");
-                    //$('#BTSingleDonerPlatelet').val("");
-                    //$('#BTSingleDonerPlateletDate').val("");
-                    //$('#WholeBloodCell').val("");
-                    //$('#WholeBloodCellDate').val("");
-                    //$('#PackedRBC').val("");
-                    //$('#PackedRBCDate').val("");
+
                     $('#searchPatient').click();
-                    $('#LabReportTab').removeClass('ui-tabs-active ui-state-active');
-                    $('#RadioDiagnosisTab').addClass('ui-tabs-active ui-state-active');
-                    $('#tabs-2').css('display', 'none');
-                    $('#tabs-3').css('display', 'block');
+                    //$('#LabReportTab').removeClass('ui-tabs-active ui-state-active');
+                    //$('#RadioDiagnosisTab').addClass('ui-tabs-active ui-state-active');
+                    //$('#tabs-2').css('display', 'none');
+                    //$('#tabs-3').css('display', 'block');
                     //$('#divDischarge').addClass('hidden');
                     //$('#divReport').addClass('hidden');
                 }
@@ -176,13 +151,12 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "Save") {
                     utility.alert.setAlert("Diagnosis Report", "Diagnosis Report Saved");
-                    //$('#xray').val("");
-                    //$('#USG').val("");
+
                     $('#searchPatient').click();
-                    $('#RadioDiagnosisTab').removeClass('ui-tabs-active ui-state-active');
-                    $('#StatusTab').addClass('ui-tabs-active ui-state-active');
-                    $('#tabs-3').css('display', 'none');
-                    $('#tabs-4').css('display', 'block');
+                    //$('#RadioDiagnosisTab').removeClass('ui-tabs-active ui-state-active');
+                    //$('#StatusTab').addClass('ui-tabs-active ui-state-active');
+                    //$('#tabs-3').css('display', 'none');
+                    //$('#tabs-4').css('display', 'block');
                     //$('#divDischarge').addClass('hidden');
                     //$('#divReport').addClass('hidden');
                 }
@@ -213,10 +187,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "Save") {
                     utility.alert.setAlert("IPD Status", "IPD Status Updated");
-                    //$('#IPDStatus').val("");
-                    //$('#AdmittedDateTime').val("");
-                    //$('#Reason').val("");
-                    //$('#casesummary').val("");
+
                     $('#searchPatient').click();
                     //$('#divDischarge').addClass('hidden');
                     //$('#divReport').addClass('hidden');
@@ -292,6 +263,9 @@ $(document).on('click', '#selectPatient', function () {
             data: '{patientId: ' + patientId + '}',
             url: '/Admin/GetPatientDetailByPatientId',
             success: function (data) {
+                resetLabReport();
+                resetDiagnosisReport();
+                resetIpdStatus();
                 if (data.LabReport != null) {
                     $('#Hb').val(data.LabReport.HbCount);
                     $('#Platelet').val(data.LabReport.PlateletCount);
@@ -446,4 +420,42 @@ function formatDate(dateNow) {
     return now.toISOString().slice(0, 16);
 }
 
+function resetLabReport() {
+    $('#Hb').val("");
+    $('#Platelet').val("");
+    $('#Malaria').val("");
+    $('#malariadate').val("");
+    $('#RapidKitNS1Status').val("");
+    $('#RapidKitNS1Date').val("");
+    $('#RapidKitIGMStatus').val("");
+    $('#RapidKitIGMDate').val("");
+    $('#ELISANS1Status').val("");
+    $('#ELISANS1Date').val("");
+    $('#ELISAIGMStatus').val("");
+    $('#ELISAIGMDate').val("");
+    $('#ELISAScrubTyphusStatus').val("");
+    $('#ELISAScrubTyphusDate').val("");
+    $('#ELISALeptospiraStatus').val("");
+    $('#ELISALeptospiraDate').val("");
+    $('#LFT').val("");
+    $('#kft').val("");
+    $('#BTRandomDonerPlatelet').val("");
+    $('#BTRandomDonerPlateletDate').val("");
+    $('#BTSingleDonerPlatelet').val("");
+    $('#BTSingleDonerPlateletDate').val("");
+    $('#WholeBloodCell').val("");
+    $('#WholeBloodCellDate').val("");
+    $('#PackedRBC').val("");
+    $('#PackedRBCDate').val("");
 
+}
+function resetDiagnosisReport() {
+    $('#xray').val("");
+    $('#USG').val("");
+}
+function resetIpdStatus() {
+    $('#IPDStatus').val("");
+    $('#AdmittedDateTime').val("");
+    $('#Reason').val("");
+    $('#casesummary').val("");
+}

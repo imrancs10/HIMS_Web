@@ -59,7 +59,7 @@ nav {
         .menu li a {
             font-weight: 600;
             text-decoration: none;
-            padding: 20px 15px;
+            padding: 15px 10px;
             display: block;
             color: #fff;
             transition: all 0.2s ease-in-out 0s;
@@ -101,14 +101,14 @@ nav {
 
         .menu ul li {
             display: block;
-            float: none;
+            float: none;            
             background: none;
             margin: 0;
             padding: 0;
         }
 
             .menu ul li a {
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: normal;
                 display: block;
                 color: #797979;
