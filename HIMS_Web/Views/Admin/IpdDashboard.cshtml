@@ -6,7 +6,9 @@
     var dashboardData = ViewData["PageData"] as DashboardDataModel;
     var AreaData = ViewData["IPDData"] as List<IpdPatientInfoModel>;
 }
-<link href="~/css/style.css" rel="stylesheet" /><div class="main-container inner">
+<link href="~/css/style.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="~/styles/table_form.css">*@
+<div class="main-container inner">
     <!-- start: PAGE -->
     <div class="main-content">
         <div class="container">
@@ -43,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 widget">
+                        <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-ambulance dollar2 icon-rounded"></i>
                                 <div class="stats">
@@ -192,183 +194,13 @@
                     </div>
                 </div>
             </div>
-
-            @*<div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-white">
-                            <div class="panel-body">
-                                <div class="col-md-4">
-                                    <a href="~/Admin/IPDEntry">
-                                        <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
-                                            <h3 style="text-align:center">
-                                                IPD Entry Form
-                                            </h3>
-                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="~/Admin/AddArea">
-                                        <div class="panel panel-green" style="padding:15px 20px 15px 20px">
-                                            <h3 style="text-align:center">Area Master Form </h3>
-                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="~/Admin/IPDList">
-                                        <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
-                                            <h3 style="text-align:center"> IPD Patient List </h3>
-                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="~/Admin/IpdPatientStatus">
-                                        <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
-                                            <h3 style="text-align:center"> IPD Status & Lab Report </h3>
-                                            <img src="../img/blink.gif" style="width:74px;float:right;margin-top:-74px;" alt="" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-yellow" style="padding:15px 20px 15px 20px">
-
-                                        <h3 style="text-align:center"> Doctor </h3>
-
-                                        <p>
-
-
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
-
-                                        <h3 style="text-align:center"> RadioDiagnosis </h3>
-
-                                        <p>
-
-
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-green" style="padding:15px 20px 15px 20px">
-
-                                        <h3 style="text-align:center"> Patient Status </h3>
-
-                                        <p>
-
-
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-orange" style="padding:15px 20px 15px 20px">
-
-                                        <h3 style="text-align:center"> Complaint </h3>
-
-                                        <p>
-
-
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-azure" style="padding:15px 20px 15px 20px">
-
-                                        <h3 style="text-align:center"> OPD Details </h3>
-
-                                        <p>
-                                            <a id="" class="btn btn-light-yellow">View Advetisement</a>
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>*@
-
-
         </div>
-
     </div>
     <!-- end: PAGE -->
 </div>
-<style type="text/css">
-    .panel {
-        background-color: #FFFFFF;
-        -webkit-box-shadow: 0 1px 2px #c3c3c3;
-        -moz-box-shadow: 0 1px 2px #c3c3c3;
-        box-shadow: 0 1px 2px #c3c3c3;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        border-radius: 3px;
-        color: #8b91a0;
-        border: none;
-        padding: 25px;
-        position: relative;
-    }
-
-    .panel-dark, .partition-dark {
-        background-color: #f0c180;
-        position: relative;
-        background-color: #373b4a 0px;
-        color: white;
-        background-image: linear-gradient(top, #373b4a 0px, #2c2f3b 100%);
-    }
-
-    .panel-white, .partition-white {
-        background-color: white;
-        position: relative;
-        color: #8b91a0;
-    }
-
-    .panel-green, .partition-green {
-        background-color: #1fbba6;
-        position: relative;
-        background-color: #23d1b9 0px;
-        color: white;
-        background-image: linear-gradient(top, #23d1b9 0px, #1fbba6 100%);
-    }
-
-    .panel-orange, .partition-orange {
-        background-color: #f58a5c;
-        position: relative;
-        background-color: #f69b74 0px;
-        color: white;
-        background-image: linear-gradient(top, #f69b74 0px, #f58a5c 100%);
-    }
-
-    .panel-azure, .partition-azure {
-        background-color: #00bdcc;
-        position: relative;
-        background-color: #00d5e6 0px;
-        color: white;
-        background-image: linear-gradient(top, #00d5e6 0px, #00bdcc 100%);
-    }
-
-    .panel-yellow, .partition-yellow {
-        background-color: #ffb848;
-        position: relative;
-        background-color: #ffc261 0px;
-        color: white;
-        background-image: linear-gradient(top, #ffc261 0px, #ffb848 100%);
-    }
-</style>
-
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('.navbar-nav li.active').removeClass('active');
         $('[href="/Admin/Dashboard"]').parent().addClass('active')
     });
 </script>
-
-
-
-
