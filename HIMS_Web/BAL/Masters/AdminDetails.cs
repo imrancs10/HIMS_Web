@@ -800,5 +800,77 @@ namespace HIMS_Web.BAL.Masters
             data.PatientStatus = statusData;
             return data;
         }
+
+        public List<BarChartModel> GetIPDChartDetail()
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                var filterDate = DateTime.Now.AddDays(-6);
+                var _list = (from dept in _db.IpdPatientInfoes
+                             join patStatus1 in _db.IpdPatientStatus on dept.PatientId equals patStatus1.PatientId into patStatus2
+                             from patStatus in patStatus2.DefaultIfEmpty()
+                             where dept.IsActive == true
+                                    && (dept.AdmittedDateTime >= filterDate
+                                            || patStatus.DischargeDateTime >= filterDate
+                                            || patStatus.ReferDateTime >= filterDate)
+                             select new
+                             {
+                                 Address = dept.Address,
+                                 AdmittedDateTime = dept.AdmittedDateTime,
+                                 Age = dept.Age,
+                                 FatherOrHusbandName = dept.FatherOrHusbandName,
+                                 Gender = dept.Gender,
+                                 IDNumber = dept.IDNumber,
+                                 IDorAadharNumber = dept.IDorAadharNumber,
+                                 IpdNo = dept.IpdNo,
+                                 IPDStatus = dept.IPDStatus,
+                                 MobileNumber = dept.MobileNumber,
+                                 PatientId = dept.PatientId,
+                                 PatientName = dept.PatientName,
+                                 AreaId = dept.AreaId,
+                                 DepartmentId = dept.DepartmentId,
+                                 DischargeDateTime = patStatus != null ? patStatus.DischargeDateTime : null,
+                                 ReferDateTime = patStatus != null ? patStatus.ReferDateTime : null,
+                                 LAMADateTime = patStatus != null ? patStatus.LAMADateTime : null,
+                                 DOPRDateTime = patStatus != null ? patStatus.DOPRDateTime : null,
+                                 DeathDateTime = patStatus != null ? patStatus.DeathDateTime : null,
+                                 AbscondDateTime = patStatus != null ? patStatus.AbscondDateTime : null,
+                                 OtherDateTime = patStatus != null ? patStatus.OtherDateTime : null
+                             }).Distinct().ToList();
+
+                var model = new List<BarChartModel>();
+                for (int i = 6; i >= 0; i--)
+                {
+                    var reportDate = DateTime.Now.AddDays(-i);
+                    var dataList = _list.Where(x => (x.AdmittedDateTime != null && x.AdmittedDateTime.Value.Date == reportDate.Date)
+                       || (x.DischargeDateTime != null && x.DischargeDateTime.Value.Date == reportDate.Date)
+                       || (x.ReferDateTime != null && x.ReferDateTime.Value.Date == reportDate.Date)).GroupBy(x => x.IPDStatus).Select(x => new { Status = x.Key, Count = x.Count() }).ToList();
+                    var admitPatientCount = dataList.Where(x => x.Status == "Admit").FirstOrDefault() != null ? dataList.Where(x => x.Status == "Admit").FirstOrDefault().Count : 0;
+                    var admittedPatientWithDiffStatusCount = _list.Where(x => x.IPDStatus != "Admit" && x.AdmittedDateTime != null && x.AdmittedDateTime.Value.Date == reportDate.Date).Count();
+                    admitPatientCount += admittedPatientWithDiffStatusCount;
+                    model.Add(new BarChartModel()
+                    {
+                        MonthYr = reportDate.ToString("dd-MMM"),
+                        Admit = admitPatientCount,
+                        Discharge = dataList.Where(x => x.Status == "Discharge").FirstOrDefault() != null ? dataList.Where(x => x.Status == "Discharge").FirstOrDefault().Count : 0,
+                        Refer = dataList.Where(x => x.Status == "Refer").FirstOrDefault() != null ? dataList.Where(x => x.Status == "Refer").FirstOrDefault().Count : 0
+                    });
+                }
+
+                return model != null ? model : new List<BarChartModel>();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new List<BarChartModel>();
+            }
+        }
     }
 }

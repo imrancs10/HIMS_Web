@@ -265,6 +265,8 @@
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\boxstyle.css" />
+    <Content Include="Content\c3.css" />
+    <Content Include="Content\c3.min.css" />
     <Content Include="Content\files\autocomplete.css" />
     <Content Include="Content\files\DashStyle.css" />
     <Content Include="Content\files\logo ASMC.png" />
@@ -353,11 +355,13 @@
     <Content Include="img\slider2.jpg" />
     <Content Include="img\slider3.jpg" />
     <Content Include="img\triangle-down.svg" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
     <Content Include="Scripts\App\Appointment\Appoint.js" />
     <Content Include="Scripts\App\Appointment\PatientProfile.js" />
     <Content Include="Scripts\App\Global\App.js" />
     <Content Include="Scripts\App\Global\Utility.js" />
+    <Content Include="Scripts\App\HIMS\IPDDashboard.js" />
     <Content Include="Scripts\App\HIMS\PatientEntry.js" />
     <Content Include="Scripts\App\HIMS\AdminLookup.js" />
     <Content Include="Scripts\App\index.css" />
@@ -398,6 +402,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\c3.js" />
+    <Content Include="Scripts\c3.min.js" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

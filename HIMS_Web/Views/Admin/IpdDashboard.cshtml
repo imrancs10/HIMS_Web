@@ -8,6 +8,10 @@
 }
 <link href="~/css/style.css" rel="stylesheet" />
 @*<link rel="stylesheet" href="~/styles/table_form.css">*@
+<link href="~/Content/c3.css" rel="stylesheet" />
+<script src="~/Scripts/c3.js"></script>
+<script src="~/Scripts/d3.js"></script>
+<script src="~/Scripts/App/HIMS/IPDDashboard.js"></script>
 <div class="main-container inner">
     <!-- start: PAGE -->
     <div class="main-content">
@@ -79,10 +83,22 @@
                         <div class="col-md-9 content-top-2 card">
                             <div class="agileinfo-cdr">
                                 <div class="card-header">
-                                    <h3>Weekly Patient Status</h3>
+                                    <h3>
+                                        Weekly Patient Status
+                                        (
+                                        <span id="spanLastDayOfWeek">
+                                        </span> -
+                                        <span id="spanCurrentDayOfWeek">
+                                        </span>
+                                        )
+                                        <span style="margin-left: 30%; color: red;cursor:pointer;" id="spanPreviousChart"><i class="fa fa-angle-double-left"></i></span>
+                                        <span style=" margin-left: 8%; color: red; cursor: pointer;" id="spanNextChart"><i class="fa fa-angle-double-right"></i></span>
+                                    </h3>
+                                    <hr />
                                 </div>
 
-                                <div id="Linegraph" style="width: 96%; height: 220px">
+                                <div id="Linegraph" style="width: 96%; height: 320px">
+                                    <div id="Barchart"></div>
                                 </div>
 
                             </div>
@@ -198,9 +214,3 @@
     </div>
     <!-- end: PAGE -->
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.navbar-nav li.active').removeClass('active');
-        $('[href="/Admin/Dashboard"]').parent().addClass('active')
-    });
-</script>

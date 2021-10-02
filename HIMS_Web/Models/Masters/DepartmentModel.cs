@@ -124,6 +124,14 @@ namespace HIMS_Web.Models.Masters
         public Nullable<int> CreatedBy { get; set; }
 
     }
+
+    public class BarChartModel
+    {
+        public int Admit { get; set; }
+        public int Discharge { get; set; }
+        public int Refer { get; set; }
+        public string MonthYr { get; set; }
+    }
     public class IPDPatientDetailModel
     {
         public IpdPatientLabReportModel LabReport { get; set; }

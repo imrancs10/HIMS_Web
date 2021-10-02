@@ -572,5 +572,21 @@ namespace HIMS_Web.Controllers
             var patientInfo = _details.GetPatientDetailByPatientId(patientId);
             return Json(patientInfo, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult BarChart(ReportRequestModel model)
+        {
+            if (string.IsNullOrEmpty(model.reportStartDate))
+            {
+                AdminDetails _details = new AdminDetails();
+                return Json(_details.GetIPDChartDetail(), JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+    }
+
+    public class ReportRequestModel
+    {
+        public string reportStartDate { get; set; }
     }
 }
