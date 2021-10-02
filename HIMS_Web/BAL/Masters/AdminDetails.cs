@@ -801,19 +801,32 @@ namespace HIMS_Web.BAL.Masters
             return data;
         }
 
-        public List<BarChartModel> GetIPDChartDetail()
+        public List<BarChartModel> GetIPDChartDetail(string reportStartDate)
         {
             try
             {
                 _db = new HIMSDBEntities();
-                var filterDate = DateTime.Now.AddDays(-6);
+                DateTime filterStartDate;
+                DateTime filterEndDate;
+
+                if (string.IsNullOrEmpty(reportStartDate))
+                {
+                    filterStartDate = DateTime.Now.AddDays(-6);
+                    filterEndDate = DateTime.Now;
+                }
+                else
+                {
+                    filterStartDate = Convert.ToDateTime(reportStartDate);
+                    filterEndDate = (Convert.ToDateTime(reportStartDate)).AddDays(6);
+                }
+
                 var _list = (from dept in _db.IpdPatientInfoes
                              join patStatus1 in _db.IpdPatientStatus on dept.PatientId equals patStatus1.PatientId into patStatus2
                              from patStatus in patStatus2.DefaultIfEmpty()
                              where dept.IsActive == true
-                                    && (dept.AdmittedDateTime >= filterDate
-                                            || patStatus.DischargeDateTime >= filterDate
-                                            || patStatus.ReferDateTime >= filterDate)
+                                    && ((DbFunctions.TruncateTime(dept.AdmittedDateTime) >= DbFunctions.TruncateTime(filterStartDate) && DbFunctions.TruncateTime(dept.AdmittedDateTime) <= DbFunctions.TruncateTime(filterEndDate))
+                                    || (DbFunctions.TruncateTime(patStatus.DischargeDateTime) >= DbFunctions.TruncateTime(filterStartDate) && DbFunctions.TruncateTime(patStatus.DischargeDateTime) <= DbFunctions.TruncateTime(filterEndDate))
+                                    || (DbFunctions.TruncateTime(patStatus.ReferDateTime) >= DbFunctions.TruncateTime(filterStartDate) && DbFunctions.TruncateTime(patStatus.ReferDateTime) <= DbFunctions.TruncateTime(filterEndDate)))
                              select new
                              {
                                  Address = dept.Address,
@@ -842,7 +855,7 @@ namespace HIMS_Web.BAL.Masters
                 var model = new List<BarChartModel>();
                 for (int i = 6; i >= 0; i--)
                 {
-                    var reportDate = DateTime.Now.AddDays(-i);
+                    var reportDate = filterEndDate.AddDays(-i);
                     var dataList = _list.Where(x => (x.AdmittedDateTime != null && x.AdmittedDateTime.Value.Date == reportDate.Date)
                        || (x.DischargeDateTime != null && x.DischargeDateTime.Value.Date == reportDate.Date)
                        || (x.ReferDateTime != null && x.ReferDateTime.Value.Date == reportDate.Date)).GroupBy(x => x.IPDStatus).Select(x => new { Status = x.Key, Count = x.Count() }).ToList();

@@ -576,12 +576,9 @@ namespace HIMS_Web.Controllers
         [HttpPost]
         public JsonResult BarChart(ReportRequestModel model)
         {
-            if (string.IsNullOrEmpty(model.reportStartDate))
-            {
-                AdminDetails _details = new AdminDetails();
-                return Json(_details.GetIPDChartDetail(), JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
+
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.GetIPDChartDetail(model.reportStartDate), JsonRequestBehavior.AllowGet);
         }
     }
 

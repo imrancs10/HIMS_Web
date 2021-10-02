@@ -68,14 +68,14 @@
                             </div>
                         </div>
                         @*<div class="col-md-3 widget widget1">
-                            <div class="r3_counter_box">
-                                <i class="pull-left fa fa-heartbeat user2 icon-rounded"></i>
-                                <div class="stats">
-                                    <h5><strong>@dashboardData.Abscond</strong></h5>
-                                    <span>Abscond</span>
+                                <div class="r3_counter_box">
+                                    <i class="pull-left fa fa-heartbeat user2 icon-rounded"></i>
+                                    <div class="stats">
+                                        <h5><strong>@dashboardData.Abscond</strong></h5>
+                                        <span>Abscond</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                         <div class="clearfix"> </div>
                     </div>
 
@@ -103,11 +103,11 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3 stat">
+                        <div class="col-md-3 stat" style=" width: 24% !important;">
                             <div class="content-top-1">
                                 <div class="col-md-3 widget widget1">
                                     <div class="r3_counter_box" style="width:150px;">
-                                        <i class="pull-left fa fa-user-md user1 icon-rounded"></i>
+                                        <i class="pull-left fa fa-user-md user1 icon-rounded" style="background-color: #f35501 "></i>
                                         <div class="stats">
                                             <h5><strong>@dashboardData.Abscond</strong></h5>
                                             <span>Abscond</span>
@@ -226,3 +226,8 @@
     </div>
     <!-- end: PAGE -->
 </div>
+
+<script type="text/javascript">
+    $('.homer').removeClass('homer');
+    $('#Home').addClass('homer');
+</script>

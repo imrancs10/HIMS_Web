@@ -104,6 +104,9 @@
 </form>
 
 <script type="text/javascript">
+    $('.homer').removeClass('homer');
+    $('#Master').addClass('homer');
+
     $(document).ready(function () {
         $('#btnAddArea').click(function () {
             $('[name*=AreaId]').val("");

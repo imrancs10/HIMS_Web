@@ -114,6 +114,9 @@
 </form>
 
 <script type="text/javascript">
+    $('.homer').removeClass('homer');
+    $('#Master').addClass('homer');
+
     $(document).ready(function () {
         $('#btnAddTreatment').click(function () {
             $('[name*=TreatmentId]').val("");

@@ -103,6 +103,9 @@
 </form>
 
 <script type="text/javascript">
+    $('.homer').removeClass('homer');
+    $('#Master').addClass('homer');
+
     $(document).ready(function () {
         $('#btnAddDepartment').click(function () {
             $('[name*=DepartmentId]').val("");
