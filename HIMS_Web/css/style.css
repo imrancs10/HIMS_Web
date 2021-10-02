@@ -2267,8 +2267,8 @@ h4.modal-title {
 	padding:0;
 }
 .col-md-3.widget {
-    /*width: 18.8%;*/
-    width: 24%!important;
+    width: auto;
+    /*width: 23%!important;*/
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
