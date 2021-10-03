@@ -45,7 +45,7 @@
                 </a>
                 <div class="logotitle">
                     Autonomous State Medical College, Firozabad<br>
-                   <div class="logohtitle">स्वशासी राज्य चिकित्सा महाविद्यालय, फिरोजाबाद </div>
+                    <div class="logohtitle">स्वशासी राज्य चिकित्सा महाविद्यालय, फिरोजाबाद </div>
                 </div>
             </div>
             <div class="col-sm-2 col-xs-12  hidesmall">
@@ -70,11 +70,14 @@
                         <li><a href="/Admin/AddArea">Create Area</a></li>
                         <li><a href="/Admin/AddDepartment">Create Department</a></li>
                         <li><a href="/Admin/AddTreatment">Create Treatment</a></li>
-                        <li><a href="/Admin/AddUser">Create User</a></li>
+                        @if (UserData.UserRole != "User")
+                        {
+                            <li><a href="/Admin/AddUser">Create User</a></li>
+                        }
                     </ul>
                 </li>
                 <li>
-                    <a id="IPDDetail"  href="javascript:void(0);"><i class="fa fa-tags"></i> IPD Details</a>
+                    <a id="IPDDetail" href="javascript:void(0);"><i class="fa fa-tags"></i> IPD Details</a>
                     <ul class="sub-menu">
                         <li><a href="/Admin/IPDEntry">IPD Entry Form 1</a></li>
                         <li><a href="/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>

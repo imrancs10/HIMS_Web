@@ -360,15 +360,23 @@ namespace HIMS_Web.Controllers
             ViewData["IPDData"] = _details.GetIPDList().Where(x => x.AdmittedDate.Value.Date == DateTime.Now.Date).ToList();
             return View();
         }
-        public ActionResult AdminDashboard()
-        {
-            return View();
-        }
+        //public ActionResult AdminDashboard()
+        //{
+        //    return View();
+        //}
         public ActionResult AddUser()
         {
-            AdminDetails _details = new AdminDetails();
-            ViewData["UserData"] = _details.GetGidaUsers();
-            return View();
+            if (UserData.UserRole != "User")
+            {
+                AdminDetails _details = new AdminDetails();
+                ViewData["UserData"] = _details.GetGidaUsers();
+                return View();
+            }
+            else
+            {
+                SetAlertMessage("You are not authorize to open this page", "Unauthorization");
+                return RedirectToAction("IpdDashboard");
+            }
         }
 
         [HttpPost]
