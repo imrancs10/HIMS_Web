@@ -1,7 +1,5 @@
 ﻿@using HIMS_Web.Global;
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>@ViewBag.Title - Hospital Management Information System</title>
@@ -10,6 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="files/favicon.ico" type="image/vnd.microsoft.icon" />
+    <!--New Bootstrep-->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <link href="~/Content/App/Common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link href="~/Content/jquery-ui.css" rel="stylesheet" />*@
+    @*<script src="~/Scripts/jquery-ui.js"></script>*@
+    <script src="~/Scripts/menu.js"></script>
+    @*<link href="~/Content/Menu.css" rel="stylesheet" />*@
+    <link href="~/css/Menu.css" rel="stylesheet" />
+    <script src="~/Scripts/App/Global/App.js"></script>
+    <script src="~/Scripts/App/Global/Utility.js"></script>
+
     <link rel="shortcut icon" href="files/favicon.ico" type="image/vnd.microsoft.icon" />
     <!--New Bootstrep-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,18 +40,13 @@
     <div class="container-fluid" style="background:#fff">
         <div class="row" style="padding:10px 0px;">
             <div class="col-sm-10 col-xs-12">
-
                 <a href="javascript:void(0);" title="Home" rel="home">
                     <img src="~/Content/files/logo ASMC.png" class="logo_class" alt="Home">
                 </a>
-
-
-
                 <div class="logotitle">
                     Autonomous State Medical College, Firozabad<br>
-                   <div class="logohtitle">स्वशासी राज्य चिकित्सा महाविद्यालय, फिरोजाबाद </div>
+                    <div class="logohtitle">स्वशासी राज्य चिकित्सा महाविद्यालय, फिरोजाबाद </div>
                 </div>
-
             </div>
             <div class="col-sm-2 col-xs-12  hidesmall">
                 <div style="margin-top:0.5em;margin-bottom:0.5em;margin-right:2em;" class="pull-right">
@@ -59,44 +69,44 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 @*<div class="col-sm-12 col-xs-12" style="padding: 0 30px;">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/Admin/IpdDashboard" title="Home">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li class="kopie"><a href="/Admin/AddArea">Create Area</a></li>
-                                <li class="kopie"><a href="/Admin/AddDepartment">Create Department</a></li>
-                                <li class="kopie"><a href="/Admin/AddTreatment">Create Treatment</a></li>
-                                <li class="kopie"><a href="/Admin/AddUser">Create User</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Details<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Admin/IPDEntry">IPD Entry Form 1</a></li>
-                                <li><a href="/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
-                                <li><a href="/Admin/IPDList">IPD List</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Reports<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Admin/ApplicantUser">IPD Lab Report</a></li>
-                                <li><a href="/Admin/ApplicantFormSubmitted">IPD Radio Diagnosis Report</a></li>
-                                <li><a href="/Admin/ApplicantTransactionCompleted">IPD Status Report</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="apply_btn_cl" style="background-color: transparent;">
-                            <a>
-                                <i class="fa fa-user" aria-hidden="true" style="padding-right: 6px;"></i>Welcome @UserData.Username
-                            </a>
-                        </li>
-                        <li class="apply_btn_cl" style="background: #1b5d95;"><a href="/Login/Logout" title="Logout"><i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; Logout</a></li>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/Admin/IpdDashboard" title="Home">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="kopie"><a href="/Admin/AddArea">Create Area</a></li>
+                                    <li class="kopie"><a href="/Admin/AddDepartment">Create Department</a></li>
+                                    <li class="kopie"><a href="/Admin/AddTreatment">Create Treatment</a></li>
+                                    <li class="kopie"><a href="/Admin/AddUser">Create User</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Details<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Admin/IPDEntry">IPD Entry Form 1</a></li>
+                                    <li><a href="/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
+                                    <li><a href="/Admin/IPDList">IPD List</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">IPD Reports<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Admin/ApplicantUser">IPD Lab Report</a></li>
+                                    <li><a href="/Admin/ApplicantFormSubmitted">IPD Radio Diagnosis Report</a></li>
+                                    <li><a href="/Admin/ApplicantTransactionCompleted">IPD Status Report</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="apply_btn_cl" style="background-color: transparent;">
+                                <a>
+                                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 6px;"></i>Welcome @UserData.Username
+                                </a>
+                            </li>
+                            <li class="apply_btn_cl" style="background: #1b5d95;"><a href="/Login/Logout" title="Logout"><i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; Logout</a></li>
 
-                    </ul>
-                </div>*@
+                        </ul>
+                    </div>*@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
@@ -194,6 +204,22 @@
             if (props.status === 401) {
                 window.location.href = '@Url.Action("Login", "AdminLogin")';
             }
+        });
+    </script>
+    <script>
+        $(function () {
+
+            $("#dialog").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
         });
     </script>
 </body>
