@@ -249,11 +249,12 @@ $(document).ready(function () {
 $(document).on('click', '#selectPatient', function () {
     var patientId = $(this).attr('data-Id');
     var status = $(this).attr('data-status');
-    if (status == 'Discharge' || status == 'Death' || status == 'Refer' || status == 'Abscond') {
-        $('#divDischarge').removeClass('hidden');
-        $('#divReport').addClass('hidden');
-    }
-    else if (patientId > 0) {
+    //if (status == 'Discharge' || status == 'Death' || status == 'Refer' || status == 'Abscond') {
+    //    $('#divDischarge').removeClass('hidden');
+    //    $('#divReport').addClass('hidden');
+    //}
+    //else
+    if (patientId > 0) {
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -323,11 +324,36 @@ $(document).on('click', '#selectPatient', function () {
                     if (data.LabReport.PackedRBC_TestDate != null) {
                         $('#PackedRBCDate').val(formatDate(data.LabReport.PackedRBC_TestDate));
                     }
+
+                    if (data.userRole == 'User' && status != 'Admit') {
+                        $('#saveLabReport').hide();
+                        $('#divDischarge').removeClass('hidden');
+                    }
+                    else {
+                        $('#saveLabReport').show();
+                        $('#divDischarge').addClass('hidden');
+                    }
+                }
+                else if (data.userRole == 'User' && status != 'Admit') {
+                    $('#saveLabReport').hide();
+                    $('#divDischarge').removeClass('hidden');
                 }
 
                 if (data.DiagnosisReport != null) {
                     $('#xray').val(data.DiagnosisReport.Xray_Details);
                     $('#USG').val(data.DiagnosisReport.USG_Details);
+                    if (data.userRole == 'User' && status != 'Admit') {
+                        $('#saveDiagnosisReport').hide();
+                        $('#divDischarge').removeClass('hidden');
+                    }
+                    else {
+                        $('#saveDiagnosisReport').show();
+                        $('#divDischarge').addClass('hidden');
+                    }
+                }
+                else if (data.userRole == 'User' && status != 'Admit') {
+                    $('#saveDiagnosisReport').hide();
+                    $('#divDischarge').removeClass('hidden');
                 }
 
                 if (data.PatientStatus != null) {
@@ -392,9 +418,22 @@ $(document).on('click', '#selectPatient', function () {
                         $("#Reason").parent().parent().show();
                         $("#casesummary").parent().parent().hide();
                     }
+
+                    if (data.userRole == 'User' && status != 'Admit') {
+                        $('#saveIPDStatus').hide();
+                        $('#divDischarge').removeClass('hidden');
+                    }
+                    else {
+                        $('#saveIPDStatus').show();
+                        $('#divDischarge').addClass('hidden');
+                    }
+                }
+                else if (data.userRole == 'User' && status != 'Admit') {
+                    $('#saveIPDStatus').hide();
+                    $('#divDischarge').removeClass('hidden');
                 }
 
-                $('#divDischarge').addClass('hidden');
+                /*$('#divDischarge').addClass('hidden');*/
                 $('#divReport').removeClass('hidden');
                 $('[name*=patientId]').val(patientId);
             },

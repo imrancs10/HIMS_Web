@@ -85,6 +85,19 @@ namespace HIMS_Web.Global
             }
             set { HttpContext.Current.Session["Email"] = value; }
         }
+        public static string UserRole
+        {
+            get
+            {
+                if (System.Web.HttpContext.Current.Session["UserRole"] != null)
+                {
+                    return HttpContext.Current.Session["UserRole"].ToString();
+                }
+                else
+                    return string.Empty;
+            }
+            set { HttpContext.Current.Session["UserRole"] = value; }
+        }
 
     }
 }

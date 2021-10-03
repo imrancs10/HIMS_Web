@@ -30,6 +30,7 @@ namespace HIMS_Web.BAL.Login
                 UserData.Username = _userRow.UserName;
                 UserData.Name = _userRow.Name;
                 UserData.Email = _userRow.Email;
+                UserData.UserRole = _userRow.UserRole;
                 return Enums.LoginMessage.Authenticated;
             }
             else

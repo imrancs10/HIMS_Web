@@ -813,6 +813,7 @@ namespace HIMS_Web.BAL.Masters
             data.LabReport = labData;
             data.DiagnosisReport = diagnosisData;
             data.PatientStatus = statusData;
+            data.userRole = UserData.UserRole;
             return data;
         }
 

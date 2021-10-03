@@ -152,6 +152,7 @@ namespace HIMS_Web.Models.Masters
         public IpdPatientLabReportModel LabReport { get; set; }
         public IpdRadioDiagnosisReportModel DiagnosisReport { get; set; }
         public IpdPatientStatusModel PatientStatus { get; set; }
+        public string userRole { get; set; }
     }
     public class IpdPatientInfoModel
     {
