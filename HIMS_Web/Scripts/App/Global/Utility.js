@@ -78,6 +78,19 @@ utility.alert.setAlert = function (title, msg) {
     }
 }
 
+utility.restrictFutureDate = function (id) {
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('#' + id).attr('max', maxDate + "T00:00:00");
+}
+
 utility.alert.alertType = {};
 utility.alert.alertType.warning = "Warning";
 utility.alert.alertType.error = "Error";

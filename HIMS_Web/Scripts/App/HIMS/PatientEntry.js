@@ -5,6 +5,9 @@ $(document).ready(function () {
     fillTreatment();
     //fillstate();
     //fillArea(null);
+
+    utility.restrictFutureDate('AdmittedDateTime');
+
     $("#Area").autocomplete({
         source: function (request, response) {
             $.ajax({

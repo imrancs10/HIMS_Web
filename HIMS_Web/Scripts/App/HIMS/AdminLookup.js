@@ -1,6 +1,20 @@
 ﻿/// <reference path="../Global/Utility.js" />
 'use strict';
 $(document).ready(function () {
+
+    utility.restrictFutureDate('malariadate');
+    utility.restrictFutureDate('RapidKitNS1Date');
+    utility.restrictFutureDate('RapidKitIGMDate');
+    utility.restrictFutureDate('ELISANS1Date');
+    utility.restrictFutureDate('ELISAIGMDate');
+    utility.restrictFutureDate('ELISAScrubTyphusDate');
+    utility.restrictFutureDate('ELISALeptospiraDate');
+    utility.restrictFutureDate('BTRandomDonerPlateletDate');
+    utility.restrictFutureDate('BTSingleDonerPlateletDate');
+    utility.restrictFutureDate('WholeBloodCellDate');
+    utility.restrictFutureDate('PackedRBCDate');
+    utility.restrictFutureDate('AdmittedDateTime');
+
     $('#searchPatient').click(function () {
         var searchText = $('#searchText').val();
         $.ajax({
