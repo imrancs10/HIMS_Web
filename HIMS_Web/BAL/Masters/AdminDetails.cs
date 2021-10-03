@@ -13,6 +13,21 @@ namespace HIMS_Web.BAL.Masters
     {
         HIMSDBEntities _db = null;
 
+        public bool ChangePassword(string oldPassword, string newPassword, int userId)
+        {
+            _db = new HIMSDBEntities();
+            int _effectRow = 0;
+            var _deptRow = _db.HIMSUsers.Where(x => x.Id == userId && x.Password == oldPassword).FirstOrDefault();
+            if (_deptRow != null)
+            {
+                _deptRow.Password = newPassword;
+                _db.Entry(_deptRow).State = EntityState.Modified;
+                _effectRow = _db.SaveChanges();
+                return _effectRow > 0 ? true : false;
+            }
+            else
+                return false;
+        }
         public IpdPatientInfoModel GetIPDPatientById(int? patientId)
         {
             _db = new HIMSDBEntities();
@@ -962,18 +977,18 @@ namespace HIMS_Web.BAL.Masters
             {
                 _db = new HIMSDBEntities();
                 var model = (from user in _db.HIMSUsers
-                                   where user.Id == userId
-                                   select new HIMSUserModel
-                                   {
-                                       Email = user.Email,
-                                       Id = user.Id,
-                                       IsActive = user.IsActive,
-                                       MobileNo = user.MobileNo,
-                                       Name = user.Name,
-                                       Password = user.Password,
-                                       UserName = user.UserName,
-                                       UserRole = user.UserRole,
-                                   }).FirstOrDefault();
+                             where user.Id == userId
+                             select new HIMSUserModel
+                             {
+                                 Email = user.Email,
+                                 Id = user.Id,
+                                 IsActive = user.IsActive,
+                                 MobileNo = user.MobileNo,
+                                 Name = user.Name,
+                                 Password = user.Password,
+                                 UserName = user.UserName,
+                                 UserRole = user.UserRole,
+                             }).FirstOrDefault();
                 return model;
 
             }

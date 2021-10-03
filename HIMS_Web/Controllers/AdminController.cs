@@ -26,6 +26,36 @@ namespace HIMS_Web.Controllers
     public class AdminController : CommonController
     {
         // GET: Admin
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string OldPassword, string NewPassword)
+        {
+            AdminDetails _details = new AdminDetails();
+            if (UserData.UserId != null)
+            {
+                bool result = _details.ChangePassword(OldPassword, NewPassword, UserData.UserId);
+                if (result)
+                {
+                    SetAlertMessage("Password Change Successfully", "Change Password");
+                    return RedirectToAction("IpdDashboard");
+                }
+                else
+                {
+                    SetAlertMessage("Old Password not correct", "Change Password");
+                    return RedirectToAction("ChangePassword");
+                }
+            }
+            else
+            {
+                SetAlertMessage("password not updated", "Change Password");
+                return RedirectToAction("ChangePassword");
+            }
+        }
+
         public ActionResult IPDEntry(int? patientId)
         {
             if (patientId != null && patientId > 0)
