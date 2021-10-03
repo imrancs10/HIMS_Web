@@ -338,6 +338,10 @@ $(document).on('click', '#selectPatient', function () {
                     $('#saveLabReport').hide();
                     $('#divDischarge').removeClass('hidden');
                 }
+                else {
+                    $('#saveLabReport').show();
+                    $('#divDischarge').addClass('hidden');
+                }
 
                 if (data.DiagnosisReport != null) {
                     $('#xray').val(data.DiagnosisReport.Xray_Details);
@@ -354,6 +358,10 @@ $(document).on('click', '#selectPatient', function () {
                 else if (data.userRole == 'User' && status != 'Admit') {
                     $('#saveDiagnosisReport').hide();
                     $('#divDischarge').removeClass('hidden');
+                }
+                else {
+                    $('#saveDiagnosisReport').show();
+                    $('#divDischarge').addClass('hidden');
                 }
 
                 if (data.PatientStatus != null) {
@@ -431,6 +439,10 @@ $(document).on('click', '#selectPatient', function () {
                 else if (data.userRole == 'User' && status != 'Admit') {
                     $('#saveIPDStatus').hide();
                     $('#divDischarge').removeClass('hidden');
+                }
+                else {
+                    $('#saveDiagnosisReport').show();
+                    $('#divDischarge').addClass('hidden');
                 }
 
                 /*$('#divDischarge').addClass('hidden');*/
