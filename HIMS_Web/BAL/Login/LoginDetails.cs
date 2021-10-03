@@ -20,47 +20,16 @@ namespace HIMS_Web.BAL.Login
         /// <returns>Enums</returns>
         public Enums.LoginMessage GetLogin(string UserName, string Password)
         {
-            string _passwordHash = Utility.GetHashString(Password);
             _db = new HIMSDBEntities();
 
-            var _userRow = _db.Ipd_Master_User.Where(x => x.Username.Equals(UserName) && x.PasswordHash.Equals(Password) && x.IsDeleted == false).FirstOrDefault();
+            var _userRow = _db.HIMSUsers.Where(x => x.UserName.Equals(UserName) && x.Password.Equals(Password) && x.IsActive == true).FirstOrDefault();
 
             if (_userRow != null)
             {
-                var _userLogin = _userRow.Ipd_Master_Login.FirstOrDefault(x => x.IsDeleted == false);
-
-                if (_userLogin != null)
-                {
-                    if (_userLogin.IsActive == false)
-                        return Enums.LoginMessage.UserBlocked;
-                    else if (_userLogin.IsBlocked)
-                        return Enums.LoginMessage.UserInactive;
-                    else
-                    {
-                        _userLogin.LastLogin = DateTime.Now;
-                        _db.Entry(_userLogin).State = EntityState.Modified;
-                        _db.SaveChanges();
-                    }
-                }
-                else
-                {
-                    Ipd_Master_Login _newLogin = new Ipd_Master_Login();
-                    _newLogin.CreatedAt = DateTime.Now;
-                    _newLogin.IsActive = true;
-                    _newLogin.IsBlocked = false;
-                    _newLogin.IsDeleted = false;
-                    _newLogin.IsSync = false;
-                    _newLogin.LastLogin = DateTime.Now;
-                    _newLogin.UserId = _userRow.UserId;
-                    _db.Entry(_newLogin).State = EntityState.Added;
-                    _db.SaveChanges();
-                }
-                UserData.UserId = _userRow.UserId;
-                UserData.Username = _userRow.Username;
-                UserData.FirstName = _userRow.FirstName;
-                UserData.MiddleName = _userRow.MiddleName;
-                UserData.LastName = _userRow.LastName;
-                UserData.Email = _userRow.EmailId;
+                UserData.UserId = _userRow.Id;
+                UserData.Username = _userRow.UserName;
+                UserData.Name = _userRow.Name;
+                UserData.Email = _userRow.Email;
                 return Enums.LoginMessage.Authenticated;
             }
             else

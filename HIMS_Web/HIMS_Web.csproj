@@ -364,6 +364,7 @@
     <Content Include="Scripts\App\Appointment\PatientProfile.js" />
     <Content Include="Scripts\App\Global\App.js" />
     <Content Include="Scripts\App\Global\Utility.js" />
+    <Content Include="Scripts\App\HIMS\AdminUser.js" />
     <Content Include="Scripts\App\HIMS\IPDDashboard.js" />
     <Content Include="Scripts\App\HIMS\PatientEntry.js" />
     <Content Include="Scripts\App\HIMS\AdminLookup.js" />

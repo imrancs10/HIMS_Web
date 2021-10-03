@@ -33,7 +33,7 @@ namespace HIMS_Web.Global
             }
             set { HttpContext.Current.Session["username"] = value; }
         }
-        public static string FirstName
+        public static string Name
         {
             get
             {
@@ -46,32 +46,32 @@ namespace HIMS_Web.Global
             }
             set { HttpContext.Current.Session["FirstName"] = value; }
         }
-        public static string MiddleName
-        {
-            get
-            {
-                if (System.Web.HttpContext.Current.Session["MiddleName"] != null)
-                {
-                    return HttpContext.Current.Session["MiddleName"].ToString();
-                }
-                else
-                    return string.Empty;
-            }
-            set { HttpContext.Current.Session["MiddleName"] = value; }
-        }
-        public static string LastName
-        {
-            get
-            {
-                if (System.Web.HttpContext.Current.Session["LastName"] != null)
-                {
-                    return HttpContext.Current.Session["LastName"].ToString();
-                }
-                else
-                    return string.Empty;
-            }
-            set { HttpContext.Current.Session["LastName"] = value; }
-        }
+        //public static string MiddleName
+        //{
+        //    get
+        //    {
+        //        if (System.Web.HttpContext.Current.Session["MiddleName"] != null)
+        //        {
+        //            return HttpContext.Current.Session["MiddleName"].ToString();
+        //        }
+        //        else
+        //            return string.Empty;
+        //    }
+        //    set { HttpContext.Current.Session["MiddleName"] = value; }
+        //}
+        //public static string LastName
+        //{
+        //    get
+        //    {
+        //        if (System.Web.HttpContext.Current.Session["LastName"] != null)
+        //        {
+        //            return HttpContext.Current.Session["LastName"].ToString();
+        //        }
+        //        else
+        //            return string.Empty;
+        //    }
+        //    set { HttpContext.Current.Session["LastName"] = value; }
+        //}
         public static string Email
         {
             get

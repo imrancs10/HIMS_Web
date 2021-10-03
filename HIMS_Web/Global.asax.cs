@@ -17,7 +17,7 @@ namespace HIMS_Web
         {
             if (!Request.IsLocal)
             {
-               // Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+                // Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
             }
         }
         protected void Application_Start()
@@ -54,9 +54,7 @@ namespace HIMS_Web
                     CustomPrincipal newUser = new CustomPrincipal(authTicket.Name)
                     {
                         Id = serializeModel.Id,
-                        FirstName = serializeModel.FirstName,
-                        MiddleName = serializeModel.MiddleName,
-                        LastName = serializeModel.LastName,
+                        Name = serializeModel.Name,
                         Email = serializeModel.Email,
                         Mobile = serializeModel.Mobile
                     };

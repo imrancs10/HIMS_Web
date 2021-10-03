@@ -44,14 +44,14 @@ namespace DataLayer
         public byte[] Photo { get; set; }
         public string FatherOrHusbandName { get; set; }
         public Nullable<System.DateTime> ValidUpto { get; set; }
-        public Nullable<bool> IsActive { get; set; }
         public string IDorAadharNumber { get; set; }
-        public string IDNumber { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string RenewalStatusIPD { get; set; }
         public string RegistrationStatusIPD { get; set; }
         public Nullable<int> Age { get; set; }
         public string IPDStatus { get; set; }
+        public string IDNumber { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual City City { get; set; }
         public virtual Department Department { get; set; }

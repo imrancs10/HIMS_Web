@@ -336,8 +336,45 @@ namespace HIMS_Web.Controllers
         }
         public ActionResult AddUser()
         {
+            AdminDetails _details = new AdminDetails();
+            ViewData["UserData"] = _details.GetGidaUsers();
             return View();
         }
+
+        [HttpPost]
+        public ActionResult SaveNewUser(string userId, string username, string name, string Role, string email, string mobileNumber, string active)
+        {
+            HIMSUser user = new HIMSUser();
+            user.Id = !string.IsNullOrEmpty(userId) ? Convert.ToInt32(userId) : 0;
+            user.UserName = username;
+            user.Name = name;
+            user.Email = email;
+            user.MobileNo = mobileNumber;
+            user.CreatedBy = UserData.UserId;
+            user.CreatedDate = DateTime.Now;
+            user.IsActive = active == "on" ? true : false;
+            user.Password = ConfigurationManager.AppSettings["HIMSUserPassword"].ToString();
+            user.UserRole = Role;
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveGidaUser(user);
+            if (result == Enums.CrudStatus.Saved)
+            {
+                SetAlertMessage("User created", "Save User");
+            }
+            else
+                SetAlertMessage("User creation failed", "Save User");
+            return RedirectToAction("AddUser");
+        }
+
+        [HttpPost]
+        public JsonResult GetUserDetail(int userId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var result = _details.GetUserDetail(userId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Test()
         {
             return View();

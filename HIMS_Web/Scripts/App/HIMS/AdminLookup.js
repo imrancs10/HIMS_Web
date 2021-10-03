@@ -246,8 +246,6 @@ $(document).ready(function () {
     });
 })
 
-
-
 $(document).on('click', '#selectPatient', function () {
     var patientId = $(this).attr('data-Id');
     var status = $(this).attr('data-status');

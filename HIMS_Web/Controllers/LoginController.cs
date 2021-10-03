@@ -42,10 +42,7 @@ namespace HIMS_Web.Controllers
         {
             CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
             serializeModel.Id = UserData.UserId;
-            serializeModel.FirstName = string.IsNullOrEmpty(UserData.FirstName) ? string.Empty : UserData.FirstName;
-            serializeModel.MiddleName = string.IsNullOrEmpty(UserData.MiddleName) ? string.Empty : UserData.MiddleName;
-            serializeModel.LastName = string.IsNullOrEmpty(UserData.LastName) ? string.Empty : UserData.LastName;
-            serializeModel.LastName = string.IsNullOrEmpty(UserData.Username) ? string.Empty : UserData.Username;
+            serializeModel.Name = string.IsNullOrEmpty(UserData.Name) ? string.Empty : UserData.Name;
             serializeModel.Email = string.IsNullOrEmpty(UserData.Email) ? string.Empty : UserData.Email;
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();

@@ -74,6 +74,9 @@
     <Compile Include="Department.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="HIMSUser.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="HospitalDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
@@ -87,12 +90,6 @@
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="IpdRadioDiagnosisReport.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ipd_Master_Login.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ipd_Master_User.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="PatientTreatment.cs">

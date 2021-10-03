@@ -28,9 +28,8 @@ namespace DataLayer
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<HIMSUser> HIMSUsers { get; set; }
         public virtual DbSet<HospitalDetail> HospitalDetails { get; set; }
-        public virtual DbSet<Ipd_Master_Login> Ipd_Master_Login { get; set; }
-        public virtual DbSet<Ipd_Master_User> Ipd_Master_User { get; set; }
         public virtual DbSet<IpdPatientInfo> IpdPatientInfoes { get; set; }
         public virtual DbSet<IpdPatientLabReport> IpdPatientLabReports { get; set; }
         public virtual DbSet<IpdPatientStatu> IpdPatientStatus { get; set; }

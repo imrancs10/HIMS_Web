@@ -1,12 +1,14 @@
-﻿@{
+﻿@using DataLayer;
+@using HIMS_Web.Models.Masters;
+@{
     Layout = "~/Views/Shared/_LayoutIpd.cshtml";
     ViewBag.Title = "Add User";
-    //var UserData = ViewData["UserData"] as List<UserModel>;
-    //int index = 1;
+    var UserData = ViewData["UserData"] as List<HIMSUserModel>;
+    int index = 1;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
+<script src="~/Scripts/App/HIMS/AdminUser.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
@@ -19,59 +21,61 @@
             </ul>
             <div class="col-sm-12 col-xs-12">
                 <div class="row">
-                    <div class="col-sm-6 col-xs-12">
-                        <h3 style="font-size:20px;"><strong>User Details</strong></h3>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddNewUser">Add New User</button>
-                    </div>
-                </div><hr />
-            </div>
-            <div class="col-sm-12 col-xs-12" style="padding: 0px;">
-                <div class="table-responsive" style="padding:10px 0 50px 0;">
-                    <table class="table table_css_main_cl table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">E Mail ID </th>
-                                <th class="text-center">Mobile Number</th>
-                                <th class="text-center">DOB</th>
-                                <th class="text-center">Department</th>
-                                <th class="text-center">Active/NonActive</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @*@foreach (var data in UserData)
-                        {
-                            <tr>
-                                <td scope="text-left">@index</td>
-                                <td class="text-left">@data.UserName</td>
-                                <td class="text-center">@data.Name</td>
-                                <td class="text-center">@data.Email</td>
-                                <td class="text-center">@data.MobileNo</td>
-                                <td class="text-center">@data.DOB</td>
-                                <td class="text-center">@data.Department</td>
-                                <td class="text-center">@data.Designation</td>
-                                @if (data.IsActive == true)
-                                {
-                                    <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
-                                }
-                                else
-                                {
-                                    <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
-                                }
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <div class="col-sm-12 col-xs-12" style="padding:20px 0;">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <h3 style="font-size:20px; padding-top: 10px;">User Details</h3>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <button type="button" class="btn btn-primary pull-right" value="AddNew" id="btnAddNewUser">Add New User</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12 col-xs-12" style="padding: 0px;">
+                            <div class="table-responsive" style="padding:10px 0 50px 0;">
+                                <table class="table table_css_main_cl table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-center">Username</th>
+                                            <th class="text-center">Name</th>
+                                            <th class="text-center">E Mail ID </th>
+                                            <th class="text-center">Phone umber</th>
+                                            <th class="text-center">Active/NonActive</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var data in UserData)
+                                        {
+                                            <tr>
+                                                <td scope="text-left">@index</td>
+                                                <td class="text-left">@data.UserName</td>
+                                                <td class="text-center">@data.Name</td>
+                                                <td class="text-center">@data.Email</td>
+                                                <td class="text-center">@data.MobileNo</td>
+                                                @if (data.IsActive == true)
+                                                {
+                                                    <td class="text-center" style="color:rgb(30, 148, 55);">Active</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-center" style="color:rgb(211, 35, 35);">NonActive</td>
+                                                }
 
-                                <td class="text-center">
-                                    <a href="#" onclick="editUser(@data.Id); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                            index++;
-                        }*@
-                        </tbody>
-                    </table>
+                                                <td class="text-center">
+                                                    <a href="#" onclick="editUser(@data.Id); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            index++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,37 +92,59 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="form-group col-sm-12 col-xs-12">
+                        <div class="form-group col-sm-6 col-xs-12">
                             <input type="hidden" name="userId" value="" />
-                            <label for="user" class="">Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="user name">
-                        </div>
-                        <div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class="">Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="user full name">
-                        </div>
-                        <div class="form-group col-sm-6 col-xs-12">
-                                <label for="user" class="">DOB</label>
-                                <input type="date" name="dob" class="form-control" placeholder="dd/mm/yyyy">
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="user" class="">Username</label>
                             </div>
-                        <div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class="">E Mail ID</label>
-                            <input type="Email" name="email" class="form-control" placeholder="abcd@gmail.com">
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="text" name="username" class="form-control" placeholder="user name">
+                            </div>
                         </div>
                         <div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class="">Mobile Number</label>
-                            <input type="number" name="mobileNumber" class="form-control" placeholder="0000 000 000">
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="user" class="">Name</label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="text" name="name" class="form-control" placeholder="user full name">
+                            </div>
                         </div>
                         <div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class=""> Department </label>
-                            <select id="ddlDepartment" name="Department"></select>
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="user" class="">E Mail ID</label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="Email" name="email" class="form-control" placeholder="abcd@gmail.com">
+                            </div>
                         </div>
-                        @*<div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class=""> Role </label>
-                            <select id="ddlRole" name="Role"></select>
-                        </div>*@
                         <div class="form-group col-sm-6 col-xs-12">
-                            Active<input type="checkbox" name="active" />
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="user" class="">Mobile Number</label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="number" name="mobileNumber" class="form-control" placeholder="0000 000 000">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <div class="form-group col-sm-3 col-xs-12">
+                                <label for="user" class=""> Role </label>
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <select id="ddlRole" name="Role">
+                                    <option value="">--Select--</option>
+                                    <option>Admin</option>
+                                    <option>Super Admin</option>
+                                    <option>User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <div class="form-group col-sm-3 col-xs-12">
+                                Active
+                            </div>
+                            <div class="form-group col-sm-9 col-xs-12">
+                                <input type="checkbox" name="active" />
+                            </div>
                         </div>
                     </div>
                 </div>

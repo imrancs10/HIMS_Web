@@ -885,5 +885,109 @@ namespace HIMS_Web.BAL.Masters
                 return new List<BarChartModel>();
             }
         }
+
+        public List<HIMSUserModel> GetGidaUsers()
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                return (from user in _db.HIMSUsers
+                        select new HIMSUserModel
+                        {
+                            Email = user.Email,
+                            Id = user.Id,
+                            IsActive = user.IsActive,
+                            MobileNo = user.MobileNo,
+                            Name = user.Name,
+                            Password = user.Password,
+                            UserName = user.UserName,
+                            UserRole = user.UserRole
+                        }).OrderByDescending(x => x.Name).ToList();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                    }
+                }
+                return new List<HIMSUserModel>();
+            }
+        }
+
+        public Enums.CrudStatus SaveGidaUser(HIMSUser user)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                int _effectRow = 0;
+                if (user.Id > 0)
+                {
+                    var gidaUser = _db.HIMSUsers.Where(x => x.Id == user.Id).FirstOrDefault();
+                    if (gidaUser != null)
+                    {
+                        gidaUser.IsActive = user.IsActive;
+                        gidaUser.Email = user.Email;
+                        gidaUser.MobileNo = user.MobileNo;
+                        gidaUser.Name = user.Name;
+                        gidaUser.UserName = user.UserName;
+                        gidaUser.UserRole = user.UserRole;
+                        _db.Entry(gidaUser).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(user).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+        public HIMSUserModel GetUserDetail(int userId)
+        {
+            try
+            {
+                _db = new HIMSDBEntities();
+                var model = (from user in _db.HIMSUsers
+                                   where user.Id == userId
+                                   select new HIMSUserModel
+                                   {
+                                       Email = user.Email,
+                                       Id = user.Id,
+                                       IsActive = user.IsActive,
+                                       MobileNo = user.MobileNo,
+                                       Name = user.Name,
+                                       Password = user.Password,
+                                       UserName = user.UserName,
+                                       UserRole = user.UserRole,
+                                   }).FirstOrDefault();
+                return model;
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+        }
     }
 }

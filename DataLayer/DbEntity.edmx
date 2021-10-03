@@ -32,6 +32,22 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="HIMSUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="500" />
+          <Property Name="UserRole" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="HospitalDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -40,40 +56,6 @@
           <Property Name="HospitalName" Type="varchar" MaxLength="500" />
           <Property Name="HospitalLogo" Type="varbinary(max)" />
           <Property Name="IsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="Ipd_Master_Login">
-          <Key>
-            <PropertyRef Name="LoginId" />
-          </Key>
-          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LastLogin" Type="datetime" />
-          <Property Name="IsBlocked" Type="bit" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="IsSync" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedAt" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Ipd_Master_User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar" MaxLength="250" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Gender" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="DoB" Type="datetime" Nullable="false" />
-          <Property Name="EmailId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MobileNumber" Type="nvarchar" MaxLength="13" Nullable="false" />
-          <Property Name="IsdCode" Type="nvarchar" MaxLength="4" Nullable="false" />
-          <Property Name="IsSync" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
@@ -100,14 +82,14 @@
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="FatherOrHusbandName" Type="varchar" MaxLength="100" />
           <Property Name="ValidUpto" Type="datetime" />
-          <Property Name="IsActive" Type="bit" />
           <Property Name="IDorAadharNumber" Type="varchar" MaxLength="50" />
-          <Property Name="IDNumber" Type="varchar" MaxLength="500" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="RenewalStatusIPD" Type="varchar" MaxLength="500" />
           <Property Name="RegistrationStatusIPD" Type="varchar" MaxLength="500" />
           <Property Name="Age" Type="int" />
           <Property Name="IPDStatus" Type="varchar" MaxLength="500" />
+          <Property Name="IDNumber" Type="varchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="IpdPatientLabReport">
           <Key>
@@ -242,18 +224,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ipd_Master_Login_Ipd_Master_User">
-          <End Role="Ipd_Master_User" Type="Self.Ipd_Master_User" Multiplicity="1" />
-          <End Role="Ipd_Master_Login" Type="Self.Ipd_Master_Login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ipd_Master_User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Ipd_Master_Login">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IpdPatientInfo_City">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="IpdPatientInfo" Type="Self.IpdPatientInfo" Multiplicity="*" />
@@ -342,9 +312,8 @@
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HIMSUser" EntityType="Self.HIMSUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalDetail" EntityType="Self.HospitalDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Ipd_Master_Login" EntityType="Self.Ipd_Master_Login" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Ipd_Master_User" EntityType="Self.Ipd_Master_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientInfo" EntityType="Self.IpdPatientInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientLabReport" EntityType="Self.IpdPatientLabReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IpdPatientStatus" EntityType="Self.IpdPatientStatus" Schema="dbo" store:Type="Tables" />
@@ -360,10 +329,6 @@
           <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
             <End Role="State" EntitySet="State" />
             <End Role="City" EntitySet="City" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ipd_Master_Login_Ipd_Master_User" Association="Self.FK_Ipd_Master_Login_Ipd_Master_User">
-            <End Role="Ipd_Master_User" EntitySet="Ipd_Master_User" />
-            <End Role="Ipd_Master_Login" EntitySet="Ipd_Master_Login" />
           </AssociationSet>
           <AssociationSet Name="FK_IpdPatientInfo_City" Association="Self.FK_IpdPatientInfo_City">
             <End Role="City" EntitySet="City" />
@@ -402,9 +367,8 @@
           <EntitySet Name="Areas" EntityType="HIMSDBModel.Area" />
           <EntitySet Name="Cities" EntityType="HIMSDBModel.City" />
           <EntitySet Name="Departments" EntityType="HIMSDBModel.Department" />
+          <EntitySet Name="HIMSUsers" EntityType="HIMSDBModel.HIMSUser" />
           <EntitySet Name="HospitalDetails" EntityType="HIMSDBModel.HospitalDetail" />
-          <EntitySet Name="Ipd_Master_Login" EntityType="HIMSDBModel.Ipd_Master_Login" />
-          <EntitySet Name="Ipd_Master_User" EntityType="HIMSDBModel.Ipd_Master_User" />
           <EntitySet Name="IpdPatientInfoes" EntityType="HIMSDBModel.IpdPatientInfo" />
           <EntitySet Name="IpdPatientLabReports" EntityType="HIMSDBModel.IpdPatientLabReport" />
           <EntitySet Name="IpdPatientStatus" EntityType="HIMSDBModel.IpdPatientStatu" />
@@ -428,10 +392,6 @@
           <AssociationSet Name="FK_IpdPatientInfo_Department" Association="HIMSDBModel.FK_IpdPatientInfo_Department">
             <End Role="Department" EntitySet="Departments" />
             <End Role="IpdPatientInfo" EntitySet="IpdPatientInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ipd_Master_Login_Ipd_Master_User" Association="HIMSDBModel.FK_Ipd_Master_Login_Ipd_Master_User">
-            <End Role="Ipd_Master_User" EntitySet="Ipd_Master_User" />
-            <End Role="Ipd_Master_Login" EntitySet="Ipd_Master_Login" />
           </AssociationSet>
           <AssociationSet Name="FK_IpdPatientInfo_State" Association="HIMSDBModel.FK_IpdPatientInfo_State">
             <End Role="State" EntitySet="States" />
@@ -486,6 +446,22 @@
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="IpdPatientInfoes" Relationship="HIMSDBModel.FK_IpdPatientInfo_Department" FromRole="Department" ToRole="IpdPatientInfo" />
         </EntityType>
+        <EntityType Name="HIMSUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="HospitalDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -494,42 +470,6 @@
           <Property Name="HospitalName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="HospitalLogo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Ipd_Master_Login">
-          <Key>
-            <PropertyRef Name="LoginId" />
-          </Key>
-          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LastLogin" Type="DateTime" Precision="3" />
-          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="IsSync" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Ipd_Master_User" Relationship="HIMSDBModel.FK_Ipd_Master_Login_Ipd_Master_User" FromRole="Ipd_Master_Login" ToRole="Ipd_Master_User" />
-        </EntityType>
-        <EntityType Name="Ipd_Master_User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="DoB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
-          <Property Name="IsdCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="IsSync" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Ipd_Master_Login" Relationship="HIMSDBModel.FK_Ipd_Master_Login_Ipd_Master_User" FromRole="Ipd_Master_User" ToRole="Ipd_Master_Login" />
         </EntityType>
         <EntityType Name="IpdPatientInfo">
           <Key>
@@ -556,14 +496,14 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FatherOrHusbandName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ValidUpto" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" />
           <Property Name="IDorAadharNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IDNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="RenewalStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="RegistrationStatusIPD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Age" Type="Int32" />
           <Property Name="IPDStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="City" Relationship="HIMSDBModel.FK_IpdPatientInfo_City" FromRole="IpdPatientInfo" ToRole="City" />
           <NavigationProperty Name="Department" Relationship="HIMSDBModel.FK_IpdPatientInfo_Department" FromRole="IpdPatientInfo" ToRole="Department" />
           <NavigationProperty Name="State" Relationship="HIMSDBModel.FK_IpdPatientInfo_State" FromRole="IpdPatientInfo" ToRole="State" />
@@ -735,18 +675,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ipd_Master_Login_Ipd_Master_User">
-          <End Type="HIMSDBModel.Ipd_Master_User" Role="Ipd_Master_User" Multiplicity="1" />
-          <End Type="HIMSDBModel.Ipd_Master_Login" Role="Ipd_Master_Login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ipd_Master_User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Ipd_Master_Login">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IpdPatientInfo_State">
           <End Type="HIMSDBModel.State" Role="State" Multiplicity="0..1" />
           <End Type="HIMSDBModel.IpdPatientInfo" Role="IpdPatientInfo" Multiplicity="*" />
@@ -843,6 +771,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HIMSUsers">
+            <EntityTypeMapping TypeName="HIMSDBModel.HIMSUser">
+              <MappingFragment StoreEntitySet="HIMSUser">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="HospitalDetails">
             <EntityTypeMapping TypeName="HIMSDBModel.HospitalDetail">
               <MappingFragment StoreEntitySet="HospitalDetail">
@@ -853,53 +798,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ipd_Master_Login">
-            <EntityTypeMapping TypeName="HIMSDBModel.Ipd_Master_Login">
-              <MappingFragment StoreEntitySet="Ipd_Master_Login">
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
-                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ipd_Master_User">
-            <EntityTypeMapping TypeName="HIMSDBModel.Ipd_Master_User">
-              <MappingFragment StoreEntitySet="Ipd_Master_User">
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
-                <ScalarProperty Name="IsdCode" ColumnName="IsdCode" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="DoB" ColumnName="DoB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IpdPatientInfoes">
             <EntityTypeMapping TypeName="HIMSDBModel.IpdPatientInfo">
               <MappingFragment StoreEntitySet="IpdPatientInfo">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="IPDStatus" ColumnName="IPDStatus" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="RegistrationStatusIPD" ColumnName="RegistrationStatusIPD" />
                 <ScalarProperty Name="RenewalStatusIPD" ColumnName="RenewalStatusIPD" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="IDorAadharNumber" ColumnName="IDorAadharNumber" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
                 <ScalarProperty Name="FatherOrHusbandName" ColumnName="FatherOrHusbandName" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
