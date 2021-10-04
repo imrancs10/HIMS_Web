@@ -6,7 +6,7 @@ p {margin: 0;}
 
 html, body{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
-    /*font-size: 100%;*/
+    font-size: 100%;
   	overflow-x: hidden;
 	background: #fff;
 }
@@ -2267,13 +2267,13 @@ h4.modal-title {
 	padding:0;
 }
 .col-md-3.widget {
-/*	width: auto;*/
-	width: 24% !important;
-	-webkit-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-ms-transition: 0.5 sall;
-	transition: 0.5s all;
+    /*	width: auto;!important;*/
+    width: 23% ;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5 sall;
+    transition: 0.5s all;
 }
 .widget:hover i.fa {
     -webkit-transform: scale(1.1);
