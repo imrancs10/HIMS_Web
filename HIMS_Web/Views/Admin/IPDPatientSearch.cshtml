@@ -8,35 +8,55 @@
 <div class="container">
     <ul class="breadcrumb">
         <li style="font-size:14px;"><a href="~/Admin/IpdDashboard">Home</a></li>
-        <li style="font-size:16px;"><a href="~/Admin/IPDEntry">IPD Entry Form 1</a></li>
-        <li style="font-size:16px;"><a href="~/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
-        <li style="font-size:16px;"><a href="~/Admin/IPDList">IPD List</a></li>
+        <li style="font-size:16px;"><a href="javascript:void(0);">Lab Report</a></li>
+        <li style="font-size:16px;"><a href="javascript:void(0);">Radio Diagnosis Report</a></li>
+        <li style="font-size:16px;"><a href="~/Admin/IPDPatientSearch">IPD Patient Search</a></li>
     </ul>
     <div class="col-sm-12 col-xs-12 text-center" style="padding-bottom: 5px;">
         <h3 style="font-size:20px;"><strong>Search IPD Patient</strong></h3>
         <hr />
     </div>
     <div class="col-sm-12 col-xs-12">
-        <div class="form-group col-sm-3 col-xs-12">
+        <div class="form-group col-sm-2 col-xs-12">
             <label>IPD No</label>
             <input type="text" class="form-control" value="" id="ipdNumber">
         </div>
-        <div class="form-group col-sm-3 col-xs-12">
+        <div class="form-group col-sm-2 col-xs-12">
             <label>Patient Name</label>
             <input type="text" class="form-control" value="" id="patientName">
         </div>
-        <div class="form-group col-sm-3 col-xs-12">
+        <div class="form-group col-sm-2 col-xs-12">
+            <label for="IPDNo" class="control-label">Select Patient Status</label>
+            <div class="">
+                <select id="IPDStatus" class="form-control" name="IPDStatus">
+                    <option value="">--Select Status--</option>
+                    <option>Admit</option>
+                    <option>Discharge</option>
+                    <option>Refer</option>
+                    <option>LAMA</option>
+                    <option>DOPR</option>
+                    <option>Death</option>
+                    <option>Abscond</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-2 col-xs-12">
             <label>Admit Start Date</label>
             <input type="date" class="form-control" value="" id="startDate">
         </div>
-        <div class="form-group col-sm-3 col-xs-12">
+        <div class="form-group col-sm-2 col-xs-12">
             <label>Admit End Date</label>
             <input type="date" class="form-control" value="" id="endDate">
         </div>
+        <div class="form-group col-sm-2 col-xs-12">
+            <label style="color:white">Search IPD Patient</label>
+            <button type="button" class="submit_plot_master" value="button" id="searchPatient">Search</button>
+        </div>
     </div>
-    <div class="form-group col-sm-1 col-xs-12">
-        <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;" id="searchPatient">Search</button>
-    </div>
+    @*<div class="form-group col-sm-12 col-xs-12">
+        <button type="button" class="submit_plot_master" value="button" id="searchPatient">Search</button>
+    </div>*@
     <div class="col-sm-12 col-xs-12">
         <div class="table-responsive" style="padding: 10px 0 10px 0; overflow-x: scroll; width: 100%; max-height: 325px; overflow-y: auto; ">
             <table class="table table_css_main_cl table-bordered" id="tableIPDSeach">
