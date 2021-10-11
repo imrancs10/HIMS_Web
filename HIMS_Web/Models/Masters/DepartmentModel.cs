@@ -205,6 +205,30 @@ namespace HIMS_Web.Models.Masters
         public string IPDStatusDate { get; set; }
     }
 
+    public class IPDSearchPatientDetail : IpdPatientInfoModel
+    {
+        public string HbCount { get; set; }
+        public string PlateletCount { get; set; }
+        public string LFT_Details { get; set; }
+        public string KFT_Details { get; set; }
+        public string RandomDonerPlatelet_Count { get; set; }
+        public string RandomDonerPlatelet_TestDate { get; set; }
+        public string WholeBloodCell_Count { get; set; }
+        public string WholeBloodCell_TestDate { get; set; }
+        public string PackedRBC_Count { get; set; }
+        public string PackedRBC_TestDate { get; set; }
+        public string Xray_Details { get; set; }
+        public string USG_Details { get; set; }
+
+        public string MalariaParasite_TestDate { get; set; }
+        public string RapidKitNS1_TestDate { get; set; }
+        public string RapidKitIGM_TestDate { get; set; }
+        public string ELISANS1_TestDate { get; set; }
+        public string ELISAIGM_TestDate { get; set; }
+        public string ELISAScrubTyphus_TestDate { get; set; }
+        public string ELISALaptospira_TestDate { get; set; }
+    }
+
     public class IpdLabReportModel
     {
         public int PatientId { get; set; }

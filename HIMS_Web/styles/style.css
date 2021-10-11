@@ -111,7 +111,7 @@ select.list-dt {
 }
 
 .table-responsive {
-    width:100%;
+    width: 100%;
 }
 
 #progressbar {
@@ -3097,6 +3097,7 @@ h4.main_cla_profile {
         float: right;
         height: 100%;
     }
+
     .banner-sec {
         background: url(../../images/id.jpg);
         background-size: 180% !important;
@@ -3107,9 +3108,11 @@ h4.main_cla_profile {
         display: flex;
         min-height: 296px !important;
     }
+
     .hidesmall {
-        display:none;
+        display: none;
     }
+
     .logo_class {
         float: left;
         padding-left: 10px;
@@ -3117,6 +3120,7 @@ h4.main_cla_profile {
         height: 63px;
         margin-top: 5px;
     }
+
     .logotitle {
         float: left;
         text-align: left;
@@ -3138,82 +3142,93 @@ ul.breadcrumb {
     background-color: #eee;
 }
 
-ul.breadcrumb li {
-    display: inline;
-    font-size: 18px;
-}
-
-    ul.breadcrumb li + li:before {
-        padding: 8px;
-        color: black;
-        content: "/\00a0";
+    ul.breadcrumb li {
+        display: inline;
+        font-size: 18px;
     }
 
-    ul.breadcrumb li a {
-        color: #0275d8;
-        text-decoration: none;
-    }
-
-        ul.breadcrumb li a:hover {
-            color: #01447e;
-            text-decoration: underline;
+        ul.breadcrumb li + li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
         }
+
+        ul.breadcrumb li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
 
 @media (min-width: 320px) and (max-width: 449px) {
     .login-sec {
-            padding: 30px 50px;
-            position: relative !important;
-            background: #f9f9f9;
-            width: 100% !important;
-            margin-top: 76px;
-            right: 0;
-            padding: 10px !important;
-            float: right;
-            height: 100%;
-        }
-        .logo_class {
-            float: left;
-            padding-left: 10px;
-            width: 82px;
-            height: 63px;
-            margin-top: 5px;
-        }
-        .logotitle {
-            float: left;
-            text-align: left;
-            margin-top: 25px;
-            margin-left: 0px;
-            color: #3e3e3e;
-            font-size: 11px;
-            font-weight: 500;
-            /* font-family: Kokila, Andalus, Microsoft Himalaya; */
-            font-family: Andalus;
-            -webkit-text-size-adjust: 100%;
-        }
-        .hidesmall {
-            display: none;
-        }
-        .text-uppercase {
-            text-transform: capitalize;
-            font-weight: 500;
-            font-size: 13px;
-            text-align: left;
-            width: 100%;
-        }
-
-        .banner-sec {
-            background: url(../../images/id.jpg);
-            background-size: 200% !important;
-            height: 100%;
-            float: left;
-            width: 100%;
-            background-position: -15px 0;
-            display: flex;
-            min-height: 296px !important;
-        }
+        padding: 30px 50px;
+        position: relative !important;
+        background: #f9f9f9;
+        width: 100% !important;
+        margin-top: 76px;
+        right: 0;
+        padding: 10px !important;
+        float: right;
+        height: 100%;
     }
+
+    .logo_class {
+        float: left;
+        padding-left: 10px;
+        width: 82px;
+        height: 63px;
+        margin-top: 5px;
+    }
+
+    .logotitle {
+        float: left;
+        text-align: left;
+        margin-top: 25px;
+        margin-left: 0px;
+        color: #3e3e3e;
+        font-size: 11px;
+        font-weight: 500;
+        /* font-family: Kokila, Andalus, Microsoft Himalaya; */
+        font-family: Andalus;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .hidesmall {
+        display: none;
+    }
+
+    .text-uppercase {
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 13px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .banner-sec {
+        background: url(../../images/id.jpg);
+        background-size: 200% !important;
+        height: 100%;
+        float: left;
+        width: 100%;
+        background-position: -15px 0;
+        display: flex;
+        min-height: 296px !important;
+    }
+}
 
 .modal-dialog {
     left: -3px !important;
     top: 60px !important;
+}
+
+#header-fixed {
+    position: fixed;
+    top: 0px;
+    display: none;
+    background-color: white;
 }

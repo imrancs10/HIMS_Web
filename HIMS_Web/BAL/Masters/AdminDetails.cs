@@ -324,7 +324,7 @@ namespace HIMS_Web.BAL.Masters
                 else if (x.IPDStatus == "Other")
                     x.IPDStatusDate = x.OtherDateTime;
             });
-            //output = output.Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
+            output = output.Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
             return output != null ? output : new List<IpdPatientInfoModel>();
         }
         public int SaveDepartment(Department model)
@@ -1004,6 +1004,173 @@ namespace HIMS_Web.BAL.Masters
                 }
                 return null;
             }
+        }
+
+        public List<IPDSearchPatientDetail> GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate)
+        {
+            var startDate = !string.IsNullOrEmpty(StartDate) ? Convert.ToDateTime(StartDate) : DateTime.Now.AddYears(-100);
+            var endDate = !string.IsNullOrEmpty(EndDate) ? Convert.ToDateTime(EndDate) : DateTime.Now.AddYears(100);
+
+            _db = new HIMSDBEntities();
+            var _list = (from dept in _db.IpdPatientInfoes
+                         join patTreat in _db.PatientTreatments on dept.PatientId equals patTreat.PatientId
+                         join treat in _db.Treatments on patTreat.PatientTreatmentId equals treat.TreatmentID
+                         join area in _db.Areas on dept.AreaId equals area.AreaId
+                         join deptarment in _db.Departments on dept.DepartmentId equals deptarment.DepartmentID
+                         join labReport1 in _db.IpdPatientLabReports on dept.PatientId equals labReport1.PatientId into labReport2
+                         from labReport in labReport2.DefaultIfEmpty()
+                         join RadioDiagnosis1 in _db.IpdRadioDiagnosisReports on dept.PatientId equals RadioDiagnosis1.PatientId into RadioDiagnosis2
+                         from RadioDiagnosis in RadioDiagnosis2.DefaultIfEmpty()
+                         join patStatus1 in _db.IpdPatientStatus on dept.PatientId equals patStatus1.PatientId into patStatus2
+                         from patStatus in patStatus2.DefaultIfEmpty()
+                         where ((IDPNumber != "" && dept.IpdNo.Contains(IDPNumber)) || IDPNumber == "")
+                         && ((PatientName != "" && dept.PatientName.Contains(PatientName)) || PatientName == "")
+                         && (DbFunctions.TruncateTime(dept.AdmittedDateTime) >= DbFunctions.TruncateTime(startDate) && DbFunctions.TruncateTime(dept.AdmittedDateTime) <= DbFunctions.TruncateTime(endDate))
+                         && dept.IsActive == true
+                         select new
+                         {
+                             Address = dept.Address,
+                             AdmittedDateTime = dept.AdmittedDateTime,
+                             Age = dept.Age,
+                             FatherOrHusbandName = dept.FatherOrHusbandName,
+                             Gender = dept.Gender,
+                             IDNumber = dept.IDNumber,
+                             IDorAadharNumber = dept.IDorAadharNumber,
+                             IpdNo = dept.IpdNo,
+                             IPDStatus = dept.IPDStatus,
+                             MobileNumber = dept.MobileNumber,
+                             PatientId = dept.PatientId,
+                             PatientName = dept.PatientName,
+                             AreaId = dept.AreaId,
+                             DepartmentId = dept.DepartmentId,
+                             TreatmentId = treat.TreatmentID,
+                             AreaName = area != null ? area.AreaName : "",
+                             DepartmentName = deptarment != null ? deptarment.DepartmentName : "",
+                             TreatmentName = treat != null ? treat.TreatmentName : "",
+                             PatientStatusUpdated = patStatus != null ? patStatus.IPDStatus : "",
+                             DischargeDateTime = patStatus != null ? patStatus.DischargeDateTime : null,
+                             ReferDateTime = patStatus != null ? patStatus.ReferDateTime : null,
+                             LAMADateTime = patStatus != null ? patStatus.LAMADateTime : null,
+                             DOPRDateTime = patStatus != null ? patStatus.DOPRDateTime : null,
+                             DeathDateTime = patStatus != null ? patStatus.DeathDateTime : null,
+                             AbscondDateTime = patStatus != null ? patStatus.AbscondDateTime : null,
+                             OtherDateTime = patStatus != null ? patStatus.OtherDateTime : null,
+
+                             MalariaStatus = labReport != null && labReport.MalariaParasite_Status != null ? labReport.MalariaParasite_Status : "",
+                             RapidKitNS1Status = labReport != null && labReport.RapidKitNS1_Status != null ? labReport.RapidKitNS1_Status : "",
+                             RapidKitIGMStatus = labReport != null && labReport.RapidKitIGM_Status != null ? labReport.RapidKitIGM_Status : "",
+                             ELISANS1Status = labReport != null && labReport.ELISANS1_Status != null ? labReport.ELISANS1_Status : "",
+                             ELISAIGMStatus = labReport != null && labReport.ELISAIGM_Status != null ? labReport.ELISAIGM_Status : "",
+                             ELISAScrubTyphusStatus = labReport != null && labReport.ELISAScrubTyphus_Status != null ? labReport.ELISAScrubTyphus_Status : "",
+                             ELISALeptospiraStatus = labReport != null && labReport.ELISALaptospira_Status != null ? labReport.ELISALaptospira_Status : "",
+
+                             HbCount = labReport != null && labReport.HbCount != null ? labReport.HbCount : "",
+                             PlateletCount = labReport != null && labReport.PlateletCount != null ? labReport.PlateletCount : "",
+                             LFT_Details = labReport != null && labReport.LFT_Details != null ? labReport.LFT_Details : "",
+                             KFT_Details = labReport != null && labReport.KFT_Details != null ? labReport.KFT_Details : "",
+                             RandomDonerPlatelet_Count = labReport != null && labReport.RandomDonerPlatelet_Count != null ? labReport.RandomDonerPlatelet_Count : "",
+                             RandomDonerPlatelet_TestDate = labReport != null && labReport.RandomDonerPlatelet_TestDate != null ? labReport.RandomDonerPlatelet_TestDate : null,
+                             WholeBloodCell_Count = labReport != null && labReport.WholeBloodCell_Count != null ? labReport.WholeBloodCell_Count : "",
+                             WholeBloodCell_TestDate = labReport != null && labReport.WholeBloodCell_TestDate != null ? labReport.WholeBloodCell_TestDate : null,
+                             PackedRBC_Count = labReport != null && labReport.PackedRBC_Count != null ? labReport.PackedRBC_Count : "",
+                             PackedRBC_TestDate = labReport != null && labReport.PackedRBC_TestDate != null ? labReport.PackedRBC_TestDate : null,
+
+                             Xray_Details = RadioDiagnosis != null && RadioDiagnosis.Xray_Details != null ? RadioDiagnosis.Xray_Details : "",
+                             USG_Details = RadioDiagnosis != null && RadioDiagnosis.USG_Details != null ? RadioDiagnosis.USG_Details : "",
+
+                             MalariaParasite_TestDate = labReport != null && labReport.MalariaParasite_TestDate != null ? labReport.MalariaParasite_TestDate : null,
+                             RapidKitNS1_TestDate = labReport != null && labReport.RapidKitNS1_TestDate != null ? labReport.RapidKitNS1_TestDate : null,
+                             RapidKitIGM_TestDate = labReport != null && labReport.RapidKitIGM_TestDate != null ? labReport.RapidKitIGM_TestDate : null,
+                             ELISANS1_TestDate = labReport != null && labReport.ELISANS1_TestDate != null ? labReport.ELISANS1_TestDate : null,
+                             ELISAIGM_TestDate = labReport != null && labReport.ELISAIGM_TestDate != null ? labReport.ELISAIGM_TestDate : null,
+                             ELISAScrubTyphus_TestDate = labReport != null && labReport.ELISAScrubTyphus_TestDate != null ? labReport.ELISAScrubTyphus_TestDate : null,
+                             ELISALaptospira_TestDate = labReport != null && labReport.ELISALaptospira_TestDate != null ? labReport.ELISALaptospira_TestDate : null,
+
+                         }).Distinct().ToList();
+
+            var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
+            var output = new List<IPDSearchPatientDetail>();
+            foreach (var item in listGrouped)
+            {
+                var treartments = _list.Where(x => x.PatientId == item.patientId).Select(x => x.TreatmentName).ToList();
+                var treatmentName = string.Join(",", treartments);
+                var patientInfo = _list.Where(x => x.PatientId == item.patientId).FirstOrDefault();
+                output.Add(new IPDSearchPatientDetail()
+                {
+                    Address = patientInfo.Address,
+                    AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    Age = patientInfo.Age,
+                    FatherOrHusbandName = patientInfo.FatherOrHusbandName,
+                    Gender = patientInfo.Gender,
+                    IDNumber = patientInfo.IDNumber,
+                    IDorAadharNumber = patientInfo.IDorAadharNumber,
+                    IpdNo = patientInfo.IpdNo,
+                    IPDStatus = patientInfo.IPDStatus,
+                    MobileNumber = patientInfo.MobileNumber,
+                    PatientId = patientInfo.PatientId,
+                    PatientName = patientInfo.PatientName,
+                    AreaId = patientInfo.AreaId,
+                    DepartmentId = patientInfo.DepartmentId,
+                    AreaName = patientInfo.AreaName,
+                    DepartmentName = patientInfo.DepartmentName,
+                    MalariaStatus = patientInfo.MalariaStatus,
+                    RapidKitNS1Status = patientInfo.RapidKitNS1Status,
+                    RapidKitIGMStatus = patientInfo.RapidKitIGMStatus,
+                    ELISANS1Status = patientInfo.ELISANS1Status,
+                    ELISAIGMStatus = patientInfo.ELISAIGMStatus,
+                    ELISAScrubTyphusStatus = patientInfo.ELISAScrubTyphusStatus,
+                    ELISALeptospiraStatus = patientInfo.ELISALeptospiraStatus,
+                    TreatmentName = treatmentName,
+                    DischargeDateTime = patientInfo.DischargeDateTime != null ? patientInfo.DischargeDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ReferDateTime = patientInfo.ReferDateTime != null ? patientInfo.ReferDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    LAMADateTime = patientInfo.LAMADateTime != null ? patientInfo.LAMADateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    DOPRDateTime = patientInfo.DOPRDateTime != null ? patientInfo.DOPRDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    DeathDateTime = patientInfo.DeathDateTime != null ? patientInfo.DeathDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    AbscondDateTime = patientInfo.AbscondDateTime != null ? patientInfo.AbscondDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    OtherDateTime = patientInfo.OtherDateTime != null ? patientInfo.OtherDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+
+                    MalariaParasite_TestDate = patientInfo.MalariaParasite_TestDate != null ? patientInfo.MalariaParasite_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    RapidKitNS1_TestDate = patientInfo.RapidKitNS1_TestDate != null ? patientInfo.RapidKitNS1_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    RapidKitIGM_TestDate = patientInfo.RapidKitIGM_TestDate != null ? patientInfo.RapidKitIGM_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ELISANS1_TestDate = patientInfo.ELISANS1_TestDate != null ? patientInfo.ELISANS1_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ELISAIGM_TestDate = patientInfo.ELISAIGM_TestDate != null ? patientInfo.ELISAIGM_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ELISAScrubTyphus_TestDate = patientInfo.ELISAScrubTyphus_TestDate != null ? patientInfo.ELISAScrubTyphus_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    ELISALaptospira_TestDate = patientInfo.ELISALaptospira_TestDate != null ? patientInfo.ELISALaptospira_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+
+                    HbCount = patientInfo.HbCount,
+                    PlateletCount = patientInfo.PlateletCount,
+                    LFT_Details = patientInfo.LFT_Details,
+                    KFT_Details = patientInfo.KFT_Details,
+                    RandomDonerPlatelet_Count = patientInfo.RandomDonerPlatelet_Count,
+                    RandomDonerPlatelet_TestDate = patientInfo.RandomDonerPlatelet_TestDate != null ? patientInfo.RandomDonerPlatelet_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    WholeBloodCell_Count = patientInfo.WholeBloodCell_Count,
+                    WholeBloodCell_TestDate = patientInfo.WholeBloodCell_TestDate != null ? patientInfo.WholeBloodCell_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    PackedRBC_Count = patientInfo.PackedRBC_Count,
+                    PackedRBC_TestDate = patientInfo.PackedRBC_TestDate != null ? patientInfo.PackedRBC_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    Xray_Details = patientInfo.Xray_Details,
+                    USG_Details = patientInfo.USG_Details,
+                });
+            }
+            output.ForEach(x =>
+            {
+                if (x.IPDStatus == "Admit")
+                    x.IPDStatusDate = x.AdmittedDateTime;
+                else if (x.IPDStatus == "Discharge")
+                    x.IPDStatusDate = x.DischargeDateTime;
+                else if (x.IPDStatus == "Refer")
+                    x.IPDStatusDate = x.ReferDateTime;
+                else if (x.IPDStatus == "LAMA")
+                    x.IPDStatusDate = x.LAMADateTime;
+                else if (x.IPDStatus == "DOPR")
+                    x.IPDStatusDate = x.DOPRDateTime;
+                else if (x.IPDStatus == "Death")
+                    x.IPDStatusDate = x.DeathDateTime;
+                else if (x.IPDStatus == "Abscond")
+                    x.IPDStatusDate = x.AbscondDateTime;
+                else if (x.IPDStatus == "Other")
+                    x.IPDStatusDate = x.OtherDateTime;
+            });
+            return output != null ? output : new List<IPDSearchPatientDetail>();
         }
     }
 }

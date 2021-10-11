@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "IPD Status & Reports";
+    Layout = "~/Views/Shared/_LayoutIpd.cshtml";
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<script src="~/Scripts/App/HIMS/searchPatient.js"></script>
+<div class="container">
+    <ul class="breadcrumb">
+        <li style="font-size:14px;"><a href="~/Admin/IpdDashboard">Home</a></li>
+        <li style="font-size:16px;"><a href="~/Admin/IPDEntry">IPD Entry Form 1</a></li>
+        <li style="font-size:16px;"><a href="~/Admin/IPDPatientStatus">IPD Entry Form 2</a></li>
+        <li style="font-size:16px;"><a href="~/Admin/IPDList">IPD List</a></li>
+    </ul>
+    <div class="col-sm-12 col-xs-12 text-center" style="padding-bottom: 5px;">
+        <h3 style="font-size:20px;"><strong>Search IPD Patient</strong></h3>
+        <hr />
+    </div>
+    <div class="col-sm-12 col-xs-12">
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>IPD No</label>
+            <input type="text" class="form-control" value="" id="ipdNumber">
+        </div>
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>Patient Name</label>
+            <input type="text" class="form-control" value="" id="patientName">
+        </div>
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>Admit Start Date</label>
+            <input type="date" class="form-control" value="" id="startDate">
+        </div>
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>Admit End Date</label>
+            <input type="date" class="form-control" value="" id="endDate">
+        </div>
+    </div>
+    <div class="form-group col-sm-1 col-xs-12">
+        <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;" id="searchPatient">Search</button>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+        <div class="table-responsive" style="padding: 10px 0 10px 0; overflow-x: scroll; width: 100%; max-height: 325px; overflow-y: auto; ">
+            <table class="table table_css_main_cl table-bordered" id="tableIPDSeach">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="text-center">IPD Number</th>
+                        <th class="text-center">Patient Name</th>
+                        <th class="text-center">Fathers/ Husband Name</th>
+                        <th class="text-center">Mobile Number</th>
+                        <th class="text-center">Age</th>
+                        <th class="text-center">Admit Date</th>
+                        <th class="text-center">Treatment</th>
+                        <th class="text-center">Department</th>
+                        <th class="text-center">Area</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Status Date</th>
+                        <th class="text-center">Malaria Parasite</th>
+                        <th class="text-center">Malaria Parasite TestDate</th>
+                        <th class="text-center">Rapid Kit NS1</th>
+                        <th class="text-center">Rapid Kit NS1 TestDate</th>
+                        <th class="text-center">Rapid Kit IgM</th>
+                        <th class="text-center">Rapid Kit IgM TestDate</th>
+                        <th class="text-center">ELISA NS1</th>
+                        <th class="text-center">ELISA NS1 TestDate</th>
+                        <th class="text-center">ELISA IgM</th>
+                        <th class="text-center">ELISA IgM  TestDate</th>
+                        <th class="text-center">ELISA Scrub Typhus</th>
+                        <th class="text-center">ELISA Scrub Typhus TestDate</th>
+                        <th class="text-center">ELISA Leptospira</th>
+                        <th class="text-center">ELISA Leptospira TestDate</th>
+                        <th class="text-center">Hb Count</th>
+                        <th class="text-center">Platelet Count</th>
+                        <th class="text-center">LFT</th>
+                        <th class="text-center">KFT</th>
+                        <th class="text-center">Random Doner Platelet Count</th>
+                        <th class="text-center">RandomDoner Platelet TestDate</th>
+                        <th class="text-center">Whole BloodCell Count</th>
+                        <th class="text-center">Whole BloodCell TestDate</th>
+                        <th class="text-center">Packed RBC Count</th>
+                        <th class="text-center">Packed RBC TestDate</th>
+                        <th class="text-center">Xray</th>
+                        <th class="text-center">USG</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyData"></tbody>
+            </table>
+        </div>
+    </div>
+    <input type="hidden" name="patientId" id="patientId" />
+</div>
+
+<script type="text/javascript">
+    $('.homer').removeClass('homer');
+    $('#IPDDetail').addClass('homer');
+</script>
+
+<style type="text/css">
+    table {
+        text-align: left;
+        position: relative;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 0.25rem;
+    }
+
+    tr.red th {
+        background: red;
+        color: white;
+    }
+
+    tr.green th {
+        background: green;
+        color: white;
+    }
+
+    tr.purple th {
+        background: purple;
+        color: white;
+    }
+
+    th {
+        background: white;
+        position: sticky;
+        top: -15px; /* Don't forget this, required for the stickiness */
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+        vertical-align: middle !important;
+    }
+</style>

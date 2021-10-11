@@ -737,6 +737,18 @@ namespace HIMS_Web.Controllers
             return Json(_details.GetIPDChartDetail(model.reportStartDate), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult IPDPatientSearch()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetIPDPatientDetail(IDPNumber, PatientName, StartDate, EndDate);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
     }
 
     public class ReportRequestModel
