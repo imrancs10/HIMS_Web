@@ -353,6 +353,60 @@ namespace HIMS_Web.Controllers
 
             return RedirectToAction("IPDList");
         }
+        public ActionResult IPDSearchExportToExcel(string IPDNo, string PatientName, string StartDate, string EndDate)
+        {
+            var _details = new AdminDetails();
+            var ipdList = _details.GetIPDPatientDetail(IPDNo,PatientName,StartDate,EndDate);
+            var data = (from ipd in ipdList
+                        select new
+                        {
+                            PatientId = "RCH-" + ipd.PatientId,
+                            IpdNo = ipd.IpdNo,
+                            PatientName = ipd.PatientName,
+                            IPDStatus = ipd.IPDStatus,
+                            IPDStatusDate = ipd.IPDStatusDate,
+                            FatherOrHusbandName = ipd.FatherOrHusbandName,
+                            Gender = ipd.Gender,
+                            MobileNumber = ipd.MobileNumber,
+                            Address = ipd.Address,
+                            AdmittedDateTime = ipd.AdmittedDateTime,
+                            Age = ipd.Age,
+                            AreaName = ipd.AreaName,
+                            DepartmentName = ipd.DepartmentName,
+                            TreatmentName = ipd.TreatmentName,
+                            IDorAadharNumber = ipd.IDorAadharNumber,
+                            IDNumber = ipd.IDNumber,
+                            MalariaStatus = ipd.MalariaStatus,
+                            RapidKitNS1Status = ipd.RapidKitNS1Status,
+                            RapidKitIGMStatus = ipd.RapidKitIGMStatus,
+                            ELISANS1Status = ipd.ELISANS1Status,
+                            ELISAIGMStatus = ipd.ELISAIGMStatus,
+                            ELISAScrubTyphusStatus = ipd.ELISAScrubTyphusStatus,
+                            ELISALeptospiraStatus = ipd.ELISALeptospiraStatus,
+                        }).ToList();
+            var products = new System.Data.DataTable();
+            products = ListtoDataTable.ToDataTable(data);
+            var grid = new GridView();
+            grid.DataSource = products;
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("IPDPatientSearch");
+        }
         public ActionResult IpdDashboard()
         {
             var _details = new AdminDetails();

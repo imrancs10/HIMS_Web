@@ -327,6 +327,7 @@ namespace HIMS_Web.BAL.Masters
             output = output.Where(x => (searchText.Contains("/") && x.AdmittedDateTime.Contains(searchText)) || !searchText.Contains("/")).ToList();
             return output != null ? output : new List<IpdPatientInfoModel>();
         }
+
         public int SaveDepartment(Department model)
         {
             _db = new HIMSDBEntities();
