@@ -183,7 +183,8 @@ namespace HIMS_Web.Models.Masters
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string RenewalStatusIPD { get; set; }
         public string RegistrationStatusIPD { get; set; }
-        public Nullable<int> Age { get; set; }
+        public Nullable<int> Age_Year { get; set; }
+        public Nullable<int> Age_Month { get; set; }
         public string IPDStatus { get; set; }
         public string AreaName { get; set; }
         public string TreatmentName { get; set; }
@@ -203,6 +204,8 @@ namespace HIMS_Web.Models.Masters
         public string AbscondDateTime { get; set; }
         public string OtherDateTime { get; set; }
         public string IPDStatusDate { get; set; }
+        public string HBCount { get; set; }
+        public string PlateletCount { get; set; }
     }
 
     public class IPDSearchPatientDetail : IpdPatientInfoModel

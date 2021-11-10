@@ -27,7 +27,8 @@ $(document).ready(function () {
                         '<td class="text-center">' + entry.PatientName + '</td>' +
                         '<td class="text-center">' + entry.FatherOrHusbandName + '</td>' +
                         '<td class="text-center">' + entry.MobileNumber + '</td>' +
-                        '<td class="text-center">' + entry.Age + '</td>' +
+                        '<td class="text-center">' + entry.Age_Year + '</td>' +
+                        '<td class="text-center">' + entry.Age_Month + '</td>' +
                         '<td class="text-center">' + entry.AdmittedDateTime + '</td>' +
                         '<td class="text-center">' + entry.TreatmentName + '</td>' +
                         '<td class="text-center">' + entry.DepartmentName + '</td>' +

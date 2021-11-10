@@ -48,7 +48,8 @@ namespace HIMS_Web.BAL.Masters
             {
                 _deptRow.Address = !string.IsNullOrEmpty(model.Address) ? model.Address : _deptRow.Address;
                 _deptRow.AdmittedDateTime = model.AdmittedDateTime != null ? model.AdmittedDateTime : _deptRow.AdmittedDateTime;
-                _deptRow.Age = model.Age != null ? model.Age : _deptRow.Age;
+                _deptRow.Age_Year = model.Age_Year != null ? model.Age_Year : _deptRow.Age_Year;
+                _deptRow.Age_Month = model.Age_Month != null ? model.Age_Month : _deptRow.Age_Month;
                 _deptRow.AreaId = model.AreaId != null ? model.AreaId : _deptRow.AreaId;
                 _deptRow.CityId = model.CityId != null ? model.CityId : _deptRow.CityId;
                 _deptRow.DepartmentId = model.DepartmentId != null ? model.DepartmentId : _deptRow.DepartmentId;
@@ -110,7 +111,8 @@ namespace HIMS_Web.BAL.Masters
                          {
                              Address = dept.Address,
                              AdmittedDateTime = dept.AdmittedDateTime,
-                             Age = dept.Age,
+                             Age_Year = dept.Age_Year,
+                             Age_Month = dept.Age_Month,
                              FatherOrHusbandName = dept.FatherOrHusbandName,
                              Gender = dept.Gender,
                              IDNumber = dept.IDNumber,
@@ -139,7 +141,9 @@ namespace HIMS_Web.BAL.Masters
                              DOPRDateTime = patStatus != null ? patStatus.DOPRDateTime : null,
                              DeathDateTime = patStatus != null ? patStatus.DeathDateTime : null,
                              AbscondDateTime = patStatus != null ? patStatus.AbscondDateTime : null,
-                             OtherDateTime = patStatus != null ? patStatus.OtherDateTime : null
+                             OtherDateTime = patStatus != null ? patStatus.OtherDateTime : null,
+                             HBCount = labReport != null ? labReport.HbCount : null,
+                             PlateletCount = labReport != null ? labReport.PlateletCount : null,
                          }).Distinct().ToList();
 
             var listGrouped = _list.GroupBy(x => x.PatientId).Select(x => new { patientId = x.Key });
@@ -155,7 +159,8 @@ namespace HIMS_Web.BAL.Masters
                     Address = patientInfo.Address,
                     AdmittedDate = patientInfo.AdmittedDateTime,
                     AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
-                    Age = patientInfo.Age,
+                    Age_Year = patientInfo.Age_Year,
+                    Age_Month = patientInfo.Age_Month,
                     FatherOrHusbandName = patientInfo.FatherOrHusbandName,
                     Gender = patientInfo.Gender,
                     IDNumber = patientInfo.IDNumber,
@@ -185,6 +190,8 @@ namespace HIMS_Web.BAL.Masters
                     DeathDateTime = patientInfo.DeathDateTime != null ? patientInfo.DeathDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
                     AbscondDateTime = patientInfo.AbscondDateTime != null ? patientInfo.AbscondDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
                     OtherDateTime = patientInfo.OtherDateTime != null ? patientInfo.OtherDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    HBCount = patientInfo.HBCount,
+                    PlateletCount = patientInfo.PlateletCount,
                 });
 
             }
@@ -230,7 +237,8 @@ namespace HIMS_Web.BAL.Masters
                          {
                              Address = dept.Address,
                              AdmittedDateTime = dept.AdmittedDateTime,
-                             Age = dept.Age,
+                             Age_Year = dept.Age_Year,
+                             Age_Month = dept.Age_Month,
                              FatherOrHusbandName = dept.FatherOrHusbandName,
                              Gender = dept.Gender,
                              IDNumber = dept.IDNumber,
@@ -274,7 +282,8 @@ namespace HIMS_Web.BAL.Masters
                 {
                     Address = patientInfo.Address,
                     AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
-                    Age = patientInfo.Age,
+                    Age_Year = patientInfo.Age_Year,
+                    Age_Month = patientInfo.Age_Month,
                     FatherOrHusbandName = patientInfo.FatherOrHusbandName,
                     Gender = patientInfo.Gender,
                     IDNumber = patientInfo.IDNumber,
@@ -691,7 +700,8 @@ namespace HIMS_Web.BAL.Masters
                          {
                              Address = dept.Address,
                              AdmittedDateTime = dept.AdmittedDateTime,
-                             Age = dept.Age,
+                             Age_Year = dept.Age_Year,
+                             Age_Month = dept.Age_Month,
                              FatherOrHusbandName = dept.FatherOrHusbandName,
                              Gender = dept.Gender,
                              IDNumber = dept.IDNumber,
@@ -848,7 +858,8 @@ namespace HIMS_Web.BAL.Masters
                              {
                                  Address = dept.Address,
                                  AdmittedDateTime = dept.AdmittedDateTime,
-                                 Age = dept.Age,
+                                 Age_Year = dept.Age_Year,
+                                 Age_Month = dept.Age_Month,
                                  FatherOrHusbandName = dept.FatherOrHusbandName,
                                  Gender = dept.Gender,
                                  IDNumber = dept.IDNumber,
@@ -1032,7 +1043,8 @@ namespace HIMS_Web.BAL.Masters
                          {
                              Address = dept.Address,
                              AdmittedDateTime = dept.AdmittedDateTime,
-                             Age = dept.Age,
+                             Age_Year = dept.Age_Year,
+                             Age_Month = dept.Age_Month,
                              FatherOrHusbandName = dept.FatherOrHusbandName,
                              Gender = dept.Gender,
                              IDNumber = dept.IDNumber,
@@ -1100,7 +1112,8 @@ namespace HIMS_Web.BAL.Masters
                 {
                     Address = patientInfo.Address,
                     AdmittedDateTime = patientInfo.AdmittedDateTime != null ? patientInfo.AdmittedDateTime.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
-                    Age = patientInfo.Age,
+                    Age_Year = patientInfo.Age_Year,
+                    Age_Month = patientInfo.Age_Month,
                     FatherOrHusbandName = patientInfo.FatherOrHusbandName,
                     Gender = patientInfo.Gender,
                     IDNumber = patientInfo.IDNumber,

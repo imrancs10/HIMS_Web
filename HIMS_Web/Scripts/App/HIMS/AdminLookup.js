@@ -27,6 +27,9 @@ $(document).ready(function () {
                 var rowHtml = "";
                 $('#tbodyData tr').remove();
                 $.each(data, function (key, entry) {
+                    var age = entry.Age_Year + " years";
+                    if (parseInt(entry.Age_Month) > 0)
+                        age += "," + entry.Age_Month + " months"
                     if ($('#patientId').val() != "" && entry.PatientId == $('#patientId').val()) {
                         rowHtml += '<tr>' +
                             '<td class="text-center"><input type="radio" checked="checked" id="selectPatient" name="selectPatient" data-status="' + entry.IPDStatus + '" data-Id="' + entry.PatientId + '" name="" /></td>' +
@@ -34,7 +37,7 @@ $(document).ready(function () {
                             '<td class="text-center">' + entry.PatientName + '</td>' +
                             '<td class="text-center">' + entry.FatherOrHusbandName + '</td>' +
                             '<td class="text-center">' + entry.MobileNumber + '</td>' +
-                            '<td class="text-center">' + entry.Age + '</td>' +
+                            '<td class="text-center">' + age + '</td>' +
                             '<td class="text-center">' + entry.AdmittedDateTime + '</td>' +
                             '<td class="text-center">' + entry.TreatmentName + '</td>' +
                             '<td class="text-center">' + entry.DepartmentName + '</td>' +
@@ -57,7 +60,7 @@ $(document).ready(function () {
                             '<td class="text-center">' + entry.PatientName + '</td>' +
                             '<td class="text-center">' + entry.FatherOrHusbandName + '</td>' +
                             '<td class="text-center">' + entry.MobileNumber + '</td>' +
-                            '<td class="text-center">' + entry.Age + '</td>' +
+                            '<td class="text-center">' + age + '</td>' +
                             '<td class="text-center">' + entry.AdmittedDateTime + '</td>' +
                             '<td class="text-center">' + entry.TreatmentName + '</td>' +
                             '<td class="text-center">' + entry.DepartmentName + '</td>' +

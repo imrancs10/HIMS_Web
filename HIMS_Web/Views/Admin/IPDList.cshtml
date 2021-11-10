@@ -49,7 +49,8 @@
                    columns.Add(c => c.PatientName).Titled("Patient Name").Filterable(true);
                    columns.Add(c => c.FatherOrHusbandName).Titled("Father/Husband Name").Filterable(false);
                    columns.Add(c => c.MobileNumber).Titled("Mobile Number").Filterable(true);
-                   columns.Add(c => c.Age).Titled("Age").Filterable(true);
+                   columns.Add(c => c.Age_Year).Titled("Age Year").Filterable(true);
+                   columns.Add(c => c.Age_Month).Titled("Age Month").Filterable(true);
                    columns.Add(c => c.Gender).Titled("Gender").Filterable(true);
                    columns.Add(c => c.IDorAadharNumber).Titled("ID Proof Type").Filterable(true);
                    columns.Add(c => c.IDNumber).Titled("ID Proof Number").Filterable(false);
@@ -67,6 +68,8 @@
                    columns.Add(c => c.ELISAIGMStatus).Titled("ELISA IgM").Filterable(true);
                    columns.Add(c => c.ELISAScrubTyphusStatus).Titled("ELISA Scrub Typhus").Filterable(true);
                    columns.Add(c => c.ELISALeptospiraStatus).Titled("ELISA Leptospira").Filterable(true);
+                   columns.Add(c => c.HBCount).Titled("HB Count").Filterable(true);
+                   columns.Add(c => c.PlateletCount).Titled("Platelet Count").Filterable(true);
                }).WithPaging(10).Sortable(true)
                 </div>
                 @*<div class="table-responsive" id="divExport" style=" padding: 10px 0 10px 0; overflow-x: scroll; width: 1200px; height: 440px;">

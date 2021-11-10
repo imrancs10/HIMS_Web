@@ -43,7 +43,8 @@ function onSaveIPDEntry() {
     if ($('[name*=IPDNo]').val() == ""
         || $('[name*=AdmittedDateTime]').val() == ""
         || $('[name*=PetientName]').val() == ""
-        || $('[name*=Age]').val() == ""
+        || $('[name*=Age_Year]').val() == ""
+        || $('[name*=Age_Month]').val() == ""
         || $('[name*=Gender]').val() == ""
         || $('[name*=FathersHusbandName]').val() == ""
         || $('[name*=Treatment]').val() == ""
@@ -230,7 +231,8 @@ function GetPatientDetail(patientId) {
                 }
                 $('#PetientName').val(data.PatientName);
                 $('#FathersHusbandName').val(data.FatherOrHusbandName);
-                $('#Age').val(data.Age);
+                $('#Age_Year').val(data.Age_Year);
+                $('#Age_Month').val(data.Age_Month);
                 $('#Gender').val(data.Gender);
                 $('#Address').val(data.Address);
                 $('#hfAreaId').val(data.AreaId);
@@ -306,7 +308,15 @@ function getUrlParameter(sParam) {
 //    }
 //});
 
-$('#Age').on('keypress', function (event) {
+$('#Age_Year').on('keypress', function (event) {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+});
+$('#Age_Year').on('keypress', function (event) {
     var regex = new RegExp("^[0-9]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {

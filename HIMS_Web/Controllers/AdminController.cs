@@ -79,7 +79,7 @@ namespace HIMS_Web.Controllers
         public ActionResult SaveIPDEntry(int? PatientId, string IPDNo, string AdmittedDateTime,
             string PetientName, string Mobile, string Gender, string FathersHusbandName,
             List<int> Treatment, string Address, string AreaId, string OtherAreaName,
-            string department, string IDorAadharNumber, string Age, string OtherTreatment, string IDNumber)
+            string department, string IDorAadharNumber, string Age_Year, string Age_Month, string OtherTreatment, string IDNumber)
         //string Title,string Email, string DOB, string MariatalStatus, string state, string city,string religion, string pincode,
         {
             AdminDetails _details = new AdminDetails();
@@ -137,7 +137,8 @@ namespace HIMS_Web.Controllers
                     //StateId = Convert.ToInt32(state),
                     //Title = Title,
                     //TreatmentId = treatmentId,
-                    Age = Convert.ToInt32(Age),
+                    Age_Year = Convert.ToInt32(Age_Year),
+                    Age_Month = Convert.ToInt32(Age_Month),
                     IPDStatus = "Admit",
                     IDNumber = IDNumber,
                     IsActive = true,
@@ -183,7 +184,7 @@ namespace HIMS_Web.Controllers
                             MobileNumber = ipd.MobileNumber,
                             Address = ipd.Address,
                             AdmittedDateTime = ipd.AdmittedDateTime,
-                            Age = ipd.Age,
+                            Age = ipd.Age_Year + " years" + "," + ipd.Age_Month + " months",
                             AreaName = ipd.AreaName,
                             DepartmentName = ipd.DepartmentName,
                             TreatmentName = ipd.TreatmentName,
@@ -196,6 +197,8 @@ namespace HIMS_Web.Controllers
                             ELISAIGMStatus = ipd.ELISAIGMStatus,
                             ELISAScrubTyphusStatus = ipd.ELISAScrubTyphusStatus,
                             ELISALeptospiraStatus = ipd.ELISALeptospiraStatus,
+                            HBCount = ipd.HBCount,
+                            PlateletCount = ipd.PlateletCount
                         }).ToList();
             var products = new System.Data.DataTable();
             products = ListtoDataTable.ToDataTable(data);
@@ -237,7 +240,7 @@ namespace HIMS_Web.Controllers
                             MobileNumber = ipd.MobileNumber,
                             Address = ipd.Address,
                             AdmittedDateTime = ipd.AdmittedDateTime,
-                            Age = ipd.Age,
+                            Age = ipd.Age_Year + " years" + "," + ipd.Age_Month + " months",
                             AreaName = ipd.AreaName,
                             DepartmentName = ipd.DepartmentName,
                             TreatmentName = ipd.TreatmentName,
@@ -356,7 +359,7 @@ namespace HIMS_Web.Controllers
         public ActionResult IPDSearchExportToExcel(string IPDNo, string PatientName, string StartDate, string EndDate)
         {
             var _details = new AdminDetails();
-            var ipdList = _details.GetIPDPatientDetail(IPDNo,PatientName,StartDate,EndDate);
+            var ipdList = _details.GetIPDPatientDetail(IPDNo, PatientName, StartDate, EndDate);
             var data = (from ipd in ipdList
                         select new
                         {
@@ -370,7 +373,7 @@ namespace HIMS_Web.Controllers
                             MobileNumber = ipd.MobileNumber,
                             Address = ipd.Address,
                             AdmittedDateTime = ipd.AdmittedDateTime,
-                            Age = ipd.Age,
+                            Age = ipd.Age_Year + " years" + "," + ipd.Age_Month + " months",
                             AreaName = ipd.AreaName,
                             DepartmentName = ipd.DepartmentName,
                             TreatmentName = ipd.TreatmentName,
