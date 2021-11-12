@@ -10,11 +10,12 @@ $(document).ready(function () {
         var PatientName = $('#patientName').val();
         var StartDate = $('#startDate').val();
         var EndDate = $('#endDate').val();
+        var IPDStatus = $('#IPDStatus').val();
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
-            data: '{IDPNumber: "' + IDPNumber + '",PatientName: "' + PatientName + '",StartDate: "' + StartDate + '",EndDate: "' + EndDate + '" }',
+            data: '{IDPNumber: "' + IDPNumber + '",PatientName: "' + PatientName + '",StartDate: "' + StartDate + '",EndDate: "' + EndDate + '" ,IPDStatus: "' + IPDStatus + '" }',
             url: '/Admin/GetIPDPatientDetail',
             success: function (data) {
                 var rowHtml = "";
@@ -71,6 +72,29 @@ $(document).ready(function () {
                         '</tr>';
                 }
                 $('#tbodyData').append(rowHtml);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+
+    $('#exportSearchPatient').click(function () {
+        var IDPNumber = $('#ipdNumber').val();
+        var PatientName = $('#patientName').val();
+        var StartDate = $('#startDate').val();
+        var EndDate = $('#endDate').val();
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{IPDNo: "' + IDPNumber + '",PatientName: "' + PatientName + '",StartDate: "' + StartDate + '",EndDate: "' + EndDate + '" }',
+            url: '/Admin/IPDSearchExportToExcel',
+            success: function (data) {
+   
             },
             failure: function (response) {
                 console.log(response);

@@ -216,6 +216,8 @@ namespace HIMS_Web.Models.Masters
         public string KFT_Details { get; set; }
         public string RandomDonerPlatelet_Count { get; set; }
         public string RandomDonerPlatelet_TestDate { get; set; }
+        public string SingleDonerPlatelet_Count { get; set; }
+        public string SingleDonerPlatelet_TestDate { get; set; }
         public string WholeBloodCell_Count { get; set; }
         public string WholeBloodCell_TestDate { get; set; }
         public string PackedRBC_Count { get; set; }

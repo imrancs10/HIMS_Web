@@ -1018,7 +1018,7 @@ namespace HIMS_Web.BAL.Masters
             }
         }
 
-        public List<IPDSearchPatientDetail> GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate)
+        public List<IPDSearchPatientDetail> GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate, string IPDStatus)
         {
             var startDate = !string.IsNullOrEmpty(StartDate) ? Convert.ToDateTime(StartDate) : DateTime.Now.AddYears(-100);
             var endDate = !string.IsNullOrEmpty(EndDate) ? Convert.ToDateTime(EndDate) : DateTime.Now.AddYears(100);
@@ -1036,6 +1036,7 @@ namespace HIMS_Web.BAL.Masters
                          join patStatus1 in _db.IpdPatientStatus on dept.PatientId equals patStatus1.PatientId into patStatus2
                          from patStatus in patStatus2.DefaultIfEmpty()
                          where ((IDPNumber != "" && dept.IpdNo.Contains(IDPNumber)) || IDPNumber == "")
+                         && ((IPDStatus != "" && dept.IPDStatus.Contains(IPDStatus)) || IPDStatus == "")
                          && ((PatientName != "" && dept.PatientName.Contains(PatientName)) || PatientName == "")
                          && (DbFunctions.TruncateTime(dept.AdmittedDateTime) >= DbFunctions.TruncateTime(startDate) && DbFunctions.TruncateTime(dept.AdmittedDateTime) <= DbFunctions.TruncateTime(endDate))
                          && dept.IsActive == true
@@ -1081,8 +1082,12 @@ namespace HIMS_Web.BAL.Masters
                              PlateletCount = labReport != null && labReport.PlateletCount != null ? labReport.PlateletCount : "",
                              LFT_Details = labReport != null && labReport.LFT_Details != null ? labReport.LFT_Details : "",
                              KFT_Details = labReport != null && labReport.KFT_Details != null ? labReport.KFT_Details : "",
+
                              RandomDonerPlatelet_Count = labReport != null && labReport.RandomDonerPlatelet_Count != null ? labReport.RandomDonerPlatelet_Count : "",
                              RandomDonerPlatelet_TestDate = labReport != null && labReport.RandomDonerPlatelet_TestDate != null ? labReport.RandomDonerPlatelet_TestDate : null,
+                             SingleDonorPlatelet_Count = labReport != null && labReport.SingleDonorPlatelet_Count != null ? labReport.SingleDonorPlatelet_Count : "",
+                             SingleDonorPlatelet_TestDate = labReport != null && labReport.SingleDonorPlatelet_TestDate != null ? labReport.SingleDonorPlatelet_TestDate : null,
+
                              WholeBloodCell_Count = labReport != null && labReport.WholeBloodCell_Count != null ? labReport.WholeBloodCell_Count : "",
                              WholeBloodCell_TestDate = labReport != null && labReport.WholeBloodCell_TestDate != null ? labReport.WholeBloodCell_TestDate : null,
                              PackedRBC_Count = labReport != null && labReport.PackedRBC_Count != null ? labReport.PackedRBC_Count : "",
@@ -1155,8 +1160,12 @@ namespace HIMS_Web.BAL.Masters
                     PlateletCount = patientInfo.PlateletCount,
                     LFT_Details = patientInfo.LFT_Details,
                     KFT_Details = patientInfo.KFT_Details,
+
                     RandomDonerPlatelet_Count = patientInfo.RandomDonerPlatelet_Count,
                     RandomDonerPlatelet_TestDate = patientInfo.RandomDonerPlatelet_TestDate != null ? patientInfo.RandomDonerPlatelet_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+                    SingleDonerPlatelet_Count = patientInfo.SingleDonorPlatelet_Count,
+                    SingleDonerPlatelet_TestDate = patientInfo.SingleDonorPlatelet_TestDate != null ? patientInfo.SingleDonorPlatelet_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
+
                     WholeBloodCell_Count = patientInfo.WholeBloodCell_Count,
                     WholeBloodCell_TestDate = patientInfo.WholeBloodCell_TestDate != null ? patientInfo.WholeBloodCell_TestDate.Value.ToString("dd/MM/yyyy hh:mm") : string.Empty,
                     PackedRBC_Count = patientInfo.PackedRBC_Count,

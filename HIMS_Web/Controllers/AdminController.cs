@@ -356,10 +356,11 @@ namespace HIMS_Web.Controllers
 
             return RedirectToAction("IPDList");
         }
-        public ActionResult IPDSearchExportToExcel(string IPDNo, string PatientName, string StartDate, string EndDate)
+
+        public ActionResult IPDSearchExportToExcel(string IPDNo, string PatientName, string StartDate, string EndDate, string IPDStatus)
         {
             var _details = new AdminDetails();
-            var ipdList = _details.GetIPDPatientDetail(IPDNo, PatientName, StartDate, EndDate);
+            var ipdList = _details.GetIPDPatientDetail(IPDNo, PatientName, StartDate, EndDate, IPDStatus);
             var data = (from ipd in ipdList
                         select new
                         {
@@ -379,13 +380,34 @@ namespace HIMS_Web.Controllers
                             TreatmentName = ipd.TreatmentName,
                             IDorAadharNumber = ipd.IDorAadharNumber,
                             IDNumber = ipd.IDNumber,
+                            HBCount = ipd.HBCount,
+                            PlateletCount = ipd.PlateletCount,
                             MalariaStatus = ipd.MalariaStatus,
+                            MalariaParasite_TestDate = ipd.MalariaParasite_TestDate,
                             RapidKitNS1Status = ipd.RapidKitNS1Status,
+                            RapidKitNS1_TestDate = ipd.RapidKitNS1_TestDate,
                             RapidKitIGMStatus = ipd.RapidKitIGMStatus,
+                            RapidKitIGM_TestDate = ipd.RapidKitIGM_TestDate,
                             ELISANS1Status = ipd.ELISANS1Status,
+                            ELISANS1_TestDate = ipd.ELISANS1_TestDate,
                             ELISAIGMStatus = ipd.ELISAIGMStatus,
+                            ELISAIGM_TestDate = ipd.ELISAIGM_TestDate,
                             ELISAScrubTyphusStatus = ipd.ELISAScrubTyphusStatus,
+                            ELISAScrubTyphus_TestDate = ipd.ELISAScrubTyphus_TestDate,
                             ELISALeptospiraStatus = ipd.ELISALeptospiraStatus,
+                            ELISALaptospira_TestDate = ipd.ELISALaptospira_TestDate,
+                            LFT = ipd.LFT_Details,
+                            KFT = ipd.KFT_Details,
+                            RandomDonerPlatelet_Count = ipd.RandomDonerPlatelet_Count,
+                            RandomDonerPlatelet_TestDate = ipd.RandomDonerPlatelet_TestDate,
+                            SingleDonerPlatelet_Count = ipd.SingleDonerPlatelet_Count,
+                            SingleDonerPlatelet_TestDate = ipd.SingleDonerPlatelet_TestDate,
+                            WholeBloodCell_Count = ipd.WholeBloodCell_Count,
+                            WholeBloodCell_TestDate = ipd.WholeBloodCell_TestDate,
+                            PackedRBC_Count = ipd.PackedRBC_Count,
+                            PackedRBC_TestDate = ipd.PackedRBC_TestDate,
+                            XRay = ipd.Xray_Details,
+                            USG = ipd.USG_Details,
                         }).ToList();
             var products = new System.Data.DataTable();
             products = ListtoDataTable.ToDataTable(data);
@@ -395,7 +417,7 @@ namespace HIMS_Web.Controllers
 
             Response.ClearContent();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment; filename=IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
+            Response.AddHeader("content-disposition", "attachment; filename=Search_IPD_Patient_List_" + DateTime.Now.Date.ToString() + ".xls");
             Response.ContentType = "application/ms-excel";
 
             Response.Charset = "";
@@ -410,6 +432,7 @@ namespace HIMS_Web.Controllers
 
             return RedirectToAction("IPDPatientSearch");
         }
+
         public ActionResult IpdDashboard()
         {
             var _details = new AdminDetails();
@@ -799,10 +822,10 @@ namespace HIMS_Web.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate)
+        public JsonResult GetIPDPatientDetail(string IDPNumber, string PatientName, string StartDate, string EndDate, string IPDStatus)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetIPDPatientDetail(IDPNumber, PatientName, StartDate, EndDate);
+            var data = _details.GetIPDPatientDetail(IDPNumber, PatientName, StartDate, EndDate, IPDStatus);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
